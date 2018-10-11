@@ -10,6 +10,8 @@ int main(void)
 
 	printf("1+‚Q=%d", num);
 
+	//;iwaht;oiwayt ;oiwa
+
 	_getch();
 	return 0;
 }
