@@ -9,7 +9,9 @@ int main(void)
 	num = 1 + ‚Q;
 
 	printf("1+‚Q=%d", num);
-	//@py@0tp098y
+
+	//;iwaht;oiwayt ;oiwa
+
 	_getch();
 	return 0;
 }
