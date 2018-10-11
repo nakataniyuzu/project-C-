@@ -10,7 +10,6 @@ int main(void)
 
 	printf("1+‚Q=%d", num);
 
-	//@-i5oiawn-oja-05
 	_getch();
 	return 0;
 }
