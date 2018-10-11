@@ -10,7 +10,7 @@ int main(void)
 
 	printf("1+‚Q=%d", num);
 
-	//ppp
+	//]uy@u4y6wo4i:p4[]p-u4w
 
 	_getch();
 	return 0;
