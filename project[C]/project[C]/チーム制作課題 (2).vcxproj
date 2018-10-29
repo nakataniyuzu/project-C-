@@ -18,64 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="GameL\Audio.cpp" />
-    <ClCompile Include="GameL\DirectXDevice.cpp" />
-    <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
-    <ClCompile Include="GameL\DrawFont.cpp" />
-    <ClCompile Include="GameL\DrawTexture.cpp" />
-    <ClCompile Include="GameL\GameL_Main.cpp" />
-    <ClCompile Include="GameL\HitBoxManager.cpp" />
-    <ClCompile Include="GameL\MultiThread.cpp" />
-    <ClCompile Include="GameL\SceneManager.cpp" />
-    <ClCompile Include="GameL\SceneObjManager.cpp" />
-    <ClCompile Include="GameL\SetWindow.cpp" />
-    <ClCompile Include="GameL\UserData.cpp" />
-    <ClCompile Include="GameL\WICTextureLoader.cpp" />
-    <ClCompile Include="GameL\WinInputs.cpp" />
-    <ClCompile Include="ObjBlock.cpp" />
-    <ClCompile Include="ObjHero.cpp" />
-    <ClCompile Include="ObjMain.cpp" />
-    <ClCompile Include="ObjMenu.cpp" />
-    <ClCompile Include="ObjTitle.cpp" />
-    <ClCompile Include="SceneMain.cpp" />
-    <ClCompile Include="SceneMenu.cpp" />
-    <ClCompile Include="SceneTitle.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameHead.h" />
-    <ClInclude Include="GameL\Audio.h" />
-    <ClInclude Include="GameL\DirectXDevice.h" />
-    <ClInclude Include="GameL\DirectXTex.h" />
-    <ClInclude Include="GameL\DrawFont.h" />
-    <ClInclude Include="GameL\DrawTexture.h" />
-    <ClInclude Include="GameL\HitBoxManager.h" />
-    <ClInclude Include="GameL\MultiThread.h" />
-    <ClInclude Include="GameL\SceneManager.h" />
-    <ClInclude Include="GameL\SceneObjManager.h" />
-    <ClInclude Include="GameL\SetWindow.h" />
-    <ClInclude Include="GameL\UserData.h" />
-    <ClInclude Include="GameL\WICTextureLoader.h" />
-    <ClInclude Include="GameL\WinInputs.h" />
-    <ClInclude Include="main.h" />
-    <ClInclude Include="ObjBlock.h" />
-    <ClInclude Include="ObjHero.h" />
-    <ClInclude Include="ObjMain.h" />
-    <ClInclude Include="ObjMenu.h" />
-    <ClInclude Include="ObjTitle.h" />
-    <ClInclude Include="SceneMain.h" />
-    <ClInclude Include="SceneMenu.h" />
-    <ClInclude Include="SceneTitle.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GameL\DirectXTex.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="GameL\DirectXTex.lib" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CE815EC5-49F0-4931-90F8-783D9E734119}</ProjectGuid>
-    <RootNamespace>projectC</RootNamespace>
+    <ProjectGuid>{9EFDA1A4-AD25-4E4D-A351-E5F8FAAD9C4C}</ProjectGuid>
+    <RootNamespace>チーム制作課題</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -83,14 +28,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -103,7 +48,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -164,6 +109,49 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GameL\Audio.cpp" />
+    <ClCompile Include="GameL\DirectXDevice.cpp" />
+    <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
+    <ClCompile Include="GameL\DrawFont.cpp" />
+    <ClCompile Include="GameL\DrawTexture.cpp" />
+    <ClCompile Include="GameL\GameL_Main.cpp" />
+    <ClCompile Include="GameL\HitBoxManager.cpp" />
+    <ClCompile Include="GameL\MultiThread.cpp" />
+    <ClCompile Include="GameL\SceneManager.cpp" />
+    <ClCompile Include="GameL\SceneObjManager.cpp" />
+    <ClCompile Include="GameL\SetWindow.cpp" />
+    <ClCompile Include="GameL\UserData.cpp" />
+    <ClCompile Include="GameL\WICTextureLoader.cpp" />
+    <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameHead.h" />
+    <ClInclude Include="GameL\Audio.h" />
+    <ClInclude Include="GameL\DirectXDevice.h" />
+    <ClInclude Include="GameL\DirectXTex.h" />
+    <ClInclude Include="GameL\DrawFont.h" />
+    <ClInclude Include="GameL\DrawTexture.h" />
+    <ClInclude Include="GameL\HitBoxManager.h" />
+    <ClInclude Include="GameL\MultiThread.h" />
+    <ClInclude Include="GameL\SceneManager.h" />
+    <ClInclude Include="GameL\SceneObjManager.h" />
+    <ClInclude Include="GameL\SetWindow.h" />
+    <ClInclude Include="GameL\UserData.h" />
+    <ClInclude Include="GameL\WICTextureLoader.h" />
+    <ClInclude Include="GameL\WinInputs.h" />
+    <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GameL\DirectXTex.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="GameL\DirectXTex.lib" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

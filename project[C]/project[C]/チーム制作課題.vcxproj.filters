@@ -13,14 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\Main">
-      <UniqueIdentifier>{baa29261-75ee-4512-af66-c5fd9f170f69}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Title">
-      <UniqueIdentifier>{bb6dc68a-1327-44b8-ac9f-48e0268ae98d}</UniqueIdentifier>
+      <UniqueIdentifier>{c2646017-06ec-4380-a569-e707915ac3b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain">
+      <UniqueIdentifier>{5536a48b-c471-48cd-9010-771cfba218aa}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Menu">
-      <UniqueIdentifier>{524852c8-d492-489f-bd75-ad6bc8652f4f}</UniqueIdentifier>
+      <UniqueIdentifier>{8f42ea7f-a541-478a-83dc-50349d4ea92f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,29 +66,29 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMain.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjHero.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBlock.cpp">
-      <Filter>ソース ファイル\Main</Filter>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
       <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>ソース ファイル\Title</Filter>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHero.cpp">
+      <Filter>ソース ファイル\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMenu.cpp">
+      <Filter>ソース ファイル\Menu</Filter>
     </ClCompile>
     <ClCompile Include="SceneMenu.cpp">
       <Filter>ソース ファイル\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="ObjMenu.cpp">
-      <Filter>ソース ファイル\Menu</Filter>
+    <ClCompile Include="ObjBlock.cpp">
+      <Filter>ソース ファイル\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMain.cpp">
+      <Filter>ソース ファイル\GameMain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,29 +137,29 @@
     <ClInclude Include="main.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMain.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjHero.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBlock.h">
-      <Filter>ソース ファイル\Main</Filter>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
     <ClInclude Include="ObjTitle.h">
       <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>ソース ファイル\Title</Filter>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ソース ファイル\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHero.h">
+      <Filter>ソース ファイル\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMenu.h">
+      <Filter>ソース ファイル\Menu</Filter>
     </ClInclude>
     <ClInclude Include="SceneMenu.h">
       <Filter>ソース ファイル\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMenu.h">
-      <Filter>ソース ファイル\Menu</Filter>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソース ファイル\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMain.h">
+      <Filter>ソース ファイル\GameMain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
