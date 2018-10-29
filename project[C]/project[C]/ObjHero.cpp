@@ -7,8 +7,8 @@
 #include "GameHead.h"
 #include "ObjHero.h"
 
-float g_px = 70.0f;
-float g_py = 60.0f;
+float g_px = 50.0f;
+float g_py = 100.0f;
 
 //使用するネームスペース
 using namespace GameL;
