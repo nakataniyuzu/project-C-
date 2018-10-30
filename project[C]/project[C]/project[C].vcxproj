@@ -44,6 +44,8 @@
     <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ObjMobThird.h" />
+    <ClInclude Include="ObjMobFirst.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -64,6 +66,7 @@
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
+    <ClInclude Include="ObjMobSecond.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneMenu.h" />
