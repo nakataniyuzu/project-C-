@@ -7,8 +7,8 @@
 #include "GameHead.h"
 #include "ObjHero.h"
 
-float g_px = 50.0f;
-float g_py = 100.0f;
+float g_px = 200.0f;
+float g_py = 200.0f;
 
 //使用するネームスペース
 using namespace GameL;
@@ -32,7 +32,7 @@ void CObjHero::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, g_px, g_py, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, g_px, g_py, 49, 49, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 }
 
@@ -78,6 +78,8 @@ void CObjHero::Action()
 		&m_block_type
 	);
 
+
+
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -88,7 +90,7 @@ void CObjHero::Action()
 	
 	//HitBoxの位置の変更
 	hit->SetPos(g_px, g_py);
-
+	
 }
 
 //ドロー
