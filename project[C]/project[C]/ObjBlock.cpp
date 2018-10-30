@@ -31,32 +31,32 @@ void CObjBlock::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
-	//左スクロールライン
+	//後方スクロールライン
 	if (hx < 80)
 	{
 		hero->SetX(80);				//主人公はラインを超えないようにする
 		m_scroll -= hero->GetVX();	//主人公が本来動くべき分の値をm_scrollに加える
 	}
 
-	//右スクロールライン
-	if (hx > 300)
+	//前方スクロールライン
+	if (hx > 64)
 	{
-		hero->SetX(300);			//主人公はラインを超えないようにする
+		hero->SetX(64);			//主人公はラインを超えないようにする
 		m_scroll -= hero->GetVX();	//主人公が本来動くべき分の値をm_scrollに加える
 	}
 	//上スクロールライン
-	/*if (hy > 300)
+	if (hy > 128)
 	{
-		hero->SetY(80);				//主人公はラインを超えないようにする
+		hero->SetY(128);				//主人公はラインを超えないようにする
 		m_scroll -= hero->GetVY();	//主人公が本来動くべき分の値をm_scrollに加える
 	}
 
 	//下スクロールライン
-	if (hy < 350)
+	if (hy < 32)
 	{
-		hero->SetY(300);			//主人公はラインを超えないようにする
+		hero->SetY(32);			//主人公はラインを超えないようにする
 		m_scroll -= hero->GetVY();	//主人公が本来動くべき分の値をm_scrollに加える
-	}*/
+	}
 
 	//敵出現ライン
 	//主人公の位置+500を敵出現ラインにする
