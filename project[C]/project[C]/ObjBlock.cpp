@@ -21,7 +21,7 @@ CObjBlock::CObjBlock(int map[27][55])
 //イニシャライズ
 void CObjBlock::Init()
 {
-
+	//aaaaaaaaaa
 }
 
 //アクション
