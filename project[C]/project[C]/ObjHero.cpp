@@ -24,15 +24,15 @@ void CObjHero::Init()
 	m_speed_power = 0.3f;	//通常速度
 
 	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
+	m_hit_up    = false;
+	m_hit_down  = false;
+	m_hit_left  = false;
 	m_hit_right = false;
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, g_px, g_py, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 }
 
@@ -73,7 +73,7 @@ void CObjHero::Action()
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, true,
+	pb->BlockHit(&g_px, &g_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
 	);

@@ -161,6 +161,15 @@
     <ClInclude Include="ObjMenu.h">
       <Filter>ソース ファイル\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="ObjMobFirst.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMobSecond.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMobThird.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\DirectXTex.inl">
