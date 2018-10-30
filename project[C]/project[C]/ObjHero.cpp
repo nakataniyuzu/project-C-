@@ -7,8 +7,8 @@
 #include "GameHead.h"
 #include "ObjHero.h"
 
-//float g_px = 50.0f;
-//float g_py = 100.0f;
+float g_px = 200.0f;
+float g_py = 200.0f;
 
 //使用するネームスペース
 using namespace GameL;
@@ -18,8 +18,6 @@ using namespace GameL;
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 50.0f;
-	m_py = 100.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
@@ -34,7 +32,7 @@ void CObjHero::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 49, 49, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, g_px, g_py, 49, 49, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 }
 
@@ -75,22 +73,24 @@ void CObjHero::Action()
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, true,
+	pb->BlockHit(&g_px, &g_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
 	);
+
+
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
+	g_px += m_vx;
+	g_py += m_vy;
 	
 	
 	//HitBoxの位置の変更
-	hit->SetPos(m_px, m_py);
-
+	hit->SetPos(g_px, g_py);
+	
 }
 
 //ドロー
@@ -109,10 +109,10 @@ void CObjHero::Draw()
 	src.m_bottom = 100.0f;
 
 	//表示位置の設定
-	dst.m_top    =  0.0f + m_py;
-	dst.m_left   =  0.0f + m_px;
-	dst.m_right  = 50.0f + m_px;
-	dst.m_bottom = 50.0f + m_py;
+	dst.m_top    =  0.0f + g_py;
+	dst.m_left   =  0.0f + g_px;
+	dst.m_right  = 50.0f + g_px;
+	dst.m_bottom = 50.0f + g_py;
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);

@@ -90,6 +90,9 @@
     <ClCompile Include="ObjMenu.cpp">
       <Filter>ソース ファイル\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBackground.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="ObjMenu.h">
       <Filter>ソース ファイル\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBackground.h">
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
