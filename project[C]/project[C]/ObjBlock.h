@@ -22,13 +22,6 @@ public:
 		float* vx, float*vy, int* bt
 	);
 
-	//主人公と壁の交差判定
-	bool HeroBlckCrossPoint(
-		float x, float y, float vx, float vy,
-		float *out_px, float *out_py, float* out_len
-	);
-
-
 private:
 	int m_map[27][55];	//マップ情報
 

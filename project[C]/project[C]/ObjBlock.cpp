@@ -3,6 +3,9 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
+#include "GameL\HitBoxManager.h"
+
+
 #include "GameHead.h"
 #include "ObjBlock.h"
 
@@ -55,10 +58,7 @@ void CObjBlock::Action()
 		//列の中から4を探す
 		if (m_map[i][ex] == 4)
 		{
-			//4があれば、主人公を出現
-			CObjHero* obj = new CObjHero(ex*64.0f, i*64.0f);
-			Objs::InsertObj(obj, OBJ_HERO, 10);
-
+			
 			//敵出現場所の値を0にする
 			m_map[i][ex] = 0;
 		}
