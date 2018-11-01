@@ -6,9 +6,10 @@
 
 #include "GameHead.h"
 #include "ObjHero.h"
+#include "ObjBlock.h"
 
-float g_px = 200.0f;
-float g_py = 200.0f;
+float g_px = 375.0f;
+float g_py = 300.0f;
 
 //使用するネームスペース
 using namespace GameL;
@@ -21,7 +22,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 0.3f;	//通常速度
+	//m_speed_power = 0.3f;	//通常速度
 
 	//blockとの衝突状態確認
 	m_hit_up    = false;
@@ -49,27 +50,27 @@ void CObjHero::Action()
 	//キーの入力方向
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
-		m_vx += m_speed_power;
+
 	}
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
-		m_vx -= m_speed_power;
+
 	}
 
 	if (Input::GetVKey(VK_UP) == true)
 	{
-		m_vy -= m_speed_power;
+
 	}
 
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
-		m_vy += m_speed_power;
+
 	}
 
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	/*m_vx += -(m_vx * 0.098);
+	m_vy += -(m_vy * 0.098);*/
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -82,6 +83,13 @@ void CObjHero::Action()
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
+
+	//ブロックと当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)
+	{
+
+	}
+
 
 	//位置の更新
 	g_px += m_vx;

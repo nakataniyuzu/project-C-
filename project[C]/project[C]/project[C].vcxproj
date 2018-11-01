@@ -39,6 +39,7 @@
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
@@ -68,6 +69,7 @@
     <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjMobSecond.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="SceneTitle.h" />
