@@ -38,6 +38,8 @@
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
+    <ClCompile Include="ObjMoveblock.cpp" />
+    <ClCompile Include="ObjMysteryblock.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -68,6 +70,8 @@
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjMobSecond.h" />
+    <ClInclude Include="ObjMoveblock.h" />
+    <ClInclude Include="ObjMysteryblock.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="SceneMain.h" />

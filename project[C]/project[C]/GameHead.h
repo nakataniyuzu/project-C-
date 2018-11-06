@@ -14,6 +14,8 @@ enum OBJ_NAME
 	OBJ_BLOCK,
 	OBJ_BACKGROUND,
 	OBJ_TOPBACK,
+	OBJ_MOVEBLOCK,
+	OBJ_MYSTERYBLOCK,
 };
 //------------------------------------------------
 
@@ -28,6 +30,8 @@ enum HIT_ELEMENTS
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
+	ELEMENT_MYSTERY_BLOCK,
+	ELEMENT_GATE_BLOCK,
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
@@ -65,6 +69,8 @@ struct UserData
 #include "ObjBlock.h"
 #include "ObjBackground.h"
 #include "ObjTopback.h"
+#include "ObjMoveblock.h"
+#include "ObjMysteryblock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

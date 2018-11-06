@@ -22,7 +22,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	//m_speed_power = 0.3f;	//通常速度
+	m_speed_power = 0.3f;	//通常速度
 
 	//blockとの衝突状態確認
 	m_hit_up    = false;
@@ -33,7 +33,7 @@ void CObjHero::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, g_px, g_py, 49, 49, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, g_px, g_py, ALL_SIZE, ALL_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 }
 
@@ -47,30 +47,71 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMenu());
 	}
 
+	
 	//キーの入力方向
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
-
+		m_vx += m_speed_power;
 	}
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
+		m_vx -= m_speed_power;
 
 	}
 
 	if (Input::GetVKey(VK_UP) == true)
 	{
+		m_vy -= m_speed_power;
 
 	}
 
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
+		m_vy += m_speed_power;
 
 	}
 
+	//主人公の位置を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hx = hero->GetX();
+	float hy = hero->GetY();
 
+	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//左のスクロールライン
+	{
+		g_px = 0;
+		b->SetScrollX(b->GetScrollX());
+	}
+
+	//右のスクロールライン
+	{
+		g_px = 400;
+		b->SetScrollX(b->GetScrollX());	
+	}
+
+	//上のスクロールライン
+	{
+		g_py = 0;
+		b->SetScrollY(b->GetScrollY());	
+	}
+
+	//下のスクロールライン
+	{
+		g_py = 300;
+		b->SetScrollY(b->GetScrollY());
+	}
+
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	if (hit->CheckObjNameHit(OBJ_MYSTERYBLOCK) != nullptr)
+	{
+		m_vx -= 5.0f;
+	}
+	
 	//摩擦
-	/*m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);*/
+	m_vx += -(m_vx * 0.098);
+	m_vy += -(m_vy * 0.098);
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -80,21 +121,9 @@ void CObjHero::Action()
 	);
 
 
-
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-
-	//ブロックと当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)
-	{
-
-	}
-
-
 	//位置の更新
 	g_px += m_vx;
 	g_py += m_vy;
-	
 	
 	//HitBoxの位置の変更
 	hit->SetPos(g_px, g_py);
@@ -119,8 +148,8 @@ void CObjHero::Draw()
 	//表示位置の設定
 	dst.m_top    =  0.0f + g_py;
 	dst.m_left   =  0.0f + g_px;
-	dst.m_right  = 50.0f + g_px;
-	dst.m_bottom = 50.0f + g_py;
+	dst.m_right  = ALL_SIZE + g_px;
+	dst.m_bottom = ALL_SIZE + g_py;
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);
