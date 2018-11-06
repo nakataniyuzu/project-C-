@@ -22,6 +22,9 @@
     <Filter Include="ソース ファイル\Menu">
       <UniqueIdentifier>{524852c8-d492-489f-bd75-ad6bc8652f4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Battle">
+      <UniqueIdentifier>{754d1f11-6cfa-43b9-8f97-8821013966bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -93,8 +96,20 @@
     <ClCompile Include="ObjBackground.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
+    <ClCompile Include="ObjEnemyBattle.cpp">
+      <Filter>ソース ファイル\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHeroBattle.cpp">
+      <Filter>ソース ファイル\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBattle.cpp">
+      <Filter>ソース ファイル\Battle</Filter>
+    </ClCompile>
     <ClCompile Include="ObjTopback.cpp">
       <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlockBattle.cpp">
+      <Filter>ソース ファイル\Battle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,8 +194,20 @@
     <ClInclude Include="ObjBackground.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
+    <ClInclude Include="ObjEnemyBattle.h">
+      <Filter>ソース ファイル\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHeroBattle.h">
+      <Filter>ソース ファイル\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBattle.h">
+      <Filter>ソース ファイル\Battle</Filter>
+    </ClInclude>
     <ClInclude Include="ObjTopback.h">
       <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlockBattle.h">
+      <Filter>ソース ファイル\Battle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

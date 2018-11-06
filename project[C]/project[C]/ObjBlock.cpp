@@ -34,31 +34,31 @@ void CObjBlock::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
+	//左のスクロールライン
+	{
+		hero->SetX(0);				//主人公はラインを超えないようにする
+		m_scrollx -= hero->GetVX();	//主人公が本来動くべき分の値をm_scrollに加える
+	}
 
-	
-		//キーの入力方向
-		if (Input::GetVKey(VK_RIGHT) == true)
-		{
-			m_scrollx -= 3.0f;
+	//右のスクロールライン
+	{
+		hero->SetX(400);			//主人公はラインを超えないようにする
+		m_scrollx -= hero->GetVX();	//主人公が本来動くべき分の値をm_scrollに加える
+	}
 
-		}
-		if (Input::GetVKey(VK_LEFT) == true)
-		{
-			m_scrollx += 3.0f;
+	//上のスクロールライン
+	{
+		hero->SetY(0);				//主人公はラインを超えないようにする
+		m_scrolly -= hero->GetVY();	//主人公が本来動くべき分の値をm_scrollに加える
+	}
 
-		}
+	//下のスクロールライン
+	{
+		hero->SetY(300);			//主人公はラインを超えないようにする
+		m_scrolly -= hero->GetVY();	//主人公が本来動くべき分の値をm_scrollに加える
+	}
 
-		if (Input::GetVKey(VK_UP) == true)
-		{
-			m_scrolly += 3.0f;
 
-		}
-
-		if (Input::GetVKey(VK_DOWN) == true)
-		{
-			m_scrolly -= 3.0f;
-
-		}
 	
 	
 	
@@ -78,25 +78,57 @@ void CObjBlock::Draw()
 	{
 		for (int j = 0; j < 55; j++)
 		{
-			if (m_map[i][j] >= 0)
+			if (m_map[i][j] > 0)
 			{
 
 				//表示位置の設定
-				dst.m_top    = i*50.0f + 50.0f +m_scrolly;
-				dst.m_left   = j*50.0f + m_scrollx;
-				dst.m_right  = dst.m_left + 50.0f;
-				dst.m_bottom = dst.m_top + 50.0f;
+				dst.m_top    = i*ALL_SIZE + m_scrolly;
+				dst.m_left   = j*ALL_SIZE + m_scrollx;
+				dst.m_right  = dst.m_left + ALL_SIZE;
+				dst.m_bottom = dst.m_top  + ALL_SIZE;
 				if (m_map[i][j] == 1)
 				{
 					src.m_top    = 0.0f;
 					src.m_left   = 0.0f;
-					src.m_right  = src.m_left + 50.0f;
-					src.m_bottom = src.m_top + 50.0f;
+					src.m_right  = 50.0f;
+					src.m_bottom = 50.0f;
 					//描画
 					Draw::Draw(2, &src, &dst, c, 0.0f);
-
 				}
-
+				else if (m_map[i][j] == 2)
+				{
+				}
+				else if (m_map[i][j] == 3)
+				{
+				}
+				else if (m_map[i][j] == 4)
+				{
+				}
+				else if (m_map[i][j] == 5)
+				{
+				}
+				else if (m_map[i][j] == 6)
+				{
+					;
+				}
+				else if (m_map[i][j] == 7)
+				{
+				}
+				else if (m_map[i][j] == 8)
+				{
+				}
+				else if (m_map[i][j] == 9)
+				{
+				}
+				else if (m_map[i][j] == 10)
+				{
+				}
+				else if (m_map[i][j] == 11)
+				{
+				}
+				else if (m_map[i][j] == 12)
+				{
+				}
 				else
 				{
 				}
@@ -144,21 +176,21 @@ void CObjBlock::BlockHit(
 			if (m_map[i][j] > 0 && m_map[i][j] != 6)
 			{
 				//要素番号を座標に変更
-				float bx = j*51.0f;
-				float by = i*51.0f + 50.0f;
+				float bx = j*ALL_SIZE;
+				float by = i*ALL_SIZE;
 
 				//スクロールの影響
 				float scrollx = scroll_on ? m_scrollx : 0;
 				float scrolly = scroll_on ? m_scrolly : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x +(-m_scrollx) + 51.0f > bx) && (*x + (-m_scrollx) < bx + 51.0f) && (*y + (-m_scrolly) + 51.0f > by) && (*y + (-m_scrolly) < by + 51.0f))
+				if ((*x +(-scrollx) + ALL_SIZE > bx) && (*x + (-scrollx) < bx + ALL_SIZE) && (*y + (-scrolly) + ALL_SIZE > by) && (*y + (-scrolly) < by + ALL_SIZE))
 				{
 					//上下左右判定
 
 					//vectorの作成
-					float rvx = (*x + (-m_scrollx)) - bx;
-					float rvy = (*y + (-m_scrolly)) - by;
+					float rvx = (*x + (-scrollx)) - bx;
+					float rvy = (*y + (-scrolly)) - by;
 
 					//長さを求める
 					float len = sqrt(rvx*rvx + rvy*rvy);
@@ -176,36 +208,33 @@ void CObjBlock::BlockHit(
 					if (len < 88.0f)
 					{
 						//角度で上下左右を判定
-						if ((r < 45 && r>=0) || r > 315)
+						if ((r < 45 && r > 0) || r > 315)
 						{
 							//右
 							*right = true;	//主人公の左の部分が衝突している
-							*x = bx + 51.0f+ (m_scrollx);	//ブロックの位置+主人公の幅
-							*vx = -(*vx) * 0.1f;//-VX*反発係数
+							*x = bx + ALL_SIZE + (scrollx);	//ブロックの位置+主人公の幅
+							*vx = 0.1f;//-VX*反発係数
 						}
 						if (r > 45 && r < 135)
 						{
 							//上
 							*down = true;	//主人公から見て、下の部分が衝突している
-							*y = by - 51.0f + (m_scrolly);	//ブロックの位置-主人公の幅
-							*vy = 0.0f;
+							*y = by - ALL_SIZE + (scrolly);	//ブロックの位置-主人公の幅
+							*vy = -0.1f;//-VX*反発係数
 						}
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;	//主人公の右の部分が衝突している
-							*x = bx - 51.0 + (m_scrollx);	//ブロックの位置-主人公の幅
-							*vx = -(*vx) * 0.1f;//-VX*反発係数
+							*x = bx - ALL_SIZE + (scrollx);	//ブロックの位置-主人公の幅
+							*vx = -0.1f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							//下
 							*up = true;		//主人公から見て、上の部分が衝突している
-							*y = by + 51.0f + (m_scrolly);	//ブロック位置+主人公の幅
-							if (*vy < 0)
-							{
-								*vy = 0.0f;
-							}
+							*y = by + ALL_SIZE + (scrolly);	//ブロック位置+主人公の幅
+							*vy = 0.1f;//-VX*反発係数
 						}
 					}
 

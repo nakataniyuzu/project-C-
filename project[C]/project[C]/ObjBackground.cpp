@@ -12,8 +12,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjBackground::Init()
 {
-	m_x1 = 0.0f;
-	m_x2 = 800.0f;
+	m_x1 =    0.0f;
+	m_x2 =  800.0f;
 	m_x3 = -800.0f;
 	m_scroll = 0.0f;
 	m_scroll_map = 0.0f;
@@ -34,7 +34,7 @@ void CObjBackground::Action()
 	if (hero->GetVX() >= 0.0f)
 	{
 		//キャラクターが右に動いたら
-		if (hx >350)
+		if (hx > 0)
 		{
 			//スクロールライン超えようとしたらスクロール
 			m_x1 -= hero->GetVX();
@@ -51,7 +51,7 @@ void CObjBackground::Action()
 	else
 	{
 		//キャラクターが左に動いたら
-		if (hx < 100)
+		if (hx < 400)
 		{
 			//スクロールライン超えようとしたらスクロール
 			m_x1 -= hero->GetVX();
