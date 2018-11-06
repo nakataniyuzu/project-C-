@@ -22,16 +22,9 @@ void CObjHeroBattle::Init()
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
-	m_speed_power = 0.5f;	//通常速度
+	m_speed_power = 1.0f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
-	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
-	m_hit_right = false;
-
-	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
  	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
@@ -53,20 +46,30 @@ void CObjHeroBattle::Action()
 	}
 
 	//Spaceキーでジャンプ
-	if (Input::GetVKey(VK_SPACE) == true)
+	if (m_py + 100 >= 549)
+	{
+		if (Input::GetVKey(VK_SPACE) == true)
+		{
+			if (1)
+			{
+				m_vy = -40;
+			}
+		}
+	}
+	/*if (Input::GetVKey(VK_SPACE) == true)
 	{
 		if (1)
 		{
-			m_vy = -20;
+			m_vy = -30;
 		}
-	}
+	}*/
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
 	//自由落下運動
-	m_vy += 9.8 / (16.0f);
+	m_vy += 15.8 / (16.0f);
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -85,6 +88,7 @@ void CObjHeroBattle::Action()
 		Hits::DeleteHitBox(this);
 	}
 
+	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)
 	{
 		m_px = 800.0 - 75.0f;
@@ -100,9 +104,9 @@ void CObjHeroBattle::Action()
 		m_py = 550.0 - 100.0f;
 	}
 
-	if (m_py < 0)
+	if (m_py <50)
 	{
-		m_py = 0.0f;
+		m_py = 50.0f;
 	}
 }
 
