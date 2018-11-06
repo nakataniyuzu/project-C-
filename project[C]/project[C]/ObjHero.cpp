@@ -70,17 +70,6 @@ void CObjHero::Action()
 		m_vy += m_speed_power;
 	}
 
-	//右のスクロールライン
-	{
-		g_px = 400;
-		b->SetScrollX(b->GetScrollX());	
-	}
-
-	//上のスクロールライン
-	{
-		g_py = 0;
-		b->SetScrollY(b->GetScrollY());	
-	}
 
 	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//左のスクロールライン
@@ -131,9 +120,6 @@ void CObjHero::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
 	);
-
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
 
 	//位置の更新
 	g_px += m_vx;
