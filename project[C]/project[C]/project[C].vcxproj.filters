@@ -25,6 +25,12 @@
     <Filter Include="ソース ファイル\Battle">
       <UniqueIdentifier>{754d1f11-6cfa-43b9-8f97-8821013966bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Block関係">
+      <UniqueIdentifier>{c9a7dd07-0e17-486d-be6b-f81a3ea98f88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\背景関係">
+      <UniqueIdentifier>{500681d8-dcbc-4798-83d7-3861cf946fee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -78,9 +84,6 @@
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBlock.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
       <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
@@ -93,8 +96,20 @@
     <ClCompile Include="ObjMenu.cpp">
       <Filter>ソース ファイル\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="ObjMoveblock.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlock.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
     <ClCompile Include="ObjBackground.cpp">
-      <Filter>ソース ファイル\Main</Filter>
+      <Filter>ソース ファイル\Main\背景関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTopback.cpp">
+      <Filter>ソース ファイル\Main\背景関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMysteryblock.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemyBattle.cpp">
       <Filter>ソース ファイル\Battle</Filter>
@@ -167,9 +182,6 @@
     <ClInclude Include="ObjHero.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBlock.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
     <ClInclude Include="ObjTitle.h">
       <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
@@ -191,6 +203,12 @@
     <ClInclude Include="ObjMobThird.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
+    <ClInclude Include="ObjMoveblock.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
     <ClInclude Include="ObjBackground.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
@@ -205,6 +223,13 @@
     </ClInclude>
     <ClInclude Include="ObjTopback.h">
       <Filter>ソース ファイル\Main</Filter>
+      <Filter>ソース ファイル\Main\背景関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTopback.h">
+      <Filter>ソース ファイル\Main\背景関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMysteryblock.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjBlockBattle.h">
       <Filter>ソース ファイル\Battle</Filter>

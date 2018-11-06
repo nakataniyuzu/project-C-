@@ -68,13 +68,19 @@ void CObjHero::Action()
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
 		m_vy += m_speed_power;
-
 	}
 
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
+	//右のスクロールライン
+	{
+		g_px = 400;
+		b->SetScrollX(b->GetScrollX());	
+	}
+
+	//上のスクロールライン
+	{
+		g_py = 0;
+		b->SetScrollY(b->GetScrollY());	
+	}
 
 	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//左のスクロールライン
@@ -101,6 +107,20 @@ void CObjHero::Action()
 		b->SetScrollY(b->GetScrollY());
 	}
 
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	if (hit->CheckObjNameHit(OBJ_MYSTERYBLOCK) != nullptr)
+	{
+		m_vx -= 5.0f;
+	}
+	
+	//下のスクロールライン
+	{
+		g_py = 300;
+		b->SetScrollY(b->GetScrollY());
+	}
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -118,7 +138,6 @@ void CObjHero::Action()
 	//位置の更新
 	g_px += m_vx;
 	g_py += m_vy;
-	
 	
 	//HitBoxの位置の変更
 	hit->SetPos(g_px, g_py);

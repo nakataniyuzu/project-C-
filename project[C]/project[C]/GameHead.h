@@ -18,6 +18,9 @@ enum OBJ_NAME
 	OBJ_HERO_BATTLE,
 	OBJ_ENEMY_BATTLE,
 	OBJ_BLOCK_BATTLE,
+	OBJ_TOPBACK,
+	OBJ_MOVEBLOCK,
+	OBJ_MYSTERYBLOCK,
 };
 //------------------------------------------------
 
@@ -32,6 +35,8 @@ enum HIT_ELEMENTS
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
+	ELEMENT_MYSTERY_BLOCK,
+	ELEMENT_GATE_BLOCK,
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
@@ -72,6 +77,9 @@ struct UserData
 #include "ObjHeroBattle.h"
 #include "ObjEnemyBattle.h"
 #include "ObjBlockBattle.h"
+#include "ObjTopback.h"
+#include "ObjMoveblock.h"
+#include "ObjMysteryblock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

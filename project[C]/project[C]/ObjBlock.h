@@ -21,6 +21,7 @@ class CObjBlock : public CObj
 		float GetScrollX() { return m_scrollx; }
 		void SetScrollY(float sy) { m_scrolly = sy; }
 		float GetScrollY() { return m_scrolly; }
+
 		//ƒuƒƒbƒN‚Æ‚Ì“–‚½‚è”»’è
 		void BlockHit(
 			float *x, float *y, bool scroll_on,

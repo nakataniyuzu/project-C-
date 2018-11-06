@@ -60,6 +60,34 @@ void CObjBlock::Action()
 
 
 	
+	//敵出現
+	for (int i = 0; i < 27; i++)
+	{
+		for (int j = 0; j < 55; j++)
+		{
+			//列の中からを探す
+			if (m_map[i][j] == 7)
+			{
+				//7があれば出現
+				CObjMysteryblock* objgate = new CObjMysteryblock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objgate, OBJ_MYSTERYBLOCK, 9);
+
+				//敵出現場所の値を0にする
+				m_map[i][j] = 0;
+			}
+			if (m_map[i][j] == 11)
+			{
+				//11があれば出現
+				CObjMoveblock* objmb = new CObjMoveblock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objmb, OBJ_MOVEBLOCK, 9);
+
+				//敵出現場所の値を0にする
+				m_map[i][j] = 0;
+			}
+		}
+	}
+	
+	
 	
 	
 }
@@ -106,6 +134,7 @@ void CObjBlock::Draw()
 				}
 				else if (m_map[i][j] == 5)
 				{
+					;
 				}
 				else if (m_map[i][j] == 6)
 				{
@@ -113,6 +142,7 @@ void CObjBlock::Draw()
 				}
 				else if (m_map[i][j] == 7)
 				{
+					;
 				}
 				else if (m_map[i][j] == 8)
 				{
@@ -173,7 +203,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 55; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 6)
+			if (m_map[i][j] > 0 && m_map[i][j] != 6 && m_map[i][j] != 7 && m_map[i][j] != 10)
 			{
 				//要素番号を座標に変更
 				float bx = j*ALL_SIZE;
@@ -213,28 +243,28 @@ void CObjBlock::BlockHit(
 							//右
 							*right = true;	//主人公の左の部分が衝突している
 							*x = bx + ALL_SIZE + (scrollx);	//ブロックの位置+主人公の幅
-							*vx = 0.1f;//-VX*反発係数
+							*vx = 0.15f;//-VX*反発係数
 						}
 						if (r > 45 && r < 135)
 						{
 							//上
 							*down = true;	//主人公から見て、下の部分が衝突している
 							*y = by - ALL_SIZE + (scrolly);	//ブロックの位置-主人公の幅
-							*vy = -0.1f;//-VX*反発係数
+							*vy = -0.15f;//-VX*反発係数
 						}
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;	//主人公の右の部分が衝突している
 							*x = bx - ALL_SIZE + (scrollx);	//ブロックの位置-主人公の幅
-							*vx = -0.1f;//-VX*反発係数
+							*vx = -0.15f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							//下
 							*up = true;		//主人公から見て、上の部分が衝突している
 							*y = by + ALL_SIZE + (scrolly);	//ブロック位置+主人公の幅
-							*vy = 0.1f;//-VX*反発係数
+							*vy = 0.15f;//-VX*反発係数
 						}
 					}
 
