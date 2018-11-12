@@ -10,8 +10,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-float g_enemy_px = 600.0f;
-float g_enemy_py = 450.0f;
+
 
 //イニシャライズ
 void CObjEnemyBattle::Init()
@@ -26,25 +25,64 @@ void CObjEnemyBattle::Init()
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
-	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
-	m_hit_right = false;
+	m_move = true;  //true=右 false=左
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
+	Hits::SetHitBox(this, g_enemy_px, g_enemy_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
 
 }
 
 //アクション
 void CObjEnemyBattle::Action()
 {
+	//通常速度
+	m_speed_power = 0.4f;
+	m_ani_max_time = 4;
+
+	//画面端衝突で向き変更
+	if (g_enemy_px + 75 >= 800)
+	{
+		m_move = true;
+	}
+
+	if (g_enemy_px  <= 0)
+	{
+		m_move = false;
+	}
+
+	//方向
+	if (m_move == false)
+	{
+		m_vx += m_speed_power;
+		m_posture = 1.0f;
+		m_ani_time += 1;
+	}
+
+	else if (m_move == true)
+	{
+		m_vx -= m_speed_power;
+		m_posture = 0.0f;
+		m_ani_time += 1;
+	}
+
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
+
+	//自由落下運動
+	//m_vy += 15.8 / (16.0f);
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -56,6 +94,33 @@ void CObjEnemyBattle::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(g_enemy_px, g_enemy_py);
 
+	//主人公とぶつかったら敵削除
+	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	//敵が領域外に行かないようにする
+	if (g_enemy_px + 75 >= 800)
+	{
+		g_enemy_px = 800.0 - 75.0f;
+	}
+
+	if (g_enemy_px < 0)
+	{
+		g_enemy_px = 0.0f;
+	}
+
+	if (g_enemy_py + 100 >= 550)
+	{
+		g_enemy_py = 550.0 - 100.0f;
+	}
+
+	if (g_enemy_py <50)
+	{
+		g_enemy_py = 50.0f;
+	}
 }
 
 //ドロー

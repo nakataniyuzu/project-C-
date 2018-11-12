@@ -22,7 +22,7 @@ void CObjHeroBattle::Init()
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
-	m_speed_power = 1.0f;	//通常速度
+	m_speed_power = 0.7f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
 
@@ -56,13 +56,6 @@ void CObjHeroBattle::Action()
 			}
 		}
 	}
-	/*if (Input::GetVKey(VK_SPACE) == true)
-	{
-		if (1)
-		{
-			m_vy = -30;
-		}
-	}*/
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -82,11 +75,11 @@ void CObjHeroBattle::Action()
 	hit->SetPos(m_px, m_py);
 
 	//敵機オブジェクトと接触したら主人公削除
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	/*if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
-	}
+	}*/
 
 	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)

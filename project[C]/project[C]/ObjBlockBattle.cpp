@@ -44,7 +44,7 @@ void CObjBlockBattle::Init()
 void CObjBlockBattle::Action()
 {
 	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO_BATTLE);
+	CObjHeroBattle* hero = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 }
@@ -64,22 +64,15 @@ void CObjBlockBattle::Draw()
 	src.m_right = 50.0f;
 	src.m_bottom = 50.0f;
 
-	for (int i = 0; i < 12; i++)
-	{
-		for (int j = 0; j < 16; j++)
-		{
-			if (m_map[i][j] > 0)
-			{
-				//表示位置の設定
-				dst.m_top = i*50.0f;
-				dst.m_left = j*50.0f;
-				dst.m_right = dst.m_left + 50.0;
-				dst.m_bottom = dst.m_top + 50.0;
+	
+	//表示位置の設定
+	dst.m_top = 550.0f;
+	dst.m_left = 0.0f;
+	dst.m_right =  800.0f;
+	dst.m_bottom = 600.0f;
 
-				//描画
-				Draw::Draw(2, &src, &dst, c, 0.0f);
-			}
-		}
-	}
+	//描画
+	Draw::Draw(1, &src, &dst, c, 0.0f);
+		
 
 }

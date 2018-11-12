@@ -44,7 +44,9 @@
     <ClCompile Include="ObjHero.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ObjHeroBattle.cpp" />
+    <ClCompile Include="ObjHeroBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjMain.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -67,7 +69,9 @@
   <ItemGroup>
     <ClInclude Include="ObjBlockBattle.h" />
     <ClInclude Include="ObjEnemyBattle.h" />
-    <ClInclude Include="ObjHeroBattle.h" />
+    <ClInclude Include="ObjHeroBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjMobThird.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
