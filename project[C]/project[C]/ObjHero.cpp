@@ -6,9 +6,10 @@
 
 #include "GameHead.h"
 #include "ObjHero.h"
+#include "ObjBlock.h"
 
-float g_px = 200.0f;
-float g_py = 200.0f;
+float g_px = 375.0f;
+float g_py = 300.0f;
 
 //使用するネームスペース
 using namespace GameL;
@@ -32,7 +33,7 @@ void CObjHero::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, g_px, g_py, 49, 49, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, g_px, g_py, ALL_SIZE, ALL_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 }
 
@@ -46,6 +47,7 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMenu());
 	}
 
+	
 	//キーの入力方向
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
@@ -54,11 +56,13 @@ void CObjHero::Action()
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
 		m_vx -= m_speed_power;
+
 	}
 
 	if (Input::GetVKey(VK_UP) == true)
 	{
 		m_vy -= m_speed_power;
+
 	}
 
 	if (Input::GetVKey(VK_DOWN) == true)
@@ -66,6 +70,45 @@ void CObjHero::Action()
 		m_vy += m_speed_power;
 	}
 
+
+	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//左のスクロールライン
+	{
+		g_px = 0;
+		b->SetScrollX(b->GetScrollX());
+	}
+
+	//右のスクロールライン
+	{
+		g_px = 400;
+		b->SetScrollX(b->GetScrollX());	
+	}
+
+	//上のスクロールライン
+	{
+		g_py = 0;
+		b->SetScrollY(b->GetScrollY());	
+	}
+
+	//下のスクロールライン
+	{
+		g_py = 300;
+		b->SetScrollY(b->GetScrollY());
+	}
+
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	if (hit->CheckObjNameHit(OBJ_MYSTERYBLOCK) != nullptr)
+	{
+		m_vx -= 5.0f;
+	}
+	
+	//下のスクロールライン
+	{
+		g_py = 300;
+		b->SetScrollY(b->GetScrollY());
+	}
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -78,15 +121,9 @@ void CObjHero::Action()
 		&m_block_type
 	);
 
-
-
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-
 	//位置の更新
 	g_px += m_vx;
 	g_py += m_vy;
-	
 	
 	//HitBoxの位置の変更
 	hit->SetPos(g_px, g_py);
@@ -111,8 +148,8 @@ void CObjHero::Draw()
 	//表示位置の設定
 	dst.m_top    =  0.0f + g_py;
 	dst.m_left   =  0.0f + g_px;
-	dst.m_right  = 50.0f + g_px;
-	dst.m_bottom = 50.0f + g_py;
+	dst.m_right  = ALL_SIZE + g_px;
+	dst.m_bottom = ALL_SIZE + g_py;
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);

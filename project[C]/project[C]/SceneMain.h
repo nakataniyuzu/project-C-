@@ -17,5 +17,5 @@ class CSceneMain :public CScene
 		void InitScene();//ゲームメインの初期化メソッド
 		void Scene();    //ゲームメインの実行中メソッド
 	private:
-
+		/*int m_map[10][10];	//マップ情報*/
 };

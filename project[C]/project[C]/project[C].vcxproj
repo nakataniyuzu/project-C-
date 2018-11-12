@@ -33,19 +33,47 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WICTextureLoader.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
-    <ClCompile Include="ObjBackground.cpp" />
-    <ClCompile Include="ObjBlock.cpp" />
-    <ClCompile Include="ObjHero.cpp" />
-    <ClCompile Include="ObjMain.cpp" />
+    <ClCompile Include="ObjBackground.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ObjBlockBattle.cpp" />
+    <ClCompile Include="ObjBlock.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyBattle.cpp" />
+    <ClCompile Include="ObjHero.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ObjHeroBattle.cpp" />
+    <ClCompile Include="ObjMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjMenu.cpp" />
+    <ClCompile Include="ObjMoveblock.cpp" />
+    <ClCompile Include="ObjMysteryblock.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="ObjTopback.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="SceneBattle.cpp" />
+    <ClCompile Include="SceneMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ObjMobThird.h" />
-    <ClInclude Include="ObjMobFirst.h" />
+    <ClInclude Include="ObjBlockBattle.h" />
+    <ClInclude Include="ObjEnemyBattle.h" />
+    <ClInclude Include="ObjHeroBattle.h" />
+    <ClInclude Include="ObjMobThird.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ObjMobFirst.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -61,14 +89,35 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="ObjBackground.h" />
-    <ClInclude Include="ObjBlock.h" />
-    <ClInclude Include="ObjHero.h" />
-    <ClInclude Include="ObjMain.h" />
+    <ClInclude Include="ObjBackground.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ObjBlock.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ObjHero.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ObjMain.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjMenu.h" />
+    <ClInclude Include="ObjMobSecond.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjMobSecond.h" />
+    <ClInclude Include="ObjMoveblock.h" />
+    <ClInclude Include="ObjMysteryblock.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="ObjTopback.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="SceneBattle.h" />
+    <ClInclude Include="SceneMain.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="SceneTitle.h" />
   </ItemGroup>

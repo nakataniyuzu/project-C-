@@ -13,6 +13,13 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_BLOCK,
 	OBJ_BACKGROUND,
+	OBJ_TOPBACK,
+	OBJ_ENEMY,
+	OBJ_HERO_BATTLE,
+	OBJ_ENEMY_BATTLE,
+	OBJ_BLOCK_BATTLE,
+	OBJ_MOVEBLOCK,
+	OBJ_MYSTERYBLOCK,
 };
 //------------------------------------------------
 
@@ -27,6 +34,8 @@ enum HIT_ELEMENTS
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
+	ELEMENT_MYSTERY_BLOCK,
+	ELEMENT_GATE_BLOCK,
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
@@ -63,16 +72,24 @@ struct UserData
 
 #include "ObjBlock.h"
 #include "ObjBackground.h"
+#include "ObjTopback.h"
+#include "ObjHeroBattle.h"
+#include "ObjEnemyBattle.h"
+#include "ObjBlockBattle.h"
+#include "ObjTopback.h"
+#include "ObjMoveblock.h"
+#include "ObjMysteryblock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneTitle.h"
 #include "SceneMain.h"
 #include "SceneMenu.h"
+#include "SceneBattle.h"
 
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneMain
+#define SET_GAME_START  CSceneBattle
 //-----------------------------------------------

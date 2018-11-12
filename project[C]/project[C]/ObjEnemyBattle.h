@@ -5,20 +5,17 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：主人公
-class CObjHero : public CObj
+//オブジェクト：敵(戦闘)
+class CObjEnemyBattle : public CObj
 {
 public:
-	CObjHero() {};
-	~CObjHero() {};
+	CObjEnemyBattle() {};
+	~CObjEnemyBattle() {};
 	void Init();		//イニシャライズ
-
-public:
 	void Action();		//アクション
-public:
 	void Draw();		//ドロー
 
- 	float GetX() { return m_px; }
+	float GetX() { return m_px; }
 	float GetY() { return m_py; }
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
@@ -41,19 +38,13 @@ private:
 	float m_vy;
 	float m_posture;	//姿勢
 
-	float m_scrollx;		//左右スクロール用
-	float m_scrolly;
-
-	float m_x;
-	float m_y;
-
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム
 
 	float m_speed_power;	//スピードパワー
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
-							//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;
@@ -62,4 +53,6 @@ private:
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
 
+	//テスト用
+	float px, py;		//交点
 };

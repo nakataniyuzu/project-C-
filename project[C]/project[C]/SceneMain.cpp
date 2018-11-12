@@ -45,8 +45,13 @@ void CSceneMain::InitScene()
 		{
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
-
+		
 			map[i][j] = w;
+			
+			if (w >= 10)
+			{
+				count += 1;
+			}
 			count += 2;
 		}
 	}
@@ -56,6 +61,9 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Wall.png", 2, TEX_SIZE_100);
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
+	Draw::LoadImageW(L"nazotoki.png", 4, TEX_SIZE_100);
+	Draw::LoadImageW(L"Gate.png", 5, TEX_SIZE_100);
+
 
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
@@ -66,7 +74,10 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
 	CObjBackground* objback = new CObjBackground();
-	Objs::InsertObj(objback, OBJ_BACKGROUND, 19);
+	Objs::InsertObj(objback, OBJ_BACKGROUND, 8);
+	
+	CObjTopback* objtb = new CObjTopback();
+	Objs::InsertObj(objtb, OBJ_TOPBACK, 19);
 
 	CObjMain* objm = new CObjMain();
 	Objs::InsertObj(objm, OBJ_MAIN, 20);
