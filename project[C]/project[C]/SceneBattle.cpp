@@ -31,9 +31,9 @@ CSceneBattle::~CSceneBattle()
 void CSceneBattle::InitScene()
 {
 	//グラフィック読み込み
-	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_100);
+	Draw::LoadImageW(L"Hero2.png", 0, TEX_SIZE_100);
 	Draw::LoadImageW(L"Battlefloor.png", 1, TEX_SIZE_100);
-	//Draw::LoadImageW(L"Wall.png", 2, TEX_SIZE_100);
+	Draw::LoadImageW(L"Wall.png", FLOOR1_WALL,TEX_SIZE_100);
 
 	//主人公オブジェクト作成
 	CObjHeroBattle* obj = new CObjHeroBattle();
@@ -46,6 +46,10 @@ void CSceneBattle::InitScene()
 	//敵(戦闘)オブジェクト作成
 	CObjEnemyBattle* obje = new CObjEnemyBattle();
 	Objs::InsertObj(obje, OBJ_ENEMY_BATTLE, 10);
+
+	//背景(戦闘)オブジェクト作成
+	CObjBackgroundBattle* objbackb = new CObjBackgroundBattle();
+	Objs::InsertObj(objbackb, OBJ_BACKGROUND_BATTLE, 8);
 
 	CObjMain* p = new CObjMain();
 	Objs::InsertObj(p, OBJ_TITLE, 20);

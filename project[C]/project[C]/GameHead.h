@@ -20,6 +20,7 @@ enum OBJ_NAME
 	OBJ_BLOCK_BATTLE,
 	OBJ_MOVEBLOCK,
 	OBJ_MYSTERYBLOCK,
+	OBJ_BACKGROUND_BATTLE,
 };
 //------------------------------------------------
 
@@ -76,6 +77,7 @@ struct UserData
 #include "ObjHeroBattle.h"
 #include "ObjEnemyBattle.h"
 #include "ObjBlockBattle.h"
+#include "ObjBackgroundBattle.h"
 #include "ObjTopback.h"
 #include "ObjMoveblock.h"
 #include "ObjMysteryblock.h"

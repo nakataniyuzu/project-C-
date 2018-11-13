@@ -17,7 +17,7 @@ void CObjHeroBattle::Init()
 	m_py = 450.0f;		//位置
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
+	m_posture = 0.0f;	//右向き0.0f 左向き1.0f
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -33,16 +33,35 @@ void CObjHeroBattle::Init()
 //アクション
 void CObjHeroBattle::Action()
 {
+	//移動ベクトルの破棄
+	//m_vy = 0.0f;
+
 	//キーの入力方向
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
 		m_vx += m_speed_power;
-		m_posture = 2.0f;
+		m_posture = 0.0f;
+		m_ani_time += 1;
 	}
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
 		m_vx -= m_speed_power;
-		m_posture = 2.0f;
+		m_posture = 1.0f;
+		m_ani_time += 1;
+	}
+	else
+	{
+		m_ani_frame = 0; //キー入力が無い場合は静止フレームにする
+		m_ani_time = 0;
+	}
+	if (m_ani_time > 4)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
 	}
 
 	//Spaceキーでジャンプ
@@ -85,6 +104,7 @@ void CObjHeroBattle::Action()
 	if (m_px + 75 >= 800)
 	{
 		m_px = 800.0 - 75.0f;
+		Scene::SetScene(new CSceneMain());
 	}
 
 	if (m_px < 0)
@@ -106,6 +126,11 @@ void CObjHeroBattle::Action()
 //ドロー
 void CObjHeroBattle::Draw()
 {
+	int AniData[4] =
+	{
+		1,0,2,0,
+	};
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -113,15 +138,15 @@ void CObjHeroBattle::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 100.0f;
-	src.m_bottom = 100.0f;
+	src.m_top = 00.0f;
+	src.m_left = 32.0f + AniData[m_ani_frame] ;
+	src.m_right = 0.0f + AniData[m_ani_frame] ;
+	src.m_bottom = 45.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px;
-	dst.m_right = 75.0f + m_px;
+	dst.m_left = (75.0f * m_posture) + m_px;
+	dst.m_right = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画

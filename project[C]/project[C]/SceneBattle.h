@@ -5,6 +5,9 @@
 //使用するネームスペース
 using namespace GameL;
 
+//マクロ
+#define FLOOR1_WALL 02
+
 //シーン：戦闘
 class CSceneBattle :public CScene
 {

@@ -36,6 +36,7 @@
     <ClCompile Include="ObjBackground.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjBackgroundBattle.cpp" />
     <ClCompile Include="ObjBlockBattle.cpp" />
     <ClCompile Include="ObjBlock.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -67,6 +68,7 @@
     <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ObjBackgroundBattle.h" />
     <ClInclude Include="ObjBlockBattle.h" />
     <ClInclude Include="ObjEnemyBattle.h" />
     <ClInclude Include="ObjHeroBattle.h">
