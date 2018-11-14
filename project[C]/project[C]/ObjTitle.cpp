@@ -59,7 +59,22 @@ void CObjTitle::Action()
 //ドロー
 void CObjTitle::Draw()
 {
-	float c[4] = { 1,1,1,1 };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	RECT_F src;		//描画元切り取り位置
+	RECT_F dst;		//描画先表示位置
+	//背景切り取り
+	src.m_top    =   0.0f;
+	src.m_left   =   0.0f;
+	src.m_right  = 800.0f;
+	src.m_bottom = 600.0f;
+
+	//背景の描画
+	dst.m_top    =   0.0f;
+	dst.m_left   =   0.0f;
+	dst.m_right  = 800.0f;
+	dst.m_bottom = 600.0f;
+	Draw::Draw(0, &src, &dst, c, 0.0f);
 
 	//タイトル
 	Font::StrDraw(L"○○", TITLE_POS_X, TITLE_POS_Y, TITLE_FONT_SIZE, c);

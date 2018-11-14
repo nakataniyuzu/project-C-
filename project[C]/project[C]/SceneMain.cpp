@@ -45,28 +45,38 @@ void CSceneMain::InitScene()
 		{
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
-
+		
 			map[i][j] = w;
+			
+			if (w >= 10)
+			{
+				count += 1;
+			}
 			count += 2;
 		}
 	}
 
 	//グラフィック読み込み
-	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_100);
+	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256_128);
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Wall.png", 2, TEX_SIZE_100);
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
+	Draw::LoadImageW(L"nazotoki.png", 4, TEX_SIZE_100);
+	Draw::LoadImageW(L"Gate.png", 5, TEX_SIZE_100);
+	Draw::LoadImageW(L"Water.png", 6, TEX_SIZE_200_100);
+	Draw::LoadImageW(L"Enemy1.png", 7, TEX_SIZE_200_100);
+	Draw::LoadImageW(L"Magic.png", 8, TEX_SIZE_100);
+	Draw::LoadImageW(L"Candle.png", 9, TEX_SIZE_200_100);
+	Draw::LoadImageW(L"magicitem.png", 10, TEX_SIZE_256);
 
+	
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 10);
+	Objs::InsertObj(obj, OBJ_HERO, 15);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
-
-	CObjBackground* objback = new CObjBackground();
-	Objs::InsertObj(objback, OBJ_BACKGROUND, 8);
 	
 	CObjTopback* objtb = new CObjTopback();
 	Objs::InsertObj(objtb, OBJ_TOPBACK, 19);
