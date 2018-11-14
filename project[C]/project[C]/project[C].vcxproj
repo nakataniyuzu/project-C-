@@ -59,6 +59,7 @@
     </ClCompile>
     <ClCompile Include="ObjMoveblock.cpp" />
     <ClCompile Include="ObjMysteryblock.cpp" />
+    <ClCompile Include="ObjResetblock.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="ObjWater.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="ObjMobSecond.h" />
     <ClInclude Include="ObjMoveblock.h" />
     <ClInclude Include="ObjMysteryblock.h" />
+    <ClInclude Include="ObjResetblock.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="ObjWater.h" />

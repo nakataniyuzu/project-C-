@@ -156,6 +156,9 @@
     <ClCompile Include="ObjBattleMain.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
+    <ClCompile Include="ObjResetblock.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -285,6 +288,9 @@
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjBattleMain.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjResetblock.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>

@@ -26,15 +26,13 @@ void CObjResetblock::Init()
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 
-	m_move = true;			//true=右 false=左
-
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
 	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
+	m_hit_up    = false;
+	m_hit_down  = false;
+	m_hit_left  = false;
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
@@ -75,22 +73,22 @@ void CObjResetblock::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-				//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 800.0f;
+	//切り取り位置の設定
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 800.0f;
 	src.m_bottom = 595.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
-	dst.m_left = 0.0f + m_px + block->GetScrollX();
-	dst.m_right = ALL_SIZE + m_px + block->GetScrollX();
+	dst.m_top    = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
+	dst.m_left   = 0.0f + m_px + block->GetScrollX();
+	dst.m_right  = ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw (9,&src, &dst, c, 0.0f);
+	Draw::Draw (11,&src, &dst, c, 0.0f);
 
 
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -109,5 +107,3 @@ void CObjResetblock::Draw()
 	
 
 }
-
-

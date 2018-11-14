@@ -33,6 +33,7 @@ enum OBJ_NAME
 	OBJ_MOVEBLOCK,
 	OBJ_MYSTERYBLOCK,
 	OBJ_WATER,
+	OBJ_RESETBLOCK,
 };
 //------------------------------------------------
 
@@ -58,6 +59,7 @@ enum HIT_ELEMENTS
 	ELEMENT_MYSTERY_BLOCK,
 	ELEMENT_GATE_BLOCK,
 	ELEMENT_WATER,
+	ELEMENT_RESET,
 };
 //------------------------------------------------
 
@@ -105,10 +107,11 @@ struct UserData
 #include "ObjBackgroundBattle.h"
 #include "ObjBattleMain.h"
 
-#include "ObjTopback.h"
 #include "ObjMoveblock.h"
 #include "ObjMysteryblock.h"
 #include "ObjWater.h"
+#include "ObjResetblock.h"
+
 #include "ObjMessage.h"
 //------------------------------------------------
 
