@@ -6,21 +6,21 @@
 #include "GameL\DrawFont.h"
 
 #include "GameHead.h"
-#include "ObjMysteryblock.h"
+#include "ObjWater.h"
 
 
 //使用するネームスペース
 using namespace GameL;
 
 
-CObjMysteryblock::CObjMysteryblock(float x, float y)
+CObjWater::CObjWater(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjMysteryblock::Init()
+void CObjWater::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -28,27 +28,44 @@ void CObjMysteryblock::Init()
 
 	m_move = true;			//true=右 false=左
 
+	m_ani_time = 0;
+	m_ani_frame = 0;	//静止フレームを初期にする
+
+	m_ani_max_time = 4;		//アニメーション間隔幅
+
 	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
+	m_hit_up    = false;
+	m_hit_down  = false;
+	m_hit_left  = false;
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_MYSTERYBLOCK, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_WATER, 1);
 
 }
 
 //アクション
-void CObjMysteryblock::Action()
+void CObjWater::Action()
 {
+		
+	m_ani_time += 1;
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
+
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//MOVEと当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_MOVEBLOCK) != nullptr)
+	//ICEと当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_ICE) != nullptr)
 	{
-		this->SetStatus(false);
+		//this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
 
@@ -65,24 +82,15 @@ void CObjMysteryblock::Action()
 }
 
 //ドロー
-void CObjMysteryblock::Draw()
+void CObjWater::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	CHitBox* hit = Hits::GetHitBox(this);
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
+	int AniDate[4] =
 	{
-		m_time = 100;
-	}
-	if (m_time > 0) {
-		m_time--;
-		Font::StrDraw(L"鍵が必要です。", 200, 200, 20, c);//時間が0になると表示を終了
-		if (m_time <= 0){
-			m_time = 0;
-		}
-	}
-	
+		0, 0, 1, 1,
+	};
 
 
 	RECT_F src;	//描画元切り取り位置
@@ -90,19 +98,21 @@ void CObjMysteryblock::Draw()
 
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
-	src.m_left   =   0.0f;
-	src.m_right  = 100.0f;
+	src.m_left   =   0.0f + AniDate[m_ani_frame] * 100.f;
+	src.m_right  = 100.0f + AniDate[m_ani_frame] * 100.f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 	//表示位置の設定
-	dst.m_top    =     0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
-	dst.m_left   =     0.0f + m_px + block->GetScrollX();
+	dst.m_top    = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
+	dst.m_left   = 0.0f + m_px + block->GetScrollX();
 	dst.m_right  = ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	Draw::Draw(6, &src, &dst, c, 0.0f);
+
 }
 
 

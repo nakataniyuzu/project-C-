@@ -16,5 +16,5 @@ public:
 	void Draw();		//ドロー
 
 private:
-	int m_map[12][16]; //仮ブロック情報
+	int m_map[12][16]; //ブロック情報
 };

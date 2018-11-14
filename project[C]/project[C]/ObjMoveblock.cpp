@@ -1,6 +1,5 @@
 //使用するヘッダーファイル
 #include "GameL\DrawTexture.h"
-#include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
@@ -53,17 +52,18 @@ void CObjMoveblock::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//敵と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
 	{
 		//主人公が敵とどの角度で当たっているのかを確認
 		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
-		hit_date = hit->SearchObjNameHit(OBJ_HERO);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_date = hit->SearchElementHit(ELEMENT_PLAYER);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//ブロックの上下左右に当たったら
 
 			float r = hit_date[i]->r;
+
 			if ((r < 45 && r >= 0) || r > 315)
 			{
 				//右

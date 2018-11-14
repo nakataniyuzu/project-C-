@@ -57,7 +57,7 @@ void CObjMenu::Action()
 //ドロー
 void CObjMenu::Draw()
 {
-	float c[4] = { 1,1,1,1 };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	//ゲームに戻る場所
 	Font::StrDraw(L"ゲームに戻る", MENU_RETURN_POS_X, MENU_RETURN_POS_Y, MENU_RETURN_FONT_SIZE, c);

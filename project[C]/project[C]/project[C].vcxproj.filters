@@ -22,14 +22,20 @@
     <Filter Include="ソース ファイル\Menu">
       <UniqueIdentifier>{524852c8-d492-489f-bd75-ad6bc8652f4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Battle">
-      <UniqueIdentifier>{754d1f11-6cfa-43b9-8f97-8821013966bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\Block関係">
-      <UniqueIdentifier>{c9a7dd07-0e17-486d-be6b-f81a3ea98f88}</UniqueIdentifier>
+      <UniqueIdentifier>{7353eb23-e651-4ca1-9847-e59475b54507}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Main\背景関係">
-      <UniqueIdentifier>{500681d8-dcbc-4798-83d7-3861cf946fee}</UniqueIdentifier>
+      <UniqueIdentifier>{79cfa641-fc4e-482f-aa49-5738ef017f40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Enemy関係">
+      <UniqueIdentifier>{838ed0bb-8a67-480e-b63a-a988716486ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Battle関係">
+      <UniqueIdentifier>{46bd05cf-569f-46ae-9580-bda106efa9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Magic関係">
+      <UniqueIdentifier>{80f13e64-85fc-4084-8c05-6bd80426f71a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,9 +84,6 @@
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
-    <ClCompile Include="ObjMain.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
@@ -96,35 +99,65 @@
     <ClCompile Include="ObjMenu.cpp">
       <Filter>ソース ファイル\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="ObjMoveblock.cpp">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
+    <ClCompile Include="ObjTopback.cpp">
+      <Filter>ソース ファイル\Main\背景関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMain.cpp">
+      <Filter>ソース ファイル\Main\背景関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjBlock.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBackground.cpp">
-      <Filter>ソース ファイル\Main\背景関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTopback.cpp">
-      <Filter>ソース ファイル\Main\背景関係</Filter>
+    <ClCompile Include="ObjMoveblock.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjMysteryblock.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemyBattle.cpp">
-      <Filter>ソース ファイル\Battle</Filter>
+    <ClCompile Include="ObjWater.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjHeroBattle.cpp">
-      <Filter>ソース ファイル\Battle</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneBattle.cpp">
-      <Filter>ソース ファイル\Battle</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTopback.cpp">
+    <ClCompile Include="ObjMessage.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
     <ClCompile Include="ObjBlockBattle.cpp">
-      <Filter>ソース ファイル\Battle</Filter>
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjFire.cpp">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFireblock.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjIce.cpp">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjThunder.cpp">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjWind.cpp">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBackgroundBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHeroBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBattleMain.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjResetblock.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +209,6 @@
     <ClInclude Include="SceneMain.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMain.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
     <ClInclude Include="ObjHero.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
@@ -194,45 +224,74 @@
     <ClInclude Include="ObjMenu.h">
       <Filter>ソース ファイル\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMobFirst.h">
-      <Filter>ソース ファイル\Main</Filter>
+    <ClInclude Include="ObjTopback.h">
+      <Filter>ソース ファイル\Main\背景関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMobSecond.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMobThird.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMoveblock.h">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
+    <ClInclude Include="ObjMain.h">
+      <Filter>ソース ファイル\Main\背景関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjBlock.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBackground.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemyBattle.h">
-      <Filter>ソース ファイル\Battle</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjHeroBattle.h">
-      <Filter>ソース ファイル\Battle</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneBattle.h">
-      <Filter>ソース ファイル\Battle</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTopback.h">
-      <Filter>ソース ファイル\Main</Filter>
-      <Filter>ソース ファイル\Main\背景関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTopback.h">
-      <Filter>ソース ファイル\Main\背景関係</Filter>
+    <ClInclude Include="ObjMoveblock.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjMysteryblock.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
+    <ClInclude Include="ObjWater.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMessage.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy.h">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
     <ClInclude Include="ObjBlockBattle.h">
-      <Filter>ソース ファイル\Battle</Filter>
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemyBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMobFirst.h">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMobSecond.h">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMobThird.h">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFireblock.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjFire.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjIce.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjThunder.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjWind.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBackgroundBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHeroBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBattleMain.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjResetblock.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
