@@ -93,6 +93,9 @@
     <ClCompile Include="ObjBackground.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
+    <ClCompile Include="ObjTopback.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -174,6 +177,9 @@
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="ObjBackground.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTopback.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
   </ItemGroup>

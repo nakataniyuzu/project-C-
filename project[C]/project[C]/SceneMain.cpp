@@ -66,7 +66,10 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
 	CObjBackground* objback = new CObjBackground();
-	Objs::InsertObj(objback, OBJ_BACKGROUND, 19);
+	Objs::InsertObj(objback, OBJ_BACKGROUND, 8);
+	
+	CObjTopback* objtb = new CObjTopback();
+	Objs::InsertObj(objtb, OBJ_TOPBACK, 19);
 
 	CObjMain* objm = new CObjMain();
 	Objs::InsertObj(objm, OBJ_MAIN, 20);

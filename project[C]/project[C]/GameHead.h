@@ -13,6 +13,7 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_BLOCK,
 	OBJ_BACKGROUND,
+	OBJ_TOPBACK,
 };
 //------------------------------------------------
 
@@ -63,6 +64,7 @@ struct UserData
 
 #include "ObjBlock.h"
 #include "ObjBackground.h"
+#include "ObjTopback.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
