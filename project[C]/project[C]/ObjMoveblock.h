@@ -15,7 +15,8 @@ class CObjMoveblock : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
-		float GetVx() { return m_vx; }
+		float GetVY() { return m_vy; }
+		float GetVX() { return m_vx; }
 
 	private:
 		float m_px;			//位置

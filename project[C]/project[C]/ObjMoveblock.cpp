@@ -1,6 +1,5 @@
 //使用するヘッダーファイル
 #include "GameL\DrawTexture.h"
-#include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
@@ -49,7 +48,61 @@ void CObjMoveblock::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
-	
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	//敵と当たっているか確認
+	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
+	{
+		//主人公が敵とどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_PLAYER);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			//ブロックの上下左右に当たったら
+
+			float r = hit_date[i]->r;
+
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				//右
+				m_vx = -5.0f;//左に移動させる
+			}
+			if (r > 45 && r < 135)
+			{
+				//上
+				m_vy = +5.0f;//上に移動させる
+			}
+			if (r > 135 && r < 225)
+			{
+				//左
+				m_vx = +5.0f;//右に移動させる
+			}
+			if (r > 225 && r < 315)
+			{
+				//下
+				m_vy = -5.0f;//下に移動させる
+			}
+			m_px += ((CObjHero*)hit_date[i]->o)->GetVX();
+			m_py += ((CObjHero*)hit_date[i]->o)->GetVY();
+
+		}
+	}
+
+	//MYSTERYBLOCKと当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_MYSTERYBLOCK) != nullptr)
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);
+	}
+
+	//摩擦
+	m_vx += -(m_vx * 0.098);
+	m_vy += -(m_vy * 0.098);
+
+
+
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d;
 
@@ -61,7 +114,6 @@ void CObjMoveblock::Action()
 	);
 
 	//位置の更新
-
 	m_px += m_vx;
 	m_py += m_vy;
 
@@ -69,9 +121,7 @@ void CObjMoveblock::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + block->GetScrollX(), m_py);
-	hit->SetPos(m_px + block->GetScrollY(), m_py);
+	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
 
 }
 
@@ -86,8 +136,8 @@ void CObjMoveblock::Draw()
 
 	//切り取り位置の設定
 	src.m_top	 =   0.0f;
-	src.m_left	 =   0.0f;
-	src.m_right  = 100.0f;
+	src.m_left	 = 300.0f;
+	src.m_right  = 400.0f;
 	src.m_bottom = 100.0f;
 	
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -99,7 +149,7 @@ void CObjMoveblock::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(4, &src, &dst, c, 0.0f);
+	Draw::Draw(2, &src, &dst, c, 0.0f);
 }
 
 

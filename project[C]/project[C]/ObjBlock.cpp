@@ -23,7 +23,6 @@ void CObjBlock::Init()
 {
 	m_scrollx = 0.0f;
 	m_scrolly = 0.0f;
-
 }
 
 //アクション
@@ -58,21 +57,64 @@ void CObjBlock::Action()
 		m_scrolly -= hero->GetVY();	//主人公が本来動くべき分の値をm_scrollに加える
 	}
 
-
-	
-	//敵出現
+	//出現
 	for (int i = 0; i < 27; i++)
 	{
 		for (int j = 0; j < 55; j++)
 		{
 			//列の中からを探す
+			if (m_map[i][j] == 3)
+			{
+				//3があれば水を出現
+				CObjWater* objwater = new CObjWater(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objwater, OBJ_WATER, 10);
+
+				//出現場所の値を0にする
+				m_map[i][j] = 0;
+			}
+			if (m_map[i][j] == 4)
+			{
+				//4があればFireblockを出現
+				CObjFireblock* objfb = new CObjFireblock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 10);
+
+				//出現場所の値を0にする
+				m_map[i][j] = 0;
+			}
+			if (m_map[i][j] == 6)
+			{
+				//6があれば敵を出現
+				CObjEnemy* obje = new CObjEnemy(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(obje, OBJ_ENEMY, 10);
+
+				//出現場所の値を0にする
+				m_map[i][j] = 0;
+			}
 			if (m_map[i][j] == 7)
 			{
-				//7があれば出現
-				CObjMoveblock* objmb = new CObjMoveblock(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objmb, OBJ_MOVEBLOCK, 9);
+				//7があればMysteryblockを出現
+				CObjMysteryblock* objgate = new CObjMysteryblock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objgate, OBJ_MYSTERYBLOCK, 10);
 
-				//敵出現場所の値を0にする
+				//出現場所の値を0にする
+				m_map[i][j] = 0;
+			}
+			if (m_map[i][j] == 11)
+			{
+				//11があればMoveblockを出現
+				CObjMoveblock* objmb = new CObjMoveblock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objmb, OBJ_MOVEBLOCK, 10);
+
+				//出現場所の値を0にする
+				m_map[i][j] = 0;
+			}
+			if (m_map[i][j] == 12)
+			{
+				//12があればResetblockを出現
+				CObjResetblock* objrb = new CObjResetblock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objrb, OBJ_RESETBLOCK, 10);
+
+				//出現場所の値を0にする
 				m_map[i][j] = 0;
 			}
 		}
@@ -97,7 +139,7 @@ void CObjBlock::Draw()
 	{
 		for (int j = 0; j < 55; j++)
 		{
-			if (m_map[i][j] > 0)
+			if (m_map[i][j] >= 0)
 			{
 
 				//表示位置の設定
@@ -105,7 +147,16 @@ void CObjBlock::Draw()
 				dst.m_left   = j*ALL_SIZE + m_scrollx;
 				dst.m_right  = dst.m_left + ALL_SIZE;
 				dst.m_bottom = dst.m_top  + ALL_SIZE;
-				if (m_map[i][j] == 1)
+				if (m_map[i][j] == 0)
+				{
+					src.m_top    =   0.0f;
+					src.m_left   =   0.0f;
+					src.m_right  = 800.0f;
+					src.m_bottom = 600.0f;
+					//描画
+					Draw::Draw(FLOOR1, &src, &dst, c, 0.0f);
+				}
+				else if (m_map[i][j] == 1)
 				{
 					src.m_top    = 0.0f;
 					src.m_left   = 0.0f;
@@ -127,13 +178,6 @@ void CObjBlock::Draw()
 				{
 					;
 				}
-				else if (m_map[i][j] == 6)
-				{
-					;
-				}
-				else if (m_map[i][j] == 7)
-				{
-				}
 				else if (m_map[i][j] == 8)
 				{
 				}
@@ -143,14 +187,13 @@ void CObjBlock::Draw()
 				else if (m_map[i][j] == 10)
 				{
 				}
-				else if (m_map[i][j] == 11)
-				{
-				}
 				else if (m_map[i][j] == 12)
 				{
-				}
+
+				}			
 				else
 				{
+
 				}
 			}
 		}
@@ -185,15 +228,12 @@ void CObjBlock::BlockHit(
 	*left  = false;
 	*right = false;
 
-	//踏んでいるblockの種類の初期化
-	*bt = 0;
-
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < 27; i++)
 	{
 		for (int j = 0; j < 55; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 6 && m_map[i][j] != 10)
+			if (m_map[i][j] > 0 && m_map[i][j] != 10)
 			{
 				//要素番号を座標に変更
 				float bx = j*ALL_SIZE;
@@ -257,7 +297,6 @@ void CObjBlock::BlockHit(
 							*vy = 0.15f;//-VX*反発係数
 						}
 					}
-
 				}
 			}
 		}

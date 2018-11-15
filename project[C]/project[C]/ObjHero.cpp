@@ -3,6 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
 #include "ObjHero.h"
@@ -22,7 +23,17 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 0.3f;	//通常速度
+	m_speed_power = 0.2f;	//通常速度
+	m_posture = 2.0f;
+	
+	m_hp = 15;	//初期HP
+	m_mp = 999;	//初期MP
+	m_magic = 0;	//初期魔法
+
+	m_ani_time = 0;
+	m_ani_frame = 0;	//静止フレームを初期にする
+	m_ani_max_time = 8;		//アニメーション間隔幅(増やせば遅い
+
 
 	//blockとの衝突状態確認
 	m_hit_up    = false;
@@ -40,41 +51,120 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-
 	//Eキーでメニューを開く
 	if (Input::GetVKey('E') == true)
 	{
 		Scene::SetScene(new CSceneMenu());
 	}
 
-	
+	//Xキーで魔法を切り替える
+	if (Input::GetVKey('X') == true)
+	{
+		if (m_mf == true) {	//キー制御用
+			m_mf = false;
+			m_magic += 1;
+		}
+		if (m_magic >= 4) {
+			m_magic = 0;
+		}
+	}
+	else
+	{
+		m_mf = true;
+	}
+	//MPが0以上の時は魔法を放つ
+	if (m_mp > 0) {
+		if (Input::GetVKey('Z') == true)	//魔法発射
+		{
+			if (m_f == true) {	//魔法制御用
+
+				//主人公の向きによって発射する向きを設定
+				if (m_posture == 0.0f) {		
+					m_directionx =  0.0f;
+					m_directiony =-50.0f;
+				}
+				else if (m_posture == 1.0f) {
+					m_directionx = 50.0f;
+					m_directiony =  0.0f;
+				}
+				else if (m_posture == 2.0f) {
+					m_directionx =  0.0f;
+					m_directiony = 50.0f;
+				}
+				else if (m_posture == 3.0f) {
+					m_directionx =-50.0f;
+					m_directiony =  0.0f;
+				}
+
+				if (m_magic == 0)	//火の魔法
+				{
+					CObjFire* objf = new CObjFire(g_px + m_directionx, g_py + m_directiony);//Fireオブジェクト作成
+					Objs::InsertObj(objf, OBJ_FIRE, 100);		//作ったFireオブジェクトをオブジェクトマネージャーに登録
+				}
+				else if (m_magic == 1)	//氷の魔法
+				{
+					CObjIce* obji = new CObjIce(g_px + m_directionx, g_py + m_directiony);//Iceオブジェクト作成
+					Objs::InsertObj(obji, OBJ_ICE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+				}
+				else if (m_magic == 2)	//風の魔法
+				{
+					CObjWind* obji = new CObjWind(g_px + m_directionx, g_py + m_directiony);//Windオブジェクト作成
+					Objs::InsertObj(obji, OBJ_WIND, 100);		//作ったWindオブジェクトをオブジェクトマネージャーに登録
+				}
+				else if (m_magic == 3)	//雷の魔法
+				{
+					CObjThunder* obji = new CObjThunder(g_px + m_directionx, g_py + m_directiony);//Thunderオブジェクト作成
+					Objs::InsertObj(obji, OBJ_THUNDER, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+				}
+				m_f = false;
+				m_mp -= 1;		//MPを減らす
+			}
+		}
+		else 
+		{
+			m_f = true;
+		}
+	}
+
 	//キーの入力方向
-	if (Input::GetVKey(VK_RIGHT) == true)
-	{
-		m_vx += m_speed_power;
-	}
-	if (Input::GetVKey(VK_LEFT) == true)
-	{
-		m_vx -= m_speed_power;
-
-	}
-
 	if (Input::GetVKey(VK_UP) == true)
 	{
 		m_vy -= m_speed_power;
-
+		m_posture = 0.0f;	//上
+		m_ani_time += 1;
 	}
-
-	if (Input::GetVKey(VK_DOWN) == true)
+	else if (Input::GetVKey(VK_RIGHT) == true)
+	{
+		m_vx += m_speed_power;
+		m_posture = 1.0f;	//右
+		m_ani_time += 1;
+	}
+	else if (Input::GetVKey(VK_DOWN) == true)
 	{
 		m_vy += m_speed_power;
-
+		m_posture = 2.0f;	//下
+		m_ani_time += 1;
 	}
-
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
+	else if (Input::GetVKey(VK_LEFT) == true)
+	{
+		m_vx -= m_speed_power;
+		m_posture = 3.0f;	//左
+		m_ani_time += 1;
+	}
+	else   //アニメーション処理
+	{
+		m_ani_frame = 0;	//キー入力がない場合は静止フレームにする
+		m_ani_time = 0;
+	}
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
 
 	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//左のスクロールライン
@@ -82,25 +172,59 @@ void CObjHero::Action()
 		g_px = 0;
 		b->SetScrollX(b->GetScrollX());
 	}
-
 	//右のスクロールライン
 	{
 		g_px = 400;
 		b->SetScrollX(b->GetScrollX());	
 	}
-
 	//上のスクロールライン
 	{
 		g_py = 0;
 		b->SetScrollY(b->GetScrollY());	
 	}
-
 	//下のスクロールライン
 	{
 		g_py = 300;
 		b->SetScrollY(b->GetScrollY());
 	}
 
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+	
+	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_MYSTERY);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			float r = hit_date[i]->r;
+			//角度で上下左右を判定
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -0.15f; //右
+			}
+			if (r > 45 && r < 135)
+			{
+				m_vy = 0.15f;//上
+			}
+			if (r > 135 && r < 225)
+			{
+				m_vx = 0.15f;//左
+			}
+			if (r > 225 && r < 315)
+			{
+				m_vy = -0.15f; //下
+			}
+		}
+
+	}
+
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	{
+		Scene::SetScene(new CSceneBattle());
+	}
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -111,9 +235,6 @@ void CObjHero::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
 	);
-
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
 
 	//位置の更新
 	g_px += m_vx;
@@ -127,6 +248,11 @@ void CObjHero::Action()
 //ドロー
 void CObjHero::Draw()
 {
+	int AniDate[4] =
+	{
+		1 , 2 , 1 , 0 ,
+	};	
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -134,10 +260,10 @@ void CObjHero::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    =  0.0f;
-	src.m_left   =  0.0f;
-	src.m_right  = 100.0f;
-	src.m_bottom = 100.0f;
+	src.m_top    = 32.0f * m_posture;
+	src.m_left   =  0.0f + AniDate[m_ani_frame] * 24;
+	src.m_right  = 24.0f + AniDate[m_ani_frame] * 24;
+	src.m_bottom = 32.0f + (32.0f * m_posture);
 
 	//表示位置の設定
 	dst.m_top    =  0.0f + g_py;
@@ -147,5 +273,19 @@ void CObjHero::Draw()
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+	CHitBox* hit = Hits::GetHitBox(this);
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
+	{
+		m_time = 100;
+	}
+	if (m_time > 0) {
+		m_time--;
+		Font::StrDraw(L"凍らせれば渡れるか...？", 200, 200, 20, c);//時間が0になると表示を終了
+		if (m_time <= 0) {
+			m_time = 0;
+		}
+	}
+
 
 }

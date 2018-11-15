@@ -9,12 +9,31 @@ enum OBJ_NAME
 	OBJ_TITLE,
 	OBJ_MENU,
 	OBJ_MAIN,
+	OBJ_MESSAGE,
+
+
+	OBJ_FIRE,
+	OBJ_ICE,
+	OBJ_WIND,
+	OBJ_THUNDER,
+	
+	OBJ_FIREBLOCK,
 
 	OBJ_HERO,
 	OBJ_BLOCK,
-	OBJ_BACKGROUND,
 	OBJ_TOPBACK,
+	OBJ_ENEMY,
+
+	OBJ_HERO_BATTLE,
+	OBJ_ENEMY_BATTLE,
+	OBJ_BLOCK_BATTLE,
+	OBJ_BACKGROUND_BATTLE,
+	OBJ_BATTLE_MAIN,
+
 	OBJ_MOVEBLOCK,
+	OBJ_MYSTERYBLOCK,
+	OBJ_WATER,
+	OBJ_RESETBLOCK,
 };
 //------------------------------------------------
 
@@ -29,11 +48,18 @@ enum HIT_ELEMENTS
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
+	
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
+
+	ELEMENT_MYSTERY,
+	ELEMENT_MYSTERY_BLOCK,
+	ELEMENT_GATE_BLOCK,
+	ELEMENT_WATER,
+	ELEMENT_RESET,
 };
 //------------------------------------------------
 
@@ -63,16 +89,37 @@ struct UserData
 #include "ObjMenu.h"
 #include "ObjMain.h"
 
+#include "CObjFire.h"
+#include "CObjIce.h"
+#include "CObjWind.h"
+#include "CObjThunder.h"
+
+#include "ObjFireblock.h"
+
+#include "ObjEnemy.h"
+
 #include "ObjBlock.h"
-#include "ObjBackground.h"
 #include "ObjTopback.h"
+
+#include "ObjHeroBattle.h"
+#include "ObjEnemyBattle.h"
+#include "ObjBlockBattle.h"
+#include "ObjBackgroundBattle.h"
+#include "ObjBattleMain.h"
+
 #include "ObjMoveblock.h"
+#include "ObjMysteryblock.h"
+#include "ObjWater.h"
+#include "ObjResetblock.h"
+
+#include "ObjMessage.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneTitle.h"
 #include "SceneMain.h"
 #include "SceneMenu.h"
+#include "SceneBattle.h"
 
 //-----------------------------------------------
 
