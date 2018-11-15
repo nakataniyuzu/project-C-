@@ -12,7 +12,10 @@ public:
 	CObjHero() {};
 	~CObjHero() {};
 	void Init();		//イニシャライズ
+
+public:
 	void Action();		//アクション
+public:
 	void Draw();		//ドロー
 
 	float GetX() { return m_px; }
@@ -38,9 +41,8 @@ private:
 	float m_vy;
 	float m_posture;	//姿勢
 
-	//テスト
-	float m_tx;			
-	float m_ty;
+	float m_scrollx;		//左右スクロール用
+	float m_scrolly;
 
 	float m_x;
 	float m_y;
