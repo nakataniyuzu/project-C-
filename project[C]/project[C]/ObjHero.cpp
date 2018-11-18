@@ -72,6 +72,7 @@ void CObjHero::Action()
 	{
 		m_mf = true;
 	}
+
 	//MPが0以上の時は魔法を放つ
 	if (m_mp > 0) {
 		if (Input::GetVKey('Z') == true)	//魔法発射
@@ -191,6 +192,7 @@ void CObjHero::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 	
+	//主人公とMYSTTERY系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
 	{
 		//主人公がブロックとどの角度で当たっているのかを確認

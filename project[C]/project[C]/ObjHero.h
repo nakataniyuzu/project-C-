@@ -15,8 +15,8 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
- 	float GetX() { return g_px; }	//主人公のX位置を取得
-	float GetY() { return g_py; }	//主人公のY位置を取得
+ 	float GetX() { return m_px; }	//主人公のX位置を取得
+	float GetY() { return m_py; }	//主人公のY位置を取得
 	float GetPOS() { return m_posture; }	//主人公の向きを取得
 	int GetHP() { return m_hp; }	//主人公のHPを取得
 	int GetMP() { return m_mp; }	//主人公のMPを取得

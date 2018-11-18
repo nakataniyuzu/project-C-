@@ -61,7 +61,6 @@ void CObjMysteryblock::Action()
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
-
 }
 
 //ドロー

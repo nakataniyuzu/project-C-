@@ -65,7 +65,7 @@ void CObjWater::Action()
 	//ICEÇ∆ìñÇΩÇ¡ÇƒÇ¢ÇÈÇ©ämîF
 	if (hit->CheckObjNameHit(OBJ_ICE) != nullptr)
 	{
-		//this->SetStatus(false);
+		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
 
@@ -98,8 +98,8 @@ void CObjWater::Draw()
 
 	//êÿÇËéÊÇËà íuÇÃê›íË
 	src.m_top    =   0.0f;
-	src.m_left   =   0.0f + AniDate[m_ani_frame] * 100.f;
-	src.m_right  = 100.0f + AniDate[m_ani_frame] * 100.f;
+	src.m_left   =   0.0f + AniDate[m_ani_frame] * 100.0f;
+	src.m_right  = 100.0f + AniDate[m_ani_frame] * 100.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

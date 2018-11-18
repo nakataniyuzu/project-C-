@@ -26,7 +26,7 @@ void CObjMenu::Action()
 	}
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
-		choice = 0;
+		choice = 0;	
 	}
 
 	if (choice == 1)
