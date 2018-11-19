@@ -95,8 +95,8 @@ void CObjBlock::Action()
 			if (g_map[i][j] == 7)
 			{
 				//7があればMysteryblockを出現
-				CObjMysteryblock* objgate = new CObjMysteryblock(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objgate, OBJ_MYSTERYBLOCK, 10);
+				CObjGate* objgate = new CObjGate(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objgate, OBJ_GATE, 10);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -104,8 +104,8 @@ void CObjBlock::Action()
 			if (g_map[i][j] == 11)
 			{
 				//11があればMoveblockを出現
-				CObjMoveblock* objmb = new CObjMoveblock(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objmb, OBJ_MOVEBLOCK, 10);
+				CObjKey* objkey = new CObjKey(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objkey, OBJ_KEY, 10);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -115,6 +115,15 @@ void CObjBlock::Action()
 				//12があればResetblockを出現
 				CObjResetblock* objrb = new CObjResetblock(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objrb, OBJ_RESETBLOCK, 10);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 13)
+			{
+				//13があればFireGateを出現
+				CObjFireGate* objfg = new CObjFireGate(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objfg, OBJ_FIREGATE, 10);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;

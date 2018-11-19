@@ -50,6 +50,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjFireblock.cpp" />
+    <ClCompile Include="ObjFireGate.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjHeroBattle.cpp" />
     <ClCompile Include="ObjMain.cpp" />
@@ -57,8 +58,8 @@
     <ClCompile Include="ObjMessage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ObjMoveblock.cpp" />
-    <ClCompile Include="ObjMysteryblock.cpp" />
+    <ClCompile Include="ObjKey.cpp" />
+    <ClCompile Include="ObjGate.cpp" />
     <ClCompile Include="ObjResetblock.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTopback.cpp" />
@@ -91,6 +92,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjFireblock.h" />
+    <ClInclude Include="ObjFireGate.h" />
     <ClInclude Include="ObjHeroBattle.h" />
     <ClInclude Include="ObjMessage.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -117,8 +119,8 @@
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjMobSecond.h" />
-    <ClInclude Include="ObjMoveblock.h" />
-    <ClInclude Include="ObjMysteryblock.h" />
+    <ClInclude Include="ObjKey.h" />
+    <ClInclude Include="ObjGate.h" />
     <ClInclude Include="ObjResetblock.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTopback.h" />

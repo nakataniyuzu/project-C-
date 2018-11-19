@@ -230,13 +230,13 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneBattle());
 	}
 
-	if (hit->CheckObjNameHit(OBJ_MOVEBLOCK) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)
 	{
-		m_key += 1;
+		m_key = 1;
 	}
-	if (hit->CheckObjNameHit(OBJ_MYSTERYBLOCK) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
 	{
-		m_key -= 1;
+		m_key_flag = 1.0f;
 	}
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -290,15 +290,30 @@ void CObjHero::Draw()
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
 	{
-		m_time = 100;
+		m_ice_time = 100;
 	}
-	if (m_time > 0) {
-		m_time--;
+	if (m_ice_time > 0) {
+		m_ice_time--;
 		Font::StrDraw(L"凍らせれば渡れるか...？", 200, 200, 20, c);//時間が0になると表示を終了
-		if (m_time <= 0) {
-			m_time = 0;
+		if (m_ice_time <= 0) {
+			m_ice_time = 0;
 		}
 	}
 
 
+	if (m_key_flag == 1.0f)
+	{
+		if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
+		{
+			m_gate_time = 100;
+		}
+		if (m_gate_time > 0) {
+			m_gate_time--;
+			Font::StrDraw(L"鍵を開けた", 200, 200, 20, c);//時間が0になると表示を終了
+			if (m_gate_time <= 0) {
+				m_gate_time = 0;
+			}
+		}
+	}
+	
 }

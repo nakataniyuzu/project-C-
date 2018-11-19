@@ -56,8 +56,11 @@ private:
 	bool  m_f;		//キー（長押し）制御用
 	bool  m_mf;		//キー（長押し）制御用
 
+	bool m_key_flag;
+	int   m_ice_time;			//表示する時間
+	int	  m_gate_time;
 
-	int   m_time;			//表示する時間
+
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム
 

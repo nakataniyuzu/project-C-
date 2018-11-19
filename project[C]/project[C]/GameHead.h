@@ -18,6 +18,7 @@ enum OBJ_NAME
 	OBJ_THUNDER,
 	
 	OBJ_FIREBLOCK,
+	OBJ_FIREGATE,
 
 	OBJ_HERO,
 	OBJ_BLOCK,
@@ -30,8 +31,8 @@ enum OBJ_NAME
 	OBJ_BACKGROUND_BATTLE,
 	OBJ_BATTLE_MAIN,
 
-	OBJ_MOVEBLOCK,
-	OBJ_MYSTERYBLOCK,
+	OBJ_KEY,
+	OBJ_GATE,
 	OBJ_WATER,
 	OBJ_RESETBLOCK,
 };
@@ -95,6 +96,7 @@ struct UserData
 #include "CObjThunder.h"
 
 #include "ObjFireblock.h"
+#include "ObjFireGate.h"
 
 #include "ObjEnemy.h"
 
@@ -107,8 +109,8 @@ struct UserData
 #include "ObjBackgroundBattle.h"
 #include "ObjBattleMain.h"
 
-#include "ObjMoveblock.h"
-#include "ObjMysteryblock.h"
+#include "ObjKey.h"
+#include "ObjGate.h"
 #include "ObjWater.h"
 #include "ObjResetblock.h"
 

@@ -17,6 +17,7 @@ public:
 
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
+	float GetSWITCH(){ return m_switch; }
 
 private:
 	float m_px;			//ˆÊ’u
@@ -26,7 +27,7 @@ private:
 	float m_posture;	//p¨
 	
 	int m_time;			//•\¦‚·‚éŠÔ
-
+	int m_draw_time;
 	//•`‰æØ‚è‘Ö‚¦—p
 	int m_switch;
 
