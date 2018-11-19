@@ -23,6 +23,7 @@ class CObjFire : public CObj
 		float m_hit;	//衝突判定
 		float posture;	//向き
 		int m_time;		//魔法が消える時間
+		int m_draw_time;	//表示する時間
 
 		//blockとの衝突状態確認用
 		bool m_hit_up;

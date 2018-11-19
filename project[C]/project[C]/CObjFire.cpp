@@ -3,6 +3,7 @@
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
 #include "GameL\WinInputs.h"
+#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
 #include "CObjFire.h"
@@ -84,6 +85,13 @@ void CObjFire::Action()
 		&d
 	);
 
+	//FIREBLOCKと衝突したら消滅させる
+	if (hit->CheckObjNameHit(OBJ_FIREBLOCK) != nullptr)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
 	//壁に当たったら消える処理
 	if (m_hit == true) {		
 		this->SetStatus(false);
@@ -98,10 +106,6 @@ void CObjFire::Action()
 		}
 	}
 
-	
-
-
-
 }
 
 
@@ -110,6 +114,10 @@ void CObjFire::Draw()
 {
 	//描画カラー情報　R=RED  G=Green  B=Blue A=alpha(透過情報)
 	float  c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	
+
+	
+
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 

@@ -5,21 +5,21 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjMoveblock.h"
+#include "ObjKey.h"
 
 
 //使用するネームスペース
 using namespace GameL;
 
 
-CObjMoveblock::CObjMoveblock(float x, float y)
+CObjKey::CObjKey(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjMoveblock::Init()
+void CObjKey::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -36,12 +36,12 @@ void CObjMoveblock::Init()
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_MOVEBLOCK, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_KEY, 1);
 
 }
 
 //アクション
-void CObjMoveblock::Action()
+void CObjKey::Action()
 {
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -53,58 +53,12 @@ void CObjMoveblock::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公と当たっているか確認
-	/*if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
-	{
-		//主人公が敵とどの角度で当たっているのかを確認
-		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
-		if (hit->SearchElementHit(ELEMENT_PLAYER))
-		{
-			hit_date = hit->SearchElementHit(ELEMENT_PLAYER);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < hit->GetCount(); i++)
-			{
-				//ブロックの上下左右に当たったら
-
-				float r = hit_date[i]->r;
-
-				if ((r < 45 && r >= 0) || r > 315)
-				{
-					//右
-					m_vx = -5.0f;//左に移動させる
-				}
-				if (r > 45 && r < 135)
-				{
-					//上
-					m_vy = +5.0f;//上に移動させる
-				}
-				if (r > 135 && r < 225)
-				{
-					//左
-					m_vx = +5.0f;//右に移動させる
-				}
-				if (r > 225 && r < 315)
-				{
-					//下
-					m_vy = -5.0f;//下に移動させる
-				}
-				m_px += ((CObjHero*)hit_date[i]->o)->GetVX();
-				m_py += ((CObjHero*)hit_date[i]->o)->GetVY();
-			}
-		}
-		else
-		{
-
-		}
-	}
-	*/
 	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
 	{
 		key += 1;	//keyをゲット
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
-
 	}
-
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -135,7 +89,7 @@ void CObjMoveblock::Action()
 }
 
 //ドロー
-void CObjMoveblock::Draw()
+void CObjKey::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };

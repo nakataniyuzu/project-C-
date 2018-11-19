@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト：ブロック＆背景
-class CObjMoveblock : public CObj
+class CObjKey : public CObj
 	{
 	public:
-		CObjMoveblock(float x, float y);
-		~CObjMoveblock() {};
+		CObjKey(float x, float y);
+		~CObjKey() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
