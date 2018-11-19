@@ -48,5 +48,5 @@ class CObjMain :public CObj
 		int hero_hp;
 		int hero_mp;
 		int magic_type;
-
+		int key;
 };

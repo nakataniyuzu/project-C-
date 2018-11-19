@@ -9,13 +9,15 @@
 #include "ObjBlock.h"
 
 
+int g_map[27][55];
+
 //使用するネームスペース
 using namespace GameL;
 
 CObjBlock::CObjBlock(int map[27][55])
 {
 	//マップデータをコピー
-	memcpy(m_map, map, sizeof(int)*(27 * 55));
+	memcpy(g_map, map, sizeof(int)*(27 * 55));
 }
 
 //イニシャライズ
@@ -63,55 +65,62 @@ void CObjBlock::Action()
 		for (int j = 0; j < 55; j++)
 		{
 			//列の中からを探す
-			if (m_map[i][j] == 3)
+			if (g_map[i][j] == 3)
 			{
 				//3があれば水を出現
 				CObjWater* objwater = new CObjWater(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objwater, OBJ_WATER, 10);
 
 				//出現場所の値を0にする
-				m_map[i][j] = 0;
+				g_map[i][j] = 0;
 			}
-			if (m_map[i][j] == 4)
+			if (g_map[i][j] == 4)
 			{
 				//4があればFireblockを出現
 				CObjFireblock* objfb = new CObjFireblock(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 10);
 
 				//出現場所の値を0にする
-				m_map[i][j] = 0;
+				g_map[i][j] = 0;
 			}
-			if (m_map[i][j] == 6)
+			if (g_map[i][j] == 6)
 			{
 				//6があれば敵を出現
 				CObjEnemy* obje = new CObjEnemy(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(obje, OBJ_ENEMY, 10);
 
 				//出現場所の値を0にする
-				m_map[i][j] = 0;
+				g_map[i][j] = 0;
 			}
-			if (m_map[i][j] == 7)
+			if (g_map[i][j] == 7)
 			{
 				//7があればMysteryblockを出現
 				CObjMysteryblock* objgate = new CObjMysteryblock(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objgate, OBJ_MYSTERYBLOCK, 10);
 
 				//出現場所の値を0にする
-				m_map[i][j] = 0;
+				g_map[i][j] = 0;
 			}
-			if (m_map[i][j] == 11)
+			if (g_map[i][j] == 11)
 			{
 				//11があればMoveblockを出現
 				CObjMoveblock* objmb = new CObjMoveblock(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objmb, OBJ_MOVEBLOCK, 10);
 
 				//出現場所の値を0にする
-				m_map[i][j] = 0;
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 12)
+			{
+				//12があればResetblockを出現
+				CObjResetblock* objrb = new CObjResetblock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objrb, OBJ_RESETBLOCK, 10);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
 			}
 		}
 	}
-	
-	
 	
 	
 }
@@ -130,7 +139,7 @@ void CObjBlock::Draw()
 	{
 		for (int j = 0; j < 55; j++)
 		{
-			if (m_map[i][j] >= 0)
+			if (g_map[i][j] >= 0)
 			{
 
 				//表示位置の設定
@@ -138,7 +147,7 @@ void CObjBlock::Draw()
 				dst.m_left   = j*ALL_SIZE + m_scrollx;
 				dst.m_right  = dst.m_left + ALL_SIZE;
 				dst.m_bottom = dst.m_top  + ALL_SIZE;
-				if (m_map[i][j] == 0)
+				if (g_map[i][j] == 0)
 				{
 					src.m_top    =   0.0f;
 					src.m_left   =   0.0f;
@@ -147,7 +156,7 @@ void CObjBlock::Draw()
 					//描画
 					Draw::Draw(FLOOR1, &src, &dst, c, 0.0f);
 				}
-				else if (m_map[i][j] == 1)
+				else if (g_map[i][j] == 1)
 				{
 					src.m_top    = 0.0f;
 					src.m_left   = 0.0f;
@@ -156,31 +165,7 @@ void CObjBlock::Draw()
 					//描画
 					Draw::Draw(2, &src, &dst, c, 0.0f);
 				}
-				else if (m_map[i][j] == 2)
-				{
-				}
-				else if (m_map[i][j] == 3)
-				{
-				}
-				else if (m_map[i][j] == 4)
-				{
-				}
-				else if (m_map[i][j] == 5)
-				{
-					;
-				}
-				else if (m_map[i][j] == 8)
-				{
-				}
-				else if (m_map[i][j] == 9)
-				{
-				}
-				else if (m_map[i][j] == 10)
-				{
-				}
-				else if (m_map[i][j] == 12)
-				{
-				}			
+							
 				else
 				{
 
@@ -223,7 +208,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 55; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 10)
+			if (g_map[i][j] > 0 && g_map[i][j] != 10)
 			{
 				//要素番号を座標に変更
 				float bx = j*ALL_SIZE;

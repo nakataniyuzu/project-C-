@@ -15,12 +15,13 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
- 	float GetX() { return m_px; }
-	float GetY() { return m_py; }
-	float GetPOS() { return m_posture; }
-	int GetHP() { return m_hp; }
-	int GetMP() { return m_mp; }
-	int GetMAGIC() { return m_magic; }
+ 	float GetX() { return m_px; }	//主人公のX位置を取得
+	float GetY() { return m_py; }	//主人公のY位置を取得
+	float GetPOS() { return m_posture; }	//主人公の向きを取得
+	int GetHP() { return m_hp; }	//主人公のHPを取得
+	int GetMP() { return m_mp; }	//主人公のMPを取得
+	int GetMAGIC() { return m_magic; }	//主人公の設定魔法を取得
+	int GetKEY() { return m_key; }	//鍵の情報を取得
 
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
@@ -48,7 +49,7 @@ private:
 	int m_hp;			//体力
 	int m_mp;			//魔法使用回数
 	int m_magic;		//魔法切り替え
-
+	int m_key;			//鍵
 
 	float m_scrollx;		//左右スクロール用
 	float m_scrolly;		//上下スクロール用

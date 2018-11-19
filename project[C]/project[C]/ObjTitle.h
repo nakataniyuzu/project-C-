@@ -34,6 +34,7 @@ class CObjTitle :public CObj
 
 	private:
 		int choice;
+		int m_time;		//ƒL[‚Ì“ü—ÍŠÔŠÔŠu
 		bool m_key_flag;
 };
 

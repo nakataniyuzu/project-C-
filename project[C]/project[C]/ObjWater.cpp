@@ -26,6 +26,7 @@ void CObjWater::Init()
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 
+	m_switch = 0.0f;	//画像切り替え用
 	m_move = true;			//true=右 false=左
 
 	m_ani_time = 0;
@@ -63,10 +64,12 @@ void CObjWater::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//ICEと当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_ICE) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_ICE) != nullptr)//当たっていたら当たり判定を消し、描画を変える
 	{
 		//this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		//Hits::DeleteHitBox(this);
+		hit->SetInvincibility(true);
+		m_switch = 1.0f;
 	}
 
 	//位置の更新
@@ -97,10 +100,10 @@ void CObjWater::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    =   0.0f;
-	src.m_left   =   0.0f + AniDate[m_ani_frame] * 100.f;
-	src.m_right  = 100.0f + AniDate[m_ani_frame] * 100.f;
-	src.m_bottom = 100.0f;
+	src.m_top    =   0.0f + m_switch * 100.0f;
+	src.m_left   =   0.0f + AniDate[m_ani_frame] * 100.0f;
+	src.m_right  = 100.0f + AniDate[m_ani_frame] * 100.0f;
+	src.m_bottom = 100.0f + m_switch * 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 

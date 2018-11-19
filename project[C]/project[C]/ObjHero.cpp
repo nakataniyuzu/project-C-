@@ -29,6 +29,7 @@ void CObjHero::Init()
 	m_hp = 15;	//初期HP
 	m_mp = 999;	//初期MP
 	m_magic = 0;	//初期魔法
+	m_key = 0;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
@@ -72,13 +73,15 @@ void CObjHero::Action()
 	{
 		m_mf = true;
 	}
+
 	//MPが0以上の時は魔法を放つ
 	if (m_mp > 0) {
 		if (Input::GetVKey('Z') == true)	//魔法発射
 		{
 			if (m_f == true) {	//魔法制御用
 
-				if (m_posture == 0.0f) {
+				//主人公の向きによって発射する向きを設定
+				if (m_posture == 0.0f) {		
 					m_directionx =  0.0f;
 					m_directiony =-50.0f;
 				}
@@ -190,6 +193,7 @@ void CObjHero::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 	
+	//主人公とMYSTTERY系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
 	{
 		//主人公がブロックとどの角度で当たっているのかを確認
@@ -220,9 +224,19 @@ void CObjHero::Action()
 
 	}
 
+	//敵を接触したらBATTLESCENEに移行
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		Scene::SetScene(new CSceneBattle());
+	}
+
+	if (hit->CheckObjNameHit(OBJ_MOVEBLOCK) != nullptr)
+	{
+		m_key += 1;
+	}
+	if (hit->CheckObjNameHit(OBJ_MYSTERYBLOCK) != nullptr)
+	{
+		m_key -= 1;
 	}
 	//摩擦
 	m_vx += -(m_vx * 0.098);

@@ -29,7 +29,7 @@ private:
 
 	int	m_ani_time;
 	int m_ani_frame;
-	int m_time;			//表示する時間
+	float m_switch;	//画像切り替え用
 
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 

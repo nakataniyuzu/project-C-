@@ -30,7 +30,7 @@ void CObjMain::Draw()
 	hero_hp = hero->GetHP();	//主人公からHPの情報を取得
 	hero_mp = hero->GetMP();	//主人公からMPの情報を取得
 	magic_type = hero->GetMAGIC();	//主人公からMAGICの情報を取得
-
+	key = hero->GetKEY();
 
 	float c[4] = { 1,1,1,1 };
 
@@ -64,6 +64,22 @@ void CObjMain::Draw()
 
 	swprintf_s(MP, L"%d/%d",  hero_mp,5);
 	Font::StrDraw(MP, GAME_MP_POS_X, GAME_MP_POS_Y, GAME_MP_FONT_SIZE, c);
+
+	if (key == 1)
+	{
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 300.0f;
+		src.m_right  = 400.0f;
+		src.m_bottom = 100.0f;
+
+		//表示位置の設定
+		dst.m_top    =   0.0f;
+		dst.m_left   = 300.0f;
+		dst.m_right  = 330.0f;
+		dst.m_bottom =  30.0f;
+		Draw::Draw(2, &src, &dst, c, 0.0f);
+	}
 
 	//Font::StrDraw(L"Inventory   ：Iキー", GAME_INVENTORY_POS_X, GAME_INVENTORY_POS_Y, GAME_INVENTORY_FONT_SIZE, c);
 

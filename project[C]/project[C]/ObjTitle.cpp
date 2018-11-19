@@ -15,22 +15,24 @@ using namespace GameL;
 //イニシャライズ
 void CObjTitle::Init()
 {
-	choice = 1;
+	choice = 0;
+	m_key_flag = true;
 }
 
 //アクション
 void CObjTitle::Action()
 {
+	
 	if (Input::GetVKey(VK_UP) == true)
+	{
+		choice = 0;
+	}	
+	if (Input::GetVKey(VK_DOWN) == true)
 	{
 		choice = 1;
 	}
-	if (Input::GetVKey(VK_DOWN) == true)
-	{
-		choice = 0;
-	}
-
-	if (choice == 1)
+	
+	if (choice == 0)
 	{
 		if (Input::GetVKey(VK_RETURN) == true)
 		{
@@ -46,7 +48,7 @@ void CObjTitle::Action()
 		}
 	}
 
-	if (choice == 0)
+	if (choice == 1)
 	{
 		if (Input::GetVKey(VK_RETURN) == true)
 		{
@@ -84,10 +86,11 @@ void CObjTitle::Draw()
 	Font::StrDraw(L"ゲームスタート", GAME_START_POS_X, GAME_START_POS_Y, GAME_START_FONT_SIZE, c);
 	Font::StrDraw(L"ゲーム終了", GAME_END_POS_X, GAME_END_POS_Y, GAME_END_FONT_SIZE, c);
 
-	if (choice == 1){
+	if (choice == 0){
 		Font::StrDraw(L"◆", GAME_START_POS_X - 30, GAME_START_POS_Y, GAME_START_FONT_SIZE, c);
 	}
-	if (choice == 0){
+	if (choice == 1){
 		Font::StrDraw(L"◆", GAME_END_POS_X - 30, GAME_END_POS_Y, GAME_END_FONT_SIZE, c);
 	}
+	
 }

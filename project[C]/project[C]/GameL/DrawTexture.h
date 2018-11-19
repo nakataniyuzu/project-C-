@@ -22,6 +22,7 @@ namespace GameL
 	{
 		TEX_SIZE_64   =	  64,
 		TEX_SIZE_100  =  100*100,
+		TEX_SIZE_200 = 200 * 200,
 		TEX_SIZE_200_100 = 200*100,
 		TEX_SIZE_128  =	 128,
 		TEX_SIZE_256  =	 256,

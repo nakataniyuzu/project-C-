@@ -30,7 +30,7 @@ class CObjBlock : public CObj
 		);
 
 	private:
-		int m_map[27][55];	//マップ情報
+		//int m_map[27][55];	//マップ情報
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;

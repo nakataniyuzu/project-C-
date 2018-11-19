@@ -26,6 +26,7 @@ private:
 	float m_posture;	//姿勢
 	int m_time;			//表示する時間
 
+	int key;	//鍵
 	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;

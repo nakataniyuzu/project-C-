@@ -45,11 +45,16 @@ void CObjMysteryblock::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//MOVEと当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_MOVEBLOCK) != nullptr)
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	key = hero->GetKEY();
+
+	//主人公と当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		if (key >= 1) {
+			this->SetStatus(false);		//鍵を持った状態で当たっていたらMYSTERYBLOCKを消去
+			Hits::DeleteHitBox(this);
+		}
 	}
 
 	//位置の更新
@@ -61,7 +66,6 @@ void CObjMysteryblock::Action()
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
-
 }
 
 //ドロー
@@ -90,8 +94,8 @@ void CObjMysteryblock::Draw()
 
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
-	src.m_left   =   0.0f;
-	src.m_right  = 100.0f;
+	src.m_left   = 200.0f;
+	src.m_right  = 300.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -102,7 +106,7 @@ void CObjMysteryblock::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	Draw::Draw(2, &src, &dst, c, 0.0f);
 }
 
 
