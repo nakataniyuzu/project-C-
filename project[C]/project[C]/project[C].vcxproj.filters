@@ -157,7 +157,13 @@
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjResetblock.cpp">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjIceBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjThunderBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -291,7 +297,13 @@
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjResetblock.h">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjIceBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjThunderBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

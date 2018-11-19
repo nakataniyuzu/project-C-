@@ -15,14 +15,15 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
-	float GetX() { return m_px; }
-	float GetY() { return m_py; }
-	float GetVY() { return m_vy; }
-	float GetVX() { return m_vx; }
+	float GetX() { return m_px; }		//主人公のX位置を取得
+	float GetY() { return m_py; }		//主人公のY位置を取得
+	float GetPOS() { return m_posture; }//主人公の向きを取得
+	float GetVY() { return m_vy; }		
+	float GetVX() { return m_vx; }		
 
-	int GetBATTLEHP() { return m_battle_hp; }
-	int GetBATTLEMP() { return m_battle_mp; }
-	int GetBATTLEMAGIC() { return m_battle_magic; }
+	int GetBATTLEHP() { return m_battle_hp; }		//主人公のHPを取得
+	int GetBATTLEMP() { return m_battle_mp; }		//主人公のMPを取得
+	int GetBATTLEMAGIC() { return m_battle_magic; }	//主人公の設定魔法を取得
 
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
@@ -34,16 +35,21 @@ private:
 	float m_vx;			//移動ベクトル
 	float m_vy;
 	float m_posture;	//姿勢
+	float m_directionx; //魔法発射用X方向
+	float m_directiony; //魔法発射用Y方向
 
-	int m_battle_hp;
-	int m_battle_mp;
-	int m_battle_magic;
+	int m_battle_hp;	//体力(戦闘)
+	int m_battle_mp;	//魔法使用回数(戦闘)
+	int m_battle_magic;	//魔法切り替え(戦闘)
 
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム
 
 	float m_speed_power;	//スピードパワー
 	float m_ani_max_time;	//アニメーション動作間隔最大値
+
+	bool  m_f;		//キー（長押し）制御用
+	bool  m_mf;		//キー（長押し）制御用
 
 	//テスト用
 	float px, py;		//交点

@@ -82,6 +82,56 @@ void CObjHeroBattle::Action()
 		}
 	}
 
+	//Xキーで魔法を切り替える
+	if (Input::GetVKey('X') == true)
+	{
+		if (m_mf == true) {	//キー制御用
+			m_mf = false;
+			m_battle_magic += 2;
+		}
+		if (m_battle_magic >= 4) {
+			m_battle_magic = 1;
+		}
+	}
+	else
+	{
+		m_mf = true;
+	}
+	if (m_battle_mp > 0) {
+		if (Input::GetVKey('Z') == true)	//魔法発射
+		{
+			if (m_f == true) {	//魔法制御用
+
+				//主人公の向きによって発射する向きを設定
+				if (m_posture == 0.0f) {
+					m_directionx = 50.0f;
+					m_directiony = 0.0f;
+				}
+				else if (m_posture == 1.0f) {
+					m_directionx = -50.0f;
+					m_directiony = 0.0f;
+				}
+
+				if (m_battle_magic == 1)	//氷の魔法
+				{
+					CObjIceBattle* obji = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
+					Objs::InsertObj(obji, OBJ_ICE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+				}
+				else if (m_battle_magic == 3)	//雷の魔法
+				{
+					CObjThunderBattle* obji = new CObjThunderBattle(m_px + m_directionx, m_py + m_directiony);//Thunderオブジェクト(戦闘)作成
+					Objs::InsertObj(obji, OBJ_THUNDER_BATTLE, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+				}
+				m_f = false;
+				m_battle_mp -= 1;		//MPを減らす
+			}
+		}
+		else
+		{
+			m_f = true;
+		}
+	}
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);

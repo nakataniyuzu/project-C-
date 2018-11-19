@@ -20,6 +20,7 @@ void CObjEnemyBattle::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
+	m_enemy_hp = 3;     //敵のヒットポイント(最大3)
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -96,8 +97,18 @@ void CObjEnemyBattle::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(g_enemy_px, g_enemy_py);
 
-	//主人公とぶつかったら敵削除
-	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
+	//攻撃を受けたら体力を減らす
+	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)
+	{
+		m_enemy_hp -= 1;
+	}
+	if (hit->CheckObjNameHit(OBJ_THUNDER_BATTLE) != nullptr)
+	{
+		m_enemy_hp -= 1;
+	}
+
+	//敵の体力が0になったら破棄
+	if (m_enemy_hp <= 0)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

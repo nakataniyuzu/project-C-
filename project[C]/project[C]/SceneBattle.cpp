@@ -35,6 +35,7 @@ void CSceneBattle::InitScene()
 	Draw::LoadImageW(L"Battlefloor.png", 1, TEX_SIZE_100);
 	Draw::LoadImageW(L"Wall.png", FLOOR1_WALL,TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor1_Enemy.png", 3, TEX_SIZE_100);
+	Draw::LoadImageW(L"MagicBattle.png", 4, TEX_SIZE_100);
 	Draw::LoadImageW(L"magicitem.png", 10, TEX_SIZE_256);
 
 	//主人公オブジェクト作成

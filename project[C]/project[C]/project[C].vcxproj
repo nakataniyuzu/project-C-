@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClCompile Include="CObjFire.cpp" />
     <ClCompile Include="CObjIce.cpp" />
+    <ClCompile Include="CObjIceBattle.cpp" />
     <ClCompile Include="CObjThunder.cpp" />
+    <ClCompile Include="CObjThunderBattle.cpp" />
     <ClCompile Include="CObjWind.cpp" />
     <ClCompile Include="ObjBackgroundBattle.cpp" />
     <ClCompile Include="ObjBattleMain.cpp">
@@ -77,7 +79,9 @@
     <ClInclude Include="CObjIce.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="CObjIceBattle.h" />
     <ClInclude Include="CObjThunder.h" />
+    <ClInclude Include="CObjThunderBattle.h" />
     <ClInclude Include="CObjWind.h" />
     <ClInclude Include="ObjBackgroundBattle.h" />
     <ClInclude Include="ObjBattleMain.h">
