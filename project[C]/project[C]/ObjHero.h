@@ -56,10 +56,17 @@ private:
 	bool  m_f;		//キー（長押し）制御用
 	bool  m_mf;		//キー（長押し）制御用
 
+	bool m_gate_flag;
 	bool m_key_flag;
-	int   m_ice_time;			//表示する時間
-	int	  m_gate_time;
 
+	bool m_fire_flag;
+	bool m_ice_flag;
+	bool m_thunder_flag;
+	bool m_wind_flag;
+
+	int   m_gate_time;			
+	int   m_ice_time;			//表示する時間
+	int   m_key_time;
 
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム
@@ -75,5 +82,4 @@ private:
 
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
-
 };

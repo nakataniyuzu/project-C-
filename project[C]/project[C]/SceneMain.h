@@ -7,6 +7,7 @@ using namespace GameL;
 
 //マクロ
 #define FLOOR1 01
+#define ITEM 10
 
 //シーン：ゲームタイトル
 class CSceneMain :public CScene

@@ -91,7 +91,11 @@ void CObjFire::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-
+	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	//•Ç‚É“–‚½‚Á‚½‚çÁ‚¦‚éˆ—
 	if (m_hit == true) {		
 		this->SetStatus(false);

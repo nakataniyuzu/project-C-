@@ -53,6 +53,7 @@
     <ClCompile Include="ObjFireGate.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjHeroBattle.cpp" />
+    <ClCompile Include="ItemIce.cpp" />
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
     <ClCompile Include="ObjMessage.cpp">
@@ -94,6 +95,7 @@
     <ClInclude Include="ObjFireblock.h" />
     <ClInclude Include="ObjFireGate.h" />
     <ClInclude Include="ObjHeroBattle.h" />
+    <ClInclude Include="ItemIce.h" />
     <ClInclude Include="ObjMessage.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>

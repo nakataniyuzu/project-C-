@@ -37,6 +37,9 @@
     <Filter Include="ソース ファイル\Main\Magic関係">
       <UniqueIdentifier>{80f13e64-85fc-4084-8c05-6bd80426f71a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Item関係">
+      <UniqueIdentifier>{fa12d4d2-3f4f-4a30-8807-4c5fddb8ee78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -161,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="ObjGate.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemIce.cpp">
+      <Filter>ソース ファイル\Main\Item関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="ObjGate.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemIce.h">
+      <Filter>ソース ファイル\Main\Item関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

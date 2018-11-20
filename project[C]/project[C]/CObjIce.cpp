@@ -84,8 +84,8 @@ void CObjIce::Action()
 		&d
 	);
 
-	//WATER‚Æ“–‚½‚Á‚Ä‚¢‚é‚©Šm”F
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	//MYSTERY‘®«‚Æ‚ÆÕ“Ë‚µ‚½‚çÁ–Å‚³‚¹‚é
+	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

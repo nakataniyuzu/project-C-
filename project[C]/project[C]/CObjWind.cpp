@@ -84,6 +84,12 @@ void CObjWind::Action()
 		&d
 	);
 
+	//MYSTERY‘®«‚Æ‚ÆÕ“Ë‚µ‚½‚çÁ–Å‚³‚¹‚é
+	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	//•Ç‚É“–‚½‚Á‚½‚çÁ‚¦‚éˆ—
 	if (m_hit == true) {
 		this->SetStatus(false);

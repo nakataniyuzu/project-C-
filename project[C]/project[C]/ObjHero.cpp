@@ -30,11 +30,16 @@ void CObjHero::Init()
 	m_mp = 999;	//初期MP
 	m_magic = 0;	//初期魔法
 	m_key = 0;
+	m_gate_flag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 	m_ani_max_time = 8;		//アニメーション間隔幅(増やせば遅い
 
+	m_fire_flag = true;		//火：0
+	m_ice_flag = false;		//氷：1
+	m_wind_flag = false;	//風：2
+	m_thunder_flag = false;	//雷：3
 
 	//blockとの衝突状態確認
 	m_hit_up    = false;
@@ -64,6 +69,15 @@ void CObjHero::Action()
 		if (m_mf == true) {	//キー制御用
 			m_mf = false;
 			m_magic += 1;
+		}
+		if (m_magic == 1 && m_ice_flag == false){	//氷魔法を取得しないと発動させない
+			m_magic = 0;
+		}
+		if (m_magic == 2 && m_wind_flag == false){	//風魔法を取得しないと発動させない
+			m_magic = 0;
+		}
+		if (m_magic == 3 && m_thunder_flag == false){//雷魔法を取得しないと発動させない
+			m_magic = 0;
 		}
 		if (m_magic >= 4) {
 			m_magic = 0;
@@ -191,8 +205,7 @@ void CObjHero::Action()
 	}
 
 	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-	
+	CHitBox* hit = Hits::GetHitBox(this);	
 	//主人公とMYSTTERY系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
 	{
@@ -236,8 +249,17 @@ void CObjHero::Action()
 	}
 	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
 	{
-		m_key_flag = 1.0f;
+		if (m_key == 1)		//鍵を持っている場合
+		{
+			m_key = 0;		//鍵を消費する
+			m_gate_flag = true;//鍵のフラグをオンにする
+		}
 	}
+	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)
+	{
+		m_ice_flag = true;
+	}
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -294,25 +316,34 @@ void CObjHero::Draw()
 	}
 	if (m_ice_time > 0) {
 		m_ice_time--;
-		Font::StrDraw(L"凍らせれば渡れるか...？", 200, 200, 20, c);//時間が0になると表示を終了
+		Font::StrDraw(L"凍らせれば渡れるか...？", 180, 230, 20, c);//時間が0になると表示を終了
 		if (m_ice_time <= 0) {
 			m_ice_time = 0;
 		}
 	}
 
-
-	if (m_key_flag == 1.0f)
+	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//主人公がKEYブロックと当たった場合、m_timeに時間をセット
 	{
-		if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
-		{
-			m_gate_time = 100;
+		m_key_time = 100;
+	}
+	if (m_key_time > 0) {
+		m_key_time--;
+		Font::StrDraw(L"鍵を手に入れた", 200, 200, 20, c);//時間が0になると表示を終了
+		if (m_key_time <= 0) {
+			m_key_time = 0;
 		}
-		if (m_gate_time > 0) {
-			m_gate_time--;
-			Font::StrDraw(L"鍵を開けた", 200, 200, 20, c);//時間が0になると表示を終了
-			if (m_gate_time <= 0) {
-				m_gate_time = 0;
-			}
+	}
+
+	if (m_gate_flag == true)		//鍵のフラグがオンになったら時間をセット
+	{
+		m_gate_time = 100;				
+	}
+	if (m_gate_time > 0) {
+		m_gate_time--;
+		m_gate_flag = false;		//フラグをオフ
+		Font::StrDraw(L"鍵を開けた", 210, 170, 20, c);//時間が0になると表示を終了
+		if (m_gate_time <= 0) {
+			m_gate_time = 0;
 		}
 	}
 	
