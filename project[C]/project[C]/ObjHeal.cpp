@@ -35,6 +35,7 @@ void CObjHeal::Action()
 {
 	//Ž©g‚ÌHitBox‚ðŽ‚Á‚Ä‚­‚é
 	CHitBox* hit = Hits::GetHitBox(this);
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//ŽålŒö‚ªHEAL‚Æ“–‚½‚Á‚½ê‡
 	{
