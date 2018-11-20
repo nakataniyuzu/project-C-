@@ -7,6 +7,8 @@ using namespace GameL;
 
 //マクロ
 #define FLOOR1 01
+#define BLOCK1 2
+#define HEALKEY 5
 #define ITEM 10
 
 //シーン：ゲームタイトル

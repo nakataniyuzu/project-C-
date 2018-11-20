@@ -34,6 +34,7 @@ enum OBJ_NAME
 	OBJ_BACKGROUND_BATTLE,
 	OBJ_BATTLE_MAIN,
 
+	OBJ_HEAL,
 	OBJ_KEY,
 	OBJ_GATE,
 	OBJ_WATER,
@@ -59,6 +60,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
 
+	ELEMENT_HEAL,
 	ELEMENT_MYSTERY,
 	ELEMENT_MYSTERY_BLOCK,
 	ELEMENT_GATE_BLOCK,
@@ -96,6 +98,7 @@ struct UserData
 //ItemŠÖŒW
 #include "ItemIce.h"
 
+#include "ObjHeal.h"
 
 //Magic
 #include "CObjFire.h"

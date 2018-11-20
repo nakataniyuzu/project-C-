@@ -99,9 +99,9 @@ void CObjKey::Draw()
 
 	//Ø‚èŽæ‚èˆÊ’u‚ÌÝ’è
 	src.m_top	 =   0.0f;
-	src.m_left	 = 300.0f;
-	src.m_right  = 400.0f;
-	src.m_bottom = 100.0f;
+	src.m_left	 =  50.0f;
+	src.m_right  = 100.0f;
+	src.m_bottom =  50.0f;
 	
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -112,7 +112,7 @@ void CObjKey::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//•`‰æ
-	Draw::Draw(2, &src, &dst, c, 0.0f);
+	Draw::Draw(HEALKEY, &src, &dst, c, 0.0f);
 }
 
 

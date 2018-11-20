@@ -59,10 +59,10 @@ void CSceneMain::InitScene()
 	//グラフィック読み込み
 	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256_128);
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
-	Draw::LoadImageW(L"Block.png", 2, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Block.png", BLOCK1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
 	Draw::LoadImageW(L"nazotoki.png", 4, TEX_SIZE_100);
-	Draw::LoadImageW(L"Gate.png", 5, TEX_SIZE_100);
+	Draw::LoadImageW(L"healkey.png", HEALKEY, TEX_SIZE_100);
 	Draw::LoadImageW(L"Water.png", 6, TEX_SIZE_200);
 	Draw::LoadImageW(L"Enemy1.png", 7, TEX_SIZE_200_100);
 	Draw::LoadImageW(L"Magic.png", 8, TEX_SIZE_100);
@@ -84,6 +84,8 @@ void CSceneMain::InitScene()
 	CObjMain* objm = new CObjMain();
 	Objs::InsertObj(objm, OBJ_MAIN, 20);
 
+	CObjMessage* objmessa = new CObjMessage();
+	Objs::InsertObj(objmessa, OBJ_MESSAGE, 20);
 }
 
 //ゲームタイトルの実行中メソッド

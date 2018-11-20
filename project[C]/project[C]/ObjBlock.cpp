@@ -62,6 +62,15 @@ void CObjBlock::Action()
 		for (int j = 0; j < 55; j++)
 		{
 			//列の中からを探す
+			if (g_map[i][j] == 2)
+			{
+				//3があれば水を出現
+				CObjHeal* objheal = new CObjHeal(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objheal, OBJ_HEAL, 11);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
 			if (g_map[i][j] == 3)
 			{
 				//3があれば水を出現
@@ -75,7 +84,7 @@ void CObjBlock::Action()
 			{
 				//4があればFireblockを出現
 				CObjFireblock* objfb = new CObjFireblock(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 10);
+				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 11);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -178,7 +187,7 @@ void CObjBlock::Draw()
 					src.m_right  = 50.0f;
 					src.m_bottom = 50.0f;
 					//描画
-					Draw::Draw(2, &src, &dst, c, 0.0f);
+					Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
 				}						
 				else
 				{

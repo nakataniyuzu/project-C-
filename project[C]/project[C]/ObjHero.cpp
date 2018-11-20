@@ -26,11 +26,18 @@ void CObjHero::Init()
 	m_speed_power = 0.2f;	//通常速度
 	m_posture = 2.0f;
 	
+	m_max_hp = 15;
+	m_max_mp = 5;
 	m_hp = 15;	//初期HP
 	m_mp = 999;	//初期MP
 	m_magic = 0;	//初期魔法
 	m_key = 0;
-	m_gate_flag = false;
+
+	//フラグの初期化
+	m_gate_mf = false;
+	m_water_mf = false;
+	m_key_mf = false;
+	m_ice_mf = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
@@ -242,22 +249,27 @@ void CObjHero::Action()
 	{
 		Scene::SetScene(new CSceneBattle());
 	}
-
-	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{
 		m_key = 1;
+		m_key_mf = true;
 	}
 	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
 	{
 		if (m_key == 1)		//鍵を持っている場合
 		{
 			m_key = 0;		//鍵を消費する
-			m_gate_flag = true;//鍵のフラグをオンにする
+			m_gate_mf = true;//鍵のフラグをオンにする
 		}
 	}
 	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)
 	{
+		m_ice_mf = true;
 		m_ice_flag = true;
+	}
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		m_water_mf = true;
 	}
 
 	//摩擦
@@ -308,43 +320,5 @@ void CObjHero::Draw()
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
-	{
-		m_ice_time = 100;
-	}
-	if (m_ice_time > 0) {
-		m_ice_time--;
-		Font::StrDraw(L"凍らせれば渡れるか...？", 180, 230, 20, c);//時間が0になると表示を終了
-		if (m_ice_time <= 0) {
-			m_ice_time = 0;
-		}
-	}
-
-	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//主人公がKEYブロックと当たった場合、m_timeに時間をセット
-	{
-		m_key_time = 100;
-	}
-	if (m_key_time > 0) {
-		m_key_time--;
-		Font::StrDraw(L"鍵を手に入れた", 200, 200, 20, c);//時間が0になると表示を終了
-		if (m_key_time <= 0) {
-			m_key_time = 0;
-		}
-	}
-
-	if (m_gate_flag == true)		//鍵のフラグがオンになったら時間をセット
-	{
-		m_gate_time = 100;				
-	}
-	if (m_gate_time > 0) {
-		m_gate_time--;
-		m_gate_flag = false;		//フラグをオフ
-		Font::StrDraw(L"鍵を開けた", 210, 170, 20, c);//時間が0になると表示を終了
-		if (m_gate_time <= 0) {
-			m_gate_time = 0;
-		}
-	}
 	
 }
