@@ -27,6 +27,8 @@ void CObjMain::Action()
 void CObjMain::Draw()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	hero_max_hp = hero->GetMAXHP();	//主人公からMAXHPの情報を取得
+	hero_max_mp = hero->GetMAXMP();	//主人公からMAXMPの情報を取得
 	hero_hp = hero->GetHP();	//主人公からHPの情報を取得
 	hero_mp = hero->GetMP();	//主人公からMPの情報を取得
 	magic_type = hero->GetMAGIC();	//主人公からMAGICの情報を取得
@@ -45,7 +47,7 @@ void CObjMain::Draw()
 
 	Font::StrDraw(L"[NAME]", GAME_NAME_POS_X, GAME_NAME_POS_Y, GAME_NAME_FONT_SIZE, c);
 
-	swprintf_s(HP, L"HP %d/%d", hero_hp, 15);	
+	swprintf_s(HP, L"HP %d/%d", hero_hp, hero_max_hp);
 	Font::StrDraw(HP, GAME_HP_POS_X, GAME_HP_POS_Y, GAME_HP_FONT_SIZE, c);//HPを表示
 	
 
@@ -62,23 +64,23 @@ void CObjMain::Draw()
 	dst.m_bottom = 50.0f;
 	Draw::Draw(10, &src, &dst, c, 0.0f);
 
-	swprintf_s(MP, L"%d/%d",  hero_mp,5);
+	swprintf_s(MP, L"%d/%d",  hero_mp, hero_max_mp);
 	Font::StrDraw(MP, GAME_MP_POS_X, GAME_MP_POS_Y, GAME_MP_FONT_SIZE, c);
 
 	if (key == 1)
 	{
 		//切り取り位置の設定
-		src.m_top    = 0.0f;
-		src.m_left   = 300.0f;
-		src.m_right  = 400.0f;
-		src.m_bottom = 100.0f;
+		src.m_top    =  0.0f;
+		src.m_left   =  50.0f;
+		src.m_right  = 100.0f;
+		src.m_bottom =  50.0f;
 
 		//表示位置の設定
 		dst.m_top    =   0.0f;
 		dst.m_left   = 300.0f;
 		dst.m_right  = 330.0f;
 		dst.m_bottom =  30.0f;
-		Draw::Draw(2, &src, &dst, c, 0.0f);
+		Draw::Draw(HEALKEY, &src, &dst, c, 0.0f);
 	}
 
 	//Font::StrDraw(L"Inventory   ：Iキー", GAME_INVENTORY_POS_X, GAME_INVENTORY_POS_Y, GAME_INVENTORY_FONT_SIZE, c);

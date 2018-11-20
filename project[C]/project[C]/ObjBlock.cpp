@@ -40,19 +40,16 @@ void CObjBlock::Action()
 		hero->SetX(0);				//主人公はラインを超えないようにする
 		m_scrollx -= hero->GetVX();	//主人公が本来動くべき分の値をm_scrollに加える
 	}
-
 	//右のスクロールライン
 	{
 		hero->SetX(400);			//主人公はラインを超えないようにする
 		m_scrollx -= hero->GetVX();	//主人公が本来動くべき分の値をm_scrollに加える
 	}
-
 	//上のスクロールライン
 	{
 		hero->SetY(0);				//主人公はラインを超えないようにする
 		m_scrolly -= hero->GetVY();	//主人公が本来動くべき分の値をm_scrollに加える
 	}
-
 	//下のスクロールライン
 	{
 		hero->SetY(300);			//主人公はラインを超えないようにする
@@ -65,6 +62,15 @@ void CObjBlock::Action()
 		for (int j = 0; j < 55; j++)
 		{
 			//列の中からを探す
+			if (g_map[i][j] == 2)
+			{
+				//3があれば水を出現
+				CObjHeal* objheal = new CObjHeal(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objheal, OBJ_HEAL, 11);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
 			if (g_map[i][j] == 3)
 			{
 				//3があれば水を出現
@@ -78,7 +84,7 @@ void CObjBlock::Action()
 			{
 				//4があればFireblockを出現
 				CObjFireblock* objfb = new CObjFireblock(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 10);
+				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 11);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -94,16 +100,25 @@ void CObjBlock::Action()
 			}
 			if (g_map[i][j] == 7)
 			{
-				//7があればMysteryblockを出現
+				//7があればGateを出現
 				CObjGate* objgate = new CObjGate(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objgate, OBJ_GATE, 10);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
+			if (g_map[i][j] == 9)
+			{
+				//9があればItemIceを出現
+				CObjItemIce* objice = new CObjItemIce(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objice, ITEM_ICE, 10);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
 			if (g_map[i][j] == 11)
 			{
-				//11があればMoveblockを出現
+				//11があればKeyを出現
 				CObjKey* objkey = new CObjKey(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objkey, OBJ_KEY, 10);
 
@@ -172,9 +187,8 @@ void CObjBlock::Draw()
 					src.m_right  = 50.0f;
 					src.m_bottom = 50.0f;
 					//描画
-					Draw::Draw(2, &src, &dst, c, 0.0f);
-				}
-							
+					Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+				}						
 				else
 				{
 
@@ -217,7 +231,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 55; j++)
 		{
-			if (g_map[i][j] > 0 && g_map[i][j] != 10)
+			if (g_map[i][j] > 0 && g_map[i][j] != 6 && g_map[i][j] != 10)
 			{
 				//要素番号を座標に変更
 				float bx = j*ALL_SIZE;

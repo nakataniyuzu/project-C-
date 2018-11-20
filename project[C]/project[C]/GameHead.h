@@ -11,6 +11,7 @@ enum OBJ_NAME
 	OBJ_MAIN,
 	OBJ_MESSAGE,
 
+	ITEM_ICE,
 
 	OBJ_FIRE,
 	OBJ_ICE,
@@ -33,6 +34,7 @@ enum OBJ_NAME
 	OBJ_BACKGROUND_BATTLE,
 	OBJ_BATTLE_MAIN,
 
+	OBJ_HEAL,
 	OBJ_KEY,
 	OBJ_GATE,
 	OBJ_WATER,
@@ -58,6 +60,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
 
+	ELEMENT_HEAL,
 	ELEMENT_MYSTERY,
 	ELEMENT_MYSTERY_BLOCK,
 	ELEMENT_GATE_BLOCK,
@@ -92,6 +95,12 @@ struct UserData
 #include "ObjMenu.h"
 #include "ObjMain.h"
 
+//ItemŠÖŒW
+#include "ItemIce.h"
+
+#include "ObjHeal.h"
+
+//Magic
 #include "CObjFire.h"
 #include "CObjIce.h"
 #include "CObjWind.h"
@@ -99,6 +108,7 @@ struct UserData
 #include "CObjIceBattle.h"
 #include "CObjThunderBattle.h"
 
+//MagicŠÖŒW
 #include "ObjFireblock.h"
 #include "ObjFireGate.h"
 
@@ -107,12 +117,14 @@ struct UserData
 #include "ObjBlock.h"
 #include "ObjTopback.h"
 
+//BattleŠÖŒW
 #include "ObjHeroBattle.h"
 #include "ObjEnemyBattle.h"
 #include "ObjBlockBattle.h"
 #include "ObjBackgroundBattle.h"
 #include "ObjBattleMain.h"
 
+//“ä‰ð‚«ŠÖŒW
 #include "ObjKey.h"
 #include "ObjGate.h"
 #include "ObjWater.h"

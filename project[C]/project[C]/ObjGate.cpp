@@ -67,15 +67,18 @@ void CObjGate::Draw()
 
 	CHitBox* hit = Hits::GetHitBox(this);
 	
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
+	if (key == 0)
 	{
-		m_time = 100;
-	}
-	if (m_time > 0) {
-		m_time--;
-		Font::StrDraw(L"鍵が必要です", 200, 200, 20, c);//時間が0になると表示を終了		
-		if (m_time <= 0) {
-			m_time = 0;
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
+		{
+			m_time = 100;
+		}
+		if (m_time > 0) {
+			m_time--;
+			Font::StrDraw(L"鍵が必要です", 200, 200, 20, c);//時間が0になると表示を終了		
+			if (m_time <= 0) {
+				m_time = 0;
+			}
 		}
 	}
 	
@@ -99,7 +102,7 @@ void CObjGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(2, &src, &dst, c, 0.0f);
+	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
 }
 
 
