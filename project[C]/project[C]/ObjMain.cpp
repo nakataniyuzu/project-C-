@@ -86,4 +86,5 @@ void CObjMain::Draw()
 	Font::StrDraw(L"メニュー画面：Eキー", GAME_MENU_POS_X, GAME_MENU_POS_Y, GAME_MENU_FONT_SIZE, c);
 
 	Font::StrDraw(L"敵の撃破数×○", GAME_ENEMY_KILLS_POS_X, GAME_ENEMY_KILLS_POS_Y, GAME_ENEMY_KILLS_FONT_SIZE, c);
+
 }
