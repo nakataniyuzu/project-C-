@@ -29,7 +29,7 @@ void CObjHero::Init()
 	m_max_hp = 15;
 	m_max_mp = 5;
 	m_hp = 15;	//‰ŠúHP
-	m_mp = 999;	//‰ŠúMP
+	m_mp = 5;	//‰ŠúMP
 	m_magic = 0;	//‰Šú–‚–@
 	m_key = 0;
 
@@ -270,6 +270,14 @@ void CObjHero::Action()
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	{
 		m_water_mf = true;
+	}
+	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)	//ŽålŒö‚ªHEAL‚Æ“–‚½‚Á‚½ê‡
+	{
+		m_hp = m_max_hp;		//HP‚ðÅ‘å‚Ü‚Å‰ñ•œ
+		m_mp = m_max_mp;		//MP‚ðÅ‘å‚Ü‚Å‰ñ•œ
+	}
+	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)
+	{
 	}
 
 	//–€ŽC
