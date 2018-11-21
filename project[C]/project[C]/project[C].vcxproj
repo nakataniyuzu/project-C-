@@ -53,7 +53,6 @@
     </ClCompile>
     <ClCompile Include="ObjFireblock.cpp" />
     <ClCompile Include="ObjFireGate.cpp" />
-    <ClCompile Include="ObjGameover.cpp" />
     <ClCompile Include="ObjHeal.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjHeroBattle.cpp" />
@@ -66,13 +65,15 @@
     <ClCompile Include="ObjKey.cpp" />
     <ClCompile Include="ObjGate.cpp" />
     <ClCompile Include="ObjResetblock.cpp" />
+    <ClCompile Include="ObjSwitch.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="ObjWater.cpp" />
     <ClCompile Include="SceneBattle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="SceneGameover.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
@@ -101,7 +102,6 @@
     </ClInclude>
     <ClInclude Include="ObjFireblock.h" />
     <ClInclude Include="ObjFireGate.h" />
-    <ClInclude Include="ObjGameover.h" />
     <ClInclude Include="ObjHeal.h" />
     <ClInclude Include="ObjHeroBattle.h" />
     <ClInclude Include="ItemIce.h" />
@@ -133,13 +133,15 @@
     <ClInclude Include="ObjKey.h" />
     <ClInclude Include="ObjGate.h" />
     <ClInclude Include="ObjResetblock.h" />
+    <ClInclude Include="ObjSwitch.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="ObjWater.h" />
     <ClInclude Include="SceneBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="SceneGameover.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="SceneTitle.h" />

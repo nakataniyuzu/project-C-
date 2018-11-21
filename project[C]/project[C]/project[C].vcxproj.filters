@@ -40,9 +40,6 @@
     <Filter Include="ソース ファイル\Main\Item関係">
       <UniqueIdentifier>{fa12d4d2-3f4f-4a30-8807-4c5fddb8ee78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Gameover">
-      <UniqueIdentifier>{b5f11dc5-29a4-4746-a54e-147f83cab307}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -180,11 +177,8 @@
     <ClCompile Include="ObjHeal.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjGameover.cpp">
-      <Filter>ソース ファイル\Gameover</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGameover.cpp">
-      <Filter>ソース ファイル\Gameover</Filter>
+    <ClCompile Include="ObjSwitch.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,11 +329,8 @@
     <ClInclude Include="ObjHeal.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjGameover.h">
-      <Filter>ソース ファイル\Gameover</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGameover.h">
-      <Filter>ソース ファイル\Gameover</Filter>
+    <ClInclude Include="ObjSwitch.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

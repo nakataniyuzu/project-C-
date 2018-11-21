@@ -32,7 +32,7 @@ void CObjWater::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
-	m_ani_max_time = 4;		//アニメーション間隔幅
+	m_ani_max_time = 6;		//アニメーション間隔幅
 
 	//blockとの衝突状態確認
 	m_hit_up    = false;
@@ -55,7 +55,7 @@ void CObjWater::Action()
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-	if (m_ani_frame == 4)
+	if (m_ani_frame == 2)
 	{
 		m_ani_frame = 0;
 	}
@@ -90,9 +90,9 @@ void CObjWater::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	int AniDate[4] =
+	int AniDate[2] =
 	{
-		0, 0, 1, 1,
+		0, 1,
 	};
 
 

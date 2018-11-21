@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト：ブロック＆背景
-class CObjKey : public CObj
-	{
+class CObjSwitch : public CObj
+{
 	public:
-		CObjKey(float x, float y);
-		~CObjKey() {};
+		CObjSwitch(float x, float y);
+		~CObjSwitch() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
@@ -20,6 +20,6 @@ class CObjKey : public CObj
 		float m_py;
 		float m_vx;			//移動ベクトル
 		float m_vy;
+		float m_posture;	//姿勢
 
-		int key;	//鍵用変数
 };

@@ -131,13 +131,13 @@ void CObjHero::Action()
 				}
 				else if (m_magic == 2)	//風の魔法
 				{
-					CObjWind* obji = new CObjWind(g_px + m_directionx, g_py + m_directiony);//Windオブジェクト作成
-					Objs::InsertObj(obji, OBJ_WIND, 100);		//作ったWindオブジェクトをオブジェクトマネージャーに登録
+					CObjWind* objw = new CObjWind(g_px + m_directionx, g_py + m_directiony);//Windオブジェクト作成
+					Objs::InsertObj(objw, OBJ_WIND, 100);		//作ったWindオブジェクトをオブジェクトマネージャーに登録
 				}
 				else if (m_magic == 3)	//雷の魔法
 				{
-					CObjThunder* obji = new CObjThunder(g_px + m_directionx, g_py + m_directiony);//Thunderオブジェクト作成
-					Objs::InsertObj(obji, OBJ_THUNDER, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+					CObjThunder* objt = new CObjThunder(g_px + m_directionx, g_py + m_directiony);//Thunderオブジェクト作成
+					Objs::InsertObj(objt, OBJ_THUNDER, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
@@ -276,6 +276,10 @@ void CObjHero::Action()
 		m_hp = m_max_hp;		//HPを最大まで回復
 		m_mp = m_max_mp;		//MPを最大まで回復
 	}
+	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)
+	{
+	}
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);

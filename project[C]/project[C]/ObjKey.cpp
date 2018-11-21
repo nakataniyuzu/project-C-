@@ -23,17 +23,6 @@ void CObjKey::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
-
-	m_speed_power = 0.5f;	//通常速度
-
-	m_move = true;			//true=右 false=左
-
-	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
-	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_KEY, 1);
@@ -55,7 +44,6 @@ void CObjKey::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
 	{
-		key += 1;	//keyをゲット
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
@@ -64,17 +52,6 @@ void CObjKey::Action()
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
-
-
-	//ブロックタイプ検知用の変数がないためのダミー
-	int d;
-
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&d
-	);
 
 	//位置の更新
 	m_px += m_vx;
