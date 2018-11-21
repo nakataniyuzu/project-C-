@@ -177,6 +177,9 @@
     <ClCompile Include="ObjHeal.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
+    <ClCompile Include="CObjSwordBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -325,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="ObjHeal.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjSwordBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

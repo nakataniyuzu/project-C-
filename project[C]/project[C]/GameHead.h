@@ -11,6 +11,8 @@ enum OBJ_NAME
 	OBJ_MAIN,
 	OBJ_MESSAGE,
 
+	OBJ_SWORD_BATTLE,
+
 	ITEM_ICE,
 
 	OBJ_FIRE,
@@ -53,6 +55,7 @@ enum HIT_ELEMENTS
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
+	ELEMENT_SWORD,
 	
 	ELEMENT_RED,
 	ELEMENT_GREEN,
@@ -99,6 +102,9 @@ struct UserData
 #include "ItemIce.h"
 
 #include "ObjHeal.h"
+
+//Œ•ŠÖŒW
+#include "CObjSwordBattle.h"
 
 //Magic
 #include "CObjFire.h"

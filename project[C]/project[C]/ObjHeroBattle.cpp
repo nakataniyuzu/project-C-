@@ -37,6 +37,8 @@ void CObjHeroBattle::Init()
 	m_speed_power = 0.7f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
+	m_sword_delay = 0;
+
 
 	//当たり判定用のHitBoxを作成
  	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
@@ -87,6 +89,42 @@ void CObjHeroBattle::Action()
 			}
 		}
 	}
+
+	//Eキーでメニューを開く
+	if (Input::GetVKey('E') == true)
+	{
+		Scene::SetScene(new CSceneMenu());
+	}
+
+	//Aキーで近接(剣)攻撃
+	if (Input::GetVKey('A') == true)
+	{
+		if (m_sword_delay == 0)
+		{
+			//主人公の向きによって攻撃する向きを設定
+			if (m_posture == 0.0f) {
+				m_directionx = 7.0f;
+				m_directiony = 0.0f;
+			}
+			else if (m_posture == 1.0f) {
+				m_directionx = -7.0f;
+				m_directiony = 0.0f;
+			}
+
+			//剣で攻撃
+			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_directionx, m_py + m_directiony);//剣オブジェクト(戦闘)作成
+			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
+			
+			m_sword_delay = 20;
+		}
+		else if (m_sword_delay > 0)
+		{
+			m_sword_delay--;
+			if (m_sword_delay <= 0)
+				m_sword_delay = 0;
+		}
+	}
+
 
 	//Xキーで魔法を切り替える
 	if (Input::GetVKey('X') == true)
@@ -152,13 +190,13 @@ void CObjHeroBattle::Action()
 	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr)
 	{
 		//主人公が敵とどの角度で当たっているかを確認
-		HIT_DATA** hit_data;						//当たった時の細かな情報を入れるための構造体
+		HIT_DATA** hit_data;	//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchObjNameHit(OBJ_ENEMY_BATTLE);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//敵の左右に当たったら
-			float r = hit_data[i]->r;
+ 			float r = hit_data[i]->r;
 			if ((r < 45 && r >= 0) || r > 315)
 			{
 				m_vx = -5.0f;//左に移動させる
@@ -225,11 +263,10 @@ void CObjHeroBattle::Action()
 		}
 	}
 
-	//敵の体力が0になったら破棄
+	//主人公の体力が0になったらゲームオーバーシーンに移行(仮)
 	if (m_battle_hp <= 0)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		Scene::SetScene(new CSceneMain());//現在は仮でメインに設定
 	}
 
 	//主人公が領域外に行かないようにする
