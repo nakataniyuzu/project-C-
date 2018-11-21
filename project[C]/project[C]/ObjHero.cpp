@@ -276,6 +276,10 @@ void CObjHero::Action()
 		m_hp = m_max_hp;		//HP‚ðÅ‘å‚Ü‚Å‰ñ•œ
 		m_mp = m_max_mp;		//MP‚ðÅ‘å‚Ü‚Å‰ñ•œ
 	}
+	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)
+	{
+	}
+
 	//–€ŽC
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);

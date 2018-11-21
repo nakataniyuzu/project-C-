@@ -39,6 +39,7 @@ enum OBJ_NAME
 	OBJ_GATE,
 	OBJ_WATER,
 	OBJ_RESETBLOCK,
+	OBJ_SWITCH,
 };
 //------------------------------------------------
 
@@ -129,6 +130,7 @@ struct UserData
 #include "ObjGate.h"
 #include "ObjWater.h"
 #include "ObjResetblock.h"
+#include "ObjSwitch.h"
 
 #include "ObjMessage.h"
 //------------------------------------------------

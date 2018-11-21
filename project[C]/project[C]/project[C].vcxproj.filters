@@ -177,6 +177,9 @@
     <ClCompile Include="ObjHeal.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSwitch.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -324,6 +327,9 @@
       <Filter>ソース ファイル\Main\Item関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjHeal.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSwitch.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
   </ItemGroup>
