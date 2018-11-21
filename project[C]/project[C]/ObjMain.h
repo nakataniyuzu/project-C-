@@ -18,7 +18,7 @@ using namespace GameL;
 #define GAME_HP_POS_Y     (25)
 #define GAME_HP_FONT_SIZE (25)
 
-#define GAME_MP_POS_X     (100)
+#define GAME_MP_POS_X     (170)
 #define GAME_MP_POS_Y     (25)
 #define GAME_MP_FONT_SIZE (25)
 
@@ -45,6 +45,11 @@ class CObjMain :public CObj
 		void Action();	//アクション
 		void Draw();	//ドロー
 	private:
+		int hero_max_hp;	//HP最大値
+		int hero_max_mp;	//MP最大値
 
-
+		int hero_hp;	//HP
+		int hero_mp;	//MP
+		int magic_type;	//魔法の種類
+		int key;		//鍵を所持しているか
 };

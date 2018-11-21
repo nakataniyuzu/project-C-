@@ -7,13 +7,39 @@ enum OBJ_NAME
 	//ゲームで使うオブジェクトの名前
 	//OBJ_○○と表記
 	OBJ_TITLE,
+	OBJ_GAMEOVER,
 	OBJ_MENU,
 	OBJ_MAIN,
+	OBJ_MESSAGE,
+
+	ITEM_ICE,
+
+	OBJ_FIRE,
+	OBJ_ICE,
+	OBJ_WIND,
+	OBJ_THUNDER,
+	OBJ_ICE_BATTLE,
+	OBJ_THUNDER_BATTLE,
+	
+	OBJ_FIREBLOCK,
+	OBJ_FIREGATE,
 
 	OBJ_HERO,
 	OBJ_BLOCK,
-	OBJ_BACKGROUND,
 	OBJ_TOPBACK,
+	OBJ_ENEMY,
+
+	OBJ_HERO_BATTLE,
+	OBJ_ENEMY_BATTLE,
+	OBJ_BLOCK_BATTLE,
+	OBJ_BACKGROUND_BATTLE,
+	OBJ_BATTLE_MAIN,
+
+	OBJ_HEAL,
+	OBJ_KEY,
+	OBJ_GATE,
+	OBJ_WATER,
+	OBJ_RESETBLOCK,
 };
 //------------------------------------------------
 
@@ -28,11 +54,19 @@ enum HIT_ELEMENTS
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
+	
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
+
+	ELEMENT_HEAL,
+	ELEMENT_MYSTERY,
+	ELEMENT_MYSTERY_BLOCK,
+	ELEMENT_GATE_BLOCK,
+	ELEMENT_WATER,
+	ELEMENT_RESET,
 };
 //------------------------------------------------
 
@@ -61,20 +95,56 @@ struct UserData
 #include "ObjHero.h"
 #include "ObjMenu.h"
 #include "ObjMain.h"
+#include "ObjGameover.h"
+
+//Item関係
+#include "ItemIce.h"
+
+#include "ObjHeal.h"
+
+//Magic
+#include "CObjFire.h"
+#include "CObjIce.h"
+#include "CObjWind.h"
+#include "CObjThunder.h"
+#include "CObjIceBattle.h"
+#include "CObjThunderBattle.h"
+
+//Magic関係
+#include "ObjFireblock.h"
+#include "ObjFireGate.h"
+
+#include "ObjEnemy.h"
 
 #include "ObjBlock.h"
-#include "ObjBackground.h"
 #include "ObjTopback.h"
+
+//Battle関係
+#include "ObjHeroBattle.h"
+#include "ObjEnemyBattle.h"
+#include "ObjBlockBattle.h"
+#include "ObjBackgroundBattle.h"
+#include "ObjBattleMain.h"
+
+//謎解き関係
+#include "ObjKey.h"
+#include "ObjGate.h"
+#include "ObjWater.h"
+#include "ObjResetblock.h"
+
+#include "ObjMessage.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneTitle.h"
 #include "SceneMain.h"
 #include "SceneMenu.h"
+#include "SceneBattle.h"
+#include "SceneGameover.h"
 
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneMain
+#define SET_GAME_START  CSceneGameover
 //-----------------------------------------------

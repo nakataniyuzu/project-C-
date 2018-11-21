@@ -15,22 +15,24 @@ using namespace GameL;
 //イニシャライズ
 void CObjTitle::Init()
 {
-	choice = 1;
+	choice = 0;
+	m_key_flag = true;
 }
 
 //アクション
 void CObjTitle::Action()
 {
+	
 	if (Input::GetVKey(VK_UP) == true)
+	{
+		choice = 0;
+	}	
+	if (Input::GetVKey(VK_DOWN) == true)
 	{
 		choice = 1;
 	}
-	if (Input::GetVKey(VK_DOWN) == true)
-	{
-		choice = 0;
-	}
-
-	if (choice == 1)
+	
+	if (choice == 0)
 	{
 		if (Input::GetVKey(VK_RETURN) == true)
 		{
@@ -46,7 +48,7 @@ void CObjTitle::Action()
 		}
 	}
 
-	if (choice == 0)
+	if (choice == 1)
 	{
 		if (Input::GetVKey(VK_RETURN) == true)
 		{
@@ -59,7 +61,22 @@ void CObjTitle::Action()
 //ドロー
 void CObjTitle::Draw()
 {
-	float c[4] = { 1,1,1,1 };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	RECT_F src;		//描画元切り取り位置
+	RECT_F dst;		//描画先表示位置
+	//背景切り取り
+	src.m_top    =   0.0f;
+	src.m_left   =   0.0f;
+	src.m_right  = 800.0f;
+	src.m_bottom = 600.0f;
+
+	//背景の描画
+	dst.m_top    =   0.0f;
+	dst.m_left   =   0.0f;
+	dst.m_right  = 800.0f;
+	dst.m_bottom = 600.0f;
+	Draw::Draw(0, &src, &dst, c, 0.0f);
 
 	//タイトル
 	Font::StrDraw(L"○○", TITLE_POS_X, TITLE_POS_Y, TITLE_FONT_SIZE, c);
@@ -69,10 +86,11 @@ void CObjTitle::Draw()
 	Font::StrDraw(L"ゲームスタート", GAME_START_POS_X, GAME_START_POS_Y, GAME_START_FONT_SIZE, c);
 	Font::StrDraw(L"ゲーム終了", GAME_END_POS_X, GAME_END_POS_Y, GAME_END_FONT_SIZE, c);
 
-	if (choice == 1){
+	if (choice == 0){
 		Font::StrDraw(L"◆", GAME_START_POS_X - 30, GAME_START_POS_Y, GAME_START_FONT_SIZE, c);
 	}
-	if (choice == 0){
+	if (choice == 1){
 		Font::StrDraw(L"◆", GAME_END_POS_X - 30, GAME_END_POS_Y, GAME_END_FONT_SIZE, c);
 	}
+	
 }
