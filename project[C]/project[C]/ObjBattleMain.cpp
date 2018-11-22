@@ -31,7 +31,6 @@ void CObjBattleMain::Draw()
 	hero_mp = hero->GetBATTLEMP();	//ŽålŒö‚©‚çMP‚Ìî•ñ‚ðŽæ“¾
 	magic_type = hero->GetBATTLEMAGIC();	//ŽålŒö‚©‚çMAGIC‚Ìî•ñ‚ðŽæ“¾
 
-
 	float c[4] = { 1,1,1,1 };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èŽæ‚èˆÊ’u

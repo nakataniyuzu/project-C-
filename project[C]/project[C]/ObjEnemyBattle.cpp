@@ -98,6 +98,10 @@ void CObjEnemyBattle::Action()
 	hit->SetPos(g_enemy_px, g_enemy_py);
 
 	//UŒ‚‚ðŽó‚¯‚½‚ç‘Ì—Í‚ðŒ¸‚ç‚·
+	if (hit->CheckObjNameHit(OBJ_SWORD_BATTLE) != nullptr)
+	{
+		m_enemy_hp -= 1;
+	}
 	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)
 	{
 		m_enemy_hp -= 1;

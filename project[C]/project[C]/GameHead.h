@@ -7,9 +7,12 @@ enum OBJ_NAME
 	//ゲームで使うオブジェクトの名前
 	//OBJ_○○と表記
 	OBJ_TITLE,
+	OBJ_GAMEOVER,
 	OBJ_MENU,
 	OBJ_MAIN,
 	OBJ_MESSAGE,
+
+	OBJ_SWORD_BATTLE,
 
 	ITEM_ICE,
 
@@ -40,7 +43,6 @@ enum OBJ_NAME
 	OBJ_WATER,
 	OBJ_RESETBLOCK,
 	OBJ_SWITCH,
-	OBJ_SWITCHGATE,
 };
 //------------------------------------------------
 
@@ -55,6 +57,7 @@ enum HIT_ELEMENTS
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
+	ELEMENT_SWORD,
 	
 	ELEMENT_RED,
 	ELEMENT_GREEN,
@@ -96,11 +99,15 @@ struct UserData
 #include "ObjHero.h"
 #include "ObjMenu.h"
 #include "ObjMain.h"
+#include "ObjGameover.h"
 
 //Item関係
 #include "ItemIce.h"
 
 #include "ObjHeal.h"
+
+//剣関係
+#include "CObjSwordBattle.h"
 
 //Magic
 #include "CObjFire.h"
@@ -132,7 +139,6 @@ struct UserData
 #include "ObjWater.h"
 #include "ObjResetblock.h"
 #include "ObjSwitch.h"
-#include "ObjSwitchGate.h"
 
 #include "ObjMessage.h"
 //------------------------------------------------
@@ -142,10 +148,11 @@ struct UserData
 #include "SceneMain.h"
 #include "SceneMenu.h"
 #include "SceneBattle.h"
+#include "SceneGameover.h"
 
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneMain
+#define SET_GAME_START  CSceneGameover
 //-----------------------------------------------

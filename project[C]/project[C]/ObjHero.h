@@ -37,10 +37,10 @@ public:
 	bool GetWATERF() { return m_water_mf; }	//WATER‚Ìî•ñ‚ğæ“¾
 	bool GetMICE() { return m_ice_mf; }	//ICE‚Ìî•ñ‚ğæ“¾
 
-	void SetKEYF(bool x) { m_key_mf = x; }
-	void SetGATEF(bool x) { m_gate_mf = x; }
-	void SetWATERF(bool x) { m_water_mf = x; }
-	void SetMICE(bool x) { m_ice_mf = x; }
+	void SetKEYF(float x) { m_key_mf = x; }
+	void SetGATEF(float x) { m_gate_mf = x; }
+	void SetWATERF(float x) { m_water_mf = x; }
+	void SetMICE(float x) { m_ice_mf = x; }
 
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }

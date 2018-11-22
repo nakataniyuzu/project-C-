@@ -64,7 +64,7 @@ void CObjBlock::Action()
 			//列の中からを探す
 			if (g_map[i][j] == 2)
 			{
-				//2があればHealを出現
+				//3があれば水を出現
 				CObjHeal* objheal = new CObjHeal(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objheal, OBJ_HEAL, 11);
 
@@ -139,24 +139,6 @@ void CObjBlock::Action()
 				//13があればFireGateを出現
 				CObjFireGate* objfg = new CObjFireGate(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objfg, OBJ_FIREGATE, 10);
-
-				//出現場所の値を0にする
-				g_map[i][j] = 0;
-			}
-			if (g_map[i][j] == 16)
-			{
-				//16があればSwitchを出現
-				CObjSwitch* objsw = new CObjSwitch(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objsw, OBJ_SWITCH, 10);
-
-				//出現場所の値を0にする
-				g_map[i][j] = 0;
-			}
-			if (g_map[i][j] == 17)
-			{
-				//16があればSwitchGateを出現
-				CObjSwitchGate* objswg = new CObjSwitchGate(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objswg, OBJ_SWITCHGATE, 10);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;

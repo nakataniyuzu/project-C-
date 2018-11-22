@@ -43,6 +43,7 @@ private:
 	int m_battle_magic;	//魔法切り替え(戦闘)
 
 	int m_time;		//無敵時間用
+	int m_sword_delay;
 
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム
@@ -54,6 +55,10 @@ private:
 	bool  m_mf;		//キー（長押し）制御用
 
 	bool m_hit_down; //敵の頭の判定用
+
+	//魔法使用可能フラグ(戦闘)
+	bool m_ice_flag;
+	bool m_thunder_flag;
 
 	//テスト用
 	float px, py;		//交点
