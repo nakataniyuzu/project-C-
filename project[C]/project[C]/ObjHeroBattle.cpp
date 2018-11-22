@@ -18,6 +18,12 @@ void CObjHeroBattle::Init()
 	m_battle_hp = hero->GetHP();	//主人公からHPの情報を取得
 	m_battle_mp = hero->GetMP();	//主人公からMPの情報を取得
 	m_battle_magic = hero->GetMAGIC();	//主人公からMAGICの情報を取得
+
+	//炎か風の魔法で戦闘に入らないようにするための処理
+	if (m_battle_magic == 0 || m_battle_magic == 2)
+	{
+		m_battle_magic = 1;
+	}
 	
 	m_px = 100.0f;
 	m_py = 450.0f;		//位置
@@ -82,6 +88,56 @@ void CObjHeroBattle::Action()
 		}
 	}
 
+	//Xキーで魔法を切り替える
+	if (Input::GetVKey('X') == true)
+	{
+		if (m_mf == true) {	//キー制御用
+			m_mf = false;
+			m_battle_magic += 2;
+		}
+		if (m_battle_magic >= 4) {
+			m_battle_magic = 1;
+		}
+	}
+	else
+	{
+		m_mf = true;
+	}
+	if (m_battle_mp > 0) {
+		if (Input::GetVKey('Z') == true)	//魔法発射
+		{
+			if (m_f == true) {	//魔法制御用
+
+				//主人公の向きによって発射する向きを設定
+				if (m_posture == 0.0f) {
+					m_directionx = 50.0f;
+					m_directiony = 0.0f;
+				}
+				else if (m_posture == 1.0f) {
+					m_directionx = -50.0f;
+					m_directiony = 0.0f;
+				}
+
+				if (m_battle_magic == 1)	//氷の魔法
+				{
+					CObjIceBattle* objib = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
+					Objs::InsertObj(objib, OBJ_ICE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+				}
+				else if (m_battle_magic == 3)	//雷の魔法
+				{
+					CObjThunderBattle* objtb = new CObjThunderBattle(m_px + m_directionx, m_py + m_directiony);//Thunderオブジェクト(戦闘)作成
+					Objs::InsertObj(objtb, OBJ_THUNDER_BATTLE, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+				}
+				m_f = false;
+				m_battle_mp -= 1;		//MPを減らす
+			}
+		}
+		else
+		{
+			m_f = true;
+		}
+	}
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -92,6 +148,48 @@ void CObjHeroBattle::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
+	//敵と当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr)
+	{
+		//主人公が敵とどの角度で当たっているかを確認
+		HIT_DATA** hit_data;						//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchObjNameHit(OBJ_ENEMY_BATTLE);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			//敵の左右に当たったら
+			float r = hit_data[i]->r;
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -5.0f;//左に移動させる
+			}
+			if (r > 135 && r < 225)
+			{
+				m_vx = +5.0f;//右に移動させる
+			}
+			if (r > 225 && r < 315)
+			{
+				//敵の移動方向を主人公の位置に加算
+				/*m_px += ((CObjEnemy*)hit_data[i]->o)->GetVx();
+
+				CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);*/
+
+				//頭に乗せる処理
+				if (m_vy < -1.0f)
+				{
+					//ジャンプしてる場合は下記の影響を出ないようにする
+				}
+				else
+				{
+					//主人公が敵の頭に乗っているので、Yvecは0にして落下させない
+					//また、地面に当たっている判定にする
+					m_vy = 0.0f;
+					m_hit_down = true;
+				}
+			}
+		}
+	}
+
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
@@ -99,12 +197,40 @@ void CObjHeroBattle::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
 
-	//敵機オブジェクトと接触したら主人公削除
-	/*if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	//攻撃を受けたら体力を減らす
+	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr)
+	{
+		//ノックバック処理
+		if (m_posture == 0.0f)
+		{
+			m_vy = -15;
+			m_vx -= 10;
+		}
+		else if (m_posture == 1.0f)
+		{
+			m_vy = -15;
+			m_vx += 10;
+		}
+		m_battle_hp -= 1;
+		m_time = 60;		//無敵時間をセット
+		hit->SetInvincibility(true);	//無敵オン
+	}
+	if (m_time > 0)
+	{
+		m_time--;
+		if (m_time <= 0)
+		{
+			m_time = 0;
+			hit->SetInvincibility(false);	//無敵オフ
+		}
+	}
+
+	//敵の体力が0になったら破棄
+	if (m_battle_hp <= 0)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
-	}*/
+	}
 
 	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)

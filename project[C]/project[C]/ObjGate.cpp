@@ -6,41 +6,32 @@
 #include "GameL\DrawFont.h"
 
 #include "GameHead.h"
-#include "ObjMysteryblock.h"
+#include "ObjGate.h"
 
 
 //使用するネームスペース
 using namespace GameL;
 
 
-CObjMysteryblock::CObjMysteryblock(float x, float y)
+CObjGate::CObjGate(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjMysteryblock::Init()
+void CObjGate::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
-
-	m_move = true;			//true=右 false=左
-
-	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
-	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_MYSTERYBLOCK, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_GATE, 1);
 
 }
 
 //アクション
-void CObjMysteryblock::Action()
+void CObjGate::Action()
 {
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -51,8 +42,7 @@ void CObjMysteryblock::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		if (key >= 1) {
-			key -= 1;
+		if (key == 1) {
 			this->SetStatus(false);		//鍵を持った状態で当たっていたらMYSTERYBLOCKを消去
 			Hits::DeleteHitBox(this);
 		}
@@ -70,23 +60,28 @@ void CObjMysteryblock::Action()
 }
 
 //ドロー
-void CObjMysteryblock::Draw()
+void CObjGate::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	CHitBox* hit = Hits::GetHitBox(this);
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
+	
+	if (key == 0)
 	{
-		m_time = 100;
-	}
-	if (m_time > 0) {
-		m_time--;
-		Font::StrDraw(L"鍵が必要です。", 200, 200, 20, c);//時間が0になると表示を終了
-		if (m_time <= 0){
-			m_time = 0;
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
+		{
+			m_time = 100;
+		}
+		if (m_time > 0) {
+			m_time--;
+			Font::StrDraw(L"鍵が必要です", 200, 200, 20, c);//時間が0になると表示を終了		
+			if (m_time <= 0) {
+				m_time = 0;
+			}
 		}
 	}
+	
 	
 
 
@@ -107,7 +102,7 @@ void CObjMysteryblock::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(2, &src, &dst, c, 0.0f);
+	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
 }
 
 

@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト：ブロック＆背景
-class CObjMysteryblock : public CObj
+class CObjHeal : public CObj
 {
 public:
-	CObjMysteryblock(float x, float y);
-	~CObjMysteryblock() {};
+	CObjHeal(float x, float y);
+	~CObjHeal() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
@@ -23,18 +23,9 @@ private:
 	float m_py;
 	float m_vx;			//移動ベクトル
 	float m_vy;
-	float m_posture;	//姿勢
+
 	int m_time;			//表示する時間
 
-	int key;	//鍵
-	//blockとの衝突状態確認用
-	bool m_hit_up;
-	bool m_hit_down;
-	bool m_hit_left;
-	bool m_hit_right;
-
-	//移動の向き制御用
-	bool m_move;
+	float fire;	//火が灯っているかの判定用
 
 };
-

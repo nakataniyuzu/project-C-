@@ -26,14 +26,27 @@ void CObjHero::Init()
 	m_speed_power = 0.2f;	//通常速度
 	m_posture = 2.0f;
 	
+	m_max_hp = 15;
+	m_max_mp = 5;
 	m_hp = 15;	//初期HP
-	m_mp = 999;	//初期MP
+	m_mp = 5;	//初期MP
 	m_magic = 0;	//初期魔法
+	m_key = 0;
+
+	//フラグの初期化
+	m_gate_mf = false;
+	m_water_mf = false;
+	m_key_mf = false;
+	m_ice_mf = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 	m_ani_max_time = 8;		//アニメーション間隔幅(増やせば遅い
 
+	m_fire_flag = true;		//火：0
+	m_ice_flag = false;		//氷：1
+	m_wind_flag = false;	//風：2
+	m_thunder_flag = false;	//雷：3
 
 	//blockとの衝突状態確認
 	m_hit_up    = false;
@@ -63,6 +76,15 @@ void CObjHero::Action()
 		if (m_mf == true) {	//キー制御用
 			m_mf = false;
 			m_magic += 1;
+		}
+		if (m_magic == 1 && m_ice_flag == false){	//氷魔法を取得しないと発動させない
+			m_magic = 0;
+		}
+		if (m_magic == 2 && m_wind_flag == false){	//風魔法を取得しないと発動させない
+			m_magic = 0;
+		}
+		if (m_magic == 3 && m_thunder_flag == false){//雷魔法を取得しないと発動させない
+			m_magic = 0;
 		}
 		if (m_magic >= 4) {
 			m_magic = 0;
@@ -109,13 +131,13 @@ void CObjHero::Action()
 				}
 				else if (m_magic == 2)	//風の魔法
 				{
-					CObjWind* obji = new CObjWind(g_px + m_directionx, g_py + m_directiony);//Windオブジェクト作成
-					Objs::InsertObj(obji, OBJ_WIND, 100);		//作ったWindオブジェクトをオブジェクトマネージャーに登録
+					CObjWind* objw = new CObjWind(g_px + m_directionx, g_py + m_directiony);//Windオブジェクト作成
+					Objs::InsertObj(objw, OBJ_WIND, 100);		//作ったWindオブジェクトをオブジェクトマネージャーに登録
 				}
 				else if (m_magic == 3)	//雷の魔法
 				{
-					CObjThunder* obji = new CObjThunder(g_px + m_directionx, g_py + m_directiony);//Thunderオブジェクト作成
-					Objs::InsertObj(obji, OBJ_THUNDER, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+					CObjThunder* objt = new CObjThunder(g_px + m_directionx, g_py + m_directiony);//Thunderオブジェクト作成
+					Objs::InsertObj(objt, OBJ_THUNDER, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
@@ -190,8 +212,7 @@ void CObjHero::Action()
 	}
 
 	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-	
+	CHitBox* hit = Hits::GetHitBox(this);	
 	//主人公とMYSTTERY系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
 	{
@@ -223,10 +244,42 @@ void CObjHero::Action()
 
 	}
 
+	//敵を接触したらBATTLESCENEに移行
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		Scene::SetScene(new CSceneBattle());
 	}
+	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
+	{
+		m_key = 1;
+		m_key_mf = true;
+	}
+	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
+	{
+		if (m_key == 1)		//鍵を持っている場合
+		{
+			m_key = 0;		//鍵を消費する
+			m_gate_mf = true;//鍵のフラグをオンにする
+		}
+	}
+	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)
+	{
+		m_ice_mf = true;
+		m_ice_flag = true;
+	}
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		m_water_mf = true;
+	}
+	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)	//主人公がHEALと当たった場合
+	{
+		m_hp = m_max_hp;		//HPを最大まで回復
+		m_mp = m_max_mp;		//MPを最大まで回復
+	}
+	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)
+	{
+	}
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -275,19 +328,5 @@ void CObjHero::Draw()
 
 	//描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
-	{
-		m_time = 100;
-	}
-	if (m_time > 0) {
-		m_time--;
-		Font::StrDraw(L"凍らせれば渡れるか...？", 200, 200, 20, c);//時間が0になると表示を終了
-		if (m_time <= 0) {
-			m_time = 0;
-		}
-	}
-
-
+	
 }

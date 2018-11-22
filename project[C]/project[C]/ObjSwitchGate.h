@@ -6,31 +6,22 @@
 using namespace GameL;
 
 //オブジェクト：ブロック＆背景
-class CObjFireblock : public CObj
+class CObjSwitchGate : public CObj
 {
 public:
-	CObjFireblock(float x, float y);
-	~CObjFireblock() {};
+	CObjSwitchGate(float x, float y);
+	~CObjSwitchGate() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
-
-	float GetVY() { return m_vy; }
-	float GetVX() { return m_vx; }
-	float GetSWITCH(){ return m_switch; }
 
 private:
 	float m_px;			//位置
 	float m_py;
 	float m_vx;			//移動ベクトル
 	float m_vy;
-	float m_posture;	//姿勢
-	
-	int m_time;			//表示する時間
-	int m_draw_time;
-	//描画切り替え用
-	int m_switch;
 
+	int m_time;	//メッセージ時間管理
+	bool m_change;	//スイッチのオンオフ
 };
-
 

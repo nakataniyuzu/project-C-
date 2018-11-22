@@ -37,6 +37,9 @@
     <Filter Include="ソース ファイル\Main\Magic関係">
       <UniqueIdentifier>{80f13e64-85fc-4084-8c05-6bd80426f71a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Item関係">
+      <UniqueIdentifier>{fa12d4d2-3f4f-4a30-8807-4c5fddb8ee78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -108,12 +111,6 @@
     <ClCompile Include="ObjBlock.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjMoveblock.cpp">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMysteryblock.cpp">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClCompile>
     <ClCompile Include="ObjWater.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
@@ -157,6 +154,33 @@
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjResetblock.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjIceBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjThunderBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjKey.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFireGate.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGate.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemIce.cpp">
+      <Filter>ソース ファイル\Main\Item関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHeal.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSwitch.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSwitchGate.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
   </ItemGroup>
@@ -233,12 +257,6 @@
     <ClInclude Include="ObjBlock.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMoveblock.h">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMysteryblock.h">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClInclude>
     <ClInclude Include="ObjWater.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
@@ -291,6 +309,33 @@
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjResetblock.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjIceBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjThunderBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjKey.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFireGate.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGate.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemIce.h">
+      <Filter>ソース ファイル\Main\Item関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHeal.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSwitch.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSwitchGate.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClCompile Include="CObjFire.cpp" />
     <ClCompile Include="CObjIce.cpp" />
+    <ClCompile Include="CObjIceBattle.cpp" />
     <ClCompile Include="CObjThunder.cpp" />
+    <ClCompile Include="CObjThunderBattle.cpp" />
     <ClCompile Include="CObjWind.cpp" />
     <ClCompile Include="ObjBackgroundBattle.cpp" />
     <ClCompile Include="ObjBattleMain.cpp">
@@ -50,16 +52,21 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjFireblock.cpp" />
+    <ClCompile Include="ObjFireGate.cpp" />
+    <ClCompile Include="ObjHeal.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjHeroBattle.cpp" />
+    <ClCompile Include="ItemIce.cpp" />
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
     <ClCompile Include="ObjMessage.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ObjMoveblock.cpp" />
-    <ClCompile Include="ObjMysteryblock.cpp" />
+    <ClCompile Include="ObjKey.cpp" />
+    <ClCompile Include="ObjGate.cpp" />
     <ClCompile Include="ObjResetblock.cpp" />
+    <ClCompile Include="ObjSwitch.cpp" />
+    <ClCompile Include="ObjSwitchGate.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="ObjWater.cpp" />
@@ -77,7 +84,9 @@
     <ClInclude Include="CObjIce.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="CObjIceBattle.h" />
     <ClInclude Include="CObjThunder.h" />
+    <ClInclude Include="CObjThunderBattle.h" />
     <ClInclude Include="CObjWind.h" />
     <ClInclude Include="ObjBackgroundBattle.h" />
     <ClInclude Include="ObjBattleMain.h">
@@ -91,9 +100,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjFireblock.h" />
+    <ClInclude Include="ObjFireGate.h" />
+    <ClInclude Include="ObjHeal.h" />
     <ClInclude Include="ObjHeroBattle.h" />
+    <ClInclude Include="ItemIce.h" />
     <ClInclude Include="ObjMessage.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjMobThird.h" />
     <ClInclude Include="ObjMobFirst.h" />
@@ -117,9 +129,11 @@
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjMobSecond.h" />
-    <ClInclude Include="ObjMoveblock.h" />
-    <ClInclude Include="ObjMysteryblock.h" />
+    <ClInclude Include="ObjKey.h" />
+    <ClInclude Include="ObjGate.h" />
     <ClInclude Include="ObjResetblock.h" />
+    <ClInclude Include="ObjSwitch.h" />
+    <ClInclude Include="ObjSwitchGate.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="ObjWater.h" />

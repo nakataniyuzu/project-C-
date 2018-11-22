@@ -45,8 +45,11 @@ class CObjMain :public CObj
 		void Action();	//アクション
 		void Draw();	//ドロー
 	private:
-		int hero_hp;
-		int hero_mp;
-		int magic_type;
+		int hero_max_hp;	//HP最大値
+		int hero_max_mp;	//MP最大値
 
+		int hero_hp;	//HP
+		int hero_mp;	//MP
+		int magic_type;	//魔法の種類
+		int key;		//鍵を所持しているか
 };
