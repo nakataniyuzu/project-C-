@@ -39,6 +39,8 @@ void CObjHero::Init()
 	m_key_mf = false;
 	m_ice_mf = false;
 
+	m_battle_flag = true;
+
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 	m_ani_max_time = 8;		//アニメーション間隔幅(増やせば遅い
@@ -64,6 +66,13 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	if (m_battle_flag == false)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+		return;
+	}
+	
 	//Eキーでメニューを開く
 	if (Input::GetVKey('E') == true)
 	{
@@ -77,13 +86,13 @@ void CObjHero::Action()
 			m_mf = false;
 			m_magic += 1;
 		}
-		if (m_magic == 1 && m_ice_flag == false){	//氷魔法を取得しないと発動させない
+		if (m_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
 			m_magic = 0;
 		}
-		if (m_magic == 2 && m_wind_flag == false){	//風魔法を取得しないと発動させない
+		if (m_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
 			m_magic = 0;
 		}
-		if (m_magic == 3 && m_thunder_flag == false){//雷魔法を取得しないと発動させない
+		if (m_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
 			m_magic = 0;
 		}
 		if (m_magic >= 4) {
@@ -102,21 +111,21 @@ void CObjHero::Action()
 			if (m_f == true) {	//魔法制御用
 
 				//主人公の向きによって発射する向きを設定
-				if (m_posture == 0.0f) {		
-					m_directionx =  0.0f;
-					m_directiony =-50.0f;
+				if (m_posture == 0.0f) {
+					m_directionx = 0.0f;
+					m_directiony = -50.0f;
 				}
 				else if (m_posture == 1.0f) {
 					m_directionx = 50.0f;
-					m_directiony =  0.0f;
+					m_directiony = 0.0f;
 				}
 				else if (m_posture == 2.0f) {
-					m_directionx =  0.0f;
+					m_directionx = 0.0f;
 					m_directiony = 50.0f;
 				}
 				else if (m_posture == 3.0f) {
-					m_directionx =-50.0f;
-					m_directiony =  0.0f;
+					m_directionx = -50.0f;
+					m_directiony = 0.0f;
 				}
 
 				if (m_magic == 0)	//火の魔法
@@ -143,7 +152,7 @@ void CObjHero::Action()
 				m_mp -= 1;		//MPを減らす
 			}
 		}
-		else 
+		else
 		{
 			m_f = true;
 		}
@@ -198,12 +207,12 @@ void CObjHero::Action()
 	//右のスクロールライン
 	{
 		g_px = 400;
-		b->SetScrollX(b->GetScrollX());	
+		b->SetScrollX(b->GetScrollX());
 	}
 	//上のスクロールライン
 	{
 		g_py = 0;
-		b->SetScrollY(b->GetScrollY());	
+		b->SetScrollY(b->GetScrollY());
 	}
 	//下のスクロールライン
 	{
@@ -212,7 +221,7 @@ void CObjHero::Action()
 	}
 
 	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);	
+	CHitBox* hit = Hits::GetHitBox(this);
 	//主人公とMYSTTERY系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
 	{
@@ -247,7 +256,8 @@ void CObjHero::Action()
 	//敵を接触したらBATTLESCENEに移行
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
-		Scene::SetScene(new CSceneBattle());
+		m_battle_flag = false;
+		//Scene::SetScene(new CSceneBattle());
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{
@@ -276,9 +286,6 @@ void CObjHero::Action()
 		m_hp = m_max_hp;		//HPを最大まで回復
 		m_mp = m_max_mp;		//MPを最大まで回復
 	}
-	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)
-	{
-	}
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -294,15 +301,21 @@ void CObjHero::Action()
 	//位置の更新
 	g_px += m_vx;
 	g_py += m_vy;
-	
+
 	//HitBoxの位置の変更
 	hit->SetPos(g_px, g_py);
+	
 	
 }
 
 //ドロー
 void CObjHero::Draw()
 {
+	if (m_battle_flag == false)
+	{
+		return;
+	}
+
 	int AniDate[4] =
 	{
 		1 , 2 , 1 , 0 ,

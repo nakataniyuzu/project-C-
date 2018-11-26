@@ -40,6 +40,16 @@ void CObjEnemyBattle::Init()
 //アクション
 void CObjEnemyBattle::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_battle_flag = hero->GetBATTLE();
+
+	if (m_battle_flag == true)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+		return;
+	}
+
 	//通常速度
 	m_speed_power = 0.4f;
 	m_ani_max_time = 4;
@@ -143,6 +153,10 @@ void CObjEnemyBattle::Action()
 //ドロー
 void CObjEnemyBattle::Draw()
 {
+	if (m_battle_flag == true)
+	{
+		return;
+	}
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 

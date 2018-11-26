@@ -26,6 +26,8 @@ private:
 
 	int m_time;			//•\Ž¦‚·‚éŽžŠÔ
 
+	bool m_battle_flag;
+
 	float fire;	//‰Î‚ª“”‚Á‚Ä‚¢‚é‚©‚Ì”»’è—p
 
 };

@@ -21,5 +21,6 @@ class CObjKey : public CObj
 		float m_vx;			//移動ベクトル
 		float m_vy;
 
+		bool m_battle_flag;
 		int key;	//鍵用変数
 };

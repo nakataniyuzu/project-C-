@@ -31,6 +31,7 @@ private:
 	//•`‰æØ‚è‘Ö‚¦—p
 	int m_switch;
 
+	bool m_battle_flag;
 };
 
 
