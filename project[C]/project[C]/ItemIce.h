@@ -25,5 +25,5 @@ class CObjItemIce : public CObj
 		float m_vy;
 
 		int m_time;			//•\Ž¦‚·‚éŽžŠÔ
-
+		bool m_battle_flag;
 };

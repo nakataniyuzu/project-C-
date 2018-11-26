@@ -44,6 +44,16 @@ void CObjEnemy::Init()
 //アクション
 void CObjEnemy::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	battle_flag = hero->GetBATTLE();
+
+	if (battle_flag == false)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+		return;
+	}
+
 	if (m_hit_up == true)	//上
 		m_move = false;
 	if (m_hit_down == true)	//下
@@ -76,9 +86,6 @@ void CObjEnemy::Action()
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
-	//自由落下運動
-	//m_vy += 9.8 / (16.0f);
-
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d;
 
@@ -104,6 +111,10 @@ void CObjEnemy::Action()
 //ドロー
 void CObjEnemy::Draw()
 {
+	if (battle_flag == false)
+	{
+		return;
+	}
 	int AniDate[4] =
 	{
 		0 , 1 ,

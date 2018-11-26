@@ -45,6 +45,16 @@ void CObjHeroBattle::Init()
 //アクション
 void CObjHeroBattle::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_battle_flag = hero->GetBATTLE();
+
+	if (m_battle_flag == true)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+		return;
+	}
+
 	//移動ベクトルの破棄
 	//m_vy = 0.0f;
 
@@ -235,8 +245,13 @@ void CObjHeroBattle::Action()
 	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)
 	{
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		hero->SetBATTLE(false);
+
+		m_battle_flag  = false;
 		m_px = 800.0 - 75.0f;
-		Scene::SetScene(new CSceneMain());
+		//Scene::SetScene(new CSceneMain());
+		
 	}
 	if (m_px < 0)
 	{
@@ -255,6 +270,11 @@ void CObjHeroBattle::Action()
 //ドロー
 void CObjHeroBattle::Draw()
 {
+	if (m_battle_flag == true)
+	{
+		return;
+	}
+
 	int AniData[4] =
 	{
 		0,1,2,3,

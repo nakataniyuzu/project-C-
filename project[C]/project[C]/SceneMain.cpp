@@ -32,6 +32,7 @@ CSceneMain::~CSceneMain()
 //ゲームタイトルの初期化メソッド
 void CSceneMain::InitScene()
 {
+	m_f = true;
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
@@ -45,9 +46,9 @@ void CSceneMain::InitScene()
 		{
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
-		
+
 			map[i][j] = w;
-			
+
 			if (w >= 10)
 			{
 				count += 1;
@@ -69,27 +70,55 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Candle.png", 9, TEX_SIZE_200_100);
 	Draw::LoadImageW(L"magicitem.png", ITEM, TEX_SIZE_256);
 
-	
+
+
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 15);
+	Objs::InsertObj(obj, OBJ_HERO, 115);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
-	Objs::InsertObj(objb, OBJ_BLOCK, 9);
-	
+	Objs::InsertObj(objb, OBJ_BLOCK, 109);
+
 	CObjTopback* objtb = new CObjTopback();
-	Objs::InsertObj(objtb, OBJ_TOPBACK, 19);
+	Objs::InsertObj(objtb, OBJ_TOPBACK, 119);
 
 	CObjMain* objm = new CObjMain();
-	Objs::InsertObj(objm, OBJ_MAIN, 20);
+	Objs::InsertObj(objm, OBJ_MAIN, 120);
 
 	CObjMessage* objmessa = new CObjMessage();
-	Objs::InsertObj(objmessa, OBJ_MESSAGE, 20);
+	Objs::InsertObj(objmessa, OBJ_MESSAGE, 120);
+
+	
+	//主人公オブジェクト作成
+	CObjHeroBattle* bobj = new CObjHeroBattle();
+	Objs::InsertObj(bobj, OBJ_HERO_BATTLE, 10);
+
+	//blockオブジェクト作成
+	CObjBlockBattle* bobjb = new CObjBlockBattle();
+	Objs::InsertObj(bobjb, OBJ_BLOCK_BATTLE, 9);
+
+	//敵(戦闘)オブジェクト作成
+	CObjEnemyBattle* bobje = new CObjEnemyBattle();
+	Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE, 10);
+
+	//背景(戦闘)オブジェクト作成
+	CObjBackgroundBattle* bobjbackb = new CObjBackgroundBattle();
+	Objs::InsertObj(bobjbackb, OBJ_BACKGROUND_BATTLE,8);
 }
 
 //ゲームタイトルの実行中メソッド
 void CSceneMain::Scene()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	battle_flag = hero->GetBATTLE();
 
+	if (m_f == true)
+	{
+		if (battle_flag == false)
+		{
+			
+			m_f = false;
+		}
+	}
 }

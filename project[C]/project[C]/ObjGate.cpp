@@ -62,6 +62,13 @@ void CObjGate::Action()
 //ドロー
 void CObjGate::Draw()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_battle_flag = hero->GetBATTLE();
+	if (m_battle_flag == false)
+	{
+		return;
+	}
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 

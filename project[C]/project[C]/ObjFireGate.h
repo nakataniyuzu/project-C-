@@ -27,6 +27,7 @@ class CObjFireGate : public CObj
 		int m_time;			//•\Ž¦‚·‚éŽžŠÔ
 
 		float fire;	//‰Î‚ª“”‚Á‚Ä‚¢‚é‚©‚Ì”»’è—p
+		bool m_battle_flag;
 
 };
 

@@ -66,8 +66,6 @@ void CObjWater::Action()
 	//ICEと当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_ICE) != nullptr)//当たっていたら当たり判定を消し、描画を変える
 	{
-		//this->SetStatus(false);
-		//Hits::DeleteHitBox(this);
 		hit->SetInvincibility(true);
 		m_switch = 1.0f;
 	}
@@ -87,6 +85,12 @@ void CObjWater::Action()
 //ドロー
 void CObjWater::Draw()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_battle_flag = hero->GetBATTLE();
+	if (m_battle_flag == false)
+	{
+		return;
+	}
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 

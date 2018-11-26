@@ -20,6 +20,8 @@ public:
 	float GetPOS() { return m_posture; }//主人公の向きを取得
 	float GetVY() { return m_vy; }		
 	float GetVX() { return m_vx; }		
+	bool GetBATTLER() { return m_battle_flag; }
+
 
 	int GetBATTLEHP() { return m_battle_hp; }		//主人公のHPを取得
 	int GetBATTLEMP() { return m_battle_mp; }		//主人公のMPを取得
@@ -53,6 +55,7 @@ private:
 	bool  m_f;		//キー（長押し）制御用
 	bool  m_mf;		//キー（長押し）制御用
 
+	bool m_battle_flag;	//マップに戻るフラグ
 	bool m_hit_down; //敵の頭の判定用
 
 	//テスト用

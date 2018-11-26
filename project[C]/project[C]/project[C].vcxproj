@@ -68,6 +68,7 @@
     <ClCompile Include="ObjSwitch.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjSwitchGate.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="ObjWater.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="ObjSwitch.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="ObjSwitchGate.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="ObjWater.h" />
