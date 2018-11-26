@@ -41,8 +41,8 @@ void CObjBackgroundBattle::Draw()
 	//îwåiêÿÇËéÊÇË
 	src.m_top    =   0.0f;
 	src.m_left   =   0.0f;
-	src.m_right  = 200.0f;
-	src.m_bottom =  90.0f;
+	src.m_right  =  100.0f;
+	src.m_bottom =  100.0f;
 
 	//ï`âÊ
 	dst.m_top    =  50.0f;
