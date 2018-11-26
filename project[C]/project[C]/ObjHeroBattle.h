@@ -37,6 +37,7 @@ private:
 	float m_posture;	//姿勢
 	float m_directionx; //魔法発射用X方向
 	float m_directiony; //魔法発射用Y方向
+	float m_swordwidth; //ソード幅
 
 	int m_battle_hp;	//体力(戦闘)
 	int m_battle_mp;	//魔法使用回数(戦闘)
