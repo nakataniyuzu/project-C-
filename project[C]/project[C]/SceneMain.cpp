@@ -71,6 +71,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"magicitem.png", ITEM, TEX_SIZE_256);
 	Draw::LoadImageW(L"Hero2.png", 11, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor1_Enemy.png", 12, TEX_SIZE_100);
+	Draw::LoadImageW(L"MagicBattle.png", 13, TEX_SIZE_256);
 
 
 

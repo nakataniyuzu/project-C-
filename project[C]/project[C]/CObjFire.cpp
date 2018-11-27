@@ -124,8 +124,8 @@ void CObjFire::Draw()
 
 	//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 	src.m_top    = 0.0f;
-	src.m_left   = 0.0f;
-	src.m_right  = 50.0f;
+	src.m_left   = 100.0f;
+	src.m_right  = 150.0f;
 	src.m_bottom = 50.0f;
 
 	//•\¦ˆÊ’u‚Ìİ’è
@@ -134,5 +134,5 @@ void CObjFire::Draw()
 	dst.m_right  = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(8, &src, &dst, c, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
 }

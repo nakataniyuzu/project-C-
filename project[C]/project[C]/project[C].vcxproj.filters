@@ -192,6 +192,9 @@
     <ClCompile Include="SceneGameover.cpp">
       <Filter>ソース ファイル\Gameover</Filter>
     </ClCompile>
+    <ClCompile Include="CObjFireBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -351,6 +354,9 @@
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="CObjSwordBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjFireBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>

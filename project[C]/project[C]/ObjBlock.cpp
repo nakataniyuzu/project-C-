@@ -162,7 +162,7 @@ void CObjBlock::Action()
 			{
 				//16‚ª‚ ‚ê‚ÎSwitchGate‚ğoŒ»
 				CObjSwitchGate* objswg = new CObjSwitchGate(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objswg, OBJ_SWITCHGATE, 110);
+				Objs::InsertObj(objswg, OBJ_SWITCHGATE, 111);
 
 				//oŒ»êŠ‚Ì’l‚ğ0‚É‚·‚é
 				g_map[i][j] = 0;
