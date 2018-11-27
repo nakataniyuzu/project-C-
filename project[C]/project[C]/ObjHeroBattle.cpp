@@ -43,7 +43,7 @@ void CObjHeroBattle::Init()
 
 
 	//当たり判定用のHitBoxを作成
- 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
+ 	Hits::SetHitBox(this, m_px , m_py , 60, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
 }
 
 //アクション
@@ -107,7 +107,7 @@ void CObjHeroBattle::Action()
 			if (m_posture == 0.0f) {
 				m_directionx = 7.0f;
 				m_directiony = 0.0f;
-				m_swordwidth = 60.0f;
+				m_swordwidth = 50.0f;
 			}
 			else if (m_posture == 1.0f) {
 				m_directionx = -7.0f;
@@ -119,7 +119,7 @@ void CObjHeroBattle::Action()
 			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_directionx+ m_swordwidth, m_py + m_directiony+35.0f);//剣オブジェクト(戦闘)作成
 			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
 			
-			m_sword_delay = 20;
+			m_sword_delay = 10;
 		}
 		else if (m_sword_delay > 0)
 		{
@@ -200,9 +200,11 @@ void CObjHeroBattle::Action()
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//敵の左右に当たったら
-			/*if (float r = hit_data[1]->r)
+			//保留↓
+			/*if ()
 			{*/
-				float r = hit_data[i]->r;
+
+			float r = hit_data[i]->r;
 
 				if ((r < 45 && r >= 0) || r > 315)
 				{
