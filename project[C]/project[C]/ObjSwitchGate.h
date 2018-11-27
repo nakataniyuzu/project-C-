@@ -6,17 +6,14 @@
 using namespace GameL;
 
 //オブジェクト：ブロック＆背景
-class CObjHeal : public CObj
+class CObjSwitchGate : public CObj
 {
 public:
-	CObjHeal(float x, float y);
-	~CObjHeal() {};
+	CObjSwitchGate(float x, float y);
+	~CObjSwitchGate() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
-
-	float GetVY() { return m_vy; }
-	float GetVX() { return m_vx; }
 
 private:
 	float m_px;			//位置
@@ -24,10 +21,8 @@ private:
 	float m_vx;			//移動ベクトル
 	float m_vy;
 
-	int m_time;			//表示する時間
-
+	int m_time;	//メッセージ時間管理
+	bool m_change;	//スイッチのオンオフ
 	bool m_battle_flag;
-
-	float fire;	//火が灯っているかの判定用
-
 };
+

@@ -28,5 +28,6 @@ private:
 	int m_time;			//•\¦‚·‚éŠÔ
 	int m_draw_time;
 	int key;	//Œ®
+	bool m_battle_flag;
 };
 

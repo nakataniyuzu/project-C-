@@ -6,46 +6,44 @@
 #include "GameL\DrawFont.h"
 
 #include "GameHead.h"
-#include "ObjFireGate.h"
+#include "ObjSwitchGate.h"
 
 
 //使用するネームスペース
 using namespace GameL;
 
 
-CObjFireGate::CObjFireGate(float x, float y)
+CObjSwitchGate::CObjSwitchGate(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjFireGate::Init()
+void CObjSwitchGate::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_FIREGATE, 1);
-
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_SWITCHGATE, 1);
 }
 
 //アクション
-void CObjFireGate::Action()
+void CObjSwitchGate::Action()
 {
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	CObjFireblock* f = (CObjFireblock*)Objs::GetObj(OBJ_FIREBLOCK);
-	fire = f->GetSWITCH();
-
-	//Fireblockに火が灯っていたら消滅
-	if (fire == 1.0f) 
+	CObjSwitch* change = (CObjSwitch*)Objs::GetObj(OBJ_SWITCH);
+	m_change = change->GetCHANGE();
+	
+	if (m_change == true)
 	{
-		this->SetStatus(false);		
+		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
-	
+
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
@@ -58,7 +56,7 @@ void CObjFireGate::Action()
 }
 
 //ドロー
-void CObjFireGate::Draw()
+void CObjSwitchGate::Draw()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
@@ -67,20 +65,24 @@ void CObjFireGate::Draw()
 		return;
 	}
 	//描画カラー情報
-	float r[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
 
 	CHitBox* hit = Hits::GetHitBox(this);
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
+	
+	
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリー系統と当たった場合、m_timeに時間をセット
 	{
 		m_time = 100;
 	}
 	if (m_time > 0) {
 		m_time--;
-		Font::StrDraw(L"火を灯せ...?", 200, 200, 20, r);//時間が0になると表示を終了
+		Font::StrDraw(L"開かない...", 200, 200, 20, c);//時間が0になると表示を終了		
 		if (m_time <= 0) {
 			m_time = 0;
 		}
 	}
+	
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -99,7 +101,7 @@ void CObjFireGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(BLOCK1, &src, &dst, r, 0.0f);
+	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
 }
 
 

@@ -44,6 +44,7 @@ enum OBJ_NAME
 	OBJ_WATER,
 	OBJ_RESETBLOCK,
 	OBJ_SWITCH,
+	OBJ_SWITCHGATE,
 };
 //------------------------------------------------
 
@@ -59,6 +60,9 @@ enum HIT_ELEMENTS
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
 	ELEMENT_SWORD,
+	ELEMENT_ATTACK,
+
+
 	ELEMENT_BOSS,
 	
 	ELEMENT_RED,
@@ -142,6 +146,7 @@ struct UserData
 #include "ObjWater.h"
 #include "ObjResetblock.h"
 #include "ObjSwitch.h"
+#include "ObjSwitchGate.h"
 
 #include "ObjMessage.h"
 //------------------------------------------------
@@ -157,5 +162,5 @@ struct UserData
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneTitle
+#define SET_GAME_START  CSceneMain
 //-----------------------------------------------
