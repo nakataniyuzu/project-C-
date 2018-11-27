@@ -49,17 +49,25 @@ void CObjHeroBattle::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
+	hero_posture = hero->GetPOS();	
 
 	if (m_battle_flag == true)
 	{
+		if (hero_posture == 0.0f || hero_posture == 1.0f)
+		{
+			m_px = 100.0f;
+			m_py = 500.0f;		//位置
+		}
+		else if (hero_posture == 2.0f || hero_posture == 3.0f)
+		{
+			m_px = 500.0f;
+			m_py = 500.0f;		//位置
+		}
+
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 		return;
 	}
-
-	//移動ベクトルの破棄
-	//m_vy = 0.0f;
-
 	//キーの入力方向 
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
@@ -104,6 +112,7 @@ void CObjHeroBattle::Action()
 	if (Input::GetVKey('E') == true)
 	{
 		Scene::SetScene(new CSceneMenu());
+		
 	}
 
 	//Aキーで近接(剣)攻撃
@@ -282,17 +291,16 @@ void CObjHeroBattle::Action()
 	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)
 	{
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		hero->SetBATTLE(false);
-
-		m_battle_flag  = false;
 		m_px = 800.0 - 75.0f;
 		//Scene::SetScene(new CSceneMain());
-		
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		hero->SetBATTLE(true);
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		hero->SetBATTLE(true);
 	}
 	if (m_py + 100 >= 580)
 	{
@@ -331,11 +339,11 @@ void CObjHeroBattle::Draw()
 
 	//表示位置の設定
 	dst.m_top    = 0.0f + m_py;
-	dst.m_left   = (75.0f * m_posture) + m_px;
+	dst.m_left   = (     75.0f * m_posture) + m_px;
 	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	Draw::Draw(11, &src, &dst, c, 0.0f);
 
 }

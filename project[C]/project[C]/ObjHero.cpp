@@ -26,9 +26,9 @@ void CObjHero::Init()
 	m_speed_power = 0.2f;	//通常速度
 	m_posture = 2.0f;
 	
-	m_max_hp = 15;
+	m_max_hp = 10;
 	m_max_mp = 5;
-	m_hp = 15;	//初期HP
+	m_hp = 10;	//初期HP
 	m_mp = 5;	//初期MP
 	m_magic = 0;	//初期魔法
 	m_key = 0;
@@ -76,7 +76,8 @@ void CObjHero::Action()
 	//Eキーでメニューを開く
 	if (Input::GetVKey('E') == true)
 	{
-		Scene::SetScene(new CSceneMenu());
+		//Scene::SetScene(new CSceneMenu());
+		m_battle_flag = false;
 	}
 
 	//Xキーで魔法を切り替える
@@ -131,22 +132,22 @@ void CObjHero::Action()
 				if (m_magic == 0)	//火の魔法
 				{
 					CObjFire* objf = new CObjFire(g_px + m_directionx, g_py + m_directiony);//Fireオブジェクト作成
-					Objs::InsertObj(objf, OBJ_FIRE, 100);		//作ったFireオブジェクトをオブジェクトマネージャーに登録
+					Objs::InsertObj(objf, OBJ_FIRE, 120);		//作ったFireオブジェクトをオブジェクトマネージャーに登録
 				}
 				else if (m_magic == 1)	//氷の魔法
 				{
 					CObjIce* obji = new CObjIce(g_px + m_directionx, g_py + m_directiony);//Iceオブジェクト作成
-					Objs::InsertObj(obji, OBJ_ICE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+					Objs::InsertObj(obji, OBJ_ICE, 120);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
 				}
 				else if (m_magic == 2)	//風の魔法
 				{
 					CObjWind* objw = new CObjWind(g_px + m_directionx, g_py + m_directiony);//Windオブジェクト作成
-					Objs::InsertObj(objw, OBJ_WIND, 100);		//作ったWindオブジェクトをオブジェクトマネージャーに登録
+					Objs::InsertObj(objw, OBJ_WIND, 120);		//作ったWindオブジェクトをオブジェクトマネージャーに登録
 				}
 				else if (m_magic == 3)	//雷の魔法
 				{
 					CObjThunder* objt = new CObjThunder(g_px + m_directionx, g_py + m_directiony);//Thunderオブジェクト作成
-					Objs::InsertObj(objt, OBJ_THUNDER, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+					Objs::InsertObj(objt, OBJ_THUNDER, 120);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
@@ -250,7 +251,6 @@ void CObjHero::Action()
 				m_vy = -0.15f; //下
 			}
 		}
-
 	}
 
 	//敵を接触したらBATTLESCENEに移行

@@ -59,7 +59,9 @@ enum HIT_ELEMENTS
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
 	ELEMENT_SWORD,
-	
+	ELEMENT_ATTACK,
+
+
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
@@ -156,5 +158,5 @@ struct UserData
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneGameover
+#define SET_GAME_START  CSceneMain
 //-----------------------------------------------

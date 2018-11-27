@@ -15,8 +15,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjEnemyBattle::Init()
 {
-	g_enemy_px = 600.0f;//位置
-	g_enemy_py = 580.0f;
+	m_px = 600.0f;//位置
+	m_py = 450.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
@@ -33,8 +33,7 @@ void CObjEnemyBattle::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, g_enemy_px, g_enemy_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
-
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
 }
 
 //アクション
@@ -42,9 +41,20 @@ void CObjEnemyBattle::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
+	hero_posture = hero->GetPOS();
 
 	if (m_battle_flag == true)
 	{
+		if (hero_posture == 0.0f || hero_posture == 1.0f)
+		{
+			m_px = 600.0f;
+			m_py = 500.0f;		//位置
+		}
+		else if (hero_posture == 2.0f || hero_posture == 3.0f)
+		{
+			m_px = 100.0f;
+			m_py = 500.0f;		//位置
+		}
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 		return;
@@ -55,12 +65,11 @@ void CObjEnemyBattle::Action()
 	m_ani_max_time = 4;
 
 	//画面端衝突で向き変更
-	if (g_enemy_px + 75 >= 800)
+	if (m_px + 75 >= 800)
 	{
 		m_move = true;
 	}
-
-	if (g_enemy_px  <= 0)
+	if (m_px  <= 0)
 	{
 		m_move = false;
 	}
@@ -72,14 +81,12 @@ void CObjEnemyBattle::Action()
 		m_posture = 1.0f;
 		m_ani_time += 1;
 	}
-
 	else if (m_move == true)
 	{
 		m_vx -= m_speed_power;
 		m_posture = 0.0f;
 		m_ani_time += 1;
 	}
-
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
@@ -94,33 +101,25 @@ void CObjEnemyBattle::Action()
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
-	//自由落下運動
-	//m_vy += 15.8 / (16.0f);
-
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
+	//自由落下運動
+	m_vy += 9.8 / (16.0f);
+
 	//位置の更新
-	g_enemy_px += m_vx;
-	g_enemy_py += m_vy;
+	m_px += m_vx;
+	m_py += m_vy;
 
 	//HitBoxの位置の変更
-	hit->SetPos(g_enemy_px, g_enemy_py);
+	hit->SetPos(m_px, m_py);
 
 	//攻撃を受けたら体力を減らす
-	if (hit->CheckObjNameHit(OBJ_SWORD_BATTLE) != nullptr)
+	//主人公とATTACK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
 		m_enemy_hp -= 1;
 	}
-	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)
-	{
-		m_enemy_hp -= 1;
-	}
-	if (hit->CheckObjNameHit(OBJ_THUNDER_BATTLE) != nullptr)
-	{
-		m_enemy_hp -= 1;
-	}
-
 	//敵の体力が0になったら破棄
 	if (m_enemy_hp <= 0)
 	{
@@ -129,24 +128,21 @@ void CObjEnemyBattle::Action()
 	}
 
 	//敵が領域外に行かないようにする
-	if (g_enemy_px + 75 >= 800)
+	if (m_px + 75 >= 800)
 	{
-		g_enemy_px = 800.0 - 75.0f;
+		m_px = 800.0 - 75.0f;
 	}
-
-	if (g_enemy_px < 0)
+	if (m_px < 0)
 	{
-		g_enemy_px = 0.0f;
+		m_px = 0.0f;
 	}
-
-	if (g_enemy_py + 100 >= 580)
+	if (m_py + 100 >= 580)
 	{
-		g_enemy_py = 580.0 - 100.0f;
+		m_py = 580.0 - 100.0f;
 	}
-
-	if (g_enemy_py <50)
+	if (m_py <50)
 	{
-		g_enemy_py = 50.0f;
+		m_py = 50.0f;
 	}
 }
 
@@ -157,6 +153,7 @@ void CObjEnemyBattle::Draw()
 	{
 		return;
 	}
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -170,12 +167,12 @@ void CObjEnemyBattle::Draw()
 	src.m_bottom = 50.0f;
 
 	//表示位置の設定
-	dst.m_top    =   0.0f + g_enemy_py;
-	dst.m_left   = (75.0f * m_posture) + g_enemy_px;
-	dst.m_right  = (75 - 75.0f * m_posture) + g_enemy_px;
-	dst.m_bottom = 100.0f + g_enemy_py;
+	dst.m_top    =   0.0f + m_py;
+	dst.m_left   = (     75.0f * m_posture) + m_px;
+	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
+	dst.m_bottom = 100.0f + m_py;
 
 	//描画
-	Draw::Draw(3, &src, &dst, c, 0.0f);
+	Draw::Draw(12, &src, &dst, c, 0.0f);
 
 }

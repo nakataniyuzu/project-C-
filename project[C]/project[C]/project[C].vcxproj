@@ -21,12 +21,20 @@
   <ItemGroup>
     <ClCompile Include="CObjFire.cpp" />
     <ClCompile Include="CObjIce.cpp" />
-    <ClCompile Include="CObjIceBattle.cpp" />
-    <ClCompile Include="CObjSwordBattle.cpp" />
+    <ClCompile Include="CObjIceBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="CObjSwordBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="CObjThunder.cpp" />
-    <ClCompile Include="CObjThunderBattle.cpp" />
+    <ClCompile Include="CObjThunderBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="CObjWind.cpp" />
-    <ClCompile Include="ObjBackgroundBattle.cpp" />
+    <ClCompile Include="ObjBackgroundBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjBattleMain.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -54,9 +62,14 @@
     </ClCompile>
     <ClCompile Include="ObjFireblock.cpp" />
     <ClCompile Include="ObjFireGate.cpp" />
+    <ClCompile Include="ObjGameover.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjHeal.cpp" />
     <ClCompile Include="ObjHero.cpp" />
-    <ClCompile Include="ObjHeroBattle.cpp" />
+    <ClCompile Include="ObjHeroBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ItemIce.cpp" />
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
@@ -74,9 +87,14 @@
     <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="ObjWater.cpp" />
     <ClCompile Include="SceneBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="SceneGameover.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
@@ -87,12 +105,20 @@
     <ClInclude Include="CObjIce.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="CObjIceBattle.h" />
-    <ClInclude Include="CObjSwordBattle.h" />
+    <ClInclude Include="CObjIceBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="CObjSwordBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="CObjThunder.h" />
-    <ClInclude Include="CObjThunderBattle.h" />
+    <ClInclude Include="CObjThunderBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="CObjWind.h" />
-    <ClInclude Include="ObjBackgroundBattle.h" />
+    <ClInclude Include="ObjBackgroundBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjBattleMain.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -105,8 +131,13 @@
     </ClInclude>
     <ClInclude Include="ObjFireblock.h" />
     <ClInclude Include="ObjFireGate.h" />
+    <ClInclude Include="ObjGameover.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjHeal.h" />
-    <ClInclude Include="ObjHeroBattle.h" />
+    <ClInclude Include="ObjHeroBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ItemIce.h" />
     <ClInclude Include="ObjMessage.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -144,6 +175,9 @@
     <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="ObjWater.h" />
     <ClInclude Include="SceneBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="SceneGameover.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="SceneMain.h" />
