@@ -207,6 +207,9 @@
     <ClCompile Include="ObjBossBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
+    <ClCompile Include="CObjFireBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -369,6 +372,8 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjBossBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    <ClInclude Include="CObjFireBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>

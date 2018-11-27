@@ -20,13 +20,13 @@ void CObjHeroBattle::Init()
 	m_battle_magic = hero->GetMAGIC();	//主人公からMAGICの情報を取得
 
 	//炎か風の魔法で戦闘に入らないようにするための処理
-	if (m_battle_magic == 0 || m_battle_magic == 2)
+	/*if (m_battle_magic == 0 || m_battle_magic == 2)
 	{
-		m_battle_magic = 1;
-	}
-	
-	m_px = 100.0f;
-	m_py = 450.0f;		//位置
+		m_battle_magic = 0;
+	}*/
+
+	m_battle_magic = 0;
+
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;	//右向き0.0f 左向き1.0f
@@ -39,9 +39,11 @@ void CObjHeroBattle::Init()
 
 	m_sword_delay = 0;
 
+	m_swordwidth = 0.0f; //ソード幅
+
 
 	//当たり判定用のHitBoxを作成
- 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
+ 	Hits::SetHitBox(this, m_px , m_py , 60, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
 }
 
 //アクション
@@ -50,6 +52,12 @@ void CObjHeroBattle::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
 	hero_posture = hero->GetPOS();	
+
+	m_fire_flag    = hero->GetFIREF();
+	m_ice_flag     = hero->GetICEF();
+	m_thunder_flag = hero->GetTHUNDERF();
+	m_wind_flag    = hero->GetWINDF();
+
 
 	if (m_battle_flag == true)
 	{
@@ -60,7 +68,7 @@ void CObjHeroBattle::Action()
 		}
 		else if (hero_posture == 2.0f || hero_posture == 3.0f)
 		{
-			m_px = 500.0f;
+			m_px = 600.0f;
 			m_py = 500.0f;		//位置
 		}
 
@@ -68,6 +76,7 @@ void CObjHeroBattle::Action()
 		m_vy = 0.0f;
 		return;
 	}
+
 	//キーの入力方向 
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
@@ -124,17 +133,19 @@ void CObjHeroBattle::Action()
 			if (m_posture == 0.0f) {
 				m_directionx = 7.0f;
 				m_directiony = 0.0f;
+				m_swordwidth = 50.0f;
 			}
 			else if (m_posture == 1.0f) {
 				m_directionx = -7.0f;
 				m_directiony = 0.0f;
+				m_swordwidth = -30.0f;
 			}
 
 			//剣で攻撃
-			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_directionx, m_py + m_directiony);//剣オブジェクト(戦闘)作成
+			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_directionx+ m_swordwidth, m_py + m_directiony+35.0f);//剣オブジェクト(戦闘)作成
 			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
 			
-			m_sword_delay = 20;
+			m_sword_delay = 10;
 		}
 		else if (m_sword_delay > 0)
 		{
@@ -143,8 +154,6 @@ void CObjHeroBattle::Action()
 				m_sword_delay = 0;
 		}
 	}
-
-
 	//Xキーで魔法を切り替える
 	if (Input::GetVKey('X') == true)
 	{
@@ -152,8 +161,17 @@ void CObjHeroBattle::Action()
 			m_mf = false;
 			m_battle_magic += 2;
 		}
+		if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
+			m_battle_magic = 0;
+		}
+		if (m_battle_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
+			m_battle_magic = 0;
+		}
+		if (m_battle_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
+			m_battle_magic = 0;
+		}
 		if (m_battle_magic >= 4) {
-			m_battle_magic = 1;
+			m_battle_magic = 0;
 		}
 	}
 	else
@@ -215,35 +233,41 @@ void CObjHeroBattle::Action()
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//敵の左右に当たったら
- 			float r = hit_data[i]->r;
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx = -5.0f;//左に移動させる
-			}
-			if (r > 135 && r < 225)
-			{
-				m_vx = +5.0f;//右に移動させる
-			}
-			if (r > 225 && r < 315)
-			{
-				//敵の移動方向を主人公の位置に加算
-				/*m_px += ((CObjEnemy*)hit_data[i]->o)->GetVx();
+			//保留↓
+			/*if ()
+			{*/
 
-				CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);*/
+			float r = hit_data[i]->r;
 
-				//頭に乗せる処理
-				if (m_vy < -1.0f)
+				if ((r < 45 && r >= 0) || r > 315)
 				{
-					//ジャンプしてる場合は下記の影響を出ないようにする
+					m_vx = -5.0f;//左に移動させる
 				}
-				else
+				if (r > 135 && r < 225)
 				{
-					//主人公が敵の頭に乗っているので、Yvecは0にして落下させない
-					//また、地面に当たっている判定にする
-					m_vy = 0.0f;
-					m_hit_down = true;
+					m_vx = +5.0f;//右に移動させる
 				}
-			}
+				if (r > 225 && r < 315)
+				{
+					//敵の移動方向を主人公の位置に加算
+					/*m_px += ((CObjEnemy*)hit_data[i]->o)->GetVx();
+
+					CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);*/
+
+					//頭に乗せる処理
+					if (m_vy < -1.0f)
+					{
+						//ジャンプしてる場合は下記の影響を出ないようにする
+					}
+					else
+					{
+						//主人公が敵の頭に乗っているので、Yvecは0にして落下させない
+						//また、地面に当たっている判定にする
+						m_vy = 0.0f;
+						m_hit_down = true;
+					}
+				}
+			//}
 		}
 	}
 
@@ -282,25 +306,26 @@ void CObjHeroBattle::Action()
 		}
 	}
 
-	//主人公の体力が0になったらゲームオーバーシーンに移行(仮)
+	//主人公の体力が0になったらゲームオーバーシーンに移行
 	if (m_battle_hp <= 0)
 	{
-		Scene::SetScene(new CSceneMain());//現在は仮でメインに設定
+		Scene::SetScene(new CSceneGameover());
 	}
+
+	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)
 	{
 		m_px = 800.0 - 75.0f;
-		//Scene::SetScene(new CSceneMain());
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		hero->SetBATTLE(true);
+		if (hero_posture == 0.0f || hero_posture == 1.0f)
+			hero->SetBATTLE(true);
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		hero->SetBATTLE(true);
+		if (hero_posture == 2.0f || hero_posture == 3.0f)
+			hero->SetBATTLE(true);
 	}
 	if (m_py + 100 >= 580)
 	{
@@ -310,6 +335,10 @@ void CObjHeroBattle::Action()
 	{
 		m_py = 50.0f;
 	}
+
+	hero->SetHP(m_battle_hp);
+	hero->SetMP(m_battle_mp);
+	hero->SetMAGIC(m_battle_magic);
 }
 
 //ドロー

@@ -38,6 +38,7 @@ void CObjHero::Init()
 	m_water_mf = false;
 	m_key_mf = false;
 	m_ice_mf = false;
+	m_switch_mf = false;
 
 	m_battle_flag = true;
 	m_ene_battle_flag = true;
@@ -304,6 +305,10 @@ void CObjHero::Action()
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	{
 		m_water_mf = true;
+	}
+	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr)
+	{
+		m_switch_mf = true;
 	}
 	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)	//ŽålŒö‚ªHEAL‚Æ“–‚½‚Á‚½ê‡
 	{

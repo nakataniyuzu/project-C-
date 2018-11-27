@@ -93,9 +93,9 @@ void CObjThunderBattle::Draw()
 
 	//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 	src.m_top = 0.0f;
-	src.m_left = 61.0f;
-	src.m_right = 125.0f;
-	src.m_bottom = 51.0f;
+	src.m_left = 50.0f;
+	src.m_right = 100.0f;
+	src.m_bottom = 50.0f;
 
 	//•\¦ˆÊ’u‚Ìİ’è
 	dst.m_top = 0.0f + m_y;
@@ -103,5 +103,5 @@ void CObjThunderBattle::Draw()
 	dst.m_right = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(4, &src, &dst, c, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
 }
