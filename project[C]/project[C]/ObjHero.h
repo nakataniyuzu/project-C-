@@ -24,7 +24,8 @@ class CObjHero : public CObj
 		int GetHP() { return m_hp; }	//主人公のHPを取得
 		int GetMP() { return m_mp; }	//主人公のMPを取得
 		int GetMAGIC() { return m_magic; }	//主人公の設定魔法を取得
-		int GetKEY() { return m_key; }	//鍵の情報を取得
+		bool GetKEY() { return m_key; }	//鍵の情報を取得
+
 		bool GetBATTLE() { return m_battle_flag; }	//バトル移行用のフラグを取得
 		void SetBATTLE(bool x) { m_battle_flag = x; }
 
@@ -38,16 +39,18 @@ class CObjHero : public CObj
 		bool GetGATEF() { return m_gate_mf; }	//GATEの情報を取得
 		bool GetWATERF() { return m_water_mf; }	//WATERの情報を取得
 		bool GetMICE() { return m_ice_mf; }	//ICEの情報を取得
+		bool GetSGATE() { return m_switch_mf; }//SWITCHGATEの情報を取得
 
 		bool GetFIREF() { return m_fire_flag; }
 		bool GetICEF() { return m_ice_flag; }
 		bool GetTHUNDERF(){return m_thunder_flag;}
 		bool GetWINDF() { return m_wind_flag; }
 
-		void SetKEYF(float x) { m_key_mf = x; }
-		void SetGATEF(float x) { m_gate_mf = x; }
-		void SetWATERF(float x) { m_water_mf = x; }
-		void SetMICE(float x) { m_ice_mf = x; }
+		void SetKEYF(bool x) { m_key_mf = x; }
+		void SetGATEF(bool x) { m_gate_mf = x; }
+		void SetWATERF(bool x) { m_water_mf = x; }
+		void SetMICE(bool x) { m_ice_mf = x; }
+		void SetSGATE(bool x) { m_switch_mf = x; }
 
 		float GetVY() { return m_vy; }
 		float GetVX() { return m_vx; }
@@ -99,10 +102,11 @@ class CObjHero : public CObj
 		bool m_thunder_flag;
 		bool m_wind_flag;
 
-		int   m_gate_time;			
-		int   m_ice_time;			//表示する時間
-		int   m_water_time;
-		int   m_key_time;
+		bool   m_gate_time;			
+		bool   m_ice_time;			//表示する時間
+		bool   m_water_time;
+		bool   m_key_time;
+		bool   m_switch_mf;
 
 		int	  m_ani_time;	//アニメーションフレーム動作間隔
 		int   m_ani_frame;	//描画フレーム

@@ -20,6 +20,8 @@ enum OBJ_NAME
 	OBJ_ICE,
 	OBJ_WIND,
 	OBJ_THUNDER,
+
+	OBJ_FIRE_BATTLE,
 	OBJ_ICE_BATTLE,
 	OBJ_THUNDER_BATTLE,
 	
@@ -117,6 +119,8 @@ struct UserData
 #include "CObjIce.h"
 #include "CObjWind.h"
 #include "CObjThunder.h"
+
+#include "CObjFireBattle.h"
 #include "CObjIceBattle.h"
 #include "CObjThunderBattle.h"
 
