@@ -30,6 +30,7 @@ enum OBJ_NAME
 	OBJ_BLOCK,
 	OBJ_TOPBACK,
 	OBJ_ENEMY,
+	OBJ_BOSS,
 
 	OBJ_HERO_BATTLE,
 	OBJ_ENEMY_BATTLE,
@@ -58,6 +59,7 @@ enum HIT_ELEMENTS
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
 	ELEMENT_SWORD,
+	ELEMENT_BOSS,
 	
 	ELEMENT_RED,
 	ELEMENT_GREEN,
@@ -121,7 +123,8 @@ struct UserData
 #include "ObjFireblock.h"
 #include "ObjFireGate.h"
 
-#include "ObjEnemy.h"
+#include "ObjEnemy1.h"
+#include "ObjEnemyboss1.h"
 
 #include "ObjBlock.h"
 #include "ObjTopback.h"
@@ -154,5 +157,5 @@ struct UserData
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneGameover
+#define SET_GAME_START  CSceneTitle
 //-----------------------------------------------

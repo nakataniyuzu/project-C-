@@ -26,11 +26,11 @@
     <ClCompile Include="CObjThunder.cpp" />
     <ClCompile Include="CObjThunderBattle.cpp" />
     <ClCompile Include="CObjWind.cpp" />
+    <ClCompile Include="ObjEnemyboss1.cpp" />
     <ClCompile Include="ObjBackgroundBattle.cpp" />
     <ClCompile Include="ObjBattleMain.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
@@ -49,11 +49,13 @@
     <ClCompile Include="ObjBlockBattle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjEnemy1.cpp" />
     <ClCompile Include="ObjEnemyBattle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjFireblock.cpp" />
     <ClCompile Include="ObjFireGate.cpp" />
+    <ClCompile Include="ObjGameover.cpp" />
     <ClCompile Include="ObjHeal.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjHeroBattle.cpp" />
@@ -75,6 +77,7 @@
     <ClCompile Include="SceneBattle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="SceneGameover.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
@@ -91,6 +94,7 @@
     <ClInclude Include="CObjThunder.h" />
     <ClInclude Include="CObjThunderBattle.h" />
     <ClInclude Include="CObjWind.h" />
+    <ClInclude Include="ObjEnemyboss1.h" />
     <ClInclude Include="ObjBackgroundBattle.h" />
     <ClInclude Include="ObjBattleMain.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -98,20 +102,19 @@
     <ClInclude Include="ObjBlockBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="ObjEnemy.h" />
+    <ClInclude Include="ObjEnemy1.h" />
     <ClInclude Include="ObjEnemyBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjFireblock.h" />
     <ClInclude Include="ObjFireGate.h" />
+    <ClInclude Include="ObjGameover.h" />
     <ClInclude Include="ObjHeal.h" />
     <ClInclude Include="ObjHeroBattle.h" />
     <ClInclude Include="ItemIce.h" />
     <ClInclude Include="ObjMessage.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="ObjMobThird.h" />
-    <ClInclude Include="ObjMobFirst.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -131,7 +134,6 @@
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
-    <ClInclude Include="ObjMobSecond.h" />
     <ClInclude Include="ObjKey.h" />
     <ClInclude Include="ObjGate.h" />
     <ClInclude Include="ObjResetblock.h" />
@@ -144,6 +146,7 @@
     <ClInclude Include="SceneBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="SceneGameover.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="SceneTitle.h" />

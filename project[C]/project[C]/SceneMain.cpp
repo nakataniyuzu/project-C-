@@ -68,6 +68,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Magic.png", 8, TEX_SIZE_100);
 	Draw::LoadImageW(L"Candle.png", 9, TEX_SIZE_200_100);
 	Draw::LoadImageW(L"magicitem.png", ITEM, TEX_SIZE_256);
+	Draw::LoadImageW(L"ENEMYBOSS1.png", 13, TEX_SIZE_512);
 
 	
 	//主人公オブジェクト作成

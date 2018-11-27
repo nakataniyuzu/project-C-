@@ -95,6 +95,12 @@ void CObjHero::Action()
 		m_mf = true;
 	}
 
+	//HPが0以下の時にゲームオーバーにする
+	if (m_hp <= 0)
+	{
+		Scene::SetScene(new CSceneGameover());
+	}
+
 	//MPが0以上の時は魔法を放つ
 	if (m_mp > 0) {
 		if (Input::GetVKey('Z') == true)	//魔法発射
@@ -141,6 +147,7 @@ void CObjHero::Action()
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
+				m_hp -= 3;		//HPを減らす（デバッグ）
 			}
 		}
 		else 

@@ -5,19 +5,19 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy.h"
+#include "ObjEnemy1.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy::CObjEnemy(float x, float y)
+CObjEnemy1::CObjEnemy1(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjEnemy::Init()
+void CObjEnemy1::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -42,7 +42,7 @@ void CObjEnemy::Init()
 }
 
 //アクション
-void CObjEnemy::Action()
+void CObjEnemy1::Action()
 {
 	if (m_hit_up == true)	//上
 		m_move = false;
@@ -102,7 +102,7 @@ void CObjEnemy::Action()
 }
 
 //ドロー
-void CObjEnemy::Draw()
+void CObjEnemy1::Draw()
 {
 	int AniDate[4] =
 	{

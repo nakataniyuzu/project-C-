@@ -28,9 +28,6 @@
     <Filter Include="ソース ファイル\Main\背景関係">
       <UniqueIdentifier>{79cfa641-fc4e-482f-aa49-5738ef017f40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\Enemy関係">
-      <UniqueIdentifier>{838ed0bb-8a67-480e-b63a-a988716486ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\Battle関係">
       <UniqueIdentifier>{46bd05cf-569f-46ae-9580-bda106efa9ee}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,12 @@
     </Filter>
     <Filter Include="ソース ファイル\Main\Item関係">
       <UniqueIdentifier>{fa12d4d2-3f4f-4a30-8807-4c5fddb8ee78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Gameover">
+      <UniqueIdentifier>{45ceea69-a2d6-40d7-9fd9-2ecddd38edee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Enemy関係">
+      <UniqueIdentifier>{1b33a99d-4d7e-4ecf-a24e-6f09b164453d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +129,6 @@
     <ClCompile Include="SceneBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemy.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClCompile>
     <ClCompile Include="CObjFire.cpp">
       <Filter>ソース ファイル\Main\Magic関係</Filter>
     </ClCompile>
@@ -180,6 +180,21 @@
     <ClCompile Include="ObjSwitch.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
+    <ClCompile Include="CObjSwordBattle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameover.cpp">
+      <Filter>ソース ファイル\Main\Gameover</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameover.cpp">
+      <Filter>ソース ファイル\Main\Gameover</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy1.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyboss1.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -227,9 +242,6 @@
     <ClInclude Include="main.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
     <ClInclude Include="ObjHero.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
@@ -260,9 +272,6 @@
     <ClInclude Include="ObjMessage.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBlockBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
@@ -271,15 +280,6 @@
     </ClInclude>
     <ClInclude Include="SceneBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMobFirst.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMobSecond.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMobThird.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjFireblock.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
@@ -331,6 +331,24 @@
     </ClInclude>
     <ClInclude Include="ObjSwitch.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjSwordBattle.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameover.h">
+      <Filter>ソース ファイル\Main\Gameover</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameover.h">
+      <Filter>ソース ファイル\Main\Gameover</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy1.h">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemyboss1.h">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
