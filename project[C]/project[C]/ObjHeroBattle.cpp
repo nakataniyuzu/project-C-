@@ -193,6 +193,11 @@ void CObjHeroBattle::Action()
 					m_directiony = 0.0f;
 				}
 
+				if (m_battle_magic == 0)	//火の魔法
+				{
+					CObjFireBattle* objfb = new CObjFireBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
+					Objs::InsertObj(objfb, OBJ_FIRE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+				}
 				if (m_battle_magic == 1)	//氷の魔法
 				{
 					CObjIceBattle* objib = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
