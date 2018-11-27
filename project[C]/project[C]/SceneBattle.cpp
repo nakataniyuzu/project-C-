@@ -51,9 +51,6 @@ void CSceneBattle::InitScene()
 	//背景(戦闘)オブジェクト作成
 	CObjBackgroundBattle* objbackb = new CObjBackgroundBattle();
 	Objs::InsertObj(objbackb, OBJ_BACKGROUND_BATTLE, 8);
-
-	CObjBattleMain* p = new CObjBattleMain();
-	Objs::InsertObj(p, OBJ_MAIN, 20);
 }
 
 //ゲーム戦闘実行中メソッド

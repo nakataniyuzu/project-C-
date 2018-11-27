@@ -153,9 +153,6 @@
     <ClCompile Include="ObjHeroBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBattleMain.cpp">
-      <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClCompile>
     <ClCompile Include="CObjIceBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
@@ -315,9 +312,6 @@
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjHeroBattle.h">
-      <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBattleMain.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="CObjIceBattle.h">

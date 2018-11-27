@@ -134,7 +134,6 @@ struct UserData
 #include "ObjEnemyBattle.h"
 #include "ObjBlockBattle.h"
 #include "ObjBackgroundBattle.h"
-#include "ObjBattleMain.h"
 
 //“ä‰ð‚«ŠÖŒW
 #include "ObjKey.h"

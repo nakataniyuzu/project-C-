@@ -51,6 +51,12 @@ void CObjHeroBattle::Action()
 	m_battle_flag = hero->GetBATTLE();
 	hero_posture = hero->GetPOS();	
 
+	m_fire_flag = hero->GetFIREF();
+	m_ice_flag = hero->GetICEF();
+	m_thunder_flag = hero->GetTHUNDERF();
+	m_wind_flag = hero->GetWINDF();
+
+
 	if (m_battle_flag == true)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
@@ -68,6 +74,7 @@ void CObjHeroBattle::Action()
 		m_vy = 0.0f;
 		return;
 	}
+
 	//キーの入力方向 
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
@@ -143,14 +150,21 @@ void CObjHeroBattle::Action()
 				m_sword_delay = 0;
 		}
 	}
-
-
 	//Xキーで魔法を切り替える
 	if (Input::GetVKey('X') == true)
 	{
 		if (m_mf == true) {	//キー制御用
 			m_mf = false;
 			m_battle_magic += 2;
+		}
+		if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
+			m_battle_magic = 1;
+		}
+		if (m_battle_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
+			m_battle_magic = 1;
+		}
+		if (m_battle_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
+			m_battle_magic = 1;
 		}
 		if (m_battle_magic >= 4) {
 			m_battle_magic = 1;
@@ -288,18 +302,17 @@ void CObjHeroBattle::Action()
 		Scene::SetScene(new CSceneMain());//現在は仮でメインに設定
 	}
 
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)
 	{
 		m_px = 800.0 - 75.0f;
-		//Scene::SetScene(new CSceneMain());
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		hero->SetBATTLE(true);
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		hero->SetBATTLE(true);
 	}
 	if (m_py + 100 >= 580)
@@ -310,6 +323,10 @@ void CObjHeroBattle::Action()
 	{
 		m_py = 50.0f;
 	}
+
+	hero->SetHP(m_battle_hp);
+	hero->SetMP(m_battle_mp);
+	hero->SetMAGIC(m_battle_magic);
 }
 
 //ドロー

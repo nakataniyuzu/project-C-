@@ -15,7 +15,7 @@ class CObjHero : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
- 		float GetX() { return m_px; }	//主人公のX位置を取得
+		float GetX() { return m_px; }	//主人公のX位置を取得
 		float GetY() { return m_py; }	//主人公のY位置を取得
 		float GetPOS() { return m_posture; }	//主人公の向きを取得
 
@@ -28,16 +28,21 @@ class CObjHero : public CObj
 		bool GetBATTLE() { return m_battle_flag; }	//バトル移行用のフラグを取得
 		void SetBATTLE(bool x) { m_battle_flag = x; }
 
-		int SetMAXHP(float x) { m_max_hp = x; }	//主人公のMAXHPに値をセット
-		int SetMAXMP(float x) { m_max_mp = x; }	//主人公のMAXMPに値をセット
-		int SetHP(float x) { m_hp = x; }	//主人公のHPに値をセット
-		int SetMP(float x) { m_mp = x; }	//主人公のMPに値をセット
-
+		void SetMAXHP(float x) { m_max_hp = x; }	//主人公のMAXHPに値をセット
+		void SetMAXMP(float x) { m_max_mp = x; }	//主人公のMAXMPに値をセット
+		void SetHP(float x) { m_hp = x; }	//主人公のHPに値をセット
+		void SetMP(float x) { m_mp = x; }	//主人公のMPに値をセット
+		void SetMAGIC(float x) { m_magic = x; }	//主人公の魔法の種類をセット
 
 		bool GetKEYF() { return m_key_mf; }	//KEYの情報を取得
 		bool GetGATEF() { return m_gate_mf; }	//GATEの情報を取得
 		bool GetWATERF() { return m_water_mf; }	//WATERの情報を取得
 		bool GetMICE() { return m_ice_mf; }	//ICEの情報を取得
+
+		bool GetFIREF() { return m_fire_flag; }
+		bool GetICEF() { return m_ice_flag; }
+		bool GetTHUNDERF(){return m_thunder_flag;}
+		bool GetWINDF() { return m_wind_flag; }
 
 		void SetKEYF(float x) { m_key_mf = x; }
 		void SetGATEF(float x) { m_gate_mf = x; }

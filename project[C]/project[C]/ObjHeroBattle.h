@@ -61,9 +61,11 @@ private:
 	bool m_battle_flag;	//マップに戻るフラグ
 	bool m_hit_down; //敵の頭の判定用
 
-	//魔法使用可能フラグ(戦闘)
+	//魔法使用可能フラグ
+	bool m_fire_flag;
 	bool m_ice_flag;
 	bool m_thunder_flag;
+	bool m_wind_flag;
 
 	//テスト用
 	float px, py;		//交点
