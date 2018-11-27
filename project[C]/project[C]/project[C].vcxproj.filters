@@ -347,14 +347,14 @@
     <ClInclude Include="ObjResetblock.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="CObjSwordBattle.h">
-      <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClInclude>
     <ClInclude Include="ObjGameover.h">
-      <Filter>ソース ファイル\Gameover</Filter>
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="SceneGameover.h">
-      <Filter>ソース ファイル\Gameover</Filter>
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjSwordBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="CObjFireBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
