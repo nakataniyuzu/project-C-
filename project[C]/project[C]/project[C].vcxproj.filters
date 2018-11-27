@@ -153,6 +153,9 @@
     <ClCompile Include="ObjBattleMain.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
+    <ClCompile Include="ObjResetblock.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
     <ClCompile Include="CObjIceBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
@@ -177,12 +180,6 @@
     <ClCompile Include="ObjSwitch.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSwitchGate.cpp">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjResetblock.cpp">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClCompile>
     <ClCompile Include="CObjSwordBattle.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -197,6 +194,18 @@
     </ClCompile>
     <ClCompile Include="ObjEnemyboss1.cpp">
       <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSwitchGate.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameover.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBossBattle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +317,9 @@
     <ClInclude Include="ObjBattleMain.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
+    <ClInclude Include="ObjResetblock.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
     <ClInclude Include="CObjIceBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
@@ -332,12 +344,6 @@
     <ClInclude Include="ObjSwitch.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSwitchGate.h">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjResetblock.h">
-      <Filter>ソース ファイル\Main\Block関係</Filter>
-    </ClInclude>
     <ClInclude Include="CObjSwordBattle.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -355,6 +361,15 @@
     </ClInclude>
     <ClInclude Include="ObjEnemyboss1.h">
       <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSwitchGate.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameover.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBossBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

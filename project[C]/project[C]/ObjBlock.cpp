@@ -99,7 +99,7 @@ void CObjBlock::Action()
 			{
 				//6があれば敵を出現
 				CObjEnemy1* obje1 = new CObjEnemy1(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obje1, OBJ_ENEMY, 10);
+				Objs::InsertObj(obje1, OBJ_ENEMY, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -126,7 +126,7 @@ void CObjBlock::Action()
 			{
 				//10があればBOSS出現
 				CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objb1, OBJ_ENEMY, 10);
+				Objs::InsertObj(objb1, OBJ_ENEMY, 110);
 
 				//出現場所を0にする
 				g_map[i][j] = 0;

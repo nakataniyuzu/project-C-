@@ -32,19 +32,43 @@ void CObjEnemyboss1::Init()
 //アクション
 void CObjEnemyboss1::Action()
 {
+	//HitBoxの位置の変更
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	battle_flag = hero->GetBATTLE();
+
+	if (battle_flag == false)
+	{
+		m_time = 100;
+		hit->SetInvincibility(true);	//無敵オン
+		return;
+	}
+
+	if (m_time > 0)
+	{
+		m_time--;
+		if (m_time <= 0)
+		{
+			m_time = 0;
+			hit->SetInvincibility(false);	//無敵オフ
+		}
+	}
+
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-
-	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);
+	
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
-
 }
 
 //ドロー
 void CObjEnemyboss1::Draw()
 {
+	if (battle_flag == false)
+	{
+		return;
+	}
 	int AniDate[4] =
 	{
 		0 , 1 ,

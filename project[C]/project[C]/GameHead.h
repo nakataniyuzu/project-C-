@@ -34,6 +34,7 @@ enum OBJ_NAME
 
 	OBJ_HERO_BATTLE,
 	OBJ_ENEMY_BATTLE,
+	OBJ_BOSS_BATTLE,
 	OBJ_BLOCK_BATTLE,
 	OBJ_BACKGROUND_BATTLE,
 	OBJ_BATTLE_MAIN,
@@ -61,8 +62,6 @@ enum HIT_ELEMENTS
 	ELEMENT_FIELD,
 	ELEMENT_SWORD,
 	ELEMENT_ATTACK,
-
-
 	ELEMENT_BOSS,
 	
 	ELEMENT_RED,
@@ -139,6 +138,7 @@ struct UserData
 #include "ObjBlockBattle.h"
 #include "ObjBackgroundBattle.h"
 #include "ObjBattleMain.h"
+#include "ObjBossBattle.h"
 
 //“ä‰ð‚«ŠÖŒW
 #include "ObjKey.h"
