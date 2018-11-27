@@ -34,6 +34,12 @@ void CObjBlock::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
+	m_battle_flag = hero->GetBATTLE();
+
+	if (m_battle_flag == false)
+	{
+		return;
+	}
 
 	//左のスクロールライン
 	{
@@ -64,9 +70,9 @@ void CObjBlock::Action()
 			//列の中からを探す
 			if (g_map[i][j] == 2)
 			{
-				//3があれば水を出現
+				//2があればHealを出現
 				CObjHeal* objheal = new CObjHeal(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objheal, OBJ_HEAL, 11);
+				Objs::InsertObj(objheal, OBJ_HEAL, 111);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -75,7 +81,7 @@ void CObjBlock::Action()
 			{
 				//3があれば水を出現
 				CObjWater* objwater = new CObjWater(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objwater, OBJ_WATER, 10);
+				Objs::InsertObj(objwater, OBJ_WATER, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -84,7 +90,7 @@ void CObjBlock::Action()
 			{
 				//4があればFireblockを出現
 				CObjFireblock* objfb = new CObjFireblock(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 11);
+				Objs::InsertObj(objfb, OBJ_FIREBLOCK, 111);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -93,7 +99,7 @@ void CObjBlock::Action()
 			{
 				//6があれば敵を出現
 				CObjEnemy* obje = new CObjEnemy(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obje, OBJ_ENEMY, 10);
+				Objs::InsertObj(obje, OBJ_ENEMY, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -102,7 +108,7 @@ void CObjBlock::Action()
 			{
 				//7があればGateを出現
 				CObjGate* objgate = new CObjGate(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objgate, OBJ_GATE, 10);
+				Objs::InsertObj(objgate, OBJ_GATE, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -111,7 +117,7 @@ void CObjBlock::Action()
 			{
 				//9があればItemIceを出現
 				CObjItemIce* objice = new CObjItemIce(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objice, ITEM_ICE, 10);
+				Objs::InsertObj(objice, ITEM_ICE, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -120,7 +126,7 @@ void CObjBlock::Action()
 			{
 				//11があればKeyを出現
 				CObjKey* objkey = new CObjKey(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objkey, OBJ_KEY, 10);
+				Objs::InsertObj(objkey, OBJ_KEY, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -129,7 +135,7 @@ void CObjBlock::Action()
 			{
 				//12があればResetblockを出現
 				CObjResetblock* objrb = new CObjResetblock(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objrb, OBJ_RESETBLOCK, 10);
+				Objs::InsertObj(objrb, OBJ_RESETBLOCK, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -138,7 +144,25 @@ void CObjBlock::Action()
 			{
 				//13があればFireGateを出現
 				CObjFireGate* objfg = new CObjFireGate(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objfg, OBJ_FIREGATE, 10);
+				Objs::InsertObj(objfg, OBJ_FIREGATE, 110);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 16)
+			{
+				//16があればSwitchを出現
+				CObjSwitch* objsw = new CObjSwitch(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objsw, OBJ_SWITCH, 111);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 17)
+			{
+				//16があればSwitchGateを出現
+				CObjSwitchGate* objswg = new CObjSwitchGate(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objswg, OBJ_SWITCHGATE, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -152,6 +176,12 @@ void CObjBlock::Action()
 //ドロー
 void CObjBlock::Draw()
 {
+
+	if (m_battle_flag == false)
+	{
+		return;
+	}
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -266,33 +296,33 @@ void CObjBlock::BlockHit(
 					if (len < 88.0f)
 					{
 						//角度で上下左右を判定
-						if ((r < 45 && r > 0) || r > 315)
+						if ((r < 45 && r >= 0) || r > 315)
 						{
 							//右
 							*right = true;	//主人公の左の部分が衝突している
 							*x = bx + ALL_SIZE + (scrollx);	//ブロックの位置+主人公の幅
-							*vx = 0.15f;//-VX*反発係数
+							*vx = 0.3f;//-VX*反発係数
 						}
 						if (r > 45 && r < 135)
 						{
 							//上
 							*down = true;	//主人公から見て、下の部分が衝突している
 							*y = by - ALL_SIZE + (scrolly);	//ブロックの位置-主人公の幅
-							*vy = -0.15f;//-VX*反発係数
+							*vy = -0.3f;//-VX*反発係数
 						}
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;	//主人公の右の部分が衝突している
 							*x = bx - ALL_SIZE + (scrollx);	//ブロックの位置-主人公の幅
-							*vx = -0.15f;//-VX*反発係数
+							*vx = -0.3f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							//下
 							*up = true;		//主人公から見て、上の部分が衝突している
 							*y = by + ALL_SIZE + (scrolly);	//ブロック位置+主人公の幅
-							*vy = 0.15f;//-VX*反発係数
+							*vy = 0.3f;//-VX*反発係数
 						}
 					}
 				}

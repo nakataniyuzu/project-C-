@@ -33,6 +33,8 @@ private:
 
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
+	bool m_battle_flag;
+
 	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;

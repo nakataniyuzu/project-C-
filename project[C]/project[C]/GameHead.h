@@ -43,6 +43,7 @@ enum OBJ_NAME
 	OBJ_WATER,
 	OBJ_RESETBLOCK,
 	OBJ_SWITCH,
+	OBJ_SWITCHGATE,
 };
 //------------------------------------------------
 
@@ -58,7 +59,9 @@ enum HIT_ELEMENTS
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
 	ELEMENT_SWORD,
-	
+	ELEMENT_ATTACK,
+
+
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
@@ -131,7 +134,6 @@ struct UserData
 #include "ObjEnemyBattle.h"
 #include "ObjBlockBattle.h"
 #include "ObjBackgroundBattle.h"
-#include "ObjBattleMain.h"
 
 //“ä‰ð‚«ŠÖŒW
 #include "ObjKey.h"
@@ -139,6 +141,7 @@ struct UserData
 #include "ObjWater.h"
 #include "ObjResetblock.h"
 #include "ObjSwitch.h"
+#include "ObjSwitchGate.h"
 
 #include "ObjMessage.h"
 //------------------------------------------------

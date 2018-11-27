@@ -3,54 +3,46 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
-#include "ObjKey.h"
+#include "ObjSwitchGate.h"
 
 
 //使用するネームスペース
 using namespace GameL;
 
 
-CObjKey::CObjKey(float x, float y)
+CObjSwitchGate::CObjSwitchGate(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjKey::Init()
+void CObjSwitchGate::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_KEY, 1);
-
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_SWITCHGATE, 1);
 }
 
 //アクション
-void CObjKey::Action()
+void CObjSwitchGate::Action()
 {
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	key = hero->GetKEY();
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//主人公と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//キーを取得
+	CObjSwitch* change = (CObjSwitch*)Objs::GetObj(OBJ_SWITCH);
+	m_change = change->GetCHANGE();
+	
+	if (m_change == true)
 	{
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
-	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
-
 
 	//位置の更新
 	m_px += m_vx;
@@ -61,11 +53,10 @@ void CObjKey::Action()
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
-
 }
 
 //ドロー
-void CObjKey::Draw()
+void CObjSwitchGate::Draw()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
@@ -75,26 +66,42 @@ void CObjKey::Draw()
 	}
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
+
+	CHitBox* hit = Hits::GetHitBox(this);
+	
+	
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリー系統と当たった場合、m_timeに時間をセット
+	{
+		m_time = 100;
+	}
+	if (m_time > 0) {
+		m_time--;
+		Font::StrDraw(L"開かない...", 200, 200, 20, c);//時間が0になると表示を終了		
+		if (m_time <= 0) {
+			m_time = 0;
+		}
+	}
+	
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top	 =   0.0f;
-	src.m_left	 =  50.0f;
-	src.m_right  = 100.0f;
-	src.m_bottom =  50.0f;
-	
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	src.m_top    =   0.0f;
+	src.m_left   = 200.0f;
+	src.m_right  = 300.0f;
+	src.m_bottom = 100.0f;
 
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//表示位置の設定
-	dst.m_top    =  0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
-	dst.m_left   =  0.0f + m_px + block->GetScrollX();
+	dst.m_top    = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
+	dst.m_left   = 0.0f + m_px + block->GetScrollX();
 	dst.m_right  = ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(HEALKEY, &src, &dst, c, 0.0f);
+	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
 }
 
 

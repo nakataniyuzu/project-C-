@@ -40,6 +40,9 @@
     <Filter Include="ソース ファイル\Main\Item関係">
       <UniqueIdentifier>{fa12d4d2-3f4f-4a30-8807-4c5fddb8ee78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Gameover">
+      <UniqueIdentifier>{200e5aeb-3a99-453e-8cf6-c98dfe45c466}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -150,12 +153,6 @@
     <ClCompile Include="ObjHeroBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBattleMain.cpp">
-      <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjResetblock.cpp">
-      <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClCompile>
     <ClCompile Include="CObjIceBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
@@ -180,14 +177,20 @@
     <ClCompile Include="ObjSwitch.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjGameover.cpp">
-      <Filter>ソース ファイル\Main</Filter>
+    <ClCompile Include="ObjSwitchGate.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGameover.cpp">
-      <Filter>ソース ファイル\Main</Filter>
+    <ClCompile Include="ObjResetblock.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClCompile>
     <ClCompile Include="CObjSwordBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameover.cpp">
+      <Filter>ソース ファイル\Gameover</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameover.cpp">
+      <Filter>ソース ファイル\Gameover</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -311,12 +314,6 @@
     <ClInclude Include="ObjHeroBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBattleMain.h">
-      <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjResetblock.h">
-      <Filter>ソース ファイル\Main\Battle関係</Filter>
-    </ClInclude>
     <ClInclude Include="CObjIceBattle.h">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
@@ -339,6 +336,12 @@
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjSwitch.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSwitchGate.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjResetblock.h">
       <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjGameover.h">

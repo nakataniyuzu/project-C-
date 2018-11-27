@@ -23,6 +23,14 @@ void CObjBackgroundBattle::Action()
 //ドロー
 void CObjBackgroundBattle::Draw()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_battle_flag = hero->GetBATTLE();
+
+	if (m_battle_flag == true)
+	{
+		return;
+	}
+
 	//描画カラー情報　R=RED  G=Green  B=Blue A=alpha(透過情報)
 	float  c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -41,6 +49,6 @@ void CObjBackgroundBattle::Draw()
 	dst.m_left   =   0.0f;
 	dst.m_right  = 800.0f;
 	dst.m_bottom = 550.0f;
-	Draw::Draw(FLOOR1_WALL, &src, &dst, c, 0.0f);
+	Draw::Draw(2, &src, &dst, c, 0.0f);
 }
 

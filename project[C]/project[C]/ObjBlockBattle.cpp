@@ -43,8 +43,14 @@ void CObjBlockBattle::Init()
 //アクション
 void CObjBlockBattle::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_battle_flag = hero->GetBATTLE();
+
+	if (m_battle_flag == true)
+	{
+		return;
+	}
 	//主人公の位置を取得
-	CObjHeroBattle* hero = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 }
@@ -52,6 +58,11 @@ void CObjBlockBattle::Action()
 //ドロー
 void CObjBlockBattle::Draw()
 {
+	if (m_battle_flag == true)
+	{
+		return;
+	}
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
