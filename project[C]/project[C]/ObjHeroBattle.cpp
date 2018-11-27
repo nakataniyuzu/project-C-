@@ -317,6 +317,8 @@ void CObjHeroBattle::Action()
 		Scene::SetScene(new CSceneGameover());
 	}
 
+	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//ŽålŒö‚ª—ÌˆæŠO‚És‚©‚È‚¢‚æ‚¤‚É‚·‚é
 	if (m_px + 75 >= 800)
 	{
