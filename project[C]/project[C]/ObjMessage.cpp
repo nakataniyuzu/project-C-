@@ -40,6 +40,7 @@ void CObjMessage::Draw()
 	key_flag = hero->GetKEYF();
 	gate_flag = hero->GetGATEF();
 	ice_flag = hero->GetMICE();
+	switch_flag = hero->GetSGATE();
 
 	if (water_flag == true)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
 	{
@@ -93,6 +94,20 @@ void CObjMessage::Draw()
 		Font::StrDraw(L"氷魔法を覚えた！", 200, 200, 20, b);//時間が0になると表示を終了
 		if (m_ice_time <= 0) {
 			m_ice_time = 0;
+		}
+	}
+
+	if (switch_flag == true)
+	{
+		m_switch_time = 100;
+	}
+	if (m_switch_time > 0) {
+		m_switch_time--;
+		switch_flag = false;
+		hero->SetSGATE(switch_flag);
+		Font::StrDraw(L"開かない...", 200, 200, 20, c);//時間が0になると表示を終了		
+		if (m_switch_time <= 0) {
+			m_switch_time = 0;
 		}
 	}
 

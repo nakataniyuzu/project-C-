@@ -36,7 +36,7 @@ void CObjThunderBattle::Init()
 	m_time = 50;	//魔法が消える時間
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, ALL_SIZE, ALL_SIZE, ELEMENT_MAGIC, OBJ_THUNDER_BATTLE, 1);
+	Hits::SetHitBox(this, m_x, m_y, ALL_SIZE, ALL_SIZE, ELEMENT_ATTACK, OBJ_THUNDER_BATTLE, 1);
 }
 
 //アクション
@@ -93,9 +93,9 @@ void CObjThunderBattle::Draw()
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
-	src.m_left = 61.0f;
-	src.m_right = 125.0f;
-	src.m_bottom = 51.0f;
+	src.m_left = 50.0f;
+	src.m_right = 100.0f;
+	src.m_bottom = 50.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_y;
@@ -103,5 +103,5 @@ void CObjThunderBattle::Draw()
 	dst.m_right = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(4, &src, &dst, c, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
 }

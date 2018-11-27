@@ -50,7 +50,6 @@ void CObjMain::Draw()
 	swprintf_s(HP, L"HP %d/%d", hero_hp, hero_max_hp);
 	Font::StrDraw(HP, GAME_HP_POS_X, GAME_HP_POS_Y, GAME_HP_FONT_SIZE, c);//HP‚ğ•\¦
 	
-
 	//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 	src.m_top    =  0.0f;
 	src.m_left   =  0.0f + (50.0f * magic_type);

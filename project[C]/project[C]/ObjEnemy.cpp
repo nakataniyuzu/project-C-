@@ -46,12 +46,30 @@ void CObjEnemy::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
+	
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
 
 	if (battle_flag == false)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
+		m_time = 100;
+		hit->SetInvincibility(true);	//無敵オン
 		return;
+	}
+	
+	if (m_time > 0)
+	{
+		m_speed_power = 0.0f;
+		m_time--;
+		if (m_time <= 0)
+		{
+			m_speed_power = 0.5f;
+			m_time = 0;
+			hit->SetInvincibility(false);	//無敵オフ
+		}
 	}
 
 	if (m_hit_up == true)	//上
@@ -103,8 +121,6 @@ void CObjEnemy::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
 }
 
@@ -122,6 +138,7 @@ void CObjEnemy::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float r[4] = { 0.6f,0.0f,0.0f,0.8f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -139,5 +156,11 @@ void CObjEnemy::Draw()
 	dst.m_right =  ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 	
-	Draw::Draw(7, &src, &dst, c, 0.0f);
+	if (m_speed_power == 0.0f){
+		Draw::Draw(7, &src, &dst, r, 0.0f);
+	}
+	else {
+		Draw::Draw(7, &src, &dst, c, 0.0f);
+	}
+
 }

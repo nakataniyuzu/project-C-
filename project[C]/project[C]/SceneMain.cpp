@@ -69,6 +69,9 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Magic.png", 8, TEX_SIZE_100);
 	Draw::LoadImageW(L"Candle.png", 9, TEX_SIZE_200_100);
 	Draw::LoadImageW(L"magicitem.png", ITEM, TEX_SIZE_256);
+	Draw::LoadImageW(L"Hero2.png", 11, TEX_SIZE_100);
+	Draw::LoadImageW(L"Floor1_Enemy.png", 12, TEX_SIZE_100);
+	Draw::LoadImageW(L"MagicBattle.png", 13, TEX_SIZE_256);
 
 
 
@@ -110,15 +113,5 @@ void CSceneMain::InitScene()
 //ゲームタイトルの実行中メソッド
 void CSceneMain::Scene()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	battle_flag = hero->GetBATTLE();
-
-	if (m_f == true)
-	{
-		if (battle_flag == false)
-		{
-			
-			m_f = false;
-		}
-	}
+	
 }

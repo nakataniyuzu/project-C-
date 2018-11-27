@@ -42,12 +42,11 @@ void CObjKey::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公と当たっているか確認
-	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//キーを取得
 	{
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
-
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);

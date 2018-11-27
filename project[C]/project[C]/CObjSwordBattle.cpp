@@ -16,13 +16,14 @@ CObjSwordBattle::CObjSwordBattle(float x, float y)
 {
 	m_x = x;
 	m_y = y;
-
 }
 //イニシャライズ
 void CObjSwordBattle::Init()
 {
 	m_vx = 0.0f;
 	m_vy = 0.0f;
+
+	posture = 0.0f;	//右向き0.0f 左向き1.0f
 
 	//blockとの衝突状態確認
 	m_hit_left = false;
@@ -35,10 +36,10 @@ void CObjSwordBattle::Init()
 
 	m_time = 0;
 
-	m_sword_time = 20;	//剣が消える時間
+	m_sword_time = 10;	//剣が消える時間
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, ALL_SIZE, ALL_SIZE, ELEMENT_SWORD, OBJ_SWORD_BATTLE, 1);
+	Hits::SetHitBox(this, m_x, m_y, 34, 34, ELEMENT_SWORD, OBJ_SWORD_BATTLE, 1);
 }
 
 //アクション
@@ -50,11 +51,11 @@ void CObjSwordBattle::Action()
 		m_hit = true;
 
 	if (posture == 0.0f) {
-		m_vx = 7.0f;
+		m_vx = 4.0f;
 		m_x += m_vx;
 	}
 	if (posture == 1.0f) {
-		m_vx = -7.0f;
+		m_vx = -4.0f;
 		m_x += m_vx;
 	}
 
@@ -93,16 +94,26 @@ void CObjSwordBattle::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 244.0f;
-	src.m_right = 320.0f;
-	src.m_bottom = 60.0f;
+	if (posture == 0.0f)
+	{
+		src.m_top = 11.0f;
+		src.m_left = 65.0f;
+		src.m_right = 116.0f;
+		src.m_bottom = 61.0f;
+	}
+	if (posture == 1.0f)
+	{
+		src.m_top = 12.0f;
+		src.m_left = 10.0f;
+		src.m_right = 61.0f;
+		src.m_bottom = 61.0f;
+	}
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
-	dst.m_right = ALL_SIZE + m_x;
+	dst.m_right =  ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	Draw::Draw(5, &src, &dst, c, 0.0f);
 }

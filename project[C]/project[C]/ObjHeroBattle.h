@@ -39,6 +39,8 @@ private:
 	float m_posture;	//姿勢
 	float m_directionx; //魔法発射用X方向
 	float m_directiony; //魔法発射用Y方向
+	float hero_posture;	//マップ上のヒーローの向き
+	float m_swordwidth; //ソード幅
 
 	int m_battle_hp;	//体力(戦闘)
 	int m_battle_mp;	//魔法使用回数(戦闘)
@@ -56,12 +58,15 @@ private:
 	bool  m_f;		//キー（長押し）制御用
 	bool  m_mf;		//キー（長押し）制御用
 
+	bool m_pos_flag;	//主人公向き用のフラグ
 	bool m_battle_flag;	//マップに戻るフラグ
 	bool m_hit_down; //敵の頭の判定用
 
-	//魔法使用可能フラグ(戦闘)
+	//魔法使用可能フラグ
+	bool m_fire_flag;
 	bool m_ice_flag;
 	bool m_thunder_flag;
+	bool m_wind_flag;
 
 	//テスト用
 	float px, py;		//交点

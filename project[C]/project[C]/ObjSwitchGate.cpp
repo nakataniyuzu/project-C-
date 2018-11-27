@@ -70,7 +70,7 @@ void CObjSwitchGate::Draw()
 
 	CHitBox* hit = Hits::GetHitBox(this);
 	
-	
+	/*
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリー系統と当たった場合、m_timeに時間をセット
 	{
 		m_time = 100;
@@ -81,7 +81,7 @@ void CObjSwitchGate::Draw()
 		if (m_time <= 0) {
 			m_time = 0;
 		}
-	}
+	}*/
 	
 
 	RECT_F src;	//描画元切り取り位置
