@@ -39,7 +39,7 @@ void CObjSwordBattle::Init()
 	m_sword_time = 10;	//剣が消える時間
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, 34, 34, ELEMENT_SWORD, OBJ_SWORD_BATTLE, 1);
+	Hits::SetHitBox(this, m_x + 25, m_y, 35, 50, ELEMENT_ATTACK, OBJ_SWORD_BATTLE, 1);
 }
 
 //アクション
@@ -83,6 +83,9 @@ void CObjSwordBattle::Action()
 			Hits::DeleteHitBox(this);
 		}
 	}
+
+	
+
 }
 
 //ドロー
@@ -110,10 +113,10 @@ void CObjSwordBattle::Draw()
 	}
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x;
-	dst.m_right =  ALL_SIZE + m_x;
+	dst.m_top    = 0.0f + m_y;
+	dst.m_left   = 0.0f + m_x;
+	dst.m_right  = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	Draw::Draw(16, &src, &dst, c, 0.0f);
 }

@@ -29,12 +29,16 @@ enum OBJ_NAME
 	OBJ_FIREGATE,
 
 	OBJ_HERO,
+	OBJ_SISTER,
 	OBJ_BLOCK,
 	OBJ_TOPBACK,
 	OBJ_ENEMY,
+	OBJ_ENEMY_FIRST,
 
 	OBJ_HERO_BATTLE,
 	OBJ_ENEMY_BATTLE,
+	OBJ_BOSS,
+	OBJ_BOSS_BATTLE,
 	OBJ_BLOCK_BATTLE,
 	OBJ_BACKGROUND_BATTLE,
 	OBJ_BATTLE_MAIN,
@@ -57,6 +61,7 @@ enum HIT_ELEMENTS
 	//属性は追加可能だが、デバック時の色は初期設定分しか無い
 	ELEMENT_PLAYER,
 	ELEMENT_ENEMY,
+	ELEMENT_BOSS,
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
@@ -70,6 +75,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
 
+	ELEMENT_SISTER,
 	ELEMENT_HEAL,
 	ELEMENT_MYSTERY,
 	ELEMENT_MYSTERY_BLOCK,
@@ -91,6 +97,8 @@ struct UserData
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
 
+#define ALL_SIZE 50.0f
+
 
 
 //------------------------------------------------
@@ -102,6 +110,7 @@ struct UserData
 //ゲームシーンオブジェクトヘッダ------------------
 #include "ObjTitle.h"
 #include "ObjHero.h"
+#include "ObjSister.h"
 #include "ObjMenu.h"
 #include "ObjMain.h"
 #include "ObjGameover.h"
@@ -128,7 +137,12 @@ struct UserData
 #include "ObjFireblock.h"
 #include "ObjFireGate.h"
 
+//Enemy関係
+#include "ObjBoss.h"
+#include "ObjBossBattle.h"
 #include "ObjEnemy.h"
+#include "ObjEnemyFirst.h"
+
 
 #include "ObjBlock.h"
 #include "ObjTopback.h"

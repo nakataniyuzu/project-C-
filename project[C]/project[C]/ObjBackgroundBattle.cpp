@@ -25,8 +25,9 @@ void CObjBackgroundBattle::Draw()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
+	m_boss_battle_f = hero->GetBOSSBATTLE();
 
-	if (m_battle_flag == true)
+	if (m_battle_flag == true || m_boss_battle_f == true)
 	{
 		return;
 	}
@@ -49,6 +50,6 @@ void CObjBackgroundBattle::Draw()
 	dst.m_left   =   0.0f;
 	dst.m_right  = 800.0f;
 	dst.m_bottom = 550.0f;
-	Draw::Draw(2, &src, &dst, c, 0.0f);
+	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
 }
 

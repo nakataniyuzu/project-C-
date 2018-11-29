@@ -118,8 +118,8 @@ void CObjIce::Draw()
 
 	//êÿÇËéÊÇËà íuÇÃê›íË
 	src.m_top    = 0.0f;
-	src.m_left   = 50.0f;
-	src.m_right  = 100.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 50.0f;
 	src.m_bottom = 50.0f;
 
 	//ï\é¶à íuÇÃê›íË
@@ -128,5 +128,5 @@ void CObjIce::Draw()
 	dst.m_right  = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(8, &src, &dst, c, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
 }

@@ -44,6 +44,9 @@ class CObjMain :public CObj
 		void Init();	//イニシャライズ
 		void Action();	//アクション
 		void Draw();	//ドロー
+		
+		void SetENEMYKILLS(int x) { enemy_kills += x; }	//敵の撃破数のカウントを取得
+
 	private:
 		int hero_max_hp;	//HP最大値
 		int hero_max_mp;	//MP最大値
@@ -52,4 +55,6 @@ class CObjMain :public CObj
 		int hero_mp;	//MP
 		int magic_type;	//魔法の種類
 		int key;		//鍵を所持しているか
+
+		int enemy_kills = 0;//敵の撃破数
 };

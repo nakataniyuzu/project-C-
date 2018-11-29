@@ -5,14 +5,12 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define TIME_INTERVAL 1000
-
 //オブジェクト：主人公
-class CObjEnemy : public CObj
+class CObjEnemyFirst : public CObj
 {
 public:
-	CObjEnemy(float x, float y);
-	~CObjEnemy() {};
+	CObjEnemyFirst(float x, float y);
+	~CObjEnemyFirst() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
@@ -31,16 +29,17 @@ private:
 
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム
-	int   m_time;		
+	int   m_time;
 
 	float m_speed_power;	//スピードパワー
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
 	bool battle_flag;	//バトル切り替え用
 
-	//blockとの衝突状態確認用
+						//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
+
 };

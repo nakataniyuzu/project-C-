@@ -41,11 +41,12 @@ void CObjMain::Draw()
 
 	wchar_t HP[128];
 	wchar_t MP[128];
+	wchar_t KILLS[128];
 
 	//画面上部のメニュー画面
-	Font::StrDraw(L"LEVEL：", GAME_LEVEL_POS_X, GAME_LEVEL_POS_X, GAME_LEVEL_FONT_SIZE, c);
+	Font::StrDraw(L"Lv.", GAME_LEVEL_POS_X, GAME_LEVEL_POS_X, GAME_LEVEL_FONT_SIZE, c);
 
-	Font::StrDraw(L"[NAME]", GAME_NAME_POS_X, GAME_NAME_POS_Y, GAME_NAME_FONT_SIZE, c);
+	Font::StrDraw(L"No name", GAME_NAME_POS_X, GAME_NAME_POS_Y, GAME_NAME_FONT_SIZE, c);
 
 	swprintf_s(HP, L"HP %d/%d", hero_hp, hero_max_hp);
 	Font::StrDraw(HP, GAME_HP_POS_X, GAME_HP_POS_Y, GAME_HP_FONT_SIZE, c);//HPを表示
@@ -57,13 +58,13 @@ void CObjMain::Draw()
 	src.m_bottom = 50.0f;
 
 	//表示位置の設定
-	dst.m_top    = 20.0f;
+	dst.m_top    = 23.0f;
 	dst.m_left   = 130.0f;
 	dst.m_right  = 160.0f;
-	dst.m_bottom = 50.0f;
+	dst.m_bottom = 53.0f;
 	Draw::Draw(10, &src, &dst, c, 0.0f);
 
-	swprintf_s(MP, L"%d/%d",  hero_mp, hero_max_mp);
+	swprintf_s(MP, L"MP %d/%d",  hero_mp, hero_max_mp);
 	Font::StrDraw(MP, GAME_MP_POS_X, GAME_MP_POS_Y, GAME_MP_FONT_SIZE, c);
 
 	if (key == 1)
@@ -84,8 +85,9 @@ void CObjMain::Draw()
 
 	//Font::StrDraw(L"Inventory   ：Iキー", GAME_INVENTORY_POS_X, GAME_INVENTORY_POS_Y, GAME_INVENTORY_FONT_SIZE, c);
 
-	Font::StrDraw(L"メニュー画面：Eキー", GAME_MENU_POS_X, GAME_MENU_POS_Y, GAME_MENU_FONT_SIZE, c);
-
-	Font::StrDraw(L"敵の撃破数×○", GAME_ENEMY_KILLS_POS_X, GAME_ENEMY_KILLS_POS_Y, GAME_ENEMY_KILLS_FONT_SIZE, c);
+	//Font::StrDraw(L"メニュー画面：Eキー", GAME_MENU_POS_X, GAME_MENU_POS_Y, GAME_MENU_FONT_SIZE, c);
+	
+	swprintf_s(KILLS, L"敵の撃破数×%d",enemy_kills);
+	Font::StrDraw(KILLS, GAME_ENEMY_KILLS_POS_X, GAME_ENEMY_KILLS_POS_Y, GAME_ENEMY_KILLS_FONT_SIZE, c);
 
 }

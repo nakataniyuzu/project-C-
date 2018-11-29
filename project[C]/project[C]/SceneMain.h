@@ -22,5 +22,7 @@ class CSceneMain :public CScene
 	private:
 		/*int m_map[10][10];	//ƒ}ƒbƒvî•ñ*/
 		bool battle_flag;
+		bool enemy_flag;
+		bool boss_flag;
 		bool m_f;
 };

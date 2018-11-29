@@ -5,19 +5,19 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy.h"
+#include "ObjEnemyFirst.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy::CObjEnemy(float x, float y)
+CObjEnemyFirst::CObjEnemyFirst(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjEnemy::Init()
+void CObjEnemyFirst::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -38,11 +38,11 @@ void CObjEnemy::Init()
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_FIRST, 1);
 }
 
 //アクション
-void CObjEnemy::Action()
+void CObjEnemyFirst::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
@@ -125,7 +125,7 @@ void CObjEnemy::Action()
 }
 
 //ドロー
-void CObjEnemy::Draw()
+void CObjEnemyFirst::Draw()
 {
 	if (battle_flag == false)
 	{

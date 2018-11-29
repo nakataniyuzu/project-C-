@@ -38,9 +38,7 @@ void CObjHeroBattle::Init()
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
 	m_sword_delay = 0;
-
 	m_swordwidth = 0.0f; //ソード幅
-
 
 	//当たり判定用のHitBoxを作成
  	Hits::SetHitBox(this, m_px , m_py , 60, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
@@ -51,6 +49,7 @@ void CObjHeroBattle::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
+	m_boss_battle_f = hero->GetBOSSBATTLE();
 	hero_posture = hero->GetPOS();	
 
 	m_fire_flag    = hero->GetFIREF();
@@ -59,7 +58,7 @@ void CObjHeroBattle::Action()
 	m_wind_flag    = hero->GetWINDF();
 
 
-	if (m_battle_flag == true)
+	if (m_battle_flag == true || m_boss_battle_f == true)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
@@ -131,18 +130,14 @@ void CObjHeroBattle::Action()
 		{
 			//主人公の向きによって攻撃する向きを設定
 			if (m_posture == 0.0f) {
-				m_directionx = 7.0f;
-				m_directiony = 0.0f;
 				m_swordwidth = 50.0f;
 			}
 			else if (m_posture == 1.0f) {
-				m_directionx = -7.0f;
-				m_directiony = 0.0f;
-				m_swordwidth = -30.0f;
+				m_swordwidth = -50.0f;
 			}
 
 			//剣で攻撃
-			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_directionx+ m_swordwidth, m_py + m_directiony+35.0f);//剣オブジェクト(戦闘)作成
+			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_swordwidth, m_py + 32.0f);//剣オブジェクト(戦闘)作成
 			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
 			
 			m_sword_delay = 10;
@@ -228,54 +223,6 @@ void CObjHeroBattle::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//敵と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr)
-	{
-		//主人公が敵とどの角度で当たっているかを確認
-		HIT_DATA** hit_data;	//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchObjNameHit(OBJ_ENEMY_BATTLE);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
-		{
-			//敵の左右に当たったら
-			//保留↓
-			/*if ()
-			{*/
-
-			float r = hit_data[i]->r;
-
-				if ((r < 45 && r >= 0) || r > 315)
-				{
-					m_vx = -5.0f;//左に移動させる
-				}
-				if (r > 135 && r < 225)
-				{
-					m_vx = +5.0f;//右に移動させる
-				}
-				if (r > 225 && r < 315)
-				{
-					//敵の移動方向を主人公の位置に加算
-					/*m_px += ((CObjEnemy*)hit_data[i]->o)->GetVx();
-
-					CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);*/
-
-					//頭に乗せる処理
-					if (m_vy < -1.0f)
-					{
-						//ジャンプしてる場合は下記の影響を出ないようにする
-					}
-					else
-					{
-						//主人公が敵の頭に乗っているので、Yvecは0にして落下させない
-						//また、地面に当たっている判定にする
-						m_vy = 0.0f;
-						m_hit_down = true;
-					}
-				}
-			//}
-		}
-	}
-
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
@@ -341,6 +288,7 @@ void CObjHeroBattle::Action()
 		m_py = 50.0f;
 	}
 
+
 	hero->SetHP(m_battle_hp);
 	hero->SetMP(m_battle_mp);
 	hero->SetMAGIC(m_battle_magic);
@@ -349,7 +297,7 @@ void CObjHeroBattle::Action()
 //ドロー
 void CObjHeroBattle::Draw()
 {
-	if (m_battle_flag == true)
+	if (m_battle_flag == true || m_boss_battle_f == true)
 	{
 		return;
 	}

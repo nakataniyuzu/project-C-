@@ -15,36 +15,39 @@ float g_py = 300.0f;
 //使用するネームスペース
 using namespace GameL;
 
-
-
 //イニシャライズ
 void CObjHero::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 0.2f;	//通常速度
+	m_speed_power = 1.0f;	//通常速度
 	m_posture = 2.0f;
 	
-	m_max_hp = 10;
-	m_max_mp = 5;
+	m_max_hp = 10;	//最大HP
+	m_max_mp = 10;	//最大MP
 	m_hp = 10;	//初期HP
-	m_mp = 5;	//初期MP
+	m_mp = 10;	//初期MP
 	m_magic = 0;	//初期魔法
-	m_key = 0;
+
+	m_key = 0;	//鍵の情報
 
 	//フラグの初期化
-	m_gate_mf = false;
-	m_water_mf = false;
-	m_key_mf = false;
-	m_ice_mf = false;
-	m_switch_mf = false;
+	mes.gate = false;
+	mes.water = false;
+	mes.key = false;
+	mes.ice = false;
+	mes.switchblock = false;
+	mes.switchgate = false;
 
 	m_battle_flag = true;
+	m_enemy_flag = false;
+	m_boss_battle_flag = true;
+	m_boss_flag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
-	m_ani_max_time = 8;		//アニメーション間隔幅(増やせば遅い
+	m_ani_max_time = 6;		//アニメーション間隔幅(増やせば遅い
 
 	m_fire_flag = true;		//火：0
 	m_ice_flag = false;		//氷：1
@@ -67,7 +70,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	if (m_battle_flag == false)
+	if (m_battle_flag == false || m_boss_battle_flag == false)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -258,40 +261,53 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		m_battle_flag = false;
-		//Scene::SetScene(new CSceneBattle());
+		m_enemy_flag = true;
+	}
+	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
+	{
+		m_boss_battle_flag = false;
+		m_boss_flag = true;
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{
 		m_key = 1;
-		m_key_mf = true;
+		mes.key = true;
 	}
 	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
 	{
 		if (m_key == 1)		//鍵を持っている場合
 		{
 			m_key = 0;		//鍵を消費する
-			m_gate_mf = true;//鍵のフラグをオンにする
+			mes.gate = true;//鍵のフラグをオンにする
 		}
 	}
-	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)
+	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)	//主人公が氷の結晶と当たった場合
 	{
-		m_ice_mf = true;
+		mes.ice = true;			//フラグをオンにする
 		m_ice_flag = true;
 	}
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)			//主人公が水と当たった場合
 	{
-		m_water_mf = true;
+		mes.water = true;		//フラグをオンにする
 	}
-	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_SWITCH) != nullptr)	//主人公がスイッチに触れた場合
 	{
-		m_switch_mf = true;
+		mes.switchblock = true;	//フラグをオンにする
+	}
+	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr)	//主人公がゲートと当たった場合
+	{
+		mes.switchgate = true;		//フラグをオンにする
 	}
 	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)	//主人公がHEALと当たった場合
 	{
 		m_hp = m_max_hp;		//HPを最大まで回復
 		m_mp = m_max_mp;		//MPを最大まで回復
+		mes.heal = true;		//フラグをオンにする
 	}
-
+	if (hit->CheckElementHit(ELEMENT_SISTER) == true)	//主人公が妹に触れた場合
+	{
+		Scene::SetScene(new CSceneTitle());	//ゲームクリアシーンに移行
+	}
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -316,7 +332,7 @@ void CObjHero::Action()
 //ドロー
 void CObjHero::Draw()
 {
-	if (m_battle_flag == false)
+	if (m_battle_flag == false || m_boss_battle_flag == false)
 	{
 		return;
 	}

@@ -35,8 +35,9 @@ void CObjBlock::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 	m_battle_flag = hero->GetBATTLE();
+	m_boss_flag = hero->GetBOSSBATTLE();
 
-	if (m_battle_flag == false)
+	if (m_battle_flag == false || m_boss_flag == false)
 	{
 		return;
 	}
@@ -95,11 +96,21 @@ void CObjBlock::Action()
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
+			if (g_map[i][j] == 5)
+			{
+				//4があればFireblockを出現
+				CObjSister* sister = new CObjSister(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(sister, OBJ_SISTER, 111);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+
 			if (g_map[i][j] == 6)
 			{
 				//6があれば敵を出現
-				CObjEnemy* obje = new CObjEnemy(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obje, OBJ_ENEMY, 110);
+				CObjEnemyFirst* obje1 = new CObjEnemyFirst(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(obje1, OBJ_ENEMY_FIRST, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -118,6 +129,15 @@ void CObjBlock::Action()
 				//9があればItemIceを出現
 				CObjItemIce* objice = new CObjItemIce(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objice, ITEM_ICE, 110);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 10)
+			{
+				//10があればKeyを出現
+				CObjBoss* objboss = new CObjBoss(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objboss, OBJ_BOSS, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -177,7 +197,7 @@ void CObjBlock::Action()
 void CObjBlock::Draw()
 {
 
-	if (m_battle_flag == false)
+	if (m_battle_flag == false || m_boss_flag == false)
 	{
 		return;
 	}

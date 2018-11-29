@@ -5,7 +5,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：タイトル
+//オブジェクト：
 class CObjMessage :public CObj
 {
 	public:
@@ -16,18 +16,29 @@ class CObjMessage :public CObj
 		void Draw();	//ドロー
 
 	private:
-		bool water_flag;	//WATERBLOCKのメッセージフラグ
-		bool key_flag;		//KEYのメッセージフラグ
-		bool gate_flag;		//GATEのメッセージフラグ
-		bool ice_flag;		//ICEMAGICのメッセージフラグ
-		bool switch_flag;	//SWITCHGATEのメッセージフラグ
+		struct Flag {
+			bool gate;		//GATEのメッセージフラグ
+			bool key;		//KEYのメッセージフラグ
+			bool water;		//WATERBLOCKのメッセージフラグ
+			bool ice;		//ICEMAGICのメッセージフラグ
+			bool sblock;	//SWITCHBLOCKのメッセージフラグ
+			bool sgate;		//SWITCHGATEのメッセージフラグ
+			bool heal;		//HEALのメッセージフラグ
+		};
+		Flag f;
 
 		//表示する時間
-		int   m_gate_time;
-		int   m_water_time;			
-		int   m_key_time;
-		int   m_ice_time;
-		int   m_switch_time;
+		struct Time {
+			int gate;		//GATE用の時間
+			int water;		//WATER用の時間
+			int key;		//KEY用の時間
+			int ice;		//ICE用の時間
+			int sblock;		//SWITCHBLOCK用の時間
+			int sgate;		//SWITCHGATE用の時間
+			int heal;		//HEALの時間
+		};
+		Time t;
+		
 
 };
 

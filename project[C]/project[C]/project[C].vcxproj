@@ -36,6 +36,10 @@
     <ClCompile Include="ObjBackgroundBattle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjBoss.cpp" />
+    <ClCompile Include="ObjBossBattle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
@@ -77,6 +81,7 @@
     <ClCompile Include="ObjKey.cpp" />
     <ClCompile Include="ObjGate.cpp" />
     <ClCompile Include="ObjResetblock.cpp" />
+    <ClCompile Include="ObjSister.cpp" />
     <ClCompile Include="ObjSwitch.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -86,9 +91,6 @@
     <ClCompile Include="ObjWater.cpp" />
     <ClCompile Include="SceneBattle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="SceneGameover.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="SceneGameover.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -120,7 +122,13 @@
     <ClInclude Include="ObjBlockBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="ObjEnemy.h" />
+    <ClInclude Include="ObjBoss.h" />
+    <ClInclude Include="ObjBossBattle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjEnemyBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -138,8 +146,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjMobThird.h" />
-    <ClInclude Include="ObjMobFirst.h" />
-    <ClInclude Include="GameHead.h" />
+    <ClInclude Include="ObjEnemyFirst.h" />
+    <ClInclude Include="GameHead.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
     <ClInclude Include="GameL\DirectXTex.h" />
@@ -162,6 +172,7 @@
     <ClInclude Include="ObjKey.h" />
     <ClInclude Include="ObjGate.h" />
     <ClInclude Include="ObjResetblock.h" />
+    <ClInclude Include="ObjSister.h" />
     <ClInclude Include="ObjSwitch.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -171,9 +182,6 @@
     <ClInclude Include="ObjWater.h" />
     <ClInclude Include="SceneBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="SceneGameover.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="SceneGameover.h" />
     <ClInclude Include="SceneMain.h" />
