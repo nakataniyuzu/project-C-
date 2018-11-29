@@ -20,7 +20,7 @@ void CObjBossBattle::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
-	m_boss_hp = 15;     //敵のヒットポイント(最大3)
+	m_enemy_hp = 15;     //敵のヒットポイント(最大3)
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -30,21 +30,21 @@ void CObjBossBattle::Init()
 
 	m_move = true;  //true=右 false=左
 
-	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
+	m_block_type = 0;		//踏んでいるblockの種類を確認用
+
+	m_time = 0;
+							//当たり判定用のHitBoxを作成
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS, OBJ_BOSS_BATTLE, 1);
 }
 
 //アクション
 void CObjBossBattle::Action()
 {
-	//OBJ_MAINの情報を持ってくる
-	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_boss_flag = hero->GetBOSSBATTLE();
+	m_battle_flag = hero->GetBATTLE();
 	hero_posture = hero->GetPOS();
 
-	if (m_boss_flag == true)
+	if (m_battle_flag == true)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
@@ -56,12 +56,10 @@ void CObjBossBattle::Action()
 			m_px = 100.0f;
 			m_py = 500.0f;		//位置
 		}
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 		return;
 	}
-
-	//通常速度
-	m_speed_power = 0.4f;
-	m_ani_max_time = 4;
 
 	//画面端衝突で向き変更
 	if (m_px + 75 >= 800)
@@ -117,46 +115,11 @@ void CObjBossBattle::Action()
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
-		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
-		hit_date = hit->SearchElementHit(ELEMENT_ATTACK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
-		{
-			float r = hit_date[i]->r;
-			//角度で上下左右を判定
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vy = -10;
-				m_vx -= 25;
-			}
-			if (r > 135 && r < 225)
-			{
-				m_vy = -10;
-				m_vx += 25;
-			}
-
-		}
-		//ノックバック処理
-		/*if (m_posture == 1.0f)
-		{
-		m_vy = -10;
-		m_vx -= 25;
-		}
-		else if (m_posture == 0.0f)
-		{
-		m_vy = -10;
-		m_vx += 25;
-		}*/
-
-		m_boss_hp -= 1;
+		m_enemy_hp -= 1;
 	}
-
-	//敵の体力が0になったら破棄CObjMain
-	if (m_boss_hp <= 0)
+	//敵の体力が0になったら破棄
+	if (m_enemy_hp <= 0)
 	{
-		hero->SetBOSSBATTLE(true);
-		//hero->SetENEMYF(true);
-		main->SetENEMYKILLS(1);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
@@ -165,10 +128,12 @@ void CObjBossBattle::Action()
 	if (m_px + 75 >= 800)
 	{
 		m_px = 800.0 - 75.0f;
+		m_speed_power = 0.5f;
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
+		m_speed_power = 0.5f;
 	}
 	if (m_py + 100 >= 580)
 	{
@@ -178,12 +143,29 @@ void CObjBossBattle::Action()
 	{
 		m_py = 50.0f;
 	}
+
+	//突進
+	if (m_time >= 0)
+	{
+		m_time++;
+		
+		if (m_time >= 80)
+		{
+			m_speed_power = 0.0f;
+
+			if (m_time >= 120)
+			{
+				m_speed_power = 20.0f;
+				m_time = 0;
+			}
+		}
+	}
 }
 
 //ドロー
 void CObjBossBattle::Draw()
 {
-	if (m_boss_flag == true)
+	if (m_battle_flag == true)
 	{
 		return;
 	}
@@ -194,19 +176,19 @@ void CObjBossBattle::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-	//切り取り位置の設定
-	src.m_top    =   0.0f;
-	src.m_left   = 100.0f;
-	src.m_right  = 200.0f;
+				//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 200.0f;
+	src.m_right = 100.0f;
 	src.m_bottom = 100.0f;
 
 	//表示位置の設定
-	dst.m_top    = 0.0f + m_py;
-	dst.m_left   = (     75.0f * m_posture) + m_px;
-	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
+	dst.m_top = 0.0f + m_py;
+	dst.m_left = (75.0f * m_posture) + m_px;
+	dst.m_right = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画
-	Draw::Draw(14, &src, &dst, c, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
 
 }

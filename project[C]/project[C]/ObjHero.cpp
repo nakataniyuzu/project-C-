@@ -41,9 +41,8 @@ void CObjHero::Init()
 	mes.switchgate = false;
 
 	m_battle_flag = true;
-	m_enemy_flag = false;
+	m_ene_battle_flag = true;
 	m_boss_battle_flag = true;
-	m_boss_flag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
@@ -81,7 +80,6 @@ void CObjHero::Action()
 	if (Input::GetVKey('E') == true)
 	{
 		//Scene::SetScene(new CSceneMenu());
-		m_battle_flag = false;
 	}
 
 	//Xキーで魔法を切り替える
@@ -107,6 +105,12 @@ void CObjHero::Action()
 	else
 	{
 		m_mf = true;
+	}
+
+	//HPが0以下の時にゲームオーバーにする
+	if (m_hp <= 0)
+	{
+		Scene::SetScene(new CSceneGameover());
 	}
 
 	//MPが0以上の時は魔法を放つ
@@ -155,6 +159,7 @@ void CObjHero::Action()
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
+				m_hp -= 3;		//HPを減らす（デバッグ）
 			}
 		}
 		else
@@ -261,12 +266,23 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		m_battle_flag = false;
-		m_enemy_flag = true;
+		m_ene_battle_flag = false;
+		//Scene::SetScene(new CSceneBattle());
+
+		//敵(戦闘)オブジェクト作成
+		CObjEnemyBattle* bobje = new CObjEnemyBattle();
+		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE, 10);
 	}
+	//敵を接触したらBATTLESCENEに移行(BOSS)
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
+		m_battle_flag = false;
 		m_boss_battle_flag = false;
-		m_boss_flag = true;
+		//Scene::SetScene(new CSceneBattle());
+
+		//敵(戦闘)オブジェクト作成
+		CObjBossBattle* bobje = new CObjBossBattle();
+		Objs::InsertObj(bobje, OBJ_BOSS_BATTLE, 10);
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{

@@ -94,11 +94,10 @@ class CObjHero : public CObj
 		bool  m_f;		//キー（長押し）制御用
 		bool  m_mf;		//キー（長押し）制御用
 
-		bool m_enemy_flag;	//敵出現用フラグ
-		bool m_battle_flag;	//バトル移行用
-		bool m_boss_flag;	//ボス出現用フラグ
-		bool m_boss_battle_flag;	//ボスバトル移行用
-
+		bool m_battle_flag;
+		bool m_ene_battle_flag;	//雑魚バトル移行用
+		bool m_boss_battle_flag;//ボスバトル用
+		bool m_map_flag; //マップ移行用
 
 		//メッセージ用フラグ
 		struct Message {

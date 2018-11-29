@@ -63,10 +63,6 @@ void CObjEnemyBattle::Action()
 		return;
 	}
 
-	//’Êí‘¬“x
-	m_speed_power = 0.4f;
-	m_ani_max_time = 4;
-
 	//‰æ–Ê’[Õ“Ë‚ÅŒü‚«•ÏX
 	if (m_px + 75 >= 800)
 	{

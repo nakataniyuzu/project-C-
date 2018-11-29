@@ -135,11 +135,11 @@ void CObjBlock::Action()
 			}
 			if (g_map[i][j] == 10)
 			{
-				//10があればKeyを出現
-				CObjBoss* objboss = new CObjBoss(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objboss, OBJ_BOSS, 110);
+				//10があればBOSS出現
+				CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objb1, OBJ_ENEMY, 110);
 
-				//出現場所の値を0にする
+				//出現場所を0にする
 				g_map[i][j] = 0;
 			}
 			if (g_map[i][j] == 11)
