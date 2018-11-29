@@ -32,14 +32,11 @@ void CObjSister::Action()
 	//ŽålŒö‚Ìî•ñ‚ðŽ‚Á‚Ä‚­‚é
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
-	boss_battle_flag = hero->GetBOSSBATTLE();
 
-	if (battle_flag == false || boss_battle_flag == false)
+	if (battle_flag == false)
 	{
 		return;
 	}
-
-
 
 	//–€ŽC
 	m_vx += -(m_vx * 0.098);

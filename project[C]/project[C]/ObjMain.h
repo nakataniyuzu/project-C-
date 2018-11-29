@@ -22,13 +22,13 @@ using namespace GameL;
 #define GAME_MP_POS_Y     (25)
 #define GAME_MP_FONT_SIZE (25)
 
-#define GAME_INVENTORY_POS_X     (300)
-#define GAME_INVENTORY_POS_Y     (0)
-#define GAME_INVENTORY_FONT_SIZE (25)
+#define GAME_MESSAGE_POS_X     (300)
+#define GAME_MESSAGE_POS_Y     (0)
+#define GAME_MESSAGE_FONT_SIZE (20)
 
-#define GAME_MENU_POS_X     (300)
-#define GAME_MENU_POS_Y     (25)
-#define GAME_MENU_FONT_SIZE (25)
+#define GAME_MESSAGE2_POS_X     (300)
+#define GAME_MESSAGE2_POS_Y     (25)
+#define GAME_MESSAGE2_FONT_SIZE (20)
 
 #define GAME_ENEMY_KILLS_POS_X     (610)
 #define GAME_ENEMY_KILLS_POS_Y     (15)
@@ -55,6 +55,7 @@ class CObjMain :public CObj
 		int hero_mp;	//MP
 		int magic_type;	//ñÇñ@ÇÃéÌóﬁ
 		int key;		//åÆÇèäéùÇµÇƒÇ¢ÇÈÇ©
+		bool battle_flag;	//ÉoÉgÉãâÊñ Ç©Ç«Ç§Ç©
 
 		int enemy_kills = 0;//ìGÇÃåÇîjêî
 };

@@ -43,6 +43,7 @@ void CObjMessage::Draw()
 	f.ice = hero->GetMICE();
 	f.sgate = hero->GetSGATE();
 	f.sblock = hero->GetSBLOCK();
+	f.heal = hero->GetHEAL();
 
 	if (f.water == true)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
 	{
@@ -120,19 +121,19 @@ void CObjMessage::Draw()
 		Font::StrDraw(L"どこかで扉が開く音がした。", 200, 200, 20, y);//時間が0になると表示を終了
 		if (t.sblock <= 0) {
 			t.sblock = 0;
-		}
-		if (f.heal == true)		//フラグがオンの時タイムをセット
-		{
-			t.heal = 100;
-		}
-		if (t.heal > 0) {
-			t.heal--;
-			f.heal = false;
-			hero->SetHEAL(f.heal);
-			Font::StrDraw(L"HP/MPが回復した！", 200, 200, 20, g);//時間が0になると表示を終了
-			if (t.heal <= 0) {
-				t.heal = 0;
-			}
+		}	
+	}
+	if (f.heal == true)		//フラグがオンの時タイムをセット
+	{
+		t.heal = 100;
+	}
+	if (t.heal > 0) {
+		t.heal--;
+		f.heal = false;
+		hero->SetHEAL(f.heal);
+		Font::StrDraw(L"HP/MPが回復した！", 200, 200, 20, g);//時間が0になると表示を終了
+		if (t.heal <= 0) {
+			t.heal = 0;
 		}
 	}
 }

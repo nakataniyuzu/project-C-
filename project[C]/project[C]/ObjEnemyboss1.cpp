@@ -1,3 +1,4 @@
+
 //使用するヘッダーファイル
 #include "GameL\DrawTexture.h"
 #include "GameL\WinInputs.h"
@@ -19,12 +20,6 @@ CObjEnemyboss1::CObjEnemyboss1(float x, float y)
 //イニシャライズ
 void CObjEnemyboss1::Init()
 {
-	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
-	m_hit_right = false;
-
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 100.0f, 100.0f, ELEMENT_BOSS, OBJ_BOSS, 1);
 }
@@ -40,6 +35,7 @@ void CObjEnemyboss1::Action()
 
 	if (battle_flag == false)
 	{
+		
 		m_time = 100;
 		hit->SetInvincibility(true);	//無敵オン
 		return;
@@ -80,18 +76,18 @@ void CObjEnemyboss1::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-				//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 100.0f;
+	//切り取り位置の設定
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 100.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetScrollY();
-	dst.m_left = 0.0f + m_px + block->GetScrollX();
-	dst.m_right = 100.0f + m_px + block->GetScrollX();
+	dst.m_top    = 0.0f + m_py + block->GetScrollY();
+	dst.m_left   = 0.0f + m_px + block->GetScrollX();
+	dst.m_right  = 100.0f + m_px + block->GetScrollX();
 	dst.m_bottom = 100.0f + m_py + block->GetScrollY();
 
-	Draw::Draw(13, &src, &dst, c, 0.0f);
+	Draw::Draw(14, &src, &dst, c, 0.0f);
 }

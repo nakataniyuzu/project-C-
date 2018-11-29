@@ -38,13 +38,13 @@ class CObjHero : public CObj
 		void SetHP(float x) { m_hp = x; }	//主人公のHPに値をセット
 		void SetMP(float x) { m_mp = x; }	//主人公のMPに値をセット
 		void SetMAGIC(float x) { m_magic = x; }	//主人公の魔法の種類をセット
+		
+		bool GetENEMYF() { return m_ene_battle_flag; }		//敵出現用フラグを取得
+		bool GetBOSSF() { return m_boss_battle_flag; }		//ボス出現用フラグを取得
 
-		bool GetENEMYF() { return m_enemy_flag; }	//敵出現用フラグを取得
-		bool GetBOSSF() { return m_boss_flag; }		//ボス出現用フラグを取得
-
-		void SetENEMYF(bool x) { m_enemy_flag = x; }	//敵出現用フラグをセット
-		void SetBOSSF(bool x) { m_boss_flag = x; }		//ボス出現用フラグをセット
-
+		void SetENEMYF(bool x) { m_ene_battle_flag = x; }	//敵出現用フラグをセット
+		void SetBOSSF(bool x) { m_boss_battle_flag = x; }		//ボス出現用フラグをセット
+		
 		bool GetKEYF() { return mes.key; }		//KEYの情報を取得
 		bool GetGATEF() { return mes.gate; }	//GATEの情報を取得
 		bool GetWATERF() { return mes.water; }	//WATERの情報を取得

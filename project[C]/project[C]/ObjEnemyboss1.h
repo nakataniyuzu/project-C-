@@ -27,7 +27,8 @@ private:
 	bool m_hit_left;
 	bool m_hit_right;
 
-	bool battle_flag;
+	bool battle_flag;		//バトル移行用
+	bool hero_posture;		//主人公の向き
 
 	int   m_time;
 

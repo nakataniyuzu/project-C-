@@ -37,7 +37,7 @@ void CObjBlock::Action()
 	m_battle_flag = hero->GetBATTLE();
 	m_boss_flag = hero->GetBOSSBATTLE();
 
-	if (m_battle_flag == false || m_boss_flag == false)
+	if (m_battle_flag == false)
 	{
 		return;
 	}
@@ -197,7 +197,7 @@ void CObjBlock::Action()
 void CObjBlock::Draw()
 {
 
-	if (m_battle_flag == false || m_boss_flag == false)
+	if (m_battle_flag == false)
 	{
 		return;
 	}

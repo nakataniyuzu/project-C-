@@ -97,13 +97,16 @@ void CSceneMain::InitScene()
 
 	
 	//主人公オブジェクト作成
-	CObjHeroBattle* bobj = new CObjHeroBattle();
-	Objs::InsertObj(bobj, OBJ_HERO_BATTLE, 10);
+	CObjHeroBattle* bhero = new CObjHeroBattle();
+	Objs::InsertObj(bhero, OBJ_HERO_BATTLE, 10);
 
 	//blockオブジェクト作成
 	CObjBlockBattle* bobjb = new CObjBlockBattle();
 	Objs::InsertObj(bobjb, OBJ_BLOCK_BATTLE, 9);
-
+	
+	CObjEnemyBattle* bobje = new CObjEnemyBattle();
+	Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE, 10);
+	
 	//背景(戦闘)オブジェクト作成
 	CObjBackgroundBattle* bobjbackb = new CObjBackgroundBattle();
 	Objs::InsertObj(bobjbackb, OBJ_BACKGROUND_BATTLE,8);
@@ -130,5 +133,4 @@ void CSceneMain::Scene()
 		boss_flag = false;
 		hero->SetBOSSF(boss_flag);
 	}
-
 }

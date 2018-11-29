@@ -36,6 +36,7 @@ private:
 	int m_block_type;
 
 	bool m_battle_flag;
+	bool boss_flag;
 
 	//ˆÚ“®‚ÌŒü‚«§Œä—p
 	bool m_move;

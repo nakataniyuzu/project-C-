@@ -10,6 +10,7 @@ enum OBJ_NAME
 	OBJ_GAMEOVER,
 	OBJ_MENU,
 	OBJ_MAIN,
+	OBJ_CLEAR,
 	OBJ_MESSAGE,
 
 	OBJ_SWORD_BATTLE,
@@ -113,6 +114,7 @@ struct UserData
 #include "ObjSister.h"
 #include "ObjMenu.h"
 #include "ObjMain.h"
+#include "ObjClear.h"
 #include "ObjGameover.h"
 
 //ItemŠÖŒW
@@ -140,7 +142,8 @@ struct UserData
 //EnemyŠÖŒW
 #include "ObjBoss.h"
 #include "ObjBossBattle.h"
-#include "ObjEnemy.h"
+#include "ObjEnemyboss1.h"
+#include "ObjEnemy1.h"
 #include "ObjEnemyFirst.h"
 
 
@@ -170,6 +173,7 @@ struct UserData
 #include "SceneMenu.h"
 #include "SceneBattle.h"
 #include "SceneGameover.h"
+#include "SceneClear.h"
 
 //-----------------------------------------------
 

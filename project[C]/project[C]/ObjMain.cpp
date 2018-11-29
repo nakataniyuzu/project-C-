@@ -33,6 +33,7 @@ void CObjMain::Draw()
 	hero_mp = hero->GetMP();	//主人公からMPの情報を取得
 	magic_type = hero->GetMAGIC();	//主人公からMAGICの情報を取得
 	key = hero->GetKEY();
+	battle_flag = hero->GetBATTLE();
 
 	float c[4] = { 1,1,1,1 };
 
@@ -83,9 +84,18 @@ void CObjMain::Draw()
 		Draw::Draw(HEALKEY, &src, &dst, c, 0.0f);
 	}
 
-	//Font::StrDraw(L"Inventory   ：Iキー", GAME_INVENTORY_POS_X, GAME_INVENTORY_POS_Y, GAME_INVENTORY_FONT_SIZE, c);
+	if (battle_flag == false)
+	{
+		Font::StrDraw(L"Aキーで通常攻撃", GAME_MESSAGE_POS_X, GAME_MESSAGE_POS_Y, GAME_MESSAGE_FONT_SIZE, c);
 
-	//Font::StrDraw(L"メニュー画面：Eキー", GAME_MENU_POS_X, GAME_MENU_POS_Y, GAME_MENU_FONT_SIZE, c);
+		Font::StrDraw(L"Zキーで魔法攻撃", GAME_MESSAGE2_POS_X, GAME_MESSAGE2_POS_Y, GAME_MESSAGE2_FONT_SIZE, c);
+	}
+	else
+	{
+		Font::StrDraw(L"Zキーで魔法", GAME_MESSAGE_POS_X, GAME_MESSAGE_POS_Y, GAME_MESSAGE_FONT_SIZE, c);
+
+		Font::StrDraw(L"Xキーで切り替え", GAME_MESSAGE2_POS_X, GAME_MESSAGE2_POS_Y, GAME_MESSAGE2_FONT_SIZE, c);
+	}
 	
 	swprintf_s(KILLS, L"敵の撃破数×%d",enemy_kills);
 	Font::StrDraw(KILLS, GAME_ENEMY_KILLS_POS_X, GAME_ENEMY_KILLS_POS_Y, GAME_ENEMY_KILLS_FONT_SIZE, c);

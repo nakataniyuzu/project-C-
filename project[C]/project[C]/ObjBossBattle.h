@@ -30,11 +30,12 @@ private:
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 	float hero_posture;
 
+	int m_time;	//突進時間
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
 
 	bool m_boss_flag;	//ボス戦闘用フラグ
-
+	bool enemy_flag;	//敵削除用
 	//移動の向き制御用
 	bool m_move;
 };

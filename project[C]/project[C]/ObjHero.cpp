@@ -39,10 +39,11 @@ void CObjHero::Init()
 	mes.ice = false;
 	mes.switchblock = false;
 	mes.switchgate = false;
+	mes.heal = false;
 
 	m_battle_flag = true;
-	m_ene_battle_flag = true;
-	m_boss_battle_flag = true;
+	m_ene_battle_flag = false;
+	m_boss_battle_flag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
@@ -69,7 +70,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	if (m_battle_flag == false || m_boss_battle_flag == false)
+	if (m_battle_flag == false)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -159,7 +160,6 @@ void CObjHero::Action()
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
-				m_hp -= 3;		//HPを減らす（デバッグ）
 			}
 		}
 		else
@@ -266,23 +266,13 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		m_battle_flag = false;
-		m_ene_battle_flag = false;
-		//Scene::SetScene(new CSceneBattle());
-
-		//敵(戦闘)オブジェクト作成
-		CObjEnemyBattle* bobje = new CObjEnemyBattle();
-		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE, 10);
+		//m_ene_battle_flag = true;
 	}
 	//敵を接触したらBATTLESCENEに移行(BOSS)
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
 		m_battle_flag = false;
-		m_boss_battle_flag = false;
-		//Scene::SetScene(new CSceneBattle());
-
-		//敵(戦闘)オブジェクト作成
-		CObjBossBattle* bobje = new CObjBossBattle();
-		Objs::InsertObj(bobje, OBJ_BOSS_BATTLE, 10);
+		m_boss_battle_flag = true;
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{
@@ -322,7 +312,7 @@ void CObjHero::Action()
 	}
 	if (hit->CheckElementHit(ELEMENT_SISTER) == true)	//主人公が妹に触れた場合
 	{
-		Scene::SetScene(new CSceneTitle());	//ゲームクリアシーンに移行
+		Scene::SetScene(new CSceneClear());	//ゲームクリアシーンに移行
 	}
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -348,7 +338,7 @@ void CObjHero::Action()
 //ドロー
 void CObjHero::Draw()
 {
-	if (m_battle_flag == false || m_boss_battle_flag == false)
+	if (m_battle_flag == false)
 	{
 		return;
 	}

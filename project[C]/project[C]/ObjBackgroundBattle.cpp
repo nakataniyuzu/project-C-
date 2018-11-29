@@ -25,9 +25,8 @@ void CObjBackgroundBattle::Draw()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
-	m_boss_battle_f = hero->GetBOSSBATTLE();
 
-	if (m_battle_flag == true || m_boss_battle_f == true)
+	if (m_battle_flag == true)
 	{
 		return;
 	}

@@ -58,7 +58,7 @@ void CObjHeroBattle::Action()
 	m_wind_flag    = hero->GetWINDF();
 
 
-	if (m_battle_flag == true || m_boss_battle_f == true)
+	if (m_battle_flag == true)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
@@ -231,21 +231,22 @@ void CObjHeroBattle::Action()
 	hit->SetPos(m_px, m_py);
 
 	//UŒ‚‚ðŽó‚¯‚½‚ç‘Ì—Í‚ðŒ¸‚ç‚·
-	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr 
+		|| hit->CheckObjNameHit(OBJ_BOSS_BATTLE) != nullptr)
 	{
 		//ƒmƒbƒNƒoƒbƒNˆ—
 		if (m_posture == 0.0f)
 		{
 			m_vy = -15;
-			m_vx -= 10;
+			m_vx -= 20;
 		}
 		else if (m_posture == 1.0f)
 		{
 			m_vy = -15;
-			m_vx += 10;
+			m_vx += 20;
 		}
 		m_battle_hp -= 1;
-		m_time = 60;		//–³“GŽžŠÔ‚ðƒZƒbƒg
+		m_time = 80;		//–³“GŽžŠÔ‚ðƒZƒbƒg
 		hit->SetInvincibility(true);	//–³“GƒIƒ“
 	}
 	if (m_time > 0)
@@ -297,7 +298,7 @@ void CObjHeroBattle::Action()
 //ƒhƒ[
 void CObjHeroBattle::Draw()
 {
-	if (m_battle_flag == true || m_boss_battle_f == true)
+	if (m_battle_flag == true)
 	{
 		return;
 	}
@@ -309,6 +310,7 @@ void CObjHeroBattle::Draw()
 
 	//•`‰æƒJƒ‰[î•ñ
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
 	RECT_F dst;	//•`‰ææ•\Ž¦ˆÊ’u
@@ -326,6 +328,11 @@ void CObjHeroBattle::Draw()
 	dst.m_bottom = 100.0f + m_py;
 
 	//•`‰æ
-	Draw::Draw(11, &src, &dst, c, 0.0f);
+	if (m_time > 0){
+		Draw::Draw(11, &src, &dst, a, 0.0f);
+	}
+	else {
+		Draw::Draw(11, &src, &dst, c, 0.0f);
+	}
 
 }
