@@ -78,8 +78,8 @@ void CObjMain::Draw()
 
 		//ï\é¶à íuÇÃê›íË
 		dst.m_top    =   0.0f;
-		dst.m_left   = 300.0f;
-		dst.m_right  = 330.0f;
+		dst.m_left   = 500.0f;
+		dst.m_right  = 530.0f;
 		dst.m_bottom =  30.0f;
 		Draw::Draw(HEALKEY, &src, &dst, c, 0.0f);
 	}

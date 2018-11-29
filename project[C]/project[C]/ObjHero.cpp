@@ -21,7 +21,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 1.0f;	//通常速度
+	m_speed_power = 0.3f;	//通常速度
 	m_posture = 2.0f;
 	
 	m_max_hp = 10;	//最大HP
