@@ -30,6 +30,8 @@ class CObjHero : public CObj
 		bool GetBATTLE() { return m_battle_flag; }	//バトル移行用のフラグを取得
 		bool GetBOSSBATTLE() { return m_boss_battle_flag; }	//ボスバトル移行用のフラグを取得
 		
+		bool GetDELETE() { return m_delete; }	//敵消滅用のフラグを取得
+
 		void SetBOSSBATTLE(bool x) { m_boss_battle_flag = x; }
 		void SetBATTLE(bool x) { m_battle_flag = x; }
 
@@ -117,10 +119,7 @@ class CObjHero : public CObj
 		bool m_thunder_flag;
 		bool m_wind_flag;
 
-		bool   m_gate_time;
-		bool   m_ice_time;			//表示する時間
-		bool   m_water_time;
-		bool   m_key_time;
+		bool m_delete;	//敵消滅用
 
 		int	  m_ani_time;	//アニメーションフレーム動作間隔
 		int   m_ani_frame;	//描画フレーム

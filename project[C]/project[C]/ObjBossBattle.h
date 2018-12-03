@@ -15,8 +15,10 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
-private:
-	float m_px;//位置
+	void SetBOSSDELETE(bool x) { boss_delete_flag = x; }
+
+private:	
+	float m_px;			//位置
 	float m_py;
 	float m_vx;			//移動ベクトル
 	float m_vy;
@@ -36,6 +38,7 @@ private:
 
 	bool m_boss_flag;	//ボス戦闘用フラグ
 	bool enemy_flag;	//敵削除用
+	bool boss_delete_flag;	//ボス削除用
 	//移動の向き制御用
 	bool m_move;
 };

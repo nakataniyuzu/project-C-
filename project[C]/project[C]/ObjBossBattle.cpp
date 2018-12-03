@@ -44,10 +44,15 @@ void CObjBossBattle::Action()
 	hero_posture = hero->GetPOS();
 	enemy_flag = hero->GetENEMYF();
 
+	if (boss_delete_flag == true)
+	{
+		boss_delete_flag = false;
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 
 	if (m_boss_flag == true)
 	{
-		
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 		return;

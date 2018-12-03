@@ -15,11 +15,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjEnemyBattle::Init()
 {
-	m_px = 600.0f;//位置
-	m_py = 450.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 	m_enemy_hp = 3;     //敵のヒットポイント(最大3)
 
 	m_ani_time = 0;
@@ -29,20 +26,11 @@ void CObjEnemyBattle::Init()
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
 	m_move = true;  //true=右 false=左
+	enemy_delete_flag = false;	//敵消滅フラグ
+	m_posture_flag = true;	//敵向き用フラグ
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
-
-	if (hero_posture == 0.0f || hero_posture == 1.0f)
-	{
-		m_px = 600.0f;
-		m_py = 500.0f;		//出現位置
-	}
-	else if (hero_posture == 2.0f || hero_posture == 3.0f)
-	{
-		m_px = 100.0f;
-		m_py = 500.0f;		//出現位置
-	}
-
+	
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
 }
@@ -58,20 +46,37 @@ void CObjEnemyBattle::Action()
 	hero_posture = hero->GetPOS();
 	boss_flag = hero->GetBOSSF();
 
-	if (m_battle_flag == true)
+	if (enemy_delete_flag == true)
+	{
+		enemy_delete_flag = false;
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	//マップ上の主人公の向きによってリス位置、向きを設定
+	if (m_posture_flag == true)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
 			m_px = 600.0f;
 			m_py = 500.0f;		//出現位置
+			m_posture = 1.0f;	//向き
 		}
 		else if (hero_posture == 2.0f || hero_posture == 3.0f)
 		{
 			m_px = 100.0f;
 			m_py = 500.0f;		//出現位置
+			m_posture = 0.0f;	//向き
 		}
+		m_posture_flag = false;	//向き用フラグ
+	}
+	
+	//マップへの移行
+	if (m_battle_flag == true)
+	{	
 		m_vx = 0.0f;
 		m_vy = 0.0f;
+		m_posture_flag = true;
 		return;
 	}
 
@@ -192,6 +197,7 @@ void CObjEnemyBattle::Action()
 	{
 		m_py = 50.0f;
 	}
+
 }
 
 //ドロー

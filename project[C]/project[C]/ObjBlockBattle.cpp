@@ -85,6 +85,4 @@ void CObjBlockBattle::Draw()
 
 	//•`‰æ
 	Draw::Draw(FLOOR1, &src, &dst, c, 0.0f);
-		
-
 }

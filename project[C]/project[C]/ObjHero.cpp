@@ -266,13 +266,15 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		m_battle_flag = false;
-		//m_ene_battle_flag = true;
+		m_ene_battle_flag = true;
+		m_delete = true;
 	}
 	//“G‚ğÚG‚µ‚½‚çBATTLESCENE‚ÉˆÚs(BOSS)
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
 		m_battle_flag = false;
 		m_boss_battle_flag = true;
+		m_delete = false;
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//ƒL[‚ğæ“¾
 	{
