@@ -117,7 +117,7 @@ void CObjMessage::Draw()
 	if (t.sblock > 0) {
 		t.sblock--;
 		f.sblock = false;
-		hero->SetSGATE(f.sblock);
+		hero->SetSBLOCK(f.sblock);
 		Font::StrDraw(L"どこかで扉が開く音がした。", 200, 200, 20, y);//時間が0になると表示を終了
 		if (t.sblock <= 0) {
 			t.sblock = 0;

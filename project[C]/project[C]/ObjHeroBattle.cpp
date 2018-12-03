@@ -13,18 +13,6 @@ using namespace GameL;
 //イニシャライズ
 void CObjHeroBattle::Init()
 {
-	
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_hp = hero->GetHP();	//主人公からHPの情報を取得
-	m_battle_mp = hero->GetMP();	//主人公からMPの情報を取得
-	m_battle_magic = hero->GetMAGIC();	//主人公からMAGICの情報を取得
-
-	//炎か風の魔法で戦闘に入らないようにするための処理
-	/*if (m_battle_magic == 0 || m_battle_magic == 2)
-	{
-		m_battle_magic = 0;
-	}*/
-
 	m_battle_magic = 0;
 
 	m_vx = 0.0f;		//移動ベクトル
@@ -47,10 +35,20 @@ void CObjHeroBattle::Init()
 //アクション
 void CObjHeroBattle::Action()
 {
+	//敵の情報を持ってくる
+	CObjEnemyBattle* benemy = (CObjEnemyBattle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
+	CObjBossBattle* bboss = (CObjBossBattle*)Objs::GetObj(OBJ_BOSS_BATTLE);
+
+	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_battle_hp = hero->GetHP();	//主人公からHPの情報を取得
+	m_battle_mp = hero->GetMP();	//主人公からMPの情報を取得
+	m_battle_magic = hero->GetMAGIC();	//主人公からMAGICの情報を取得
+
 	m_battle_flag = hero->GetBATTLE();
 	m_boss_battle_f = hero->GetBOSSBATTLE();
-	hero_posture = hero->GetPOS();	
+	hero_posture = hero->GetPOS();	//マップ上の主人公の向きを取得
+	m_delete = hero->GetDELETE();
 
 	m_fire_flag    = hero->GetFIREF();
 	m_ice_flag     = hero->GetICEF();
@@ -265,20 +263,32 @@ void CObjHeroBattle::Action()
 		Scene::SetScene(new CSceneGameover());
 	}
 
-	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
 	//主人公が領域外に行かないようにする
 	if (m_px + 75 >= 800)
 	{
 		m_px = 800.0 - 75.0f;
-		if (hero_posture == 0.0f || hero_posture == 1.0f)
+		if (hero_posture == 0.0f || hero_posture == 1.0f) {
 			hero->SetBATTLE(true);
+			if (m_delete == true){
+				benemy->SetENEMYDELETE(true);
+			}
+			else {
+				bboss->SetBOSSDELETE(true);
+			}
+		}
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
-		if (hero_posture == 2.0f || hero_posture == 3.0f)
+		if (hero_posture == 2.0f || hero_posture == 3.0f) {
 			hero->SetBATTLE(true);
+			if (m_delete == true) {
+				benemy->SetENEMYDELETE(true);
+			}
+			else {
+				bboss->SetBOSSDELETE(true);
+			}
+		}
 	}
 	if (m_py + 100 >= 580)
 	{

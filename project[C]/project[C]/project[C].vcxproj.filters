@@ -46,6 +46,12 @@
     <Filter Include="ソース ファイル\Gameclear">
       <UniqueIdentifier>{a437afaf-0976-439a-8d74-5d8913cf08cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Enemy関係\Battle">
+      <UniqueIdentifier>{4d5e1f42-b088-4bbb-ab36-649f303a2c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Enemy関係\Map">
+      <UniqueIdentifier>{de67b104-5d55-487f-94e0-2e0d1f287afb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -186,17 +192,8 @@
     <ClCompile Include="CObjFireBattle.cpp">
       <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemyBattle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBossBattle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSister.cpp">
       <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemyboss1.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClCompile>
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソース ファイル\Main</Filter>
@@ -204,14 +201,23 @@
     <ClCompile Include="SceneGameover.cpp">
       <Filter>ソース ファイル\Gameover</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemy1.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClCompile>
     <ClCompile Include="ObjClear.cpp">
       <Filter>ソース ファイル\Gameclear</Filter>
     </ClCompile>
     <ClCompile Include="SceneClear.cpp">
       <Filter>ソース ファイル\Gameclear</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBossBattle.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyBattle.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy1.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyboss1.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -356,20 +362,8 @@
     <ClInclude Include="ObjGameover.h">
       <Filter>ソース ファイル\Gameover</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemyBattle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBossBattle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
     <ClInclude Include="ObjSister.h">
       <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemyboss1.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy1.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ソース ファイル\Main</Filter>
@@ -382,6 +376,18 @@
     </ClInclude>
     <ClInclude Include="SceneClear.h">
       <Filter>ソース ファイル\Gameclear</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBossBattle.h">
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemyBattle.h">
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy1.h">
+      <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemyboss1.h">
+      <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

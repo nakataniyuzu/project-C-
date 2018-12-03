@@ -21,7 +21,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 0.3f;	//通常速度
+	m_speed_power = 1.0f;	//通常速度
 	m_posture = 2.0f;
 	
 	m_max_hp = 10;	//最大HP
@@ -266,13 +266,15 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		m_battle_flag = false;
-		//m_ene_battle_flag = true;
+		m_ene_battle_flag = true;
+		m_delete = true;
 	}
 	//敵を接触したらBATTLESCENEに移行(BOSS)
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
 		m_battle_flag = false;
 		m_boss_battle_flag = true;
+		m_delete = false;
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{
