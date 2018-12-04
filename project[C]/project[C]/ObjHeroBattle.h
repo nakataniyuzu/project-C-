@@ -47,6 +47,8 @@ private:
 	int m_battle_mp;	//魔法使用回数(戦闘)
 	int m_battle_magic;	//魔法切り替え(戦闘)
 
+	int m_damage;
+
 	int m_time;		//無敵時間用
 	int m_sword_delay;
 

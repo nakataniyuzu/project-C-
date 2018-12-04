@@ -64,7 +64,7 @@ void CObjSwordBattle::Action()
 	hit->SetPos(m_x, m_y);
 
 	//“G‚ÆÚG‚µ‚½‚çŒ•íœ
-	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr)
+	if (hit->CheckElementHit(ELEMENT_ENEMY_BATTLE) == true)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

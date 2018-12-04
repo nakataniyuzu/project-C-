@@ -18,6 +18,7 @@ void CObjEnemyBattle::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_enemy_hp = 3;     //敵のヒットポイント(最大3)
+	m_damage = 1;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -32,7 +33,7 @@ void CObjEnemyBattle::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 	
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_FIRST, 1);
 }
 
 //アクション

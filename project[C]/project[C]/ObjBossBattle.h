@@ -16,6 +16,7 @@ public:
 	void Draw();		//ドロー
 
 	void SetBOSSDELETE(bool x) { boss_delete_flag = x; }
+	int GetDMG() { return m_damage; }//攻撃力を取得
 
 private:	
 	float m_px;			//位置
@@ -24,9 +25,10 @@ private:
 	float m_vy;
 	float m_posture;	//姿勢
 
-	int	  m_ani_time;	//アニメーションフレーム動作間隔
-	int   m_ani_frame;	//描画フレーム
-	int   m_boss_hp;   //敵の体力
+	int m_ani_time;	//アニメーションフレーム動作間隔
+	int m_ani_frame;	//描画フレーム
+	int m_boss_hp;   //敵の体力
+	int m_damage;
 
 	float m_speed_power;	//スピードパワー
 	float m_ani_max_time;	//アニメーション動作間隔最大値

@@ -21,6 +21,7 @@ void CObjEnemy2Battle::Init()
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 	m_enemy_hp = 10;     //敵のヒットポイント(最大10)
+	m_damage = 2;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -47,7 +48,7 @@ void CObjEnemy2Battle::Init()
 	}
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_SECOND, 1);
 }
 
 //アクション

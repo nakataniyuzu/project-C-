@@ -15,6 +15,8 @@ class CObjEnemy2Battle : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
+		int GetDMG() {  return m_damage; }//攻撃力を取得
+
 	private:
 		float m_px;//位置
 		float m_py;
@@ -22,9 +24,10 @@ class CObjEnemy2Battle : public CObj
 		float m_vy;
 		float m_posture;	//姿勢
 
-		int	  m_ani_time;	//アニメーションフレーム動作間隔
-		int   m_ani_frame;	//描画フレーム
-		int   m_enemy_hp;   //敵の体力
+		int m_ani_time;	//アニメーションフレーム動作間隔
+		int m_ani_frame;	//描画フレーム
+		int m_enemy_hp;   //敵の体力
+		int m_damage;		//敵の攻撃力
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値

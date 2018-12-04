@@ -231,7 +231,7 @@ void CObjHeroBattle::Action()
 	hit->SetPos(m_px, m_py);
 
 	//攻撃を受けたら体力を減らす
-	if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE) != nullptr 
+	if (hit->CheckElementHit(ELEMENT_ENEMY_BATTLE) == true
 		|| hit->CheckObjNameHit(OBJ_BOSS_BATTLE) != nullptr)
 	{
 		//ノックバック処理
@@ -245,9 +245,14 @@ void CObjHeroBattle::Action()
 			m_vy = -15;
 			m_vx += 20;
 		}
-		m_battle_hp -= 1;
 		m_time = 80;		//無敵時間をセット
 		hit->SetInvincibility(true);	//無敵オン
+		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_SECOND) != nullptr)
+		{
+			CObjEnemy2Battle* e2b = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
+			m_damage = e2b ->GetDMG();
+			m_battle_hp -= m_damage;
+		}
 	}
 	if (m_time > 0)
 	{
