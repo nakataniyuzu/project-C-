@@ -23,7 +23,7 @@ private:
 	float m_vx;			//移動ベクトル
 	float m_vy;
 	float m_posture;	//姿勢
-	bool m_posture_flag; //姿勢によってリス位置の初期化用
+	bool m_pop_flag; //リス位置の初期化用
 
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム

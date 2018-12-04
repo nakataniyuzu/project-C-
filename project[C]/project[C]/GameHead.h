@@ -51,6 +51,8 @@ enum OBJ_NAME
 	OBJ_RESETBLOCK,
 	OBJ_SWITCH,
 	OBJ_SWITCHGATE,
+
+	OBJ_FADEIN,
 };
 //------------------------------------------------
 
@@ -165,6 +167,7 @@ struct UserData
 #include "ObjSwitchGate.h"
 
 #include "ObjMessage.h"
+#include "ObjFadein.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

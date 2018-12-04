@@ -75,8 +75,9 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"ENEMYBOSS1.png", 14, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"sister.png", 15, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_800_600);
 
-
+	
 	
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
@@ -96,6 +97,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objmessa, OBJ_MESSAGE, 120);
 
 	
+
 	//主人公オブジェクト作成
 	CObjHeroBattle* bhero = new CObjHeroBattle();
 	Objs::InsertObj(bhero, OBJ_HERO_BATTLE, 10);

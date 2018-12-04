@@ -81,6 +81,8 @@ void CObjHero::Action()
 	if (Input::GetVKey('E') == true)
 	{
 		//Scene::SetScene(new CSceneMenu());
+		CObjFadein* fade = new CObjFadein();
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
 
 	//XƒL[‚Å–‚–@‚ğØ‚è‘Ö‚¦‚é

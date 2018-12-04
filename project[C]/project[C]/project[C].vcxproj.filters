@@ -219,6 +219,9 @@
     <ClCompile Include="ObjEnemyboss1.cpp">
       <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
     </ClCompile>
+    <ClCompile Include="ObjFadein.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -388,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="ObjEnemyboss1.h">
       <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFadein.h">
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

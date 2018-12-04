@@ -15,11 +15,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjBossBattle::Init()
 {
-	m_px = 100.0f;//位置
-	m_py = 500.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 	m_boss_hp = 15;     //敵のヒットポイント(最大3)
 
 	m_ani_time = 0;
@@ -27,7 +24,7 @@ void CObjBossBattle::Init()
 
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
-
+	m_pop_flag = true;
 	m_move = true;  //true=右 false=左
 
 
@@ -50,11 +47,29 @@ void CObjBossBattle::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
+	//マップ上の主人公の向きによってリス位置、向きを設定
+	if (m_pop_flag == true)
+	{
+		if (hero_posture == 0.0f || hero_posture == 1.0f)
+		{
+			m_px = 600.0f;
+			m_py = 500.0f;		//出現位置
+			m_move = true;	//向き
+		}
+		else if (hero_posture == 2.0f || hero_posture == 3.0f)
+		{
+			m_px = 100.0f;
+			m_py = 500.0f;		//出現位置
+			m_move = false;	//向き
+		}
+		m_pop_flag = false;	//向き用フラグ
+	}
 
 	if (m_boss_flag == true)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
+		m_pop_flag = true;
 		return;
 	}
 

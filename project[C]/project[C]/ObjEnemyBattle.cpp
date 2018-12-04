@@ -27,7 +27,7 @@ void CObjEnemyBattle::Init()
 
 	m_move = true;  //true=右 false=左
 	enemy_delete_flag = false;	//敵消滅フラグ
-	m_posture_flag = true;	//敵向き用フラグ
+	m_pop_flag = true;	//敵向き用フラグ
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 	
@@ -54,21 +54,21 @@ void CObjEnemyBattle::Action()
 	}
 
 	//マップ上の主人公の向きによってリス位置、向きを設定
-	if (m_posture_flag == true)
+	if (m_pop_flag == true)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
 			m_px = 600.0f;
 			m_py = 500.0f;		//出現位置
-			m_posture = 1.0f;	//向き
+			m_move = true;	//向き
 		}
-		else if (hero_posture == 2.0f || hero_posture == 3.0f)
+		if (hero_posture == 2.0f || hero_posture == 3.0f)
 		{
 			m_px = 100.0f;
 			m_py = 500.0f;		//出現位置
-			m_posture = 0.0f;	//向き
+			m_move = false;	//向き
 		}
-		m_posture_flag = false;	//向き用フラグ
+		m_pop_flag = false;	//向き用フラグ
 	}
 	
 	//マップへの移行
@@ -76,7 +76,7 @@ void CObjEnemyBattle::Action()
 	{	
 		m_vx = 0.0f;
 		m_vy = 0.0f;
-		m_posture_flag = true;
+		m_pop_flag = true;
 		return;
 	}
 

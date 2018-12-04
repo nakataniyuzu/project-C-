@@ -62,11 +62,13 @@ void CObjHeroBattle::Action()
 		{
 			m_px = 100.0f;
 			m_py = 500.0f;		//位置
+			m_posture = 0.0f;
 		}
 		else if (hero_posture == 2.0f || hero_posture == 3.0f)
 		{
 			m_px = 600.0f;
 			m_py = 500.0f;		//位置
+			m_posture = 1.0f;
 		}
 
 		m_vx = 0.0f;
@@ -117,7 +119,7 @@ void CObjHeroBattle::Action()
 	//Eキーでメニューを開く
 	if (Input::GetVKey('E') == true)
 	{
-		Scene::SetScene(new CSceneMenu());
+		//Scene::SetScene(new CSceneMenu());
 		
 	}
 
