@@ -33,12 +33,12 @@ void CObjIce::Init()
 
 	//主人公の位向きを取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	posture = hero->GetPOS();
+	m_posture = hero->GetPOS();
 
 	m_time = 50;	//魔法が消える時間
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, ALL_SIZE, ALL_SIZE, ELEMENT_MAGIC, OBJ_ICE, 1);
+	Hits::SetHitBox(this, m_x + 18, m_y + 18, 18.0f, 18.0f, ELEMENT_MAGIC, OBJ_ICE, 1);
 }
 
 //アクション
@@ -53,26 +53,26 @@ void CObjIce::Action()
 	if (m_hit_right == true)//右
 		m_hit = true;
 
-	if (posture == 0.0f) {
+	if (m_posture == 0.0f) {
 		m_vy = -5.0f;
 		m_y += m_vy;
 	}
-	if (posture == 1.0f) {
+	if (m_posture == 1.0f) {
 		m_vx = 5.0f;
 		m_x += m_vx;
 	}
-	if (posture == 2.0f) {
+	if (m_posture == 2.0f) {
 		m_vy = 5.0f;
 		m_y += m_vy;
 	}
-	if (posture == 3.0f) {
+	if (m_posture == 3.0f) {
 		m_vx = -5.0f;
 		m_x += m_vx;
 	}
 
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_x, m_y);
+	hit->SetPos(m_x + 18, m_y + 18);
 
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d;
@@ -128,5 +128,9 @@ void CObjIce::Draw()
 	dst.m_right  = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(13, &src, &dst, c, 0.0f);
+	if(m_posture == 0.0f || m_posture == 2.0f)
+		Draw::Draw(13, &src, &dst, c, 90.0f);
+	else
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+
 }

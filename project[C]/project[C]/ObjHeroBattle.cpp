@@ -270,7 +270,8 @@ void CObjHeroBattle::Action()
 	{
 		m_px = 800.0 - 75.0f;
 		if (hero_posture == 0.0f || hero_posture == 1.0f) {
-			hero->SetBATTLE(true);
+			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+			Objs::InsertObj(fade, OBJ_FADEIN, 200);
 			if (m_delete == true){
 				benemy->SetENEMYDELETE(true);
 			}
@@ -283,7 +284,8 @@ void CObjHeroBattle::Action()
 	{
 		m_px = 0.0f;
 		if (hero_posture == 2.0f || hero_posture == 3.0f) {
-			hero->SetBATTLE(true);
+			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+			Objs::InsertObj(fade, OBJ_FADEIN, 200);
 			if (m_delete == true) {
 				benemy->SetENEMYDELETE(true);
 			}

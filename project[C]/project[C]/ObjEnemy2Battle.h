@@ -28,8 +28,8 @@ class CObjEnemy2Battle : public CObj
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
-		float hero_posture;
-
+		float m_hero_posture;
+		
 		int m_subtract;			//おテスト
 		int m_hero_position;	//おテスト2
 
@@ -37,7 +37,7 @@ class CObjEnemy2Battle : public CObj
 		int m_block_type;
 
 		bool m_battle_flag;
-		bool boss_flag;
+		bool m_boss_flag;
 
 		//移動の向き制御用
 		bool m_move;

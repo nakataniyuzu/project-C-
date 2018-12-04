@@ -14,24 +14,56 @@ void CObjFadein::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
-	m_ani_max_time = 1;		//アニメーション間隔幅
+	m_ani_max_time = 2;		//アニメーション間隔幅
+	m_flag = true;		//切り替え用フラグ
 }
 
 //アクション
 void CObjFadein::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	hero->SetSPEED(0.0f);
+	hero->SetVX(0.0f);
+	hero->SetVY(0.0f);
+	m_fadein_flag = hero->GetFADEF();
 
-
-
-	m_ani_time += 1;
-	if (m_ani_time > m_ani_max_time)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
+	if (m_fadein_flag == true) {
+		m_fadeout_flag = false;
 	}
-	if (m_ani_frame == 10)
+	else {
+		m_fadeout_flag = true;
+	}
+
+	if (m_flag == true)
 	{
-		this->SetStatus(false);
+		m_ani_time += 1;
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+		if (m_ani_frame == 9)
+		{
+			m_flag = false;
+		}
+	}
+	else 
+	{
+		m_ani_time = 10;
+		m_ani_time -= 1;
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame -= 1;
+			//m_ani_time = 10;
+		}
+		if (m_ani_frame == 0)
+		{
+			hero->SetBATTLE(m_fadeout_flag);		//バトル画面への移行
+
+			this->SetStatus(false);
+		}
 	}
 }
 

@@ -5,7 +5,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：敵(戦闘：1層目)
+//オブジェクト：敵(戦闘)
 class CObjEnemyBattle : public CObj
 {
 public:

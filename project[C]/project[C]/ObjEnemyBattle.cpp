@@ -15,6 +15,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjEnemyBattle::Init()
 {
+	m_px = 300.0f;
+	m_py = 500.0f;		//出現位置
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_enemy_hp = 3;     //敵のヒットポイント(最大3)
