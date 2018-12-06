@@ -75,9 +75,9 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"ENEMYBOSS1.png", 14, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"sister.png", 15, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
-	Draw::LoadImageW(L"Floor2_Enemy.png", 17, TEX_SIZE_100);
-	Draw::LoadImageW(L"Fadein.png", 18, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_16000_600);
 
+	
 	
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
@@ -124,21 +124,21 @@ void CSceneMain::InitScene()
 void CSceneMain::Scene()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	enemy_flag = hero->GetENEMYF();
-	boss_flag = hero->GetBOSSF();
+	m_enemy_flag = hero->GetENEMYF();
+	m_boss_flag = hero->GetBOSSF();
 
-	if (enemy_flag == true)		//フラグがオンの時、敵出現
+	if (m_enemy_flag == true)		//フラグがオンの時、敵出現
 	{
-		CObjEnemy1Battle* bobje = new CObjEnemy1Battle();
+		CObjEnemyBattle1* bobje = new CObjEnemy1Battle();
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_FIRST, 10);
-		enemy_flag = false;
-		hero->SetENEMYF(enemy_flag);
+		m_enemy_flag = false;
+		hero->SetENEMYF(m_enemy_flag);
 	}
-	if (boss_flag  == true)		//フラグがオンの時、ボス出現
+	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
 		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
-		boss_flag = false;
+		m_boss_flag = false;
 		hero->SetBOSSF(boss_flag);
 	}
 }

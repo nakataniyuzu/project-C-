@@ -35,9 +35,8 @@ void CObjEnemyboss1::Action()
 
 	if (battle_flag == false)
 	{
-		
 		m_time = 100;
-		hit->SetInvincibility(true);	//無敵オン
+//		hit->SetInvincibility(true);	//無敵オン
 		return;
 	}
 
@@ -50,7 +49,10 @@ void CObjEnemyboss1::Action()
 			hit->SetInvincibility(false);	//無敵オフ
 		}
 	}
-
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公が触れたら
+	{
+		hit->SetInvincibility(true);	//当たり判定を消す
+	}
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 

@@ -207,8 +207,8 @@
     <ClCompile Include="SceneClear.cpp">
       <Filter>ソース ファイル\Gameclear</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemy2Battle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    <ClCompile Include="ObjBossBattle.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
     </ClCompile>
     <ClCompile Include="ObjFadein.cpp">
       <Filter>ソース ファイル\Main</Filter>

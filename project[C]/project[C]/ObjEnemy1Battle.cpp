@@ -15,6 +15,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjEnemy1Battle::Init()
 {
+	m_px = 300.0f;
+	m_py = 500.0f;		//出現位置
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_enemy_hp = 3;     //敵のヒットポイント(最大3)
@@ -47,11 +49,28 @@ void CObjEnemy1Battle::Action()
 	hero_posture = hero->GetPOS();
 	boss_flag = hero->GetBOSSF();
 
+	//摩擦
+	m_vx += -(m_vx * 0.098);
+	m_vy += -(m_vy * 0.098);
+	
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	//自由落下運動
+	m_vy += 9.8 / (16.0f);
+
+	//位置の更新
+	m_px += m_vx;
+	m_py += m_vy;
+
+	//HitBoxの位置の変更
+	hit->SetPos(m_px, m_py);
+
 	if (enemy_delete_flag == true)
 	{
-		enemy_delete_flag = false;
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
+		return;
 	}
 
 	//マップ上の主人公の向きによってリス位置、向きを設定
@@ -59,13 +78,13 @@ void CObjEnemy1Battle::Action()
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
-			m_px = 600.0f;
+			m_px = 700.0f;
 			m_py = 500.0f;		//出現位置
 			m_move = true;	//向き
 		}
 		if (hero_posture == 2.0f || hero_posture == 3.0f)
 		{
-			m_px = 100.0f;
+			m_px = 0.0f;
 			m_py = 500.0f;		//出現位置
 			m_move = false;	//向き
 		}
@@ -114,22 +133,10 @@ void CObjEnemy1Battle::Action()
 		m_ani_frame = 0;
 	}
 
-	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	
 
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
 
-	//自由落下運動
-	m_vy += 9.8 / (16.0f);
-
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
-
-	//HitBoxの位置の変更
-	hit->SetPos(m_px, m_py);
+	
 
 	//攻撃を受けたら体力を減らす
 	//主人公とATTACK系統との当たり判定
@@ -174,8 +181,10 @@ void CObjEnemy1Battle::Action()
 	//敵の体力が0になったら破棄CObjMain
 	if (m_enemy_hp <= 0)
 	{
-		hero->SetBATTLE(true);
-		hero->SetENEMYF(true);
+		hero->SetFADEF(false);	//フェイドフラグをオフ
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
+
 		main->SetENEMYKILLS(1);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
@@ -204,11 +213,6 @@ void CObjEnemy1Battle::Action()
 //ドロー
 void CObjEnemy1Battle::Draw()
 {
-	if (m_battle_flag == true)
-	{
-		return;
-	}
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 

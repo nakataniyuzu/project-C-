@@ -142,13 +142,13 @@ void CObjHeroBattle::Action()
 			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
 			
 			m_sword_delay = 10;
-		}
-		else if (m_sword_delay > 0)
-		{
-			m_sword_delay--;
-			if (m_sword_delay <= 0)
-				m_sword_delay = 0;
-		}
+		}	
+	}
+	if (m_sword_delay > 0)
+	{
+		m_sword_delay--;
+		if (m_sword_delay <= 0)
+			m_sword_delay = 0;
 	}
 	//Xキーで魔法を切り替える
 	if (Input::GetVKey('X') == true)
@@ -292,25 +292,42 @@ void CObjHeroBattle::Action()
 	{
 		m_px = 800.0 - 75.0f;
 		if (hero_posture == 0.0f || hero_posture == 1.0f) {
-			hero->SetBATTLE(true);
+
+			hero->SetFADEF(false);	//フェイドフラグをオフ
+			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+			Objs::InsertObj(fade, OBJ_FADEIN, 200);
+
 			if (m_delete == true){
-				benemy1->SetENEMYDELETE(true);
+				if (benemy1 != nullptr) {
+					benemy1->SetENEMYDELETE(true);
+				}
 			}
 			else {
-				bboss1->SetBOSSDELETE(true);
+				if (benemy1 != nullptr) {
+					bboss1->SetBOSSDELETE(true);
+				}
 			}
+
 		}
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
 		if (hero_posture == 2.0f || hero_posture == 3.0f) {
-			hero->SetBATTLE(true);
+
+			hero->SetFADEF(false);	//フェイドフラグをオフ
+			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+			Objs::InsertObj(fade, OBJ_FADEIN, 200);
+
 			if (m_delete == true) {
-				benemy1->SetENEMYDELETE(true);
+				if (benemy1 != nullptr) {
+					benemy1->SetENEMYDELETE(true);
+				}
 			}
 			else {
-				bboss1->SetBOSSDELETE(true);
+				if (benemy1 != nullptr) {
+					bboss1->SetBOSSDELETE(true);
+				}
 			}
 		}
 	}

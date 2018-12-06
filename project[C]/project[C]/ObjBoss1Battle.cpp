@@ -13,6 +13,9 @@ using namespace GameL;
 //イニシャライズ
 void CObjBoss1Battle::Init()
 {
+	m_px = 300.0f;
+	m_py = 500.0f;		//出現位置
+
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_boss_hp = 15;     //敵のヒットポイント(最大15)
@@ -42,9 +45,9 @@ void CObjBoss1Battle::Action()
 
 	if (boss_delete_flag == true)
 	{
-		boss_delete_flag = false;
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
+		return;
 	}
 	//マップ上の主人公の向きによってリス位置、向きを設定
 	if (m_pop_flag == true)

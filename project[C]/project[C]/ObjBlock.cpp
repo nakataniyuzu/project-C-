@@ -137,7 +137,7 @@ void CObjBlock::Action()
 			{
 				//10Ç™Ç†ÇÍÇŒBOSSèoåª
 				CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objb1, OBJ_ENEMY, 110);
+				Objs::InsertObj(objb1, OBJ_BOSS, 110);
 
 				//èoåªèÍèäÇ0Ç…Ç∑ÇÈ
 				g_map[i][j] = 0;

@@ -44,6 +44,7 @@ void CObjHero::Init()
 	m_battle_flag = true;
 	m_ene_battle_flag = false;
 	m_boss_battle_flag = false;
+	m_fade_flag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
@@ -70,19 +71,20 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	m_speed_power = 1.0f;		//通常速度
+	
 	if (m_battle_flag == false)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 		return;
 	}
-	
+
 	//Eキーでメニューを開く
 	if (Input::GetVKey('E') == true)
 	{
 		//Scene::SetScene(new CSceneMenu());
-		CObjFadein* fade = new CObjFadein();
-		Objs::InsertObj(fade, OBJ_FADEIN, 200);
+	
 	}
 
 	//Xキーで魔法を切り替える
@@ -210,6 +212,9 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
+	CObjBossBattle* bboss = (CObjBossBattle*)Objs::GetObj(OBJ_BOSS_BATTLE);
+	CObjEnemyBattle* benemy1 = (CObjEnemyBattle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
+
 	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//左のスクロールライン
 	{
@@ -264,19 +269,24 @@ void CObjHero::Action()
 		}
 	}
 
-	//敵を接触したらBATTLESCENEに移行
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)	//敵と接触したら
 	{
-		m_battle_flag = false;
-		m_ene_battle_flag = true;
-		m_delete = true;
+		m_fade_flag = true;		//フェイドフラグをオン
+		m_ene_battle_flag = true;	//敵出現フラグをオンにする
+		m_delete = true;			//敵削除フラグをオンにする
+
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
 	//敵を接触したらBATTLESCENEに移行(BOSS)
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
-		m_battle_flag = false;
-		m_boss_battle_flag = true;
-		m_delete = false;
+		m_fade_flag = true;		//フェイドフラグをオン
+		m_boss_battle_flag = true;	//敵出現フラグをオンにする
+		m_delete = false;			//敵削除フラグをオンにする
+
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{

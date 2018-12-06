@@ -36,17 +36,6 @@ void CObjEnemy2Battle::Init()
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
-	if (hero_posture == 0.0f || hero_posture == 1.0f)
-	{
-		m_px = 600.0f;
-		m_py = 500.0f;		//出現位置
-	}
-	else if (hero_posture == 2.0f || hero_posture == 3.0f)
-	{
-		m_px = 100.0f;
-		m_py = 500.0f;		//出現位置
-	}
-
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_SECOND, 1);
 }
@@ -59,19 +48,19 @@ void CObjEnemy2Battle::Action()
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
-	hero_posture = hero->GetPOS();
-	boss_flag = hero->GetBOSSF();
+	m_hero_posture = hero->GetPOS();
+	m_boss_flag = hero->GetBOSSF();
 	CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 	m_hero_position = herob->GetX();
 
 	if (m_battle_flag == true)
 	{
-		if (hero_posture == 0.0f || hero_posture == 1.0f)
+		if (m_hero_posture == 0.0f || m_hero_posture == 1.0f)
 		{
 			m_px = 600.0f;
 			m_py = 500.0f;		//出現位置
 		}
-		else if (hero_posture == 2.0f || hero_posture == 3.0f)
+		else if (m_hero_posture == 2.0f || m_hero_posture == 3.0f)
 		{
 			m_px = 100.0f;
 			m_py = 500.0f;		//出現位置
@@ -217,11 +206,6 @@ void CObjEnemy2Battle::Action()
 //ドロー
 void CObjEnemy2Battle::Draw()
 {
-	if (m_battle_flag == true)
-	{
-		return;
-	}
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 

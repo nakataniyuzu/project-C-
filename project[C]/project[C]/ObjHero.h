@@ -31,6 +31,7 @@ class CObjHero : public CObj
 		bool GetBOSSBATTLE() { return m_boss_battle_flag; }	//ボスバトル移行用のフラグを取得
 		
 		bool GetDELETE() { return m_delete; }	//敵消滅用のフラグを取得
+		void SetDELETE(bool x) { m_delete = x; }//敵消滅用フラグをセット
 
 		void SetBOSSBATTLE(bool x) { m_boss_battle_flag = x; }
 		void SetBATTLE(bool x) { m_battle_flag = x; }
@@ -43,10 +44,13 @@ class CObjHero : public CObj
 		
 		bool GetENEMYF() { return m_ene_battle_flag; }		//敵出現用フラグを取得
 		bool GetBOSSF() { return m_boss_battle_flag; }		//ボス出現用フラグを取得
+		bool GetFADEF() { return m_fade_flag; }			//フェイドフラグを取得	
 
 		void SetENEMYF(bool x) { m_ene_battle_flag = x; }	//敵出現用フラグをセット
 		void SetBOSSF(bool x) { m_boss_battle_flag = x; }		//ボス出現用フラグをセット
-		
+		void SetFADEF(bool x) { m_fade_flag = x; }		//フェイドフラグをセット
+
+
 		bool GetKEYF() { return mes.key; }		//KEYの情報を取得
 		bool GetGATEF() { return mes.gate; }	//GATEの情報を取得
 		bool GetWATERF() { return mes.water; }	//WATERの情報を取得
@@ -75,6 +79,7 @@ class CObjHero : public CObj
 		void SetY(float y) { m_py = y; }
 		void SetVY(float vy) { m_vy = vy; }
 		void SetVX(float vx) { m_vx = vx; }
+		void SetSPEED(float x) { m_speed_power = x; }
 	private:
 		float m_px;			//位置
 		float m_py;
@@ -96,9 +101,10 @@ class CObjHero : public CObj
 		bool  m_f;		//キー（長押し）制御用
 		bool  m_mf;		//キー（長押し）制御用
 
-		bool m_battle_flag;
-		bool m_ene_battle_flag;	//雑魚バトル移行用
-		bool m_boss_battle_flag;//ボスバトル用
+		bool m_fade_flag;		//フェイドイン,アウト用
+		bool m_battle_flag;		//バトル移行用
+		bool m_ene_battle_flag;	//雑魚出現用
+		bool m_boss_battle_flag;//ボス出現用
 		bool m_map_flag; //マップ移行用
 
 		//メッセージ用フラグ

@@ -14,24 +14,56 @@ void CObjFadein::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
-	m_ani_max_time = 1;		//アニメーション間隔幅
+	m_ani_max_time = 2;		//アニメーション間隔幅
+	m_flag = true;		//切り替え用フラグ
 }
 
 //アクション
 void CObjFadein::Action()
 {
+	//戦闘時の敵の情報を持ってくる
+	CObjEnemyBattle* benemy = (CObjEnemyBattle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
+	
+	//主人公の情報を持ってくる
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	hero->SetSPEED(0.0f);	//スピードを０にする
+	hero->SetVX(0.0f);		//ベクトルを０にする
+	hero->SetVY(0.0f);
 
 
+	m_fade_flag = hero->GetFADEF();	//フェイドインかアウトを設定するためのフラグ
 
-	m_ani_time += 1;
-	if (m_ani_time > m_ani_max_time)
+	if (m_flag == true)
 	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
+		m_ani_time += 1;
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+		if (m_ani_frame == 9)
+		{
+			m_flag = false;
+			hero->SetBATTLE(false);			//バトル画面へ移行
+		}
 	}
-	if (m_ani_frame == 10)
+	else 
 	{
-		this->SetStatus(false);
+		m_ani_time += 1;
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame -= 1;
+			m_ani_time = 0;
+		}
+		if (m_ani_frame == 0)
+		{
+			if (m_fade_flag == false)
+				hero->SetBATTLE(true);		//マップ画面へ移行
+
+			this->SetStatus(false);
+		}
 	}
 }
 
@@ -51,7 +83,7 @@ void CObjFadein::Draw()
 	src.m_bottom = 600.0f;
 
 	//描画
-	dst.m_top    =  50.0f;
+	dst.m_top    =   0.0f;
 	dst.m_left   =   0.0f;
 	dst.m_right  = 800.0f;
 	dst.m_bottom = 600.0f;

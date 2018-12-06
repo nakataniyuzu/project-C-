@@ -56,7 +56,7 @@ void CObjEnemyFirst::Action()
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 		m_time = 100;
-		hit->SetInvincibility(true);	//無敵オン
+//		hit->SetInvincibility(true);	//無敵オン
 		return;
 	}
 	
@@ -70,6 +70,12 @@ void CObjEnemyFirst::Action()
 			m_time = 0;
 			hit->SetInvincibility(false);	//無敵オフ
 		}
+	}
+
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公を触れたら
+	{
+		m_speed_power = 0.0f;		//スピードを０にする
+		hit->SetInvincibility(true);	//当たり判定を消す
 	}
 
 	if (m_hit_up == true)	//上
