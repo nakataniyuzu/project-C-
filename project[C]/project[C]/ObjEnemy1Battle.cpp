@@ -5,7 +5,7 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemyBattle.h"
+#include "ObjEnemy1Battle.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -13,7 +13,7 @@ using namespace GameL;
 
 
 //イニシャライズ
-void CObjEnemyBattle::Init()
+void CObjEnemy1Battle::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -37,7 +37,7 @@ void CObjEnemyBattle::Init()
 }
 
 //アクション
-void CObjEnemyBattle::Action()
+void CObjEnemy1Battle::Action()
 {
 	//OBJ_MAINの情報を持ってくる
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
@@ -202,7 +202,7 @@ void CObjEnemyBattle::Action()
 }
 
 //ドロー
-void CObjEnemyBattle::Draw()
+void CObjEnemy1Battle::Draw()
 {
 	if (m_battle_flag == true)
 	{

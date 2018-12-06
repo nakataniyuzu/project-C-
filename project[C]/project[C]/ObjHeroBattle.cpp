@@ -29,14 +29,15 @@ void CObjHeroBattle::Init()
 	m_swordwidth = 0.0f; //ソード幅
 
 	//当たり判定用のHitBoxを作成
- 	Hits::SetHitBox(this, m_px , m_py , 60, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
+ 	Hits::SetHitBox(this, m_px , m_py , 75, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
 }
 
 //アクション
 void CObjHeroBattle::Action()
 {
 	//敵の情報を持ってくる
-	CObjEnemyBattle* benemy = (CObjEnemyBattle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
+	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
+	CObjEnemy2Battle* benemy2 = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
 	CObjBossBattle* bboss = (CObjBossBattle*)Objs::GetObj(OBJ_BOSS_BATTLE);
 
 	//主人公の情報を持ってくる
@@ -247,6 +248,14 @@ void CObjHeroBattle::Action()
 		}
 		m_time = 80;		//無敵時間をセット
 		hit->SetInvincibility(true);	//無敵オン
+
+		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_FIRST) != nullptr)
+		{
+			CObjEnemy1Battle* e1b = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
+			m_damage = e1b ->GetDMG();
+			m_battle_hp -= m_damage;
+		}
+
 		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_SECOND) != nullptr)
 		{
 			CObjEnemy2Battle* e2b = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
@@ -277,7 +286,7 @@ void CObjHeroBattle::Action()
 		if (hero_posture == 0.0f || hero_posture == 1.0f) {
 			hero->SetBATTLE(true);
 			if (m_delete == true){
-				benemy->SetENEMYDELETE(true);
+				benemy1->SetENEMYDELETE(true);
 			}
 			else {
 				bboss->SetBOSSDELETE(true);
@@ -290,7 +299,7 @@ void CObjHeroBattle::Action()
 		if (hero_posture == 2.0f || hero_posture == 3.0f) {
 			hero->SetBATTLE(true);
 			if (m_delete == true) {
-				benemy->SetENEMYDELETE(true);
+				benemy1->SetENEMYDELETE(true);
 			}
 			else {
 				bboss->SetBOSSDELETE(true);

@@ -106,8 +106,14 @@ void CSceneMain::InitScene()
 	CObjBlockBattle* bobjb = new CObjBlockBattle();
 	Objs::InsertObj(bobjb, OBJ_BLOCK_BATTLE, 9);
 	
-	CObjEnemy2Battle* bobje = new CObjEnemy2Battle();
-	Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE, 10);
+	
+	//敵(1層目)オブジェクト作成
+	CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
+	Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
+
+	//敵(2層目)オブジェクト作成
+	/*CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
+	Objs::InsertObj(bobje2, OBJ_ENEMY_BATTLE_SECOND, 10);*/
 	
 	//背景(戦闘)オブジェクト作成
 	CObjBackgroundBattle* bobjbackb = new CObjBackgroundBattle();
@@ -123,8 +129,8 @@ void CSceneMain::Scene()
 
 	if (enemy_flag == true)		//フラグがオンの時、敵出現
 	{
-		CObjEnemyBattle* bobje = new CObjEnemyBattle();
-		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE, 10);
+		CObjEnemy1Battle* bobje = new CObjEnemy1Battle();
+		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_FIRST, 10);
 		enemy_flag = false;
 		hero->SetENEMYF(enemy_flag);
 	}

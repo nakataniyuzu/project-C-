@@ -213,11 +213,17 @@
     <ClCompile Include="ObjEnemy2Battle.cpp">
       <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemyBattle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClCompile>
     <ClCompile Include="ObjFadein.cpp">
       <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyboss1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy1Battle.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -383,9 +389,6 @@
     <ClInclude Include="ObjEnemy2Battle.h">
       <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemyBattle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBossBattle.h">
       <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
     </ClInclude>
@@ -400,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="ObjFadein.h">
       <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy1Battle.h">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

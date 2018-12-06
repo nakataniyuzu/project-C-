@@ -161,7 +161,7 @@ struct UserData
 
 //BattleŠÖŒW
 #include "ObjHeroBattle.h"
-#include "ObjEnemyBattle.h"
+#include "ObjEnemy1Battle.h"
 #include "ObjEnemy2Battle.h"
 #include "ObjBlockBattle.h"
 #include "ObjBackgroundBattle.h"
