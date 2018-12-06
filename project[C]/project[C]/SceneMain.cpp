@@ -136,8 +136,8 @@ void CSceneMain::Scene()
 	}
 	if (boss_flag  == true)		//フラグがオンの時、ボス出現
 	{
-		CObjBossBattle* bobjb = new CObjBossBattle();
-		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE, 10);
+		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
+		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
 		boss_flag = false;
 		hero->SetBOSSF(boss_flag);
 	}

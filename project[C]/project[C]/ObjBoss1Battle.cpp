@@ -5,19 +5,18 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjBossBattle.h"
+#include "ObjBoss1Battle.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-
-
 //イニシャライズ
-void CObjBossBattle::Init()
+void CObjBoss1Battle::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_boss_hp = 15;     //敵のヒットポイント(最大3)
+	m_boss_hp = 15;     //敵のヒットポイント(最大15)
+	m_damage = 2;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -30,11 +29,11 @@ void CObjBossBattle::Init()
 
 	m_time = 0;
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS, OBJ_BOSS_BATTLE, 1);
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS_BATTLE, OBJ_BOSS_BATTLE_FIRST, 1);
 }
 
 //アクション
-void CObjBossBattle::Action()
+void CObjBoss1Battle::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_boss_flag = hero->GetBATTLE();
@@ -176,7 +175,7 @@ void CObjBossBattle::Action()
 }
 
 //ドロー
-void CObjBossBattle::Draw()
+void CObjBoss1Battle::Draw()
 {
 	if (m_boss_flag == true)
 	{

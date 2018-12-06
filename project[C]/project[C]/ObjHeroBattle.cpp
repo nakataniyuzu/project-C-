@@ -38,7 +38,7 @@ void CObjHeroBattle::Action()
 	//“G‚Ìî•ñ‚ðŽ‚Á‚Ä‚­‚é
 	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
 	CObjEnemy2Battle* benemy2 = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
-	CObjBossBattle* bboss = (CObjBossBattle*)Objs::GetObj(OBJ_BOSS_BATTLE);
+	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
 
 	//ŽålŒö‚Ìî•ñ‚ðŽ‚Á‚Ä‚­‚é
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -233,7 +233,7 @@ void CObjHeroBattle::Action()
 
 	//UŒ‚‚ðŽó‚¯‚½‚ç‘Ì—Í‚ðŒ¸‚ç‚·
 	if (hit->CheckElementHit(ELEMENT_ENEMY_BATTLE) == true
-		|| hit->CheckObjNameHit(OBJ_BOSS_BATTLE) != nullptr)
+		|| hit->CheckElementHit(ELEMENT_BOSS_BATTLE) == true)
 	{
 		//ƒmƒbƒNƒoƒbƒNˆ—
 		if (m_posture == 0.0f)
@@ -249,17 +249,25 @@ void CObjHeroBattle::Action()
 		m_time = 80;		//–³“GŽžŠÔ‚ðƒZƒbƒg
 		hit->SetInvincibility(true);	//–³“GƒIƒ“
 
+		//“G(1‘w–Ú)
 		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_FIRST) != nullptr)
 		{
 			CObjEnemy1Battle* e1b = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
 			m_damage = e1b ->GetDMG();
 			m_battle_hp -= m_damage;
 		}
-
+		//“G(2‘w–Ú)
 		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_SECOND) != nullptr)
 		{
 			CObjEnemy2Battle* e2b = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
 			m_damage = e2b ->GetDMG();
+			m_battle_hp -= m_damage;
+		}
+		//ƒ{ƒX(1‘w–Ú)
+		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_FIRST) != nullptr)
+		{
+			CObjBoss1Battle* bs1b = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
+			m_damage = bs1b ->GetDMG();
 			m_battle_hp -= m_damage;
 		}
 	}
@@ -289,7 +297,7 @@ void CObjHeroBattle::Action()
 				benemy1->SetENEMYDELETE(true);
 			}
 			else {
-				bboss->SetBOSSDELETE(true);
+				bboss1->SetBOSSDELETE(true);
 			}
 		}
 	}
@@ -302,7 +310,7 @@ void CObjHeroBattle::Action()
 				benemy1->SetENEMYDELETE(true);
 			}
 			else {
-				bboss->SetBOSSDELETE(true);
+				bboss1->SetBOSSDELETE(true);
 			}
 		}
 	}
@@ -314,7 +322,6 @@ void CObjHeroBattle::Action()
 	{
 		m_py = 50.0f;
 	}
-
 
 	hero->SetHP(m_battle_hp);
 	hero->SetMP(m_battle_mp);
