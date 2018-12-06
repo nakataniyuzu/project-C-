@@ -212,6 +212,9 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
+	CObjBossBattle* bboss = (CObjBossBattle*)Objs::GetObj(OBJ_BOSS_BATTLE);
+	CObjEnemyBattle* benemy1 = (CObjEnemyBattle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
+
 	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//左のスクロールライン
 	{
@@ -269,8 +272,9 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)	//敵と接触したら
 	{
 		m_fade_flag = true;		//フェイドフラグをオン
-		m_delete = true;			//敵削除フラグをオンにする
 		m_ene_battle_flag = true;	//敵出現フラグをオンにする
+		m_delete = true;			//敵削除フラグをオンにする
+
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
@@ -278,8 +282,9 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
 		m_fade_flag = true;		//フェイドフラグをオン
-		m_delete = false;			//敵削除フラグをオンにする
 		m_boss_battle_flag = true;	//敵出現フラグをオンにする
+		m_delete = false;			//敵削除フラグをオンにする
+
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}

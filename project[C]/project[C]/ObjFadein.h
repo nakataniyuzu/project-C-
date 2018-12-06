@@ -20,7 +20,7 @@ class CObjFadein : public CObj
 		float m_ani_max_time;	//アニメーション動作間隔最大値
 
 		bool m_flag;			//切り替え用フラグ
-		bool m_fadein_flag;		//フェイドインの切り替え用フラグ
+		bool m_fade_flag;		//フェイドインの切り替え用フラグ
 		bool m_fadeout_flag;	//フェイドアウトの切り替え用フラグ
 
 };

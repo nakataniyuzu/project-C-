@@ -46,9 +46,9 @@ void CObjBossBattle::Action()
 
 	if (boss_delete_flag == true)
 	{
-		boss_delete_flag = false;
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
+		return;
 	}
 	//マップ上の主人公の向きによってリス位置、向きを設定
 	if (m_pop_flag == true)
