@@ -22,7 +22,7 @@ void CObjFadein::Init()
 void CObjFadein::Action()
 {
 	//í“¬‚Ì“G‚Ìî•ñ‚ğ‚Á‚Ä‚­‚é
-	CObjEnemyBattle* benemy = (CObjEnemyBattle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
+	CObjEnemy1Battle* benemy = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
 	
 	//ålŒö‚Ìî•ñ‚ğ‚Á‚Ä‚­‚é
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
