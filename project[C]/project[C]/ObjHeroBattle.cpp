@@ -29,7 +29,7 @@ void CObjHeroBattle::Init()
 	m_swordwidth = 0.0f; //ソード幅
 
 	//当たり判定用のHitBoxを作成
- 	Hits::SetHitBox(this, m_px , m_py , 75, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
+ 	Hits::SetHitBox(this, m_px , m_py , 60, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
 }
 
 //アクション
