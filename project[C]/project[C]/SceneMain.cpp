@@ -129,7 +129,7 @@ void CSceneMain::Scene()
 
 	if (m_enemy_flag == true)		//フラグがオンの時、敵出現
 	{
-		CObjEnemyBattle1* bobje = new CObjEnemy1Battle();
+		CObjEnemy1Battle* bobje = new CObjEnemy1Battle();
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_FIRST, 10);
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
@@ -139,6 +139,6 @@ void CSceneMain::Scene()
 		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
 		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
 		m_boss_flag = false;
-		hero->SetBOSSF(boss_flag);
+		hero->SetBOSSF(m_boss_flag);
 	}
 }
