@@ -33,6 +33,6 @@ void CObjNextfloor::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	
 	//GameÇ…à⁄çsèÍèä
-	Font::StrDraw(L"", GAME_START_POS_X, GAME_START_POS_Y, GAME_START_FONT_SIZE, b);
+	Font::StrDraw(L"", GAME_START_POS_X, GAME_START_POS_Y, GAME_START_FONT_SIZE, c);
 
 }
