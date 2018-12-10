@@ -109,9 +109,9 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(bobjb, OBJ_BLOCK_BATTLE, 9);
 	
 	
-	//敵(1層目)オブジェクト作成
-	CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
-	Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
+	////敵(1層目)オブジェクト作成
+	//CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
+	//Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
 
 	//敵(2層目)オブジェクト作成
 	/*CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
