@@ -131,10 +131,10 @@ void CObjHeroBattle::Action()
 		{
 			//ålŒö‚ÌŒü‚«‚É‚æ‚Á‚ÄUŒ‚‚·‚éŒü‚«‚ğİ’è
 			if (m_posture == 0.0f) {
-				m_swordwidth = 50.0f;
+				m_swordwidth = 55.0f;
 			}
 			else if (m_posture == 1.0f) {
-				m_swordwidth = -50.0f;
+				m_swordwidth = -55.0f;
 			}
 
 			//Œ•‚ÅUŒ‚

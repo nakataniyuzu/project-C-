@@ -12,6 +12,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+int g_map_change = 0;
+
 //イニシャライズ
 void CObjTitle::Init()
 {

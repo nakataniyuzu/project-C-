@@ -12,6 +12,7 @@ enum OBJ_NAME
 	OBJ_MAIN,
 	OBJ_CLEAR,
 	OBJ_MESSAGE,
+	OBJ_NEXT_FLOOR,
 
 	OBJ_SWORD_BATTLE,
 
@@ -62,6 +63,7 @@ enum OBJ_NAME
 	OBJ_RESETBLOCK,
 	OBJ_SWITCH,
 	OBJ_SWITCHGATE,
+	OBJ_STAIRS,
 
 	OBJ_FADEIN,
 };
@@ -114,9 +116,9 @@ struct UserData
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
 
-#define ALL_SIZE 50.0f
-
-
+#define ALL_SIZE 50.0f		//ブロック等のサイズ
+extern int g_map_change;	//マップ変更用変数
+	
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -132,6 +134,7 @@ struct UserData
 #include "ObjMain.h"
 #include "ObjClear.h"
 #include "ObjGameover.h"
+#include "ObjNextfloor.h"
 
 //Item関係
 #include "ItemIce.h"
@@ -180,6 +183,7 @@ struct UserData
 #include "ObjResetblock.h"
 #include "ObjSwitch.h"
 #include "ObjSwitchGate.h"
+#include "ObjStairs.h"
 
 #include "ObjMessage.h"
 #include "ObjFadein.h"

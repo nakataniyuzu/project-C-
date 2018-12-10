@@ -54,20 +54,19 @@ void CObjEnemyFirst::Action()
 	if (battle_flag == false)
 	{
 		m_vx = 0.0f;
-		m_vy = 0.0f;
-		m_time = 100;
-//		hit->SetInvincibility(true);	//無敵オン
+		m_vy = 0.0f;	//動きを止める
+		m_time = 100;	//m_timeに時間をセット
 		return;
 	}
 	
 	if (m_time > 0)
 	{
-		m_speed_power = 0.0f;
+		m_speed_power = 0.0f;	//スピードを0にする
 		m_time--;
 		if (m_time <= 0)
 		{
-			m_speed_power = 0.5f;
-			m_time = 0;
+			m_speed_power = 0.5f;	//スピードを元に戻す
+			m_time = 0;				//m_timeを0に戻す
 			hit->SetInvincibility(false);	//無敵オフ
 		}
 	}
@@ -76,6 +75,11 @@ void CObjEnemyFirst::Action()
 	{
 		m_speed_power = 0.0f;		//スピードを０にする
 		hit->SetInvincibility(true);	//当たり判定を消す
+	}
+
+	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)	//魔法攻撃(Fire)に触れたら
+	{
+		
 	}
 
 	if (m_hit_up == true)	//上

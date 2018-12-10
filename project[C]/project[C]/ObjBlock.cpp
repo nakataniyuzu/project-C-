@@ -98,9 +98,9 @@ void CObjBlock::Action()
 			}
 			if (g_map[i][j] == 5)
 			{
-				//4があればFireblockを出現
-				CObjSister* sister = new CObjSister(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(sister, OBJ_SISTER, 111);
+				//5があればStairsを出現
+				CObjStairs* objsta = new CObjStairs(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objsta, OBJ_STAIRS, 111);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -180,13 +180,14 @@ void CObjBlock::Action()
 			}
 			if (g_map[i][j] == 17)
 			{
-				//16があればSwitchGateを出現
+				//17があればSwitchGateを出現
 				CObjSwitchGate* objswg = new CObjSwitchGate(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objswg, OBJ_SWITCHGATE, 111);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
+			
 		}
 	}
 	

@@ -52,6 +52,9 @@
     <Filter Include="ソース ファイル\Main\Enemy関係\Map">
       <UniqueIdentifier>{de67b104-5d55-487f-94e0-2e0d1f287afb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\NextFloor">
+      <UniqueIdentifier>{a5beee50-5c40-4fc0-bc6c-ba564339cf80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -207,23 +210,29 @@
     <ClCompile Include="SceneClear.cpp">
       <Filter>ソース ファイル\Gameclear</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBossBattle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
-    </ClCompile>
     <ClCompile Include="ObjFadein.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemyboss1.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemy1.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="ObjBoss1Battle.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy1Battle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBoss1Battle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    <ClCompile Include="ObjEnemy1.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyboss1.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStairs.cpp">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjNextfloor.cpp">
+      <Filter>ソース ファイル\NextFloor</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNextfloor.cpp">
+      <Filter>ソース ファイル\NextFloor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -383,15 +392,6 @@
     <ClInclude Include="SceneClear.h">
       <Filter>ソース ファイル\Gameclear</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy2Battle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBossBattle.h">
-      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemyBattle.h">
-      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
-    </ClInclude>
     <ClInclude Include="ObjEnemy1.h">
       <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
     </ClInclude>
@@ -401,11 +401,20 @@
     <ClInclude Include="ObjFadein.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy1Battle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBoss1Battle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy1Battle.h">
+      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStairs.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjNextfloor.h">
+      <Filter>ソース ファイル\NextFloor</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNextfloor.h">
+      <Filter>ソース ファイル\NextFloor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

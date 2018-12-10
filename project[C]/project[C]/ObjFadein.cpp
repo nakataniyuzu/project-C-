@@ -45,7 +45,10 @@ void CObjFadein::Action()
 		if (m_ani_frame == 9)
 		{
 			m_flag = false;
-			hero->SetBATTLE(false);			//バトル画面へ移行
+			if (m_fade_flag == false)
+				hero->SetBATTLE(true);		//マップ画面へ移行
+			else
+				hero->SetBATTLE(false);			//バトル画面へ移行
 		}
 	}
 	else 
@@ -59,8 +62,7 @@ void CObjFadein::Action()
 		}
 		if (m_ani_frame == 0)
 		{
-			if (m_fade_flag == false)
-				hero->SetBATTLE(true);		//マップ画面へ移行
+			
 
 			this->SetStatus(false);
 		}

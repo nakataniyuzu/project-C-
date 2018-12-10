@@ -36,7 +36,13 @@ void CSceneMain::InitScene()
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"map1.csv", &size);//外部データ読み込み
+
+	if (g_map_change == 0) {
+		p = Save::ExternalDataOpen(L"map1.csv", &size);//外部データ読み込み
+	}
+	else if (g_map_change == 1) {
+		p = Save::ExternalDataOpen(L"map2.csv", &size);//外部データ読み込み
+	}
 
 	int map[27][55];
 	int count = 1;
@@ -76,6 +82,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"sister.png", 15, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_16000_600);
+	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
 
 	
 	
@@ -108,8 +115,8 @@ void CSceneMain::InitScene()
 	
 	
 	//敵(1層目)オブジェクト作成
-	CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
-	Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
+	//CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
+	//Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
 
 	//敵(2層目)オブジェクト作成
 	/*CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
