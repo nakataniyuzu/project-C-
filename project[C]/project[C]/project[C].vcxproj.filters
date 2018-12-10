@@ -222,8 +222,14 @@
     <ClCompile Include="ObjEnemy1.cpp">
       <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemyboss1.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
+    <ClCompile Include="ObjBoss1Battle.cpp">
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy2Battle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy1Battle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjStairs.cpp">
       <Filter>ソース ファイル\Main\Block関係</Filter>
@@ -233,6 +239,8 @@
     </ClCompile>
     <ClCompile Include="SceneNextfloor.cpp">
       <Filter>ソース ファイル\NextFloor</Filter>
+    <ClCompile Include="ObjEnemy3Battle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -402,7 +410,10 @@
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="ObjBoss1Battle.h">
-      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
+      <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy2Battle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjEnemy1Battle.h">
       <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
@@ -412,9 +423,12 @@
     </ClInclude>
     <ClInclude Include="ObjNextfloor.h">
       <Filter>ソース ファイル\NextFloor</Filter>
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
     <ClInclude Include="SceneNextfloor.h">
       <Filter>ソース ファイル\NextFloor</Filter>
+    <ClInclude Include="ObjEnemy3Battle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -173,6 +173,7 @@ extern int g_map_change;	//マップ変更用変数
 #include "ObjHeroBattle.h"
 #include "ObjEnemy1Battle.h"
 #include "ObjEnemy2Battle.h"
+#include "ObjEnemy3Battle.h"
 #include "ObjBlockBattle.h"
 #include "ObjBackgroundBattle.h"
 

@@ -212,8 +212,8 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
-	CObjBoss1Battle* bboss = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE);
-	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
+	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
+	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
 
 	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//左のスクロールライン

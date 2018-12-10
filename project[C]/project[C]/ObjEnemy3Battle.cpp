@@ -5,23 +5,21 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy2Battle.h"
+#include "ObjEnemy3Battle.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-
-
 //イニシャライズ
-void CObjEnemy2Battle::Init()
+void CObjEnemy3Battle::Init()
 {
 	m_px = 600.0f;//位置
 	m_py = 450.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
-	m_enemy_hp = 10;     //敵のヒットポイント(最大10)
-	m_damage = 2;
+	m_enemy_hp = 30;     //敵のヒットポイント(最大30)
+	m_damage = 3;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -34,14 +32,16 @@ void CObjEnemy2Battle::Init()
 	m_subtract = 0;		//HEROとの距離
 	m_hero_position = 0;//HEROの位置
 
+	m_time_j++; //ジャンプテスト用
+
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_SECOND, 1);
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_THIRD, 1);
 }
 
 //アクション
-void CObjEnemy2Battle::Action()
+void CObjEnemy3Battle::Action()
 {
 	//OBJ_MAINの情報を持ってくる
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
@@ -77,19 +77,31 @@ void CObjEnemy2Battle::Action()
 
 		m_move = true;
 	}
-	else 
+	else
 	{
 		m_move = false;
+	}
+
+	//定期的にジャンプ(仮)
+	if (m_time_j = 1000)
+	{
+		if (m_py + 100 >= 549)
+		{
+			if (1)
+			{
+				m_vy = -20;
+			}
+		}
 	}
 
 	/*/画面端衝突で向き変更
 	if (m_px + 75 >= 800)
 	{
-		m_move = true;
+	m_move = true;
 	}
 	if (m_px <= 0)
 	{
-		m_move = false;
+	m_move = false;
 	}*/
 
 	//方向
@@ -204,7 +216,7 @@ void CObjEnemy2Battle::Action()
 }
 
 //ドロー
-void CObjEnemy2Battle::Draw()
+void CObjEnemy3Battle::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -213,17 +225,17 @@ void CObjEnemy2Battle::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    = 0.0f;
-	src.m_left   = 400.0f;
-	src.m_right  = 300.0f;
-	src.m_bottom = 100.0f;
+	src.m_top = 0.0f;
+	src.m_left = 50.0f;
+	src.m_right = 100.0f;
+	src.m_bottom = 50.0f;
 
 	//表示位置の設定
-	dst.m_top    = 0.0f + m_py;
-	dst.m_left   = (75.0f * m_posture) + m_px;
-	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
+	dst.m_top = 0.0f + m_py;
+	dst.m_left = (75.0f * m_posture) + m_px;
+	dst.m_right = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画
-	Draw::Draw(18, &src, &dst, c, 0.0f);
+	Draw::Draw(19, &src, &dst, c, 0.0f);
 }

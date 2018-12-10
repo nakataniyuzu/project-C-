@@ -82,9 +82,12 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"sister.png", 15, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_16000_600);
+	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
+	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
+	//Draw::LoadImageW(L"ENEMYBOSS3.png", 20, TEX_SIZE_800_600);
+	
 	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
 
-	
 	
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
@@ -121,6 +124,10 @@ void CSceneMain::InitScene()
 	//敵(2層目)オブジェクト作成
 	/*CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
 	Objs::InsertObj(bobje2, OBJ_ENEMY_BATTLE_SECOND, 10);*/
+
+	//敵(3層目)オブジェクト作成
+	/*CObjEnemy3Battle* bobje3 = new CObjEnemy3Battle();
+	Objs::InsertObj(bobje3, OBJ_ENEMY_BATTLE_THIRD, 10);*/
 	
 	//背景(戦闘)オブジェクト作成
 	CObjBackgroundBattle* bobjbackb = new CObjBackgroundBattle();
