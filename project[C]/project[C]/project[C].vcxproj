@@ -35,6 +35,8 @@
     <ClCompile Include="CObjWind.cpp" />
     <ClCompile Include="ObjBoss1Battle.cpp" />
     <ClCompile Include="ObjClear.cpp" />
+    <ClCompile Include="ObjEnemy2Battle.cpp" />
+    <ClCompile Include="ObjEnemy3Battle.cpp" />
     <ClCompile Include="ObjEnemyboss1.cpp" />
     <ClCompile Include="ObjBackgroundBattle.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
@@ -117,6 +119,8 @@
     <ClInclude Include="CObjWind.h" />
     <ClInclude Include="ObjBoss1Battle.h" />
     <ClInclude Include="ObjClear.h" />
+    <ClInclude Include="ObjEnemy2Battle.h" />
+    <ClInclude Include="ObjEnemy3Battle.h" />
     <ClInclude Include="ObjEnemyboss1.h" />
     <ClInclude Include="ObjBackgroundBattle.h" />
     <ClInclude Include="ObjBlockBattle.h">

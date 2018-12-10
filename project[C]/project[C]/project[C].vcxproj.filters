@@ -207,9 +207,6 @@
     <ClCompile Include="SceneClear.cpp">
       <Filter>ソース ファイル\Gameclear</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBossBattle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
-    </ClCompile>
     <ClCompile Include="ObjFadein.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
@@ -219,11 +216,17 @@
     <ClCompile Include="ObjEnemy1.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemy1Battle.cpp">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBoss1Battle.cpp">
       <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy2Battle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy1Battle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy3Battle.cpp">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -383,15 +386,6 @@
     <ClInclude Include="SceneClear.h">
       <Filter>ソース ファイル\Gameclear</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy2Battle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBossBattle.h">
-      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemyBattle.h">
-      <Filter>ソース ファイル\Main\Enemy関係\Battle</Filter>
-    </ClInclude>
     <ClInclude Include="ObjEnemy1.h">
       <Filter>ソース ファイル\Main\Enemy関係\Map</Filter>
     </ClInclude>
@@ -401,11 +395,17 @@
     <ClInclude Include="ObjFadein.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy1Battle.h">
-      <Filter>ソース ファイル\Main\Enemy関係</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBoss1Battle.h">
       <Filter>ソース ファイル\Main\Enemy関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy2Battle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy1Battle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy3Battle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
