@@ -44,7 +44,7 @@ void CObjStairs::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
 	{
-		Scene::SetScene(new CSceneClear());	//ゲームクリアシーンに移行
+		Scene::SetScene(new CSceneNextfloor());	//ゲームネクストシーンに移行
 	}
 
 	//位置の更新
@@ -84,7 +84,6 @@ void CObjStairs::Draw()
 
 	//描画
 	Draw::Draw(18, &src, &dst, c, 90.0f);
-	
 }
 
 

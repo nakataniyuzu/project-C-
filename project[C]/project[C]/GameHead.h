@@ -197,10 +197,11 @@ extern int g_map_change;	//マップ変更用変数
 #include "SceneBattle.h"
 #include "SceneGameover.h"
 #include "SceneClear.h"
+#include "SceneNextfloor.h"
 
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneMain
+#define SET_GAME_START  CSceneTitle
 //-----------------------------------------------

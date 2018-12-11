@@ -16,7 +16,5 @@ public:
 	void Draw();	//ドロー
 
 private:
-	int choice;
-	int m_time;		//キーの入力時間間隔
-	bool m_key_flag;
+	int floor;		//何層目かを分ける変数
 };
