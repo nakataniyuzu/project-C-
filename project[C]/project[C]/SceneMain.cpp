@@ -94,7 +94,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
-	//Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
 	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
 
 
@@ -166,7 +166,15 @@ void CSceneMain::Scene()
 		hero->SetBOSSF(m_boss_flag);
 	}
 
-	/*
+	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	{
+		CObjBoss2Battle* bobjb = new CObjBoss2Battle();
+		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_SECOND, 10);
+		m_boss_flag = false;
+		hero->SetBOSSF(m_boss_flag);
+	}
+
+
 	if (m_enemy_flag == true || m_time == 500)		//フラグがオンの時、敵出現
 	{
 		CObjEnemy3Battle* bobje = new CObjEnemy3Battle();

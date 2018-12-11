@@ -184,6 +184,9 @@
     <ClCompile Include="ObjTopback.cpp">
       <Filter>ソースファイル\Main\UI関係</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBoss2Battle.cpp">
+      <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -371,6 +374,9 @@
     </ClInclude>
     <ClInclude Include="ObjTopback.h">
       <Filter>ソースファイル\Main\UI関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBoss2Battle.h">
+      <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
