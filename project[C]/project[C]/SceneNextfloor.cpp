@@ -31,9 +31,8 @@ CSceneNextfloor::~CSceneNextfloor()
 //ゲームタイトルの初期化メソッド
 void CSceneNextfloor::InitScene()
 {
-	CObjClear* p = new CObjClear();
+	CObjNextfloor* p = new CObjNextfloor();
 	Objs::InsertObj(p, OBJ_CLEAR, 1);
-
 }
 
 //ゲームタイトルの実行中メソッド

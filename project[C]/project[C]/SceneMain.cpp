@@ -38,17 +38,17 @@ void CSceneMain::InitScene()
 	int size;				//ステージ情報の大きさ
 
 	if (g_map_change == 0) {
-		p = Save::ExternalDataOpen(L"map1.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"map2.csv", &size);//外部データ読み込み
 	}
 	else if (g_map_change == 1) {
 		p = Save::ExternalDataOpen(L"map2.csv", &size);//外部データ読み込み
 	}
 
-	int map[27][55];
+	int map[38][65];
 	int count = 1;
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 38; i++)
 	{
-		for (int j = 0; j < 55; j++)
+		for (int j = 0; j < 65; j++)
 		{
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
@@ -66,7 +66,7 @@ void CSceneMain::InitScene()
 	m_time = 0;
 
 	//グラフィック読み込み
-	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256_128);
+	Draw::LoadImageW(L"map.Hero.png", 0, TEX_SIZE_256);
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Block.png", BLOCK1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);

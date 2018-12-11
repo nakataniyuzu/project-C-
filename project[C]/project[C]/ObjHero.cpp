@@ -21,7 +21,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 1.0f;	//通常速度
+	m_speed_power = 0.5f;	//通常速度
 	m_posture = 2.0f;
 	
 	m_max_hp = 10;	//最大HP
@@ -71,7 +71,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_speed_power = 1.0f;		//通常速度
+	m_speed_power = 0.5f;		//通常速度
 	
 	if (m_battle_flag == false)
 	{
@@ -369,10 +369,10 @@ void CObjHero::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    = 32.0f * m_posture;
-	src.m_left   =  0.0f + AniDate[m_ani_frame] * 24;
-	src.m_right  = 24.0f + AniDate[m_ani_frame] * 24;
-	src.m_bottom = 32.0f + (32.0f * m_posture);
+	src.m_top    = 64.0f * m_posture;
+	src.m_left   =  0.0f + AniDate[m_ani_frame] * 64;
+	src.m_right  = 64.0f + AniDate[m_ani_frame] * 64;
+	src.m_bottom = 64.0f + (64.0f * m_posture);
 
 	//表示位置の設定
 	dst.m_top    =  0.0f + g_py;

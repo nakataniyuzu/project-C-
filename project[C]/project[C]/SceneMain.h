@@ -21,6 +21,7 @@ class CSceneMain :public CScene
 		void Scene();    //ゲームメインの実行中メソッド
 	private:
 		/*int m_map[10][10];	//マップ情報*/
+		int i, j;
 		bool m_battle_flag;
 		bool m_enemy_flag;
 		bool m_boss_flag;

@@ -14,16 +14,16 @@ using namespace GameL;
 //イニシャライズ
 void CObjNextfloor::Init()
 {
-	
+	g_map_change += 1;
 }
 
 //アクション
 void CObjNextfloor::Action()
 {
+
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
-		g_map_change += 1;
-
+		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 	}
 }
 
@@ -32,7 +32,10 @@ void CObjNextfloor::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	
-	//Gameに移行場所
-	Font::StrDraw(L"", GAME_START_POS_X, GAME_START_POS_Y, GAME_START_FONT_SIZE, c);
+	wchar_t NEXT[128];
+
+	//n層目への移行用タイトル
+	swprintf_s(NEXT, L"%d層目",g_map_change + 1);		
+	Font::StrDraw(NEXT, 300, 200, 100, c);
 
 }
