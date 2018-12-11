@@ -151,6 +151,7 @@ void CSceneMain::Scene()
 	m_enemy_flag = hero->GetENEMYF();
 	m_boss_flag = hero->GetBOSSF();
 
+	//1層目雑魚
 	if (m_enemy_flag == true)		//フラグがオンの時、敵出現
 	{
 		CObjEnemy1Battle* bobje = new CObjEnemy1Battle();
@@ -158,6 +159,7 @@ void CSceneMain::Scene()
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
 	}
+	//1層目ボス
 	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
@@ -166,20 +168,37 @@ void CSceneMain::Scene()
 		hero->SetBOSSF(m_boss_flag);
 	}
 
-	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	//2層目雑魚
+	/*if (m_enemy_flag == true)		//フラグがオンの時、敵出現
+	{
+	CObjEnemy2Battle* bobje = new CObjEnemy2Battle();
+	Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_SECOND, 10);
+	m_enemy_flag = false;
+	hero->SetENEMYF(m_enemy_flag);
+	}*/
+	//2層目ボス
+	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 		CObjBoss2Battle* bobjb = new CObjBoss2Battle();
 		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_SECOND, 10);
 		m_boss_flag = false;
 		hero->SetBOSSF(m_boss_flag);
-	}
+	}*/
 
-
-	if (m_enemy_flag == true || m_time == 500)		//フラグがオンの時、敵出現
+	//3層目雑魚
+	/*if (m_enemy_flag == true || m_time == 400)		//フラグがオンの時、敵出現
 	{
 		CObjEnemy3Battle* bobje = new CObjEnemy3Battle();
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_THIRD, 10);
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
+	}*/
+	//3層目ボス(まだObj未作成)
+	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	{
+	CObjBoss3Battle* bobjb = new CObjBoss3Battle();
+	Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_THIRD, 10);
+	m_boss_flag = false;
+	hero->SetBOSSF(m_boss_flag);
 	}*/
 }

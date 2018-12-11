@@ -24,7 +24,7 @@ void CObjBoss2Battle::Init()
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
-	m_speed_power = 0.5f;	//通常速度
+	m_speed_power = 1.0f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 	m_pop_flag = true;
 	m_move = true;  //true=右 false=左
@@ -130,6 +130,18 @@ void CObjBoss2Battle::Action()
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
+		//ノックバック処理
+		if (m_posture == 1.0f)
+		{
+			m_vy = -10;
+			m_vx -= 25;
+		}
+		else if (m_posture == 0.0f)
+		{
+			m_vy = -10;
+			m_vx += 25;
+		}
+
 		m_boss_hp -= 1;
 	}
 	//敵の体力が0になったら破棄
@@ -143,12 +155,12 @@ void CObjBoss2Battle::Action()
 	if (m_px + 75 >= 800)
 	{
 		m_px = 800.0 - 75.0f;
-		m_speed_power = 0.5f;
+		m_speed_power = 1.0f;
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
-		m_speed_power = 0.5f;
+		m_speed_power = 1.0f;
 	}
 	if (m_py + 100 >= 580)
 	{
