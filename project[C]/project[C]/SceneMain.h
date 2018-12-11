@@ -25,4 +25,6 @@ class CSceneMain :public CScene
 		bool m_enemy_flag;
 		bool m_boss_flag;
 		bool m_f;
+
+		int m_time;
 };

@@ -36,7 +36,7 @@ class CObjEnemy3Battle : public CObj
 		int m_subtract;			//おテスト
 		int m_hero_position;	//おテスト2
 
-		int m_time_j;		//ジャンプテスト
+		float m_time_j;		//ジャンプテスト
 
 		//踏んでいるblockの種類を確認用
 		int m_block_type;

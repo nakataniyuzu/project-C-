@@ -63,6 +63,8 @@ void CSceneMain::InitScene()
 		}
 	}
 
+	m_time = 0;
+
 	//グラフィック読み込み
 	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256_128);
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
@@ -82,11 +84,12 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"sister.png", 15, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_16000_600);
+	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
-	//Draw::LoadImageW(L"ENEMYBOSS3.png", 20, TEX_SIZE_800_600);
-	
-	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
+	//Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
+	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
+
 
 	
 	//主人公オブジェクト作成
@@ -137,6 +140,8 @@ void CSceneMain::InitScene()
 //ゲームタイトルの実行中メソッド
 void CSceneMain::Scene()
 {
+	m_time++;
+
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_enemy_flag = hero->GetENEMYF();
 	m_boss_flag = hero->GetBOSSF();
@@ -154,5 +159,14 @@ void CSceneMain::Scene()
 		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
 		m_boss_flag = false;
 		hero->SetBOSSF(m_boss_flag);
+	}
+
+
+	if (m_enemy_flag == true || m_time == 500)		//フラグがオンの時、敵出現
+	{
+		CObjEnemy3Battle* bobje = new CObjEnemy3Battle();
+		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_THIRD, 10);
+		m_enemy_flag = false;
+		hero->SetENEMYF(m_enemy_flag);
 	}
 }

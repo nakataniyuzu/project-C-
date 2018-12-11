@@ -83,14 +83,12 @@ void CObjEnemy3Battle::Action()
 	}
 
 	//’èŠú“I‚ÉƒWƒƒƒ“ƒv(‰¼)
-	if (m_time_j = 1000)
+	
+	if (m_py + 100 >= 549)
 	{
-		if (m_py + 100 >= 549)
+		if (1)
 		{
-			if (1)
-			{
-				m_vy = -20;
-			}
+			m_vy = -20;
 		}
 	}
 
@@ -237,5 +235,5 @@ void CObjEnemy3Battle::Draw()
 	dst.m_bottom = 100.0f + m_py;
 
 	//•`‰æ
-	Draw::Draw(19, &src, &dst, c, 0.0f);
+	Draw::Draw(20, &src, &dst, c, 0.0f);
 }

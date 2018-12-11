@@ -225,5 +225,5 @@ void CObjEnemy2Battle::Draw()
 	dst.m_bottom = 100.0f + m_py;
 
 	//•`‰æ
-	Draw::Draw(18, &src, &dst, c, 0.0f);
+	Draw::Draw(19, &src, &dst, c, 0.0f);
 }
