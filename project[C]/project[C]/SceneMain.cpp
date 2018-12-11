@@ -38,7 +38,7 @@ void CSceneMain::InitScene()
 	int size;				//ステージ情報の大きさ
 
 	if (g_map_change == 0) {
-		p = Save::ExternalDataOpen(L"map2.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"map1.csv", &size);//外部データ読み込み
 	}
 	else if (g_map_change == 1) {
 		p = Save::ExternalDataOpen(L"map2.csv", &size);//外部データ読み込み
@@ -59,7 +59,14 @@ void CSceneMain::InitScene()
 			{
 				count += 1;
 			}
+
 			count += 2;
+
+			if (map[i][j] == 20) {
+				//主人公オブジェクト作成
+				CObjHero* obj = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(obj, OBJ_HERO, 115);
+			}
 		}
 	}
 
@@ -93,8 +100,8 @@ void CSceneMain::InitScene()
 
 	
 	//主人公オブジェクト作成
-	CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 115);
+	/*CObjHero* obj = new CObjHero();
+	Objs::InsertObj(obj, OBJ_HERO, 115);*/
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -108,8 +115,6 @@ void CSceneMain::InitScene()
 
 	CObjMessage* objmessa = new CObjMessage();
 	Objs::InsertObj(objmessa, OBJ_MESSAGE, 120);
-
-	
 
 	//主人公オブジェクト作成
 	CObjHeroBattle* bhero = new CObjHeroBattle();
@@ -161,12 +166,12 @@ void CSceneMain::Scene()
 		hero->SetBOSSF(m_boss_flag);
 	}
 
-
+	/*
 	if (m_enemy_flag == true || m_time == 500)		//フラグがオンの時、敵出現
 	{
 		CObjEnemy3Battle* bobje = new CObjEnemy3Battle();
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_THIRD, 10);
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
-	}
+	}*/
 }

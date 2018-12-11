@@ -9,11 +9,17 @@
 #include "ObjHero.h"
 #include "ObjBlock.h"
 
-float g_px = 375.0f;
-float g_py = 300.0f;
+float g_px;
+float g_py;
 
 //使用するネームスペース
 using namespace GameL;
+
+CObjHero::CObjHero(float x, float y)
+{
+	m_px = x;		//位置
+	m_py = y;
+}
 
 //イニシャライズ
 void CObjHero::Init()
