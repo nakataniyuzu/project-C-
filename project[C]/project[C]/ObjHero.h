@@ -8,6 +8,7 @@ using namespace GameL;
 //オブジェクト：主人公
 class CObjHero : public CObj
 {
+	
 	public:
 		CObjHero() {};
 		~CObjHero() {};
@@ -24,9 +25,15 @@ class CObjHero : public CObj
 		int GetHP() { return m_hp; }	//主人公のHPを取得
 		int GetMP() { return m_mp; }	//主人公のMPを取得
 		int GetMAGIC() { return m_magic; }	//主人公の設定魔法を取得
-		bool GetKEY() { return m_key; }	//鍵の情報を取得
+		bool GetKEY() { return m_key; }		//鍵の情報を取得
 
 		bool GetBATTLE() { return m_battle_flag; }	//バトル移行用のフラグを取得
+		bool GetBOSSBATTLE() { return m_boss_battle_flag; }	//ボスバトル移行用のフラグを取得
+		
+		bool GetDELETE() { return m_delete; }	//敵消滅用のフラグを取得
+		void SetDELETE(bool x) { m_delete = x; }//敵消滅用フラグをセット
+
+		void SetBOSSBATTLE(bool x) { m_boss_battle_flag = x; }
 		void SetBATTLE(bool x) { m_battle_flag = x; }
 
 		void SetMAXHP(float x) { m_max_hp = x; }	//主人公のMAXHPに値をセット
@@ -34,38 +41,45 @@ class CObjHero : public CObj
 		void SetHP(float x) { m_hp = x; }	//主人公のHPに値をセット
 		void SetMP(float x) { m_mp = x; }	//主人公のMPに値をセット
 		void SetMAGIC(float x) { m_magic = x; }	//主人公の魔法の種類をセット
+		
+		bool GetENEMYF() { return m_ene_battle_flag; }		//敵出現用フラグを取得
+		bool GetBOSSF() { return m_boss_battle_flag; }		//ボス出現用フラグを取得
+		bool GetFADEF() { return m_fade_flag; }			//フェイドフラグを取得	
 
-		bool GetKEYF() { return m_key_mf; }	//KEYの情報を取得
-		bool GetGATEF() { return m_gate_mf; }	//GATEの情報を取得
-		bool GetWATERF() { return m_water_mf; }	//WATERの情報を取得
-		bool GetMICE() { return m_ice_mf; }	//ICEの情報を取得
-		bool GetSGATE() { return m_switch_mf; }//SWITCHGATEの情報を取得
+		void SetENEMYF(bool x) { m_ene_battle_flag = x; }	//敵出現用フラグをセット
+		void SetBOSSF(bool x) { m_boss_battle_flag = x; }		//ボス出現用フラグをセット
+		void SetFADEF(bool x) { m_fade_flag = x; }		//フェイドフラグをセット
 
-		bool GetFIREF() { return m_fire_flag; }
-		bool GetICEF() { return m_ice_flag; }
-		bool GetTHUNDERF(){return m_thunder_flag;}
-		bool GetWINDF() { return m_wind_flag; }
 
-		void SetKEYF(bool x) { m_key_mf = x; }
-		void SetGATEF(bool x) { m_gate_mf = x; }
-		void SetWATERF(bool x) { m_water_mf = x; }
-		void SetMICE(bool x) { m_ice_mf = x; }
-		void SetSGATE(bool x) { m_switch_mf = x; }
+		bool GetKEYF() { return mes.key; }		//KEYの情報を取得
+		bool GetGATEF() { return mes.gate; }	//GATEの情報を取得
+		bool GetWATERF() { return mes.water; }	//WATERの情報を取得
+		bool GetMICE() { return mes.ice; }		//ICEの情報を取得
+		bool GetSGATE() { return mes.switchgate; }	//SWITCHGATEの情報を取得
+		bool GetSBLOCK() { return mes.switchblock; }//SWITCHBLOCKの情報を取得
+		bool GetHEAL() { return mes.heal; }		//HEALの情報を取得
+
+		bool GetFIREF() { return m_fire_flag; }		//Fireが使えるかどうか
+		bool GetICEF() { return m_ice_flag; }		//Iceが使えるかどうか
+		bool GetTHUNDERF(){return m_thunder_flag;}	//THUNDERが使えるかどうか
+		bool GetWINDF() { return m_wind_flag; }		//WINDが使えるかどうか
+
+		void SetKEYF(bool x) { mes.key = x; }		//KEYに情報をセット
+		void SetGATEF(bool x) { mes.gate = x; }		//GATEに情報をセット
+		void SetWATERF(bool x) { mes.water = x; }	//WATERに情報をセット
+		void SetMICE(bool x) { mes.ice = x; }		//ICEに情報をセット
+		void SetSGATE(bool x) { mes.switchgate = x; }	//SWITCHGATEに情報をセット
+		void SetSBLOCK(bool x) { mes.switchblock = x; }	//SWITCHBLOCKに情報をセット
+		void SetHEAL(bool x) { mes.heal = x; }		//HEALに情報をセット
 
 		float GetVY() { return m_vy; }
 		float GetVX() { return m_vx; }
-		int GetBT() { return m_block_type; }
 
 		void SetX(float x) { m_px = x; }
 		void SetY(float y) { m_py = y; }
 		void SetVY(float vy) { m_vy = vy; }
 		void SetVX(float vx) { m_vx = vx; }
-		void SetBT(int t) { m_block_type = t; }
-
-		void SetUp(bool b) { m_hit_up = b; }
-		void SetDown(bool b) { m_hit_down = b; }
-		void SetLeft(bool b) { m_hit_left = b; }
-		void SetRight(bool b) { m_hit_right = b; }
+		void SetSPEED(float x) { m_speed_power = x; }
 	private:
 		float m_px;			//位置
 		float m_py;
@@ -87,14 +101,23 @@ class CObjHero : public CObj
 		bool  m_f;		//キー（長押し）制御用
 		bool  m_mf;		//キー（長押し）制御用
 
-		bool m_battle_flag;	//バトル移行用
+		bool m_fade_flag;		//フェイドイン,アウト用
+		bool m_battle_flag;		//バトル移行用
+		bool m_ene_battle_flag;	//雑魚出現用
+		bool m_boss_battle_flag;//ボス出現用
 		bool m_map_flag; //マップ移行用
 
 		//メッセージ用フラグ
-		bool m_gate_mf;
-		bool m_water_mf;
-		bool m_key_mf;
-		bool m_ice_mf;
+		struct Message {
+			bool gate;		//ゲート用
+			bool water;		//水用
+			bool key;		//鍵用
+			bool ice;		//氷魔法用
+			bool switchblock;	//スイッチブロック用
+			bool switchgate;	//スイッチゲート用
+			bool heal;		//ヒールブロック用
+		};
+		Message mes;
 
 		//魔法使用可能フラグ
 		bool m_fire_flag;
@@ -102,11 +125,7 @@ class CObjHero : public CObj
 		bool m_thunder_flag;
 		bool m_wind_flag;
 
-		bool   m_gate_time;			
-		bool   m_ice_time;			//表示する時間
-		bool   m_water_time;
-		bool   m_key_time;
-		bool   m_switch_mf;
+		bool m_delete;	//敵消滅用
 
 		int	  m_ani_time;	//アニメーションフレーム動作間隔
 		int   m_ani_frame;	//描画フレーム
@@ -122,4 +141,6 @@ class CObjHero : public CObj
 
 		//踏んでいるblockの種類を確認用
 		int m_block_type;
+
+
 };

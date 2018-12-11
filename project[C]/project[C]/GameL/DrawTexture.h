@@ -30,6 +30,9 @@ namespace GameL
 		TEX_SIZE_512  =	 512,
 		TEX_SIZE_800_600  = 800*600,
 		TEX_SIZE_1024 =	1024,
+		TEX_SIZE_8000_600 = 8000*600,
+		TEX_SIZE_16000_600 = 16000 * 600,
+
 	};
 
 	//ÇQÇcï`âÊêÍópRECTÇÃFLOATå^

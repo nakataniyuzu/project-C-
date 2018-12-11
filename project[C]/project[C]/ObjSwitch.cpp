@@ -72,23 +72,6 @@ void CObjSwitch::Draw()
 	float c[4] = { 1.0f,1.0f,2.0f,0.7f };
 	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
 
-	CHitBox* hit = Hits::GetHitBox(this);
-	if (m_key_flag == false)
-	{
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
-		{
-			m_time = 100;
-		}
-		if (m_time > 0) {
-			m_time--;
-			Font::StrDraw(L"どこかで扉が開く音がした。", 200, 200, 20, r);//時間が0になると表示を終了
-			if (m_time <= 0) {
-				m_time = 0;
-				m_key_flag = true;
-			}
-		}
-	}
-
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 

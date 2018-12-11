@@ -9,15 +9,15 @@
 #include "ObjBlock.h"
 
 
-int g_map[27][55];
+int g_map[38][65];
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjBlock::CObjBlock(int map[27][55])
+CObjBlock::CObjBlock(int map[38][65])
 {
 	//マップデータをコピー
-	memcpy(g_map, map, sizeof(int)*(27 * 55));
+	memcpy(g_map, map, sizeof(int)*(38 * 65));
 }
 
 //イニシャライズ
@@ -35,6 +35,7 @@ void CObjBlock::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 	m_battle_flag = hero->GetBATTLE();
+	m_boss_flag = hero->GetBOSSBATTLE();
 
 	if (m_battle_flag == false)
 	{
@@ -63,9 +64,9 @@ void CObjBlock::Action()
 	}
 
 	//出現
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 38; i++)
 	{
-		for (int j = 0; j < 55; j++)
+		for (int j = 0; j < 65; j++)
 		{
 			//列の中からを探す
 			if (g_map[i][j] == 2)
@@ -95,11 +96,21 @@ void CObjBlock::Action()
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
+			if (g_map[i][j] == 5)
+			{
+				//5があればStairsを出現
+				CObjStairs* objsta = new CObjStairs(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objsta, OBJ_STAIRS, 111);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+
 			if (g_map[i][j] == 6)
 			{
 				//6があれば敵を出現
-				CObjEnemy* obje = new CObjEnemy(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obje, OBJ_ENEMY, 110);
+				CObjEnemyFirst* obje1 = new CObjEnemyFirst(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(obje1, OBJ_ENEMY_FIRST, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -120,6 +131,15 @@ void CObjBlock::Action()
 				Objs::InsertObj(objice, ITEM_ICE, 110);
 
 				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 10)
+			{
+				//10があればBOSS出現
+				CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objb1, OBJ_BOSS, 110);
+
+				//出現場所を0にする
 				g_map[i][j] = 0;
 			}
 			if (g_map[i][j] == 11)
@@ -160,13 +180,14 @@ void CObjBlock::Action()
 			}
 			if (g_map[i][j] == 17)
 			{
-				//16があればSwitchGateを出現
+				//17があればSwitchGateを出現
 				CObjSwitchGate* objswg = new CObjSwitchGate(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objswg, OBJ_SWITCHGATE, 111);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
+			
 		}
 	}
 	
@@ -189,9 +210,9 @@ void CObjBlock::Draw()
 	RECT_F dst;	//描画先表示位置
 
 
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 38; i++)
 	{
-		for (int j = 0; j < 55; j++)
+		for (int j = 0; j < 65; j++)
 		{
 			if (g_map[i][j] >= 0)
 			{
@@ -257,9 +278,9 @@ void CObjBlock::BlockHit(
 	*right = false;
 
 	//m_mapの全要素にアクセス
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 38; i++)
 	{
-		for (int j = 0; j < 55; j++)
+		for (int j = 0; j < 65; j++)
 		{
 			if (g_map[i][j] > 0 && g_map[i][j] != 6 && g_map[i][j] != 10)
 			{

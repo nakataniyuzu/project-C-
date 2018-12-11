@@ -10,7 +10,9 @@ enum OBJ_NAME
 	OBJ_GAMEOVER,
 	OBJ_MENU,
 	OBJ_MAIN,
+	OBJ_CLEAR,
 	OBJ_MESSAGE,
+	OBJ_NEXT_FLOOR,
 
 	OBJ_SWORD_BATTLE,
 
@@ -29,15 +31,30 @@ enum OBJ_NAME
 	OBJ_FIREGATE,
 
 	OBJ_HERO,
+	OBJ_SISTER,
 	OBJ_BLOCK,
 	OBJ_TOPBACK,
 	OBJ_ENEMY,
+	OBJ_ENEMY_FIRST,
+	OBJ_ENEMY_SECOND,
+	OBJ_ENEMY_THIRD,
 
 	OBJ_HERO_BATTLE,
-	OBJ_ENEMY_BATTLE,
+	OBJ_BOSS,
+	OBJ_BOSS_BATTLE,
+	OBJ_BOSS_BATTLE_FIRST,
+	OBJ_BOSS_BATTLE_SECOND,
+	OBJ_BOSS_BATTLE_THIRD,
+	OBJ_BOSS_BATTLE_FINAL,
+
 	OBJ_BLOCK_BATTLE,
 	OBJ_BACKGROUND_BATTLE,
+
 	OBJ_BATTLE_MAIN,
+	OBJ_ENEMY_BATTLE,
+	OBJ_ENEMY_BATTLE_FIRST,
+	OBJ_ENEMY_BATTLE_SECOND,
+	OBJ_ENEMY_BATTLE_THIRD,
 
 	OBJ_HEAL,
 	OBJ_KEY,
@@ -46,6 +63,9 @@ enum OBJ_NAME
 	OBJ_RESETBLOCK,
 	OBJ_SWITCH,
 	OBJ_SWITCHGATE,
+	OBJ_STAIRS,
+
+	OBJ_FADEIN,
 };
 //------------------------------------------------
 
@@ -57,11 +77,15 @@ enum HIT_ELEMENTS
 	//属性は追加可能だが、デバック時の色は初期設定分しか無い
 	ELEMENT_PLAYER,
 	ELEMENT_ENEMY,
+	ELEMENT_BOSS,
 	ELEMENT_ITEM,
 	ELEMENT_MAGIC,
 	ELEMENT_FIELD,
 	ELEMENT_SWORD,
 	ELEMENT_ATTACK,
+
+	ELEMENT_ENEMY_BATTLE,
+	ELEMENT_BOSS_BATTLE,
 
 
 	ELEMENT_RED,
@@ -70,6 +94,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
 
+	ELEMENT_SISTER,
 	ELEMENT_HEAL,
 	ELEMENT_MYSTERY,
 	ELEMENT_MYSTERY_BLOCK,
@@ -91,7 +116,9 @@ struct UserData
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
 
-
+#define ALL_SIZE 50.0f		//ブロック等のサイズ
+extern int g_map_change;	//マップ変更用変数
+	
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -102,9 +129,12 @@ struct UserData
 //ゲームシーンオブジェクトヘッダ------------------
 #include "ObjTitle.h"
 #include "ObjHero.h"
+#include "ObjSister.h"
 #include "ObjMenu.h"
 #include "ObjMain.h"
+#include "ObjClear.h"
 #include "ObjGameover.h"
+#include "ObjNextfloor.h"
 
 //Item関係
 #include "ItemIce.h"
@@ -128,14 +158,23 @@ struct UserData
 #include "ObjFireblock.h"
 #include "ObjFireGate.h"
 
-#include "ObjEnemy.h"
+//Enemy関係
+#include "ObjBoss.h"
+#include "ObjBoss1Battle.h"
+#include "ObjBoss2Battle.h"
+#include "ObjEnemyboss1.h"
+#include "ObjEnemy1.h"
+#include "ObjEnemyFirst.h"
+
 
 #include "ObjBlock.h"
 #include "ObjTopback.h"
 
 //Battle関係
 #include "ObjHeroBattle.h"
-#include "ObjEnemyBattle.h"
+#include "ObjEnemy1Battle.h"
+#include "ObjEnemy2Battle.h"
+#include "ObjEnemy3Battle.h"
 #include "ObjBlockBattle.h"
 #include "ObjBackgroundBattle.h"
 
@@ -146,8 +185,10 @@ struct UserData
 #include "ObjResetblock.h"
 #include "ObjSwitch.h"
 #include "ObjSwitchGate.h"
+#include "ObjStairs.h"
 
 #include "ObjMessage.h"
+#include "ObjFadein.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
@@ -156,10 +197,12 @@ struct UserData
 #include "SceneMenu.h"
 #include "SceneBattle.h"
 #include "SceneGameover.h"
+#include "SceneClear.h"
+#include "SceneNextfloor.h"
 
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneMain
+#define SET_GAME_START  CSceneTitle
 //-----------------------------------------------
