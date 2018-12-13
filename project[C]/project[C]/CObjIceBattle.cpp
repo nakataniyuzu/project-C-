@@ -102,5 +102,5 @@ void CObjIceBattle::Draw()
 	dst.m_right = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(4, &src, &dst, c, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
 }

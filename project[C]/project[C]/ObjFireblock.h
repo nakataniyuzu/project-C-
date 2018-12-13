@@ -1,6 +1,7 @@
 #pragma once
 //使用するヘッダーファイル
 #include "GameL\SceneObjManager.h"
+#include "ObjMessage.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -20,6 +21,8 @@ public:
 	float GetSWITCH(){ return m_switch; }
 
 private:
+	//void CObjMessage::BackDraw(float top, float left, float right, float bottom, float c[]);
+
 	float m_px;			//位置
 	float m_py;
 	float m_vx;			//移動ベクトル

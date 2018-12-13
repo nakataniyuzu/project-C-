@@ -19,12 +19,13 @@ void CObjTitle::Init()
 {
 	choice = 0;
 	m_key_flag = true;
+	m_and = 1.0f;
+	m_andf = false;
 }
 
 //アクション
 void CObjTitle::Action()
 {
-	
 	if (Input::GetVKey(VK_UP) == true)
 	{
 		choice = 0;
@@ -40,7 +41,7 @@ void CObjTitle::Action()
 		{
 			if (m_key_flag == true)
 			{
-				Scene::SetScene(new CSceneMain());
+				m_andf = true;
 				m_key_flag = false;
 			}
 		}
@@ -58,12 +59,23 @@ void CObjTitle::Action()
 		}
 		
 	}
+	if (m_andf == true)
+	{
+		m_and -= 0.03f;
+		if (m_and <= 0.0f)
+		{
+			m_and = 0.0f;
+			m_andf= false;
+			Scene::SetScene(new CSceneMain());
+		}
+	}
+
 }
 
 //ドロー
 void CObjTitle::Draw()
 {
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_and };
 
 	RECT_F src;		//描画元切り取り位置
 	RECT_F dst;		//描画先表示位置
