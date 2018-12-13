@@ -10,7 +10,7 @@ class CObjHero : public CObj
 {
 	
 	public:
-		CObjHero(float x,float y);
+		CObjHero() {};
 		~CObjHero() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション

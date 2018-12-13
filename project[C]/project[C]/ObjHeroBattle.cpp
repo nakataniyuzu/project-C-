@@ -3,6 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjHeroBattle.h"
@@ -143,6 +144,9 @@ void CObjHeroBattle::Action()
 			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_swordwidth, m_py + 32.0f);//剣オブジェクト(戦闘)作成
 			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
 			
+			//斬撃音
+			Audio::Start(1);
+
 			m_sword_delay = 10;
 		}	
 	}

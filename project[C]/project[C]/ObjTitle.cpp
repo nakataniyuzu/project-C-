@@ -5,6 +5,7 @@
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
 #include "GameHead.h"
+#include "GameL\Audio.h"
 
 #include "ObjTitle.h"
 //#include "SceneMain.h"
@@ -17,20 +18,27 @@ int g_map_change = 0;
 //イニシャライズ
 void CObjTitle::Init()
 {
+	m_time = 0;
 	choice = 0;
 	m_key_flag = true;
+Audio::Start(100);
 }
 
 //アクション
 void CObjTitle::Action()
 {
 	
-	if (Input::GetVKey(VK_UP) == true)
+
+	if (choice == 1 && m_time <= 0 && Input::GetVKey(VK_UP) == true)
 	{
+		m_time = 5;
+		Audio::Start(1);
 		choice = 0;
 	}	
-	if (Input::GetVKey(VK_DOWN) == true)
+	else if (choice == 0 && m_time <= 0 && Input::GetVKey(VK_DOWN) == true)
 	{
+		m_time = 5;
+		Audio::Start(1);
 		choice = 1;
 	}
 	
@@ -40,6 +48,7 @@ void CObjTitle::Action()
 		{
 			if (m_key_flag == true)
 			{
+				Audio::Start(2);
 				Scene::SetScene(new CSceneMain());
 				m_key_flag = false;
 			}
@@ -54,10 +63,14 @@ void CObjTitle::Action()
 	{
 		if (Input::GetVKey(VK_RETURN) == true)
 		{
+			Audio::Start(2);
 			exit(1);
 		}
 		
 	}
+
+	if (m_time >= 0)
+		m_time--;
 }
 
 //ドロー

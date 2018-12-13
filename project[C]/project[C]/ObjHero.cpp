@@ -4,6 +4,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjHero.h"
@@ -164,6 +165,7 @@ void CObjHero::Action()
 				}
 				m_f = false;
 				m_mp -= 1;		//MP‚ðŒ¸‚ç‚·
+				Audio::Start(1);
 			}
 		}
 		else

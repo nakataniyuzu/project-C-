@@ -93,7 +93,10 @@ void CSceneMain::InitScene()
 	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
 
-
+	//オーディオ読み込み
+	Audio::LoadAudio(1, L"ATTACK.WAV", EFFECT);
+	//BGMは100番以降
+	Audio::LoadAudio(101, L"STAGEBGM候補1.wav", SOUND_TYPE::BACK_MUSIC);
 	
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
@@ -141,6 +144,7 @@ void CSceneMain::InitScene()
 //ゲームタイトルの実行中メソッド
 void CSceneMain::Scene()
 {
+
 	m_time++;
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);

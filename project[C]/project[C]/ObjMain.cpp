@@ -5,6 +5,7 @@
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
 #include "GameHead.h"
+#include "GameL\Audio.h"
 
 #include "ObjMain.h"
 
@@ -15,6 +16,7 @@ using namespace GameL;
 void CObjMain::Init()
 {
 
+	Audio::Start(101);
 }
 
 //ƒAƒNƒVƒ‡ƒ“
