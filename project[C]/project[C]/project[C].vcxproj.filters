@@ -291,55 +291,64 @@
     <ClInclude Include="ObjStairs.h">
       <Filter>ソースファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="SceneBattle.h">
-      <Filter>ソースファイル\Main\Battle関係</Filter>
+    <ClInclude Include="ObjFireblock.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMenu.h">
-      <Filter>ソースファイル\Menu</Filter>
+    <ClInclude Include="CObjFire.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjResetblock.h">
-      <Filter>ソースファイル\Main\Block関係</Filter>
+    <ClInclude Include="CObjIce.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSwitch.h">
-      <Filter>ソースファイル\Main\Block関係</Filter>
+    <ClInclude Include="CObjThunder.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSwitchGate.h">
-      <Filter>ソースファイル\Main\Block関係</Filter>
+    <ClInclude Include="CObjWind.h">
+      <Filter>ソース ファイル\Main\Magic関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjNextfloor.h">
-      <Filter>ソースファイル\Nextfloor</Filter>
+    <ClInclude Include="ObjBackgroundBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjWater.h">
-      <Filter>ソースファイル\Main\Block関係</Filter>
+    <ClInclude Include="ObjHeroBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
-    <ClInclude Include="SceneClear.h">
-      <Filter>ソースファイル\GameClear</Filter>
+    <ClInclude Include="CObjIceBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソースファイル\Main</Filter>
+    <ClInclude Include="CObjThunderBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMain.h">
-      <Filter>ソースファイル\Main</Filter>
+    <ClInclude Include="ObjKey.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGameover.h">
-      <Filter>ソースファイル\GameOver</Filter>
+    <ClInclude Include="ObjFireGate.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="GameL\SceneManager.h">
-      <Filter>リソースファイル</Filter>
+    <ClInclude Include="ObjGate.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMenu.h">
-      <Filter>ソースファイル\Menu</Filter>
+    <ClInclude Include="ItemIce.h">
+      <Filter>ソース ファイル\Main\Item関係</Filter>
     </ClInclude>
-    <ClInclude Include="SceneNextfloor.h">
-      <Filter>ソースファイル\Nextfloor</Filter>
+    <ClInclude Include="ObjHeal.h">
+      <Filter>ソース ファイル\Main\Block関係</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>ソースファイル\Title</Filter>
+    <ClInclude Include="ObjGameover.h">
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="GameL\SceneObjManager.h">
-      <Filter>リソースファイル</Filter>
+    <ClInclude Include="CObjSwordBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
     </ClInclude>
+    <ClInclude Include="CObjFireBattle.h">
+      <Filter>ソース ファイル\Main\Battle関係</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SceneManager.h" />
+    <ClInclude Include="GameL\SceneObjManager.h" />
+    <ClInclude Include="ObjResetblock.h" />
     <ClInclude Include="ObjBoss1Battle.h">
+      <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBoss2Battle.h">
       <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
     </ClInclude>
     <ClInclude Include="ObjEnemy1Battle.h">
@@ -351,14 +360,59 @@
     <ClInclude Include="ObjEnemy3Battle.h">
       <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy1.h">
-      <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
-    </ClInclude>
     <ClInclude Include="ObjEnemyboss1.h">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClInclude>
+    <ClInclude Include="ObjEnemy1.h">
+      <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ソースファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMenu.h">
+      <Filter>ソースファイル\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMenu.h">
+      <Filter>ソースファイル\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNextfloor.h">
+      <Filter>ソースファイル\Nextfloor</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjNextfloor.h">
+      <Filter>ソースファイル\Nextfloor</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソースファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソースファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWater.h">
+      <Filter>ソースファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSwitch.h">
+      <Filter>ソースファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSwitchGate.h">
+      <Filter>ソースファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBattle.h">
+      <Filter>ソースファイル\Main\Battle関係</Filter>
+    </ClInclude>
     <ClInclude Include="ObjFadein.h">
       <Filter>ソースファイル\Main\Background関係</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>ソースファイル\GameClear</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameover.h">
+      <Filter>ソースファイル\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHero.h">
+      <Filter>ソースファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMain.h">
+      <Filter>ソースファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="ObjSister.h">
       <Filter>ソースファイル\Main\Char関係</Filter>
@@ -366,17 +420,8 @@
     <ClInclude Include="ObjMessage.h">
       <Filter>ソースファイル\Main\UI関係</Filter>
     </ClInclude>
-    <ClInclude Include="ObjHero.h">
-      <Filter>ソースファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTitle.h">
-      <Filter>ソースファイル\Title</Filter>
-    </ClInclude>
     <ClInclude Include="ObjTopback.h">
       <Filter>ソースファイル\Main\UI関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBoss2Battle.h">
-      <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
