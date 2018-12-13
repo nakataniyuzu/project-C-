@@ -15,7 +15,7 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
-	
+	void SetENEMYDELETE(bool x) { enemy_delete_flag = x; }	//敵消滅用
 
 private:
 	float m_px;//位置
@@ -23,6 +23,7 @@ private:
 	float m_vx;			//移動ベクトル
 	float m_vy;
 	float m_posture;	//姿勢
+	bool m_pop_flag; //リス位置の初期化用
 
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム
@@ -36,7 +37,9 @@ private:
 	int m_block_type;
 
 	bool m_battle_flag;
+	bool boss_flag;
 
+	bool enemy_delete_flag;	//敵消滅用
 	//移動の向き制御用
 	bool m_move;
 };

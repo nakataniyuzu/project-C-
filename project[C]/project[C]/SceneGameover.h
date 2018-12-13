@@ -8,11 +8,11 @@ using namespace GameL;
 //シーン：ゲームタイトル
 class CSceneGameover :public CScene
 {
-public:
-	CSceneGameover();
-	~CSceneGameover();
-	void InitScene();//ゲームメインの初期化メソッド
-	void Scene();    //ゲームメインの実行中メソッド
-private:
+	public:
+		CSceneGameover();
+		~CSceneGameover();
+		void InitScene();//ゲームメインの初期化メソッド
+		void Scene();    //ゲームメインの実行中メソッド
+	private:
 
 };

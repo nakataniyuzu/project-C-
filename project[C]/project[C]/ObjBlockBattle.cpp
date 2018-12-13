@@ -45,6 +45,7 @@ void CObjBlockBattle::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
+	m_boss_battle_f = hero->GetBOSSBATTLE();
 
 	if (m_battle_flag == true)
 	{
@@ -58,7 +59,7 @@ void CObjBlockBattle::Action()
 //ÉhÉçÅ[
 void CObjBlockBattle::Draw()
 {
-	if (m_battle_flag == true)
+	if (m_battle_flag == true || m_boss_battle_f == true)
 	{
 		return;
 	}
@@ -83,7 +84,5 @@ void CObjBlockBattle::Draw()
 	dst.m_bottom = 600.0f;
 
 	//ï`âÊ
-	Draw::Draw(1, &src, &dst, c, 0.0f);
-		
-
+	Draw::Draw(FLOOR1, &src, &dst, c, 0.0f);
 }

@@ -9,13 +9,17 @@
 #include "ObjHero.h"
 #include "ObjBlock.h"
 
-float g_px = 375.0f;
-float g_py = 300.0f;
+float g_px;
+float g_py;
 
 //使用するネームスペース
 using namespace GameL;
 
-
+CObjHero::CObjHero(float x, float y)
+{
+	m_px = x;		//位置
+	m_py = y;
+}
 
 //イニシャライズ
 void CObjHero::Init()
@@ -23,28 +27,34 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 0.2f;	//通常速度
+	m_speed_power = 0.5f;	//通常速度
 	m_posture = 2.0f;
 	
-	m_max_hp = 10;
-	m_max_mp = 5;
+	m_max_hp = 10;	//最大HP
+	m_max_mp = 10;	//最大MP
 	m_hp = 10;	//初期HP
-	m_mp = 5;	//初期MP
+	m_mp = 10;	//初期MP
 	m_magic = 0;	//初期魔法
-	m_key = 0;
+
+	m_key = 0;	//鍵の情報
 
 	//フラグの初期化
-	m_gate_mf = false;
-	m_water_mf = false;
-	m_key_mf = false;
-	m_ice_mf = false;
-	m_switch_mf = false;
+	mes.gate = false;
+	mes.water = false;
+	mes.key = false;
+	mes.ice = false;
+	mes.switchblock = false;
+	mes.switchgate = false;
+	mes.heal = false;
 
 	m_battle_flag = true;
+	m_ene_battle_flag = false;
+	m_boss_battle_flag = false;
+	m_fade_flag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
-	m_ani_max_time = 8;		//アニメーション間隔幅(増やせば遅い
+	m_ani_max_time = 6;		//アニメーション間隔幅(増やせば遅い
 
 	m_fire_flag = true;		//火：0
 	m_ice_flag = false;		//氷：1
@@ -67,18 +77,20 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	m_speed_power = 0.5f;		//通常速度
+	
 	if (m_battle_flag == false)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 		return;
 	}
-	
+
 	//Eキーでメニューを開く
 	if (Input::GetVKey('E') == true)
 	{
 		//Scene::SetScene(new CSceneMenu());
-		m_battle_flag = false;
+	
 	}
 
 	//Xキーで魔法を切り替える
@@ -104,6 +116,12 @@ void CObjHero::Action()
 	else
 	{
 		m_mf = true;
+	}
+
+	//HPが0以下の時にゲームオーバーにする
+	if (m_hp <= 0)
+	{
+		Scene::SetScene(new CSceneGameover());
 	}
 
 	//MPが0以上の時は魔法を放つ
@@ -200,6 +218,9 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
+	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
+	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
+
 	CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//左のスクロールライン
 	{
@@ -254,44 +275,65 @@ void CObjHero::Action()
 		}
 	}
 
-	//敵を接触したらBATTLESCENEに移行
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)	//敵と接触したら
 	{
-		m_battle_flag = false;
-		//Scene::SetScene(new CSceneBattle());
+		m_fade_flag = true;		//フェイドフラグをオン
+		m_ene_battle_flag = true;	//敵出現フラグをオンにする
+		m_delete = true;			//敵削除フラグをオンにする
+
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
+	}
+	//敵を接触したらBATTLESCENEに移行(BOSS)
+	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
+	{
+		m_fade_flag = true;		//フェイドフラグをオン
+		m_boss_battle_flag = true;	//敵出現フラグをオンにする
+		m_delete = false;			//敵削除フラグをオンにする
+
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
 	if (hit->CheckObjNameHit(OBJ_KEY) != nullptr)	//キーを取得
 	{
 		m_key = 1;
-		m_key_mf = true;
+		mes.key = true;
 	}
 	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
 	{
 		if (m_key == 1)		//鍵を持っている場合
 		{
 			m_key = 0;		//鍵を消費する
-			m_gate_mf = true;//鍵のフラグをオンにする
+			mes.gate = true;//鍵のフラグをオンにする
 		}
 	}
-	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)
+	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)	//主人公が氷の結晶と当たった場合
 	{
-		m_ice_mf = true;
+		mes.ice = true;			//フラグをオンにする
 		m_ice_flag = true;
 	}
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)			//主人公が水と当たった場合
 	{
-		m_water_mf = true;
+		mes.water = true;		//フラグをオンにする
 	}
-	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_SWITCH) != nullptr)	//主人公がスイッチに触れた場合
 	{
-		m_switch_mf = true;
+		mes.switchblock = true;	//フラグをオンにする
+	}
+	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr)	//主人公がゲートと当たった場合
+	{
+		mes.switchgate = true;		//フラグをオンにする
 	}
 	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)	//主人公がHEALと当たった場合
 	{
 		m_hp = m_max_hp;		//HPを最大まで回復
 		m_mp = m_max_mp;		//MPを最大まで回復
+		mes.heal = true;		//フラグをオンにする
 	}
-
+	if (hit->CheckElementHit(ELEMENT_SISTER) == true)	//主人公が妹に触れた場合
+	{
+		Scene::SetScene(new CSceneClear());	//ゲームクリアシーンに移行
+	}
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -333,10 +375,10 @@ void CObjHero::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    = 32.0f * m_posture;
-	src.m_left   =  0.0f + AniDate[m_ani_frame] * 24;
-	src.m_right  = 24.0f + AniDate[m_ani_frame] * 24;
-	src.m_bottom = 32.0f + (32.0f * m_posture);
+	src.m_top    = 64.0f * m_posture;
+	src.m_left   =  0.0f + AniDate[m_ani_frame] * 64;
+	src.m_right  = 64.0f + AniDate[m_ani_frame] * 64;
+	src.m_bottom = 64.0f + (64.0f * m_posture);
 
 	//表示位置の設定
 	dst.m_top    =  0.0f + g_py;

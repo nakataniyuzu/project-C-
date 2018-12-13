@@ -29,6 +29,7 @@ void CObjMessage::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float b[4] = { 0.0f,0.0f,1.0f,1.0f };
 	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
+	float g[4] = { 0.0f,1.0f,0.0f,1.0f };
 
 
 	RECT_F src;		//描画元切り取り位置
@@ -36,79 +37,103 @@ void CObjMessage::Draw()
 
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	water_flag = hero->GetWATERF();
-	key_flag = hero->GetKEYF();
-	gate_flag = hero->GetGATEF();
-	ice_flag = hero->GetMICE();
-	switch_flag = hero->GetSGATE();
+	f.water = hero->GetWATERF();
+	f.key = hero->GetKEYF();
+	f.gate = hero->GetGATEF();
+	f.ice = hero->GetMICE();
+	f.sgate = hero->GetSGATE();
+	f.sblock = hero->GetSBLOCK();
+	f.heal = hero->GetHEAL();
 
-	if (water_flag == true)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
+	if (f.water == true)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
 	{
-		m_water_time = 100;
+		t.water = 100;
 	}
-	if (m_water_time > 0) {
-		m_water_time--;
-		water_flag = false;		//フラグをオフ
-		hero->SetWATERF(water_flag);
+	if (t.water > 0) {
+		t.water--;
+		f.water = false;		//フラグをオフ
+		hero->SetWATERF(f.water);
 		Font::StrDraw(L"凍らせれば渡れるか...？", 180, 230, 20, b);//時間が0になると表示を終了
-		if (m_water_time <= 0) {
-			m_water_time = 0;
+		if (t.water <= 0) {
+			t.water = 0;
 		}
 	}
-	if (key_flag == true)	//主人公がKEYブロックと当たった場合、m_timeに時間をセット
+	if (f.key == true)	//主人公がKEYブロックと当たった場合、m_timeに時間をセット
 	{
-		m_key_time = 100;
+		t.key = 100;
 	}
-	if (m_key_time > 0) {
-		m_key_time--;
-		key_flag = false;		//フラグをオフ
-		hero->SetKEYF(key_flag);
+	if (t.key > 0) {
+		t.key--;
+		f.key = false;		//フラグをオフ
+		hero->SetKEYF(f.key);
 		Font::StrDraw(L"鍵を手に入れた", 200, 200, 20, y);//時間が0になると表示を終了
-		if (m_key_time <= 0) {
-			m_key_time = 0;
+		if (t.key <= 0) {
+			t.key = 0;
 		}
 	}
-
-	if (gate_flag == true)		//鍵のフラグがオンになったら時間をセット
+	if (f.gate == true)		//鍵のフラグがオンになったら時間をセット
 	{
-		m_gate_time = 100;
+		t.gate = 100;
 	}
-	if (m_gate_time > 0) {
-		m_gate_time--;
-		gate_flag = false;		//フラグをオフ
-		hero->SetGATEF(gate_flag);
+	if (t.gate > 0) {
+		t.gate--;
+		f.gate = false;		//フラグをオフ
+		hero->SetGATEF(f.gate);
 		Font::StrDraw(L"鍵を開けた", 210, 170, 20, y);//時間が0になると表示を終了
-		if (m_gate_time <= 0) {
-			m_gate_time = 0;
+		if (t.gate <= 0) {
+			t.gate = 0;
 		}
 	}
-
-	if (ice_flag == true)		//鍵のフラグがオンになったら時間をセット
+	if (f.ice == true)		//鍵のフラグがオンになったら時間をセット
 	{
-		m_ice_time = 100;
+		t.ice = 100;
 	}
-	if (m_ice_time > 0) {
-		m_ice_time--;
-		ice_flag = false;		//フラグをオフ
-		hero->SetMICE(ice_flag);
-		Font::StrDraw(L"氷魔法を覚えた！", 200, 200, 20, b);//時間が0になると表示を終了
-		if (m_ice_time <= 0) {
-			m_ice_time = 0;
+	if (t.ice > 0) {
+		t.ice--;
+		f.ice = false;		//フラグをオフ
+		hero->SetMICE(f.ice);
+		Font::StrDraw(L"氷魔法を覚えた！（Xキーで切り替え", 200, 200, 20, c);//時間が0になると表示を終了
+		if (t.ice <= 0) {
+			t.ice = 0;
 		}
 	}
-
-	if (switch_flag == true)
+	if (f.sgate == true)	//フラグがオンの時タイムをセット
 	{
-		m_switch_time = 100;
+		t.sgate = 100;
 	}
-	if (m_switch_time > 0) {
-		m_switch_time--;
-		switch_flag = false;
-		hero->SetSGATE(switch_flag);
+	if (t.sgate > 0) {
+		t.sgate--;
+		f.sgate = false;	//フラグをオフ
+		hero->SetSGATE(f.sgate);
 		Font::StrDraw(L"開かない...", 200, 200, 20, c);//時間が0になると表示を終了		
-		if (m_switch_time <= 0) {
-			m_switch_time = 0;
+		if (t.sgate <= 0) {
+			t.sgate = 0;
 		}
 	}
-
+	if (f.sblock == true)	//フラグがオンの時タイムをセット
+	{
+		t.sblock = 100;
+	}
+	if (t.sblock > 0) {
+		t.sblock--;
+		f.sblock = false;
+		hero->SetSBLOCK(f.sblock);
+		Font::StrDraw(L"どこかで扉が開く音がした。", 200, 200, 20, y);//時間が0になると表示を終了
+		if (t.sblock <= 0) {
+			t.sblock = 0;
+		}	
+	}
+	if (f.heal == true)		//フラグがオンの時タイムをセット
+	{
+		t.heal = 100;
+	}
+	if (t.heal > 0) {
+		t.heal--;
+		f.heal = false;
+		hero->SetHEAL(f.heal);
+		Font::StrDraw(L"HP/MPが回復した！", 200, 200, 20, g);//時間が0になると表示を終了
+		if (t.heal <= 0) {
+			t.heal = 0;
+		}
+	}
 }
