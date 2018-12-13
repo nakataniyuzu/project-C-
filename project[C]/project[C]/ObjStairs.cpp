@@ -44,7 +44,12 @@ void CObjStairs::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
 	{
-		Scene::SetScene(new CSceneNextfloor());	//ゲームネクストシーンに移行
+		hit->SetInvincibility(true);	//当たり判定を消す
+
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
+
+		//Scene::SetScene(new CSceneNextfloor());	//ゲームネクストシーンに移行
 	}
 
 	//位置の更新
@@ -62,6 +67,12 @@ void CObjStairs::Action()
 //ドロー
 void CObjStairs::Draw()
 {
+
+	if (m_battle_flag == false)
+	{
+		return;
+	}
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 

@@ -24,13 +24,14 @@ void CObjFadein::Action()
 	//戦闘時の敵の情報を持ってくる
 	CObjEnemy1Battle* benemy = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
 	
+	
+
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	hero->SetSPEED(0.0f);	//スピードを０にする
 	hero->SetVX(0.0f);		//ベクトルを０にする
 	hero->SetVY(0.0f);
-
-
+	m_next_flag = hero->GetNEXTF();	//ネクストフラグを取得
 	m_fade_flag = hero->GetFADEF();	//フェイドインかアウトを設定するためのフラグ
 
 	if (m_flag == true)
@@ -44,6 +45,14 @@ void CObjFadein::Action()
 		}
 		if (m_ani_frame == 9)
 		{
+			if (m_next_flag == true)
+			{
+				Scene::SetScene(new CSceneNextfloor());	//ゲームネクストシーンに移行
+			}
+			if (m_main_flag == true)
+			{
+				Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
+			}
 			m_flag = false;
 			if (m_fade_flag == false)
 				hero->SetBATTLE(true);		//マップ画面へ移行
@@ -51,7 +60,7 @@ void CObjFadein::Action()
 				hero->SetBATTLE(false);			//バトル画面へ移行
 		}
 	}
-	else 
+	else if(m_flag == false)
 	{
 		m_ani_time += 1;
 
@@ -62,8 +71,6 @@ void CObjFadein::Action()
 		}
 		if (m_ani_frame == 0)
 		{
-			
-
 			this->SetStatus(false);
 		}
 	}

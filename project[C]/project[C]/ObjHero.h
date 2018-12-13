@@ -10,7 +10,7 @@ class CObjHero : public CObj
 {
 	
 	public:
-		CObjHero(float x,float y);
+		CObjHero() {};
 		~CObjHero() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
@@ -45,11 +45,13 @@ class CObjHero : public CObj
 		bool GetENEMYF() { return m_ene_battle_flag; }		//敵出現用フラグを取得
 		bool GetBOSSF() { return m_boss_battle_flag; }		//ボス出現用フラグを取得
 		bool GetFADEF() { return m_fade_flag; }			//フェイドフラグを取得	
+		bool GetNEXTF() { return m_next_flag; }			//ネクストフラグを取得
+
 
 		void SetENEMYF(bool x) { m_ene_battle_flag = x; }	//敵出現用フラグをセット
 		void SetBOSSF(bool x) { m_boss_battle_flag = x; }		//ボス出現用フラグをセット
 		void SetFADEF(bool x) { m_fade_flag = x; }		//フェイドフラグをセット
-
+		void SetNEXTF(bool x) { m_next_flag = x; }		//ネクストフラグをセット
 
 		bool GetKEYF() { return mes.key; }		//KEYの情報を取得
 		bool GetGATEF() { return mes.gate; }	//GATEの情報を取得
@@ -89,6 +91,7 @@ class CObjHero : public CObj
 		float m_directionx; //魔法発射用X方向
 		float m_directiony; //魔法発射用Y方向
 
+
 		int m_max_hp;		//HPの最大値
 		int m_max_mp;		//MPの最大値
 		int m_hp;			//体力
@@ -101,6 +104,7 @@ class CObjHero : public CObj
 		bool  m_f;		//キー（長押し）制御用
 		bool  m_mf;		//キー（長押し）制御用
 
+		bool m_next_flag;		//次の階層への移行用
 		bool m_fade_flag;		//フェイドイン,アウト用
 		bool m_battle_flag;		//バトル移行用
 		bool m_ene_battle_flag;	//雑魚出現用

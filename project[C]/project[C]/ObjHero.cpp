@@ -4,22 +4,17 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjHero.h"
-#include "ObjBlock.h"
+//#include "ObjBlock.h"
 
 float g_px;
 float g_py;
 
 //使用するネームスペース
 using namespace GameL;
-
-CObjHero::CObjHero(float x, float y)
-{
-	m_px = x;		//位置
-	m_py = y;
-}
 
 //イニシャライズ
 void CObjHero::Init()
@@ -47,6 +42,7 @@ void CObjHero::Init()
 	mes.switchgate = false;
 	mes.heal = false;
 
+	m_next_flag = false;
 	m_battle_flag = true;
 	m_ene_battle_flag = false;
 	m_boss_battle_flag = false;
@@ -70,7 +66,7 @@ void CObjHero::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, g_px, g_py, ALL_SIZE, ALL_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, g_px + 8, g_py + 1, 35, 47, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 }
 
@@ -170,6 +166,7 @@ void CObjHero::Action()
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
+				Audio::Start(1);
 			}
 		}
 		else
@@ -181,24 +178,29 @@ void CObjHero::Action()
 	//キーの入力方向
 	if (Input::GetVKey(VK_UP) == true)
 	{
+		m_py -= m_speed_power;
 		m_vy -= m_speed_power;
 		m_posture = 0.0f;	//上
 		m_ani_time += 1;
+		
 	}
 	else if (Input::GetVKey(VK_RIGHT) == true)
 	{
+		m_px += m_speed_power;
 		m_vx += m_speed_power;
 		m_posture = 1.0f;	//右
 		m_ani_time += 1;
 	}
 	else if (Input::GetVKey(VK_DOWN) == true)
 	{
+		m_py += m_speed_power;
 		m_vy += m_speed_power;
 		m_posture = 2.0f;	//下
 		m_ani_time += 1;
 	}
 	else if (Input::GetVKey(VK_LEFT) == true)
 	{
+		m_px -= m_speed_power;
 		m_vx -= m_speed_power;
 		m_posture = 3.0f;	//左
 		m_ani_time += 1;
@@ -330,10 +332,16 @@ void CObjHero::Action()
 		m_mp = m_max_mp;		//MPを最大まで回復
 		mes.heal = true;		//フラグをオンにする
 	}
+	if (hit->CheckObjNameHit(OBJ_STAIRS) != nullptr)	//主人公がSTAIRSと当たった場合
+	{
+		m_next_flag = true;		//フラグをオンにする
+	}
 	if (hit->CheckElementHit(ELEMENT_SISTER) == true)	//主人公が妹に触れた場合
 	{
 		Scene::SetScene(new CSceneClear());	//ゲームクリアシーンに移行
 	}
+
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
@@ -350,7 +358,7 @@ void CObjHero::Action()
 	g_py += m_vy;
 
 	//HitBoxの位置の変更
-	hit->SetPos(g_px, g_py);
+	hit->SetPos(g_px + 8, g_py + 1);
 	
 	
 }

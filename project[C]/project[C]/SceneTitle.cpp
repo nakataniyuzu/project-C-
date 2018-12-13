@@ -33,6 +33,11 @@ void CSceneTitle::InitScene()
 {
 	Draw::LoadImageW(L"Title.png", 0, TEX_SIZE_800_600);
 
+	//オーディオ読み込み
+	Audio::LoadAudio(1, L"SERECT.wav", EFFECT);
+	Audio::LoadAudio(2, L"ENTER.wav", EFFECT);
+	Audio::LoadAudio(100, L"TITLE-BGM.WAV", SOUND_TYPE::BACK_MUSIC);
+
 
 	CObjTitle* p = new CObjTitle();
 	Objs::InsertObj(p, OBJ_TITLE, 1);

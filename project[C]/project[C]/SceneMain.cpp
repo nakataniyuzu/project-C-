@@ -62,18 +62,13 @@ void CSceneMain::InitScene()
 
 			count += 2;
 
-			if (map[i][j] == 20) {
-				//主人公オブジェクト作成
-				CObjHero* obj = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obj, OBJ_HERO, 115);
-			}
 		}
 	}
 
 	m_time = 0;
 
 	//グラフィック読み込み
-	Draw::LoadImageW(L"map.Hero.png", 0, TEX_SIZE_256);
+	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256);
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Block.png", BLOCK1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
@@ -95,14 +90,19 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
+	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);
 
-
+	//オーディオ読み込み
+	Audio::LoadAudio(1, L"ATTACK.WAV", EFFECT);
+	//BGMは100番以降
+	Audio::LoadAudio(101, L"STAGEBGM候補1.wav", SOUND_TYPE::BACK_MUSIC);
 	
 	//主人公オブジェクト作成
-	/*CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 115);*/
+	CObjHero* obj = new CObjHero();
+	Objs::InsertObj(obj, OBJ_HERO, 115);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -146,6 +146,7 @@ void CSceneMain::InitScene()
 //ゲームタイトルの実行中メソッド
 void CSceneMain::Scene()
 {
+
 	m_time++;
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
