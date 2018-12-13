@@ -5,26 +5,26 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjBoss2Battle.h"
+#include "ObjBoss3Battle.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //イニシャライズ
-void CObjBoss2Battle::Init()
+void CObjBoss3Battle::Init()
 {
 	m_px = 300.0f;
 	m_py = 500.0f;		//出現位置
 
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_boss_hp = 25;     //敵のヒットポイント(最大25)
-	m_damage = 3;
+	m_boss_hp = 50;     //敵のヒットポイント(最大50)
+	m_damage = 5;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
-	m_speed_power = 1.0f;	//通常速度
+	m_speed_power = 1.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 	m_pop_flag = true;
 	m_move = true;  //true=右 false=左
@@ -32,11 +32,11 @@ void CObjBoss2Battle::Init()
 	m_time = 0;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS_BATTLE, OBJ_BOSS_BATTLE_SECOND, 1);
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS_BATTLE, OBJ_BOSS_BATTLE_THIRD, 1);
 }
 
 //アクション
-void CObjBoss2Battle::Action()
+void CObjBoss3Battle::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_boss_flag = hero->GetBATTLE();
@@ -172,7 +172,7 @@ void CObjBoss2Battle::Action()
 	}
 
 	//突進
-	if (m_time >= 0)
+	/*if (m_time >= 0)
 	{
 		m_time++;
 
@@ -186,11 +186,11 @@ void CObjBoss2Battle::Action()
 				m_time = 0;
 			}
 		}
-	}
+	}*/
 }
 
 //ドロー
-void CObjBoss2Battle::Draw()
+void CObjBoss3Battle::Draw()
 {
 	if (m_boss_flag == true)
 	{
@@ -207,17 +207,17 @@ void CObjBoss2Battle::Draw()
 	if (m_move == true)//左向き
 	{
 		src.m_top = 0.0f;
-		src.m_left = 105.0f;
-		src.m_right = 198.0f;
-		src.m_bottom = 102.0f;
+		src.m_left = 265.0f;
+		src.m_right = 500.0f;
+		src.m_bottom = 250.0f;
 	}
-	else if (m_move == false)//右向き
+	if (m_move == false)//右向き
 	{
 		m_posture = 0.0f;
 		src.m_top = 0.0f;
-		src.m_left = 305.0f;
-		src.m_right = 398.0f;
-		src.m_bottom = 102.0f;
+		src.m_left = 770.0f;
+		src.m_right = 1000.0f;
+		src.m_bottom = 250.0f;
 	}
 
 	//表示位置の設定
@@ -227,6 +227,6 @@ void CObjBoss2Battle::Draw()
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画
-	Draw::Draw(21, &src, &dst, c, 0.0f);
+	Draw::Draw(22, &src, &dst, c, 0.0f);
 
 }

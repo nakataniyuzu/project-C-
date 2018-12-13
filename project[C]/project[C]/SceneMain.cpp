@@ -95,7 +95,8 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
-	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);
 
 
 	
@@ -193,7 +194,7 @@ void CSceneMain::Scene()
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
 	}*/
-	//3層目ボス(まだObj未作成)
+	//3層目ボス
 	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 	CObjBoss3Battle* bobjb = new CObjBoss3Battle();
