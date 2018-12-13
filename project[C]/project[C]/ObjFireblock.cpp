@@ -7,6 +7,7 @@
 
 #include "GameHead.h"
 #include "ObjFireblock.h"
+#include "ObjMessage.h"
 
 
 //使用するネームスペース
@@ -53,6 +54,8 @@ void CObjFireblock::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
 
+
+	
 }
 
 //ドロー
@@ -64,11 +67,12 @@ void CObjFireblock::Draw()
 	{
 		return;
 	}
-
+	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float r[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
+	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
@@ -78,9 +82,11 @@ void CObjFireblock::Draw()
 	if (m_time > 0) {
 		m_time--;
 		if (m_switch == 0.0f) {
+			pm->BackDraw(195.0f, 195.0f, 330.0f, 225.0f, a);
 			Font::StrDraw(L"火を灯そう...", 200, 200, 20, r);//時間が0になると表示を終了
 		}
 		else if (m_switch == 1.0f) {
+			pm->BackDraw(195.0f, 195.0f, 355.0f, 225.0f, a);
 			Font::StrDraw(L"火が灯っている。", 200, 200, 20, r);
 		}
 		if (m_time <= 0) {
@@ -94,6 +100,7 @@ void CObjFireblock::Draw()
 	}
 	if (m_draw_time > 0) {
 		m_draw_time--;
+		pm->BackDraw(195.0f, 195.0f, 420.0f, 225.0f, a);
 		Font::StrDraw(L"どこかが開いたようだ。", 200, 200, 20, y);//時間が0になると表示を終了	
 		if (m_draw_time <= 0) {
 			m_draw_time = 0;

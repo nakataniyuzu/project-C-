@@ -8,7 +8,7 @@
 
 #include "GameHead.h"
 #include "ObjHero.h"
-#include "ObjBlock.h"
+//#include "ObjBlock.h"
 
 float g_px;
 float g_py;
@@ -42,6 +42,7 @@ void CObjHero::Init()
 	mes.switchgate = false;
 	mes.heal = false;
 
+	m_next_flag = false;
 	m_battle_flag = true;
 	m_ene_battle_flag = false;
 	m_boss_battle_flag = false;
@@ -177,24 +178,29 @@ void CObjHero::Action()
 	//キーの入力方向
 	if (Input::GetVKey(VK_UP) == true)
 	{
+		m_py -= m_speed_power;
 		m_vy -= m_speed_power;
 		m_posture = 0.0f;	//上
 		m_ani_time += 1;
+		
 	}
 	else if (Input::GetVKey(VK_RIGHT) == true)
 	{
+		m_px += m_speed_power;
 		m_vx += m_speed_power;
 		m_posture = 1.0f;	//右
 		m_ani_time += 1;
 	}
 	else if (Input::GetVKey(VK_DOWN) == true)
 	{
+		m_py += m_speed_power;
 		m_vy += m_speed_power;
 		m_posture = 2.0f;	//下
 		m_ani_time += 1;
 	}
 	else if (Input::GetVKey(VK_LEFT) == true)
 	{
+		m_px -= m_speed_power;
 		m_vx -= m_speed_power;
 		m_posture = 3.0f;	//左
 		m_ani_time += 1;
@@ -326,10 +332,16 @@ void CObjHero::Action()
 		m_mp = m_max_mp;		//MPを最大まで回復
 		mes.heal = true;		//フラグをオンにする
 	}
+	if (hit->CheckObjNameHit(OBJ_STAIRS) != nullptr)	//主人公がSTAIRSと当たった場合
+	{
+		m_next_flag = true;		//フラグをオンにする
+	}
 	if (hit->CheckElementHit(ELEMENT_SISTER) == true)	//主人公が妹に触れた場合
 	{
 		Scene::SetScene(new CSceneClear());	//ゲームクリアシーンに移行
 	}
+
+
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);

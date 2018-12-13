@@ -21,6 +21,8 @@ void CObjTitle::Init()
 	m_time = 0;
 	choice = 0;
 	m_key_flag = true;
+	m_and = 1.0f;
+	m_andf = false;
 Audio::Start(100);
 }
 
@@ -48,8 +50,8 @@ void CObjTitle::Action()
 		{
 			if (m_key_flag == true)
 			{
+				m_andf = true;
 				Audio::Start(2);
-				Scene::SetScene(new CSceneMain());
 				m_key_flag = false;
 			}
 		}
@@ -68,6 +70,17 @@ void CObjTitle::Action()
 		}
 		
 	}
+	if (m_andf == true)
+	{
+		m_and -= 0.03f;
+		if (m_and <= 0.0f)
+		{
+			m_and = 0.0f;
+			m_andf= false;
+			Scene::SetScene(new CSceneMain());
+		}
+	}
+
 
 	if (m_time >= 0)
 		m_time--;
@@ -76,7 +89,7 @@ void CObjTitle::Action()
 //ドロー
 void CObjTitle::Draw()
 {
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_and };
 
 	RECT_F src;		//描画元切り取り位置
 	RECT_F dst;		//描画先表示位置

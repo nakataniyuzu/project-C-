@@ -323,7 +323,7 @@ void CObjHeroBattle::Action()
 				}
 			}
 			else {
-				if (benemy1 != nullptr) {
+				if (bboss1 != nullptr) {
 					bboss1->SetBOSSDELETE(true);
 				}
 			}
@@ -345,7 +345,7 @@ void CObjHeroBattle::Action()
 				}
 			}
 			else {
-				if (benemy1 != nullptr) {
+				if (bboss1 != nullptr) {
 					bboss1->SetBOSSDELETE(true);
 				}
 			}
