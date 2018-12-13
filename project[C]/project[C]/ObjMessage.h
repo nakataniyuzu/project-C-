@@ -16,6 +16,8 @@ class CObjMessage :public CObj
 		void Draw();	//ドロー
 
 	private:
+		void CObjMessage::BackDraw(float top, float left, float right, float bottom, float c[]);
+
 		struct Flag {
 			bool gate;		//GATEのメッセージフラグ
 			bool key;		//KEYのメッセージフラグ

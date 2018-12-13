@@ -29,7 +29,7 @@ void CObjHeroBattle::Init()
 	m_swordwidth = 0.0f; //ソード幅
 
 	//当たり判定用のHitBoxを作成
- 	Hits::SetHitBox(this, m_px , m_py , 60, 100, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
+ 	Hits::SetHitBox(this, m_px + 13 , m_py , 50, 90, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
 }
 
 //アクション
@@ -40,6 +40,7 @@ void CObjHeroBattle::Action()
 	CObjEnemy2Battle* benemy2 = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
 	CObjEnemy3Battle* benemy3 = (CObjEnemy3Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_THIRD);
 	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
+	CObjBoss2Battle* bboss2 = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
 
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -230,7 +231,7 @@ void CObjHeroBattle::Action()
 	m_py += m_vy;
 
 	//HitBoxの位置の変更
-	hit->SetPos(m_px, m_py);
+	hit->SetPos(m_px + 13, m_py);
 
 	//攻撃を受けたら体力を減らす
 	if (hit->CheckElementHit(ELEMENT_ENEMY_BATTLE) == true
@@ -276,6 +277,13 @@ void CObjHeroBattle::Action()
 		{
 			CObjBoss1Battle* bs1b = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
 			m_damage = bs1b ->GetDMG();
+			m_battle_hp -= m_damage;
+		}
+		//ボス(2層目)
+		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_SECOND) != nullptr)
+		{
+			CObjBoss2Battle* bs2b = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
+			m_damage = bs2b->GetDMG();
 			m_battle_hp -= m_damage;
 		}
 	}
@@ -363,7 +371,7 @@ void CObjHeroBattle::Draw()
 
 	int AniData[4] =
 	{
-		0,1,2,3,
+		0,1,0,2,
 	};
 
 	//描画カラー情報
@@ -374,10 +382,10 @@ void CObjHeroBattle::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    =  0.0f;
-	src.m_left   = 60.0f + AniData[m_ani_frame] *60;
-	src.m_right  =  0.0f + AniData[m_ani_frame] *60;
-	src.m_bottom = 60.0f;
+	src.m_top    = 192.0f;
+	src.m_left   = 64.0f + AniData[m_ani_frame] * 64.0f;
+	src.m_right  =  0.0f + AniData[m_ani_frame] * 64.0f;
+	src.m_bottom = 256.0f;
 
 	//表示位置の設定
 	dst.m_top    = 0.0f + m_py;
@@ -387,10 +395,10 @@ void CObjHeroBattle::Draw()
 
 	//描画
 	if (m_time > 0){
-		Draw::Draw(11, &src, &dst, a, 0.0f);
+		Draw::Draw(0, &src, &dst, a, 0.0f);
 	}
 	else {
-		Draw::Draw(11, &src, &dst, c, 0.0f);
+		Draw::Draw(0, &src, &dst, c, 0.0f);
 	}
 
 }

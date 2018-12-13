@@ -161,6 +161,7 @@ extern int g_map_change;	//マップ変更用変数
 //Enemy関係
 #include "ObjBoss.h"
 #include "ObjBoss1Battle.h"
+#include "ObjBoss2Battle.h"
 #include "ObjEnemyboss1.h"
 #include "ObjEnemy1.h"
 #include "ObjEnemyFirst.h"

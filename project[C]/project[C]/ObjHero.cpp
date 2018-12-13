@@ -15,12 +15,6 @@ float g_py;
 //使用するネームスペース
 using namespace GameL;
 
-CObjHero::CObjHero(float x, float y)
-{
-	m_px = x;		//位置
-	m_py = y;
-}
-
 //イニシャライズ
 void CObjHero::Init()
 {
@@ -70,7 +64,7 @@ void CObjHero::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, g_px, g_py, ALL_SIZE, ALL_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, g_px + 8, g_py + 1, 35, 47, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 }
 
@@ -350,7 +344,7 @@ void CObjHero::Action()
 	g_py += m_vy;
 
 	//HitBoxの位置の変更
-	hit->SetPos(g_px, g_py);
+	hit->SetPos(g_px + 8, g_py + 1);
 	
 	
 }

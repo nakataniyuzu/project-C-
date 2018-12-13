@@ -34,6 +34,7 @@
     </ClCompile>
     <ClCompile Include="CObjWind.cpp" />
     <ClCompile Include="ObjBoss1Battle.cpp" />
+    <ClCompile Include="ObjBoss2Battle.cpp" />
     <ClCompile Include="ObjClear.cpp" />
     <ClCompile Include="ObjEnemy2Battle.cpp" />
     <ClCompile Include="ObjEnemy3Battle.cpp" />
@@ -121,6 +122,7 @@
     </ClInclude>
     <ClInclude Include="CObjWind.h" />
     <ClInclude Include="ObjBoss1Battle.h" />
+    <ClInclude Include="ObjBoss2Battle.h" />
     <ClInclude Include="ObjClear.h" />
     <ClInclude Include="ObjEnemy2Battle.h" />
     <ClInclude Include="ObjEnemy3Battle.h" />

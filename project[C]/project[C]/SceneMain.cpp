@@ -62,18 +62,13 @@ void CSceneMain::InitScene()
 
 			count += 2;
 
-			if (map[i][j] == 20) {
-				//主人公オブジェクト作成
-				CObjHero* obj = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obj, OBJ_HERO, 115);
-			}
 		}
 	}
 
 	m_time = 0;
 
 	//グラフィック読み込み
-	Draw::LoadImageW(L"map.Hero.png", 0, TEX_SIZE_256);
+	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256);
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Block.png", BLOCK1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
@@ -94,17 +89,15 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
-	//Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
 	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
 
-	//オーディオ読み込み
-	Audio::LoadAudio(1, L"STAGEBGM候補1.wav", SOUND_TYPE::BACK_MUSIC);
-	Audio::LoadAudio(1, L"STAGEBGM候補1.wav", SOUND_TYPE::BACK_MUSIC);
-	Audio::LoadAudio(1, L"STAGEBGM候補1.wav", SOUND_TYPE::BACK_MUSIC);
+
 	
 	//主人公オブジェクト作成
-	/*CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 115);*/
+	CObjHero* obj = new CObjHero();
+	Objs::InsertObj(obj, OBJ_HERO, 115);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -154,6 +147,7 @@ void CSceneMain::Scene()
 	m_enemy_flag = hero->GetENEMYF();
 	m_boss_flag = hero->GetBOSSF();
 
+	//1層目雑魚
 	if (m_enemy_flag == true)		//フラグがオンの時、敵出現
 	{
 		CObjEnemy1Battle* bobje = new CObjEnemy1Battle();
@@ -161,6 +155,7 @@ void CSceneMain::Scene()
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
 	}
+	//1層目ボス
 	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
@@ -169,12 +164,37 @@ void CSceneMain::Scene()
 		hero->SetBOSSF(m_boss_flag);
 	}
 
-	/*
-	if (m_enemy_flag == true || m_time == 500)		//フラグがオンの時、敵出現
+	//2層目雑魚
+	/*if (m_enemy_flag == true)		//フラグがオンの時、敵出現
+	{
+	CObjEnemy2Battle* bobje = new CObjEnemy2Battle();
+	Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_SECOND, 10);
+	m_enemy_flag = false;
+	hero->SetENEMYF(m_enemy_flag);
+	}*/
+	//2層目ボス
+	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	{
+		CObjBoss2Battle* bobjb = new CObjBoss2Battle();
+		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_SECOND, 10);
+		m_boss_flag = false;
+		hero->SetBOSSF(m_boss_flag);
+	}*/
+
+	//3層目雑魚
+	/*if (m_enemy_flag == true || m_time == 400)		//フラグがオンの時、敵出現
 	{
 		CObjEnemy3Battle* bobje = new CObjEnemy3Battle();
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_THIRD, 10);
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
+	}*/
+	//3層目ボス(まだObj未作成)
+	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	{
+	CObjBoss3Battle* bobjb = new CObjBoss3Battle();
+	Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_THIRD, 10);
+	m_boss_flag = false;
+	hero->SetBOSSF(m_boss_flag);
 	}*/
 }
