@@ -25,8 +25,7 @@ void CObjKey::Init()
 	m_vy = 0.0f;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_KEY, 1);
-
+	Hits::SetHitBox(this, m_px + 10, m_py, 30, ALL_SIZE, ELEMENT_FIELD, OBJ_KEY, 1);
 }
 
 //アクション
@@ -51,7 +50,6 @@ void CObjKey::Action()
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
-
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
@@ -60,7 +58,7 @@ void CObjKey::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//HitBoxの位置の変更
-	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
+	hit->SetPos(m_px + block->GetScrollX() + 10, m_py + block->GetScrollY());
 
 }
 

@@ -62,18 +62,13 @@ void CSceneMain::InitScene()
 
 			count += 2;
 
-			if (map[i][j] == 20) {
-				//主人公オブジェクト作成
-				CObjHero* obj = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obj, OBJ_HERO, 115);
-			}
 		}
 	}
 
 	m_time = 0;
 
 	//グラフィック読み込み
-	Draw::LoadImageW(L"map.Hero.png", 0, TEX_SIZE_256);
+	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256);
 	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Block.png", BLOCK1, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
@@ -96,12 +91,13 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
 	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
 
 
 	
 	//主人公オブジェクト作成
-	/*CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 115);*/
+	CObjHero* obj = new CObjHero();
+	Objs::InsertObj(obj, OBJ_HERO, 115);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -175,7 +171,7 @@ void CSceneMain::Scene()
 	}
 
 
-	if (m_enemy_flag == true || m_time == 500)		//フラグがオンの時、敵出現
+	/*if (m_enemy_flag == true || m_time == 500)		//フラグがオンの時、敵出現
 	{
 		CObjEnemy3Battle* bobje = new CObjEnemy3Battle();
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_THIRD, 10);
