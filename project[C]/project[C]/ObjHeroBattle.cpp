@@ -145,7 +145,7 @@ void CObjHeroBattle::Action()
 			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
 			
 			//斬撃音
-			Audio::Start(1);
+			Audio::Start(0);
 
 			m_sword_delay = 10;
 		}	
@@ -316,7 +316,8 @@ void CObjHeroBattle::Action()
 			hero->SetFADEF(false);	//フェイドフラグをオフ
 			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-
+			Audio::Stop(13);
+			Audio::Start(12);
 			if (m_delete == true){
 				if (benemy1 != nullptr) {
 					benemy1->SetENEMYDELETE(true);
@@ -329,6 +330,7 @@ void CObjHeroBattle::Action()
 			}
 
 		}
+	
 	}
 	if (m_px < 0)
 	{
@@ -338,7 +340,8 @@ void CObjHeroBattle::Action()
 			hero->SetFADEF(false);	//フェイドフラグをオフ
 			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-
+			Audio::Stop(13);
+			Audio::Start(12);
 			if (m_delete == true) {
 				if (benemy1 != nullptr) {
 					benemy1->SetENEMYDELETE(true);
@@ -350,6 +353,7 @@ void CObjHeroBattle::Action()
 				}
 			}
 		}
+		
 	}
 	if (m_py + 100 >= 580)
 	{

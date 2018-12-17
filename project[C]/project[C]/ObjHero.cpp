@@ -148,11 +148,13 @@ void CObjHero::Action()
 				{
 					CObjFire* objf = new CObjFire(g_px + m_directionx, g_py + m_directiony);//Fireオブジェクト作成
 					Objs::InsertObj(objf, OBJ_FIRE, 120);		//作ったFireオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(7);
 				}
 				else if (m_magic == 1)	//氷の魔法
 				{
 					CObjIce* obji = new CObjIce(g_px + m_directionx, g_py + m_directiony);//Iceオブジェクト作成
 					Objs::InsertObj(obji, OBJ_ICE, 120);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(8);
 				}
 				else if (m_magic == 2)	//風の魔法
 				{
@@ -163,10 +165,10 @@ void CObjHero::Action()
 				{
 					CObjThunder* objt = new CObjThunder(g_px + m_directionx, g_py + m_directiony);//Thunderオブジェクト作成
 					Objs::InsertObj(objt, OBJ_THUNDER, 120);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(9);
 				}
 				m_f = false;
 				m_mp -= 1;		//MPを減らす
-				Audio::Start(1);
 			}
 		}
 		else
@@ -279,6 +281,9 @@ void CObjHero::Action()
 
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)	//敵と接触したら
 	{
+
+		Audio::Start(1);
+
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_ene_battle_flag = true;	//敵出現フラグをオンにする
 		m_delete = true;			//敵削除フラグをオンにする
@@ -289,6 +294,9 @@ void CObjHero::Action()
 	//敵を接触したらBATTLESCENEに移行(BOSS)
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
+
+		Audio::Start(1);
+
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_boss_battle_flag = true;	//敵出現フラグをオンにする
 		m_delete = false;			//敵削除フラグをオンにする
@@ -307,6 +315,7 @@ void CObjHero::Action()
 		{
 			m_key = 0;		//鍵を消費する
 			mes.gate = true;//鍵のフラグをオンにする
+			Audio::Start(4);
 		}
 	}
 	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)	//主人公が氷の結晶と当たった場合
@@ -331,6 +340,7 @@ void CObjHero::Action()
 		m_hp = m_max_hp;		//HPを最大まで回復
 		m_mp = m_max_mp;		//MPを最大まで回復
 		mes.heal = true;		//フラグをオンにする
+		Audio::Start(10);
 	}
 	if (hit->CheckObjNameHit(OBJ_STAIRS) != nullptr)	//主人公がSTAIRSと当たった場合
 	{

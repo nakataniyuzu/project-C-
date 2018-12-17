@@ -34,13 +34,13 @@ void CObjTitle::Action()
 	if (choice == 1 && m_time <= 0 && Input::GetVKey(VK_UP) == true)
 	{
 		m_time = 5;
-		Audio::Start(1);
+		Audio::Start(0);
 		choice = 0;
 	}	
 	else if (choice == 0 && m_time <= 0 && Input::GetVKey(VK_DOWN) == true)
 	{
 		m_time = 5;
-		Audio::Start(1);
+		Audio::Start(0);
 		choice = 1;
 	}
 	
@@ -51,7 +51,7 @@ void CObjTitle::Action()
 			if (m_key_flag == true)
 			{
 				m_andf = true;
-				Audio::Start(2);
+				Audio::Start(1);
 				m_key_flag = false;
 			}
 		}
