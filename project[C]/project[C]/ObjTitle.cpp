@@ -81,7 +81,6 @@ void CObjTitle::Action()
 		}
 	}
 
-
 	if (m_time >= 0)
 		m_time--;
 }

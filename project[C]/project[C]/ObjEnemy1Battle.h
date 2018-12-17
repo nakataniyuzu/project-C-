@@ -35,6 +35,11 @@ private:
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 	float hero_posture;
 
+	int m_ani;			//死亡アニメーション用
+	int m_ani_time_d;	//死亡アニメーション間隔タイム
+	bool m_del;			//削除チェック
+	RECT_F m_eff;		//死亡エフェクト描画用
+
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
 

@@ -22,9 +22,9 @@ CObjHeal::CObjHeal(float x, float y)
 //イニシャライズ
 void CObjHeal::Init()
 {
-	m_vx = 0.0f;		//移動ベクトル
-	m_vy = 0.0f;
 
+	m_and = 0.0f;
+	m_andf = true;
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_HEAL, OBJ_HEAL, 1);
 
@@ -33,13 +33,35 @@ void CObjHeal::Init()
 //アクション
 void CObjHeal::Action()
 {
+	if (m_andf == true)
+	{
+		m_and += 0.01f;
+		if (m_and >= 1.0f)
+		{
+			m_and = 1.0f;
+			m_andf = false;
+		}
+	}
+
+
+
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
-
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がHEALと当たった場合
+	{
+		hit->SetInvincibility(true);	//無敵オン
+		m_time = 100;
+	}
+	if (m_time > 0)
+	{
+		m_time--;
+		if (m_time <= 0)
+		{
+			m_time = 0;
+			hit->SetInvincibility(false);	//無敵オフ
+		}
+	}
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -58,7 +80,7 @@ void CObjHeal::Draw()
 	}
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_and };
 	
 
 	RECT_F src;	//描画元切り取り位置

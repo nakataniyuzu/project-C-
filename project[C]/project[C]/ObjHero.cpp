@@ -27,7 +27,7 @@ void CObjHero::Init()
 	
 	m_max_hp = 10;	//最大HP
 	m_max_mp = 10;	//最大MP
-	m_hp = 10;	//初期HP
+	m_hp = 100;	//初期HP
 	m_mp = 10;	//初期MP
 	m_magic = 0;	//初期魔法
 
@@ -50,7 +50,7 @@ void CObjHero::Init()
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
-	m_ani_max_time = 6;		//アニメーション間隔幅(増やせば遅い
+	m_ani_max_time = 8;		//アニメーション間隔幅(増やせば遅い
 
 	m_fire_flag = true;		//火：0
 	m_ice_flag = false;		//氷：1
@@ -65,6 +65,9 @@ void CObjHero::Init()
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
+	m_and = 0.0f;
+	m_andf = true;
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, g_px + 8, g_py + 1, 35, 47, ELEMENT_PLAYER, OBJ_HERO, 1);
 
@@ -73,76 +76,87 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_speed_power = 0.5f;		//通常速度
-	
-	if (m_battle_flag == false)
-	{
-		m_vx = 0.0f;
-		m_vy = 0.0f;
-		return;
-	}
+	m_speed_power = 0.2f;		//通常速度
 
-	//Eキーでメニューを開く
-	if (Input::GetVKey('E') == true)
+	if (m_andf == true)		//フェードイン
 	{
-		//Scene::SetScene(new CSceneMenu());
-	
-	}
-
-	//Xキーで魔法を切り替える
-	if (Input::GetVKey('X') == true)
-	{
-		if (m_mf == true) {	//キー制御用
-			m_mf = false;
-			m_magic += 1;
-		}
-		if (m_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
-			m_magic = 0;
-		}
-		if (m_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
-			m_magic = 0;
-		}
-		if (m_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
-			m_magic = 0;
-		}
-		if (m_magic >= 4) {
-			m_magic = 0;
-		}
-	}
-	else
-	{
-		m_mf = true;
-	}
-
-	//HPが0以下の時にゲームオーバーにする
-	if (m_hp <= 0)
-	{
-		Scene::SetScene(new CSceneGameover());
-	}
-
-	//MPが0以上の時は魔法を放つ
-	if (m_mp > 0) {
-		if (Input::GetVKey('Z') == true)	//魔法発射
+		m_and += 0.01f;
+		if (m_and >= 1.0f)
 		{
-			if (m_f == true) {	//魔法制御用
+			m_and = 1.0f;
+			m_andf = false;
+		}
+	}
+	else {		//フェードイン中は入力を受け付けない
 
-				//主人公の向きによって発射する向きを設定
-				if (m_posture == 0.0f) {
-					m_directionx = 0.0f;
-					m_directiony = -50.0f;
-				}
-				else if (m_posture == 1.0f) {
-					m_directionx = 50.0f;
-					m_directiony = 0.0f;
-				}
-				else if (m_posture == 2.0f) {
-					m_directionx = 0.0f;
-					m_directiony = 50.0f;
-				}
-				else if (m_posture == 3.0f) {
-					m_directionx = -50.0f;
-					m_directiony = 0.0f;
-				}
+		if (m_battle_flag == false)
+		{
+			m_vx = 0.0f;
+			m_vy = 0.0f;
+			return;
+		}
+
+		//Eキーでメニューを開く
+		if (Input::GetVKey('E') == true)
+		{
+			//Scene::SetScene(new CSceneMenu());
+
+		}
+
+		//Xキーで魔法を切り替える
+		if (Input::GetVKey('X') == true)
+		{
+			if (m_mf == true) {	//キー制御用
+				m_mf = false;
+				m_magic += 1;
+			}
+			if (m_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
+				m_magic = 0;
+			}
+			if (m_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
+				m_magic = 0;
+			}
+			if (m_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
+				m_magic = 0;
+			}
+			if (m_magic >= 4) {
+				m_magic = 0;
+			}
+		}
+		else
+		{
+			m_mf = true;
+		}
+
+		//HPが0以下の時にゲームオーバーにする
+		if (m_hp <= 0)
+		{
+			Scene::SetScene(new CSceneGameover());
+		}
+
+		//MPが0以上の時は魔法を放つ
+		if (m_mp > 0) {
+			if (Input::GetVKey('Z') == true)	//魔法発射
+			{
+				if (m_f == true) {	//魔法制御用
+
+					//主人公の向きによって発射する向きを設定
+					if (m_posture == 0.0f) {
+						m_directionx = 0.0f;
+						m_directiony = -50.0f;
+					}
+					else if (m_posture == 1.0f) {
+						m_directionx = 50.0f;
+						m_directiony = 0.0f;
+					}
+					else if (m_posture == 2.0f) {
+						m_directionx = 0.0f;
+						m_directiony = 50.0f;
+					}
+					else if (m_posture == 3.0f) {
+						m_directionx = -50.0f;
+						m_directiony = 0.0f;
+					}
 
 				if (m_magic == 0)	//火の魔法
 				{
@@ -177,51 +191,52 @@ void CObjHero::Action()
 		}
 	}
 
-	//キーの入力方向
-	if (Input::GetVKey(VK_UP) == true)
-	{
-		m_py -= m_speed_power;
-		m_vy -= m_speed_power;
-		m_posture = 0.0f;	//上
-		m_ani_time += 1;
-		
-	}
-	else if (Input::GetVKey(VK_RIGHT) == true)
-	{
-		m_px += m_speed_power;
-		m_vx += m_speed_power;
-		m_posture = 1.0f;	//右
-		m_ani_time += 1;
-	}
-	else if (Input::GetVKey(VK_DOWN) == true)
-	{
-		m_py += m_speed_power;
-		m_vy += m_speed_power;
-		m_posture = 2.0f;	//下
-		m_ani_time += 1;
-	}
-	else if (Input::GetVKey(VK_LEFT) == true)
-	{
-		m_px -= m_speed_power;
-		m_vx -= m_speed_power;
-		m_posture = 3.0f;	//左
-		m_ani_time += 1;
-	}
-	else   //アニメーション処理
-	{
-		m_ani_frame = 0;	//キー入力がない場合は静止フレームにする
-		m_ani_time = 0;
-	}
-	if (m_ani_time > m_ani_max_time)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
-	if (m_ani_frame == 4)
-	{
-		m_ani_frame = 0;
-	}
+		//キーの入力方向
+		if (Input::GetVKey(VK_UP) == true)
+		{
+			m_py -= m_speed_power;
+			m_vy -= m_speed_power;
+			m_posture = 0.0f;	//上
+			m_ani_time += 1;
 
+		}
+		else if (Input::GetVKey(VK_RIGHT) == true)
+		{
+			m_px += m_speed_power;
+			m_vx += m_speed_power;
+			m_posture = 1.0f;	//右
+			m_ani_time += 1;
+		}
+		else if (Input::GetVKey(VK_DOWN) == true)
+		{
+			m_py += m_speed_power;
+			m_vy += m_speed_power;
+			m_posture = 2.0f;	//下
+			m_ani_time += 1;
+		}
+		else if (Input::GetVKey(VK_LEFT) == true)
+		{
+			m_px -= m_speed_power;
+			m_vx -= m_speed_power;
+			m_posture = 3.0f;	//左
+			m_ani_time += 1;
+		}
+
+		else   //アニメーション処理
+		{
+			m_ani_frame = 0;	//キー入力がない場合は静止フレームにする
+			m_ani_time = 0;
+		}
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+		if (m_ani_frame == 4)
+		{
+			m_ani_frame = 0;
+		}
+	}
 	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
 	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
 
@@ -387,7 +402,7 @@ void CObjHero::Draw()
 	};	
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_and };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置

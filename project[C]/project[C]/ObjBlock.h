@@ -37,4 +37,7 @@ class CObjBlock : public CObj
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;
 
+		float m_and;		//透明度処理用
+		bool m_andf;		//透明度処理用フラグ
+
 };
