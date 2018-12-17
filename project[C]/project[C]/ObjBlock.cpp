@@ -25,11 +25,23 @@ void CObjBlock::Init()
 {
 	m_scrollx = 0.0f;
 	m_scrolly = 0.0f;
+	m_and = 0.0f;
+	m_andf = true;
 }
 
 //アクション
 void CObjBlock::Action()
 {
+	if (m_andf == true)
+	{
+		m_and += 0.01f;
+		if (m_and >= 1.0f)
+		{
+			m_and = 1.0f;
+			m_andf = false;
+		}
+	}
+
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
@@ -214,7 +226,7 @@ void CObjBlock::Draw()
 	}
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_and };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -303,7 +315,8 @@ void CObjBlock::BlockHit(
 				float scrolly = scroll_on ? m_scrolly : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x +(-scrollx) + ALL_SIZE > bx) && (*x + (-scrollx) < bx + ALL_SIZE) && (*y + (-scrolly) + ALL_SIZE > by) && (*y + (-scrolly) < by + ALL_SIZE))
+				if ((*x +(-scrollx) + 42.0f > bx) && (*x + (-scrollx) < bx + 42.0f) 
+				 && (*y + (-scrolly) + 48.0f > by) && (*y + (-scrolly) < by + 48.0f))
 				{
 					//上下左右判定
 
@@ -331,29 +344,29 @@ void CObjBlock::BlockHit(
 						{
 							//右
 							*right = true;	//主人公の左の部分が衝突している
-							*x = bx + ALL_SIZE + (scrollx);	//ブロックの位置+主人公の幅
-							*vx = 0.3f;//-VX*反発係数
+							*x = bx + 42.0f + (scrollx);	//ブロックの位置+主人公の幅
+							*vx = 0.2f;//-VX*反発係数
 						}
 						if (r > 45 && r < 135)
 						{
 							//上
 							*down = true;	//主人公から見て、下の部分が衝突している
-							*y = by - ALL_SIZE + (scrolly);	//ブロックの位置-主人公の幅
-							*vy = -0.3f;//-VX*反発係数
+							*y = by - 48.0f + (scrolly);	//ブロックの位置-主人公の幅
+							*vy = -0.2f;//-VX*反発係数
 						}
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;	//主人公の右の部分が衝突している
-							*x = bx - ALL_SIZE + (scrollx);	//ブロックの位置-主人公の幅
-							*vx = -0.3f;//-VX*反発係数
+							*x = bx - 42.0f + (scrollx);	//ブロックの位置-主人公の幅
+							*vx = -0.2f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							//下
 							*up = true;		//主人公から見て、上の部分が衝突している
-							*y = by + ALL_SIZE + (scrolly);	//ブロック位置+主人公の幅
-							*vy = 0.3f;//-VX*反発係数
+							*y = by + 48.0f + (scrolly);	//ブロック位置+主人公の幅
+							*vy = 0.2f;//-VX*反発係数
 						}
 					}
 				}

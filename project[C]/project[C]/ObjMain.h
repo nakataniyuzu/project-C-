@@ -58,4 +58,7 @@ class CObjMain :public CObj
 		bool battle_flag;	//バトル画面かどうか
 
 		int enemy_kills = 0;//敵の撃破数
+
+		float m_and;		//透明度処理用
+		bool m_andf;		//透明度処理用フラグ
 };

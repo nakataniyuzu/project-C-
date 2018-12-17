@@ -96,9 +96,25 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"ENEMYBOSS3_MAGIC.png", 24, TEX_SIZE_100);
 
 	//オーディオ読み込み
-	Audio::LoadAudio(1, L"ATTACK.WAV", EFFECT);
-	//BGMは100番以降
-	Audio::LoadAudio(101, L"STAGEBGM候補1.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(0, L"ATTACK.WAV", EFFECT);
+	Audio::LoadAudio(1, L"BATTLE-START.wav", EFFECT);
+	Audio::LoadAudio(2, L"BATTLE-WIN.wav", EFFECT);
+	Audio::LoadAudio(3, L"DAMAGE.WAV", EFFECT);
+	Audio::LoadAudio(4, L"DOOR-OPEN.wav", EFFECT);
+	Audio::LoadAudio(5, L"ENE-MAGIC.wav", EFFECT);
+	Audio::LoadAudio(6, L"ENE-RANGE-ATTACK.wav", EFFECT);
+	Audio::LoadAudio(7, L"FIRE.WAV", EFFECT);
+	Audio::LoadAudio(8, L"ICE.WAV", EFFECT);
+	Audio::LoadAudio(9, L"THUNDER.WAV", EFFECT);
+	Audio::LoadAudio(10, L"HEAL.WAV", EFFECT);
+	Audio::LoadAudio(11, L"ZELDA.WAV", EFFECT);
+
+	Audio::LoadAudio(12, L"STAGEBGM候補1.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(13, L"BATTLE-BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	//BGMスタート
+	float Volume = Audio::Volume(1.0,12);//ボリュームさげる
+	Audio::Start(12);
 	
 	//主人公オブジェクト作成
 	CObjHero* obj = new CObjHero();
@@ -146,6 +162,7 @@ void CSceneMain::InitScene()
 //ゲームタイトルの実行中メソッド
 void CSceneMain::Scene()
 {
+	
 
 	m_time++;
 
@@ -156,6 +173,8 @@ void CSceneMain::Scene()
 	//1層目雑魚
 	if (m_enemy_flag == true)		//フラグがオンの時、敵出現
 	{
+		Audio::Stop(12);
+		Audio::Start(13);
 		CObjEnemy1Battle* bobje = new CObjEnemy1Battle();
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_FIRST, 10);
 		m_enemy_flag = false;

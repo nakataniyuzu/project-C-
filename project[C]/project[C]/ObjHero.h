@@ -134,6 +134,9 @@ class CObjHero : public CObj
 		int	  m_ani_time;	//アニメーションフレーム動作間隔
 		int   m_ani_frame;	//描画フレーム
 
+		float m_and;		//透明度処理用
+		bool m_andf;		//透明度処理用フラグ
+
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
 

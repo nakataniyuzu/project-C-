@@ -21,8 +21,6 @@ public:
 	float GetSWITCH(){ return m_switch; }
 
 private:
-	//void CObjMessage::BackDraw(float top, float left, float right, float bottom, float c[]);
-
 	float m_px;			//位置
 	float m_py;
 	float m_vx;			//移動ベクトル
