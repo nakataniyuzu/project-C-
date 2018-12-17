@@ -76,12 +76,14 @@ void CObjEnemyFirst::Action()
 		m_speed_power = 0.0f;		//ƒXƒs[ƒh‚ð‚O‚É‚·‚é
 		hit->SetInvincibility(true);	//“–‚½‚è”»’è‚ðÁ‚·
 	}
-
 	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)	//–‚–@UŒ‚(Fire)‚ÉG‚ê‚½‚ç
 	{
-		
+		m_speed_power = 2.0f;	//ƒXƒs[ƒh‚ðã‚°‚é
 	}
-
+	if (hit->CheckObjNameHit(OBJ_ICE) != nullptr)	//–‚–@UŒ‚(Ice)‚ÉG‚ê‚½‚ç
+	{
+		m_speed_power = 0.0f;	//ƒXƒs[ƒh‚ðŽ~‚ß‚é
+	}
 	if (m_hit_up == true)	//ã
 		m_move = false;
 	if (m_hit_down == true)	//‰º
@@ -149,6 +151,7 @@ void CObjEnemyFirst::Draw()
 	//•`‰æƒJƒ‰[î•ñ
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float r[4] = { 0.6f,0.0f,0.0f,0.8f };
+	float b[4] = { 0.0f,0.0f,0.6f,0.8f };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
 	RECT_F dst;	//•`‰ææ•\Ž¦ˆÊ’u
@@ -166,8 +169,11 @@ void CObjEnemyFirst::Draw()
 	dst.m_right =  ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 	
-	if (m_speed_power == 0.0f){
+	if (m_speed_power >= 2.0f){
 		Draw::Draw(7, &src, &dst, r, 0.0f);
+	}
+	else if (m_speed_power == 0.0f) {
+		Draw::Draw(7, &src, &dst, b, 0.0f);
 	}
 	else {
 		Draw::Draw(7, &src, &dst, c, 0.0f);

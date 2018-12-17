@@ -15,14 +15,23 @@ using namespace GameL;
 //イニシャライズ
 void CObjMain::Init()
 {
-
+	m_and = 0.0f;
+	m_andf = true;
 	Audio::Start(101);
 }
 
 //アクション
 void CObjMain::Action()
 {
-
+	if (m_andf == true)
+	{
+		m_and += 0.01f;
+		if (m_and >= 1.0f)
+		{
+			m_and = 1.0f;
+			m_andf = false;
+		}
+	}
 }
 
 //ドロー
@@ -37,7 +46,7 @@ void CObjMain::Draw()
 	key = hero->GetKEY();
 	battle_flag = hero->GetBATTLE();
 
-	float c[4] = { 1,1,1,1 };
+	float c[4] = { 1.0f,1.0f,1.0f,m_and };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置

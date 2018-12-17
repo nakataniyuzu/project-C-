@@ -91,7 +91,6 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
 	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
-	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
 
 	//オーディオ読み込み
 	Audio::LoadAudio(1, L"ATTACK.WAV", EFFECT);

@@ -36,7 +36,7 @@ void CObjMessage::Draw()
 	RECT_F src;		//•`‰æŒ³Ø‚èæ‚èˆÊ’u
 	RECT_F dst;		//•`‰ææ•\¦ˆÊ’u
 
-
+	//ålŒö‚Ìî•ñ‚ğ‚Á‚Ä‚­‚é
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	f.water = hero->GetWATERF();
 	f.key = hero->GetKEYF();
