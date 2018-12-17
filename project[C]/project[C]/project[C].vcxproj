@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CObjEnemyMagicBattle.cpp" />
     <ClCompile Include="CObjFire.cpp" />
     <ClCompile Include="CObjFireBattle.cpp" />
     <ClCompile Include="CObjIce.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CObjEnemyMagicBattle.h" />
     <ClInclude Include="CObjFire.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>

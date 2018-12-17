@@ -90,10 +90,10 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
-	//Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);
+	Draw::LoadImageW(L"ENEMYBOSS3_MAGIC.png", 24, TEX_SIZE_100);
 
 	//オーディオ読み込み
 	Audio::LoadAudio(1, L"ATTACK.WAV", EFFECT);
@@ -162,13 +162,13 @@ void CSceneMain::Scene()
 		hero->SetENEMYF(m_enemy_flag);
 	}
 	//1層目ボス
-	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
 		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
 		m_boss_flag = false;
 		hero->SetBOSSF(m_boss_flag);
-	}
+	}*/
 
 	//2層目雑魚
 	/*if (m_enemy_flag == true)		//フラグがオンの時、敵出現

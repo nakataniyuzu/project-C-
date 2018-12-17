@@ -44,6 +44,8 @@ void CObjHeroBattle::Action()
 	CObjBoss2Battle* bboss2 = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
 	CObjBoss3Battle* bboss3 = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
 
+	CObjEnemyMagicBattle* emb = (CObjEnemyMagicBattle*)Objs::GetObj(OBJ_ENEMY_MAGIC_BATTLE);
+
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_hp = hero->GetHP();	//主人公からHPの情報を取得
@@ -240,7 +242,8 @@ void CObjHeroBattle::Action()
 
 	//攻撃を受けたら体力を減らす
 	if (hit->CheckElementHit(ELEMENT_ENEMY_BATTLE) == true
-		|| hit->CheckElementHit(ELEMENT_BOSS_BATTLE) == true)
+		|| hit->CheckElementHit(ELEMENT_BOSS_BATTLE) == true
+		|| hit->CheckElementHit(ELEMENT_MAGIC_BATTLE) == true)
 	{
 		//ノックバック処理
 		if (m_posture == 0.0f)
@@ -296,6 +299,13 @@ void CObjHeroBattle::Action()
 		{
 			CObjBoss3Battle* bs3b = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
 			m_damage = bs3b->GetDMG();
+			m_battle_hp -= m_damage;
+		}
+		//ボス魔法(3層目)
+		if (hit->CheckObjNameHit(OBJ_ENEMY_MAGIC_BATTLE) != nullptr)
+		{
+			CObjEnemyMagicBattle* emb = (CObjEnemyMagicBattle*)Objs::GetObj(OBJ_ENEMY_MAGIC_BATTLE);
+			m_damage = emb-> GetDMG();
 			m_battle_hp -= m_damage;
 		}
 	}

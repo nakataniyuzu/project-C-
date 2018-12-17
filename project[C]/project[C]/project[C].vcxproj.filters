@@ -190,6 +190,9 @@
     <ClCompile Include="ObjBoss3Battle.cpp">
       <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
     </ClCompile>
+    <ClCompile Include="CObjEnemyMagicBattle.cpp">
+      <Filter>ソースファイル\Main\Magic関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -383,6 +386,9 @@
     </ClInclude>
     <ClInclude Include="ObjBoss3Battle.h">
       <Filter>ソースファイル\Main\Enemy関係\Battle上</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjEnemyMagicBattle.h">
+      <Filter>ソースファイル\Main\Magic関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ class CObjEnemy3Battle : public CObj
 		void Draw();		//ƒhƒ[
 
 		int GetDMG() { return m_damage; }//UŒ‚—Í‚ğæ“¾
+		int GetPOS() { return m_posture; }//™ÂŒü‚«æ“¾™Â
 
 	private:
 		float m_px;//ˆÊ’u
