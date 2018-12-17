@@ -26,6 +26,7 @@ enum OBJ_NAME
 	OBJ_FIRE_BATTLE,
 	OBJ_ICE_BATTLE,
 	OBJ_THUNDER_BATTLE,
+	OBJ_ENEMY_MAGIC_BATTLE,
 	
 	OBJ_FIREBLOCK,
 	OBJ_FIREGATE,
@@ -86,6 +87,7 @@ enum HIT_ELEMENTS
 
 	ELEMENT_ENEMY_BATTLE,
 	ELEMENT_BOSS_BATTLE,
+	ELEMENT_MAGIC_BATTLE,
 
 
 	ELEMENT_RED,
@@ -153,6 +155,7 @@ extern int g_map_change;	//マップ変更用変数
 #include "CObjFireBattle.h"
 #include "CObjIceBattle.h"
 #include "CObjThunderBattle.h"
+#include "CObjEnemyMagicBattle.h"
 
 //Magic関係
 #include "ObjFireblock.h"

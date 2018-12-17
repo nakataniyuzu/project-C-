@@ -17,6 +17,7 @@ class CObjBoss3Battle : public CObj
 
 		void SetBOSSDELETE(bool x) { boss_delete_flag = x; }
 		int GetDMG() { return m_damage; }//攻撃力を取得
+		float GetPOS() { return m_posture; }//ボスの向きを取得
 
 	private:
 		float m_px;			//位置
@@ -33,8 +34,12 @@ class CObjBoss3Battle : public CObj
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
 		float hero_posture;
+		float m_directionx; //魔法発射用X方向
+		float m_directiony; //魔法発射用Y方向
 
 		int m_time;	//突進時間
+		int m_delay;
+
 					//踏んでいるblockの種類を確認用
 		int m_block_type;
 

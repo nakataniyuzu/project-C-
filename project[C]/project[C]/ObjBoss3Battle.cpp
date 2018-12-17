@@ -20,9 +20,11 @@ void CObjBoss3Battle::Init()
 	m_vy = 0.0f;
 	m_boss_hp = 50;     //敵のヒットポイント(最大50)
 	m_damage = 5;
+	m_delay = 5;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
+	m_posture = 0.0f;	//右向き0.0f 左向き1.0f
 
 	m_speed_power = 1.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
@@ -75,15 +77,42 @@ void CObjBoss3Battle::Action()
 		return;
 	}
 
-	//画面端衝突で向き変更
-	if (m_px + 75 >= 800)
-	{
-		m_move = true;
+	
+	//ボスの向きによって発射する向きを設定
+	if (m_posture == 0.0f) {
+		m_directionx = 50.0f;
+		m_directiony = 0.0f;
 	}
-	if (m_px <= 0)
-	{
-		m_move = false;
+	else if (m_posture == 1.0f) {
+		m_directionx = -50.0f;
+		m_directiony = 0.0f;
 	}
+
+	//画面端衝突で向き変更＆魔法発射
+	if (m_delay <= 0)
+	{
+		if (m_px + 75 >= 800)
+		{
+			m_move = true;
+			CObjEnemyMagicBattle* objemb = new CObjEnemyMagicBattle(m_px - m_directionx, m_py + m_directiony);
+			Objs::InsertObj(objemb, OBJ_ENEMY_MAGIC_BATTLE, 100);
+			m_delay = 2;
+		}
+		else if (m_px <= 0)
+		{
+			m_move = false;
+			CObjEnemyMagicBattle* objemb = new CObjEnemyMagicBattle(m_px + m_directionx, m_py + m_directiony);
+			Objs::InsertObj(objemb, OBJ_ENEMY_MAGIC_BATTLE, 100);
+			m_delay = 2;
+		}
+	}
+	else
+	{
+		m_delay--;
+	}
+
+	/*CObjEnemyMagicBattle* objemb = new CObjEnemyMagicBattle(m_px + m_directionx, m_py + m_directiony);
+	Objs::InsertObj(objemb, OBJ_ENEMY_MAGIC_BATTLE, 100);*/	
 
 	//方向
 	if (m_move == false)
@@ -134,15 +163,25 @@ void CObjBoss3Battle::Action()
 		if (m_posture == 1.0f)
 		{
 			m_vy = -10;
-			m_vx -= 25;
+			m_vx -= 5;
 		}
 		else if (m_posture == 0.0f)
 		{
 			m_vy = -10;
-			m_vx += 25;
+			m_vx += 5;
 		}
-
+		m_time = 80;		//無敵時間をセット
+		hit->SetInvincibility(true);	//無敵オン
 		m_boss_hp -= 1;
+	}
+	if (m_time > 0)
+	{
+		m_time--;
+		if (m_time <= 0)
+		{
+			m_time = 0;
+			hit->SetInvincibility(false);	//無敵オフ
+		}
 	}
 	//敵の体力が0になったら破棄
 	if (m_boss_hp <= 0)
@@ -199,6 +238,7 @@ void CObjBoss3Battle::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -227,6 +267,10 @@ void CObjBoss3Battle::Draw()
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画
-	Draw::Draw(22, &src, &dst, c, 0.0f);
-
+	if (m_time > 0) {
+		Draw::Draw(22, &src, &dst, a, 0.0f);
+	}
+	else {
+		Draw::Draw(22, &src, &dst, c, 0.0f);
+	}
 }

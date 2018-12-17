@@ -256,7 +256,7 @@ void CObjEnemy1Battle::Action()
 	//当たり判定を行うオブジェクト情報部
 	int data_base[1] =
 	{
-		OBJ_HERO_BATTLE,
+		OBJ_SWORD_BATTLE,
 	};
 
 	//オブジェクト情報群と当たり判定行い。当たっていれば削除
