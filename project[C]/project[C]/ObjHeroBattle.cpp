@@ -42,6 +42,7 @@ void CObjHeroBattle::Action()
 	CObjEnemy3Battle* benemy3 = (CObjEnemy3Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_THIRD);
 	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
 	CObjBoss2Battle* bboss2 = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
+	CObjBoss3Battle* bboss3 = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
 
 	//ŽålŒö‚Ìî•ñ‚ðŽ‚Á‚Ä‚­‚é
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -288,6 +289,13 @@ void CObjHeroBattle::Action()
 		{
 			CObjBoss2Battle* bs2b = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
 			m_damage = bs2b->GetDMG();
+			m_battle_hp -= m_damage;
+		}
+		//ƒ{ƒX(3‘w–Ú)
+		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_THIRD) != nullptr)
+		{
+			CObjBoss3Battle* bs3b = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
+			m_damage = bs3b->GetDMG();
 			m_battle_hp -= m_damage;
 		}
 	}

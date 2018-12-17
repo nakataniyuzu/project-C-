@@ -33,6 +33,14 @@ void CObjEnemy1Battle::Init()
 	m_pop_flag = true;	//敵向き用フラグ
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
+
+	m_eff.m_top    =  0;
+	m_eff.m_left   =  0;
+	m_eff.m_right  = 50;
+	m_eff.m_bottom = 50;
+	m_ani = 0;
+	m_ani_time_d = 0;
+	m_del = false;
 	
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_FIRST, 1);
@@ -208,29 +216,98 @@ void CObjEnemy1Battle::Action()
 		m_py = 50.0f;
 	}
 
+	//敵消滅処理------
+	if (m_enemy_hp <= 0)
+	{
+		if (m_del == true)
+		{
+			//死亡アニメーションRECT情報
+			RECT_F ani_src[3] =
+			{
+				{ 0,  0, 50, 50 },
+				{ 0, 50,100, 50 },
+				{ 0,100,150, 50 },
+			};
+
+			//アニメーションのコマ間隔制御
+			if (m_ani_time_d > 2)
+			{
+				m_ani++;	//アニメーションのコマを1つ進める
+				m_ani_time_d;
+
+				m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			}
+			else
+			{
+				m_ani_time_d++;
+			}
+
+			//死亡アニメーション終了で本当にオブジェクトの破棄
+			if (m_ani == 4)
+			{
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+			}
+
+			return;
+		}
+	}
+
+	//当たり判定を行うオブジェクト情報部
+	int data_base[1] =
+	{
+		OBJ_HERO_BATTLE,
+	};
+
+	//オブジェクト情報群と当たり判定行い。当たっていれば削除
+	for (int i = 0; i < 1; i++)
+	{
+		if (hit->CheckObjNameHit(data_base[i]) != nullptr)
+		{
+			m_del = true;
+			hit->SetInvincibility(true);
+		}
+	}
 }
 
 //ドロー
 void CObjEnemy1Battle::Draw()
 {
+	//死亡アニメーションRECT情報
+	RECT_F ani_src[3] =
+	{
+		{ 0,  0, 50, 50},
+		{ 0, 50,100, 50},
+		{ 0,100,150, 50},
+	};
+
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-	//切り取り位置の設定
-	src.m_top    =  0.0f;
-	src.m_left   = 50.0f;
-	src.m_right  =  0.0f;
-	src.m_bottom = 50.0f;
-
 	//表示位置の設定
-	dst.m_top    =   0.0f + m_py;
-	dst.m_left   = (     75.0f * m_posture) + m_px;
-	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
+	dst.m_top = 0.0f + m_py;
+	dst.m_left = (75.0f * m_posture) + m_px;
+	dst.m_right = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
-	//描画
-	Draw::Draw(12, &src, &dst, c, 0.0f);
+	//敵の状態で描画を変更
+	if (m_del == true)
+	{
+		//死亡アニメーション描画
+		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
+	}
+	else
+	{
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 50.0f;
+		src.m_right = 0.0f;
+		src.m_bottom = 50.0f;
+		//描画
+		Draw::Draw(12, &src, &dst, c, 0.0f);
+	}
 }
