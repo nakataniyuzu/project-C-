@@ -36,6 +36,10 @@ void CSceneGameover::InitScene()
 	//オーディオ読み込み
 	Audio::LoadAudio(0, L"SERECT.wav", EFFECT);
 	Audio::LoadAudio(1, L"ENTER.wav", EFFECT);
+	Audio::LoadAudio(2, L"GAME-OVER.wav", EFFECT);
+
+	Audio::Start(2);
+
 
 	CObjGameover* p = new CObjGameover();
 	Objs::InsertObj(p, OBJ_GAMEOVER, 1);

@@ -26,15 +26,19 @@ void CObjGameover::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjGameover::Action()
 {
+
+
 	if (choice == 1 && m_time <= 0 && Input::GetVKey(VK_UP) == true)
 	{
 		m_time = 5;
+		Audio::Start(0);
 		choice = 0;
 		Audio::Start(0);
 	}
-	if (choice == 0 && m_time <= 0 && Input::GetVKey(VK_DOWN) == true)
+	else if (choice == 0 && m_time <= 0 && Input::GetVKey(VK_DOWN) == true)
 	{
 		m_time = 5;
+		Audio::Start(0);
 		choice = 1;
 		Audio::Start(0);
 	}

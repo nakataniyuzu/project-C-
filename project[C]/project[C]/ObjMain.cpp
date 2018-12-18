@@ -17,7 +17,6 @@ void CObjMain::Init()
 {
 	m_and = 0.0f;
 	m_andf = true;
-	Audio::Start(101);
 }
 
 //ƒAƒNƒVƒ‡ƒ“

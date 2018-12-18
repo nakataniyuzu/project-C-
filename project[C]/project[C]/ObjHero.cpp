@@ -76,7 +76,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_speed_power = 0.2f;		//通常速度
+	m_speed_power = 1.2f;		//通常速度
 
 	if (m_andf == true)		//フェードイン
 	{
@@ -330,7 +330,7 @@ void CObjHero::Action()
 		{
 			m_key = 0;		//鍵を消費する
 			mes.gate = true;//鍵のフラグをオンにする
-			Audio::Start(4);
+			Audio::Start(11);
 		}
 	}
 	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)	//主人公が氷の結晶と当たった場合
