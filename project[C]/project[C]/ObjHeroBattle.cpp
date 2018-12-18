@@ -141,10 +141,10 @@ void CObjHeroBattle::Action()
 		{
 			//主人公の向きによって攻撃する向きを設定
 			if (m_posture == 0.0f) {
-				m_swordwidth = 55.0f;
+				m_swordwidth = 70.0f;
 			}
 			else if (m_posture == 1.0f) {
-				m_swordwidth = -55.0f;
+				m_swordwidth = -30.0f;
 			}
 
 			//剣で攻撃
@@ -204,18 +204,21 @@ void CObjHeroBattle::Action()
 
 				if (m_battle_magic == 0)	//火の魔法
 				{
-					CObjFireBattle* objfb = new CObjFireBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
+					CObjFireBattle* objfb = new CObjFireBattle(m_px + m_directionx, m_py + m_directiony);//Fireオブジェクト(戦闘)作成
 					Objs::InsertObj(objfb, OBJ_FIRE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(7);
 				}
 				if (m_battle_magic == 1)	//氷の魔法
 				{
 					CObjIceBattle* objib = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
 					Objs::InsertObj(objib, OBJ_ICE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(8);
 				}
 				else if (m_battle_magic == 3)	//雷の魔法
 				{
 					CObjThunderBattle* objtb = new CObjThunderBattle(m_px + m_directionx, m_py + m_directiony);//Thunderオブジェクト(戦闘)作成
 					Objs::InsertObj(objtb, OBJ_THUNDER_BATTLE, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(9);
 				}
 				m_f = false;
 				m_battle_mp -= 1;		//MPを減らす
@@ -262,12 +265,15 @@ void CObjHeroBattle::Action()
 		m_time = 80;		//無敵時間をセット
 		hit->SetInvincibility(true);	//無敵オン
 
+		Audio::Start(3);
+
 		//敵(1層目)
 		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_FIRST) != nullptr)
 		{
 			CObjEnemy1Battle* e1b = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
 			m_damage = e1b ->GetDMG();
 			m_battle_hp -= m_damage;
+			Audio::Start(3);
 		}
 		//敵(2層目)
 		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_SECOND) != nullptr)
@@ -275,6 +281,7 @@ void CObjHeroBattle::Action()
 			CObjEnemy2Battle* e2b = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
 			m_damage = e2b ->GetDMG();
 			m_battle_hp -= m_damage;
+			Audio::Start(3);
 		}
 		//敵(3層目)
 		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_THIRD) != nullptr)
@@ -282,6 +289,7 @@ void CObjHeroBattle::Action()
 			CObjEnemy3Battle* e3b = (CObjEnemy3Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_THIRD);
 			m_damage = e3b->GetDMG();
 			m_battle_hp -= m_damage;
+			Audio::Start(3);
 		}
 		//ボス(1層目)
 		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_FIRST) != nullptr)
@@ -289,6 +297,7 @@ void CObjHeroBattle::Action()
 			CObjBoss1Battle* bs1b = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
 			m_damage = bs1b ->GetDMG();
 			m_battle_hp -= m_damage;
+			Audio::Start(3);
 		}
 		//ボス(2層目)
 		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_SECOND) != nullptr)
@@ -296,6 +305,7 @@ void CObjHeroBattle::Action()
 			CObjBoss2Battle* bs2b = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
 			m_damage = bs2b->GetDMG();
 			m_battle_hp -= m_damage;
+			Audio::Start(3);
 		}
 		//ボス(3層目)
 		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_THIRD) != nullptr)
@@ -303,6 +313,7 @@ void CObjHeroBattle::Action()
 			CObjBoss3Battle* bs3b = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
 			m_damage = bs3b->GetDMG();
 			m_battle_hp -= m_damage;
+			Audio::Start(3);
 		}
 		//ボス魔法(3層目)
 		if (hit->CheckObjNameHit(OBJ_ENEMY_MAGIC_BATTLE) != nullptr)
@@ -310,6 +321,7 @@ void CObjHeroBattle::Action()
 			CObjEnemyMagicBattle* emb = (CObjEnemyMagicBattle*)Objs::GetObj(OBJ_ENEMY_MAGIC_BATTLE);
 			m_damage = emb-> GetDMG();
 			m_battle_hp -= m_damage;
+			Audio::Start(3);
 		}
 	}
 	if (m_time > 0)
