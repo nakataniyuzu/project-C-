@@ -23,14 +23,12 @@ void CObjTitle::Init()
 	m_key_flag = true;
 	m_and = 1.0f;
 	m_andf = false;
-Audio::Start(100);
+	Audio::Start(100);
 }
 
 //アクション
 void CObjTitle::Action()
 {
-	
-
 	if (choice == 1 && m_time <= 0 && Input::GetVKey(VK_UP) == true)
 	{
 		m_time = 5;

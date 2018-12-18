@@ -3,6 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjBoss1Battle.h"
@@ -172,6 +173,7 @@ void CObjBoss1Battle::Action()
 			{
 				m_speed_power = 20.0f;
 				m_time = 0;
+				Audio::Start(6);
 			}
 		}
 	}

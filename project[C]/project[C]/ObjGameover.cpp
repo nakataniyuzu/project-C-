@@ -5,6 +5,7 @@
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
 #include "GameHead.h"
+#include "GameL\Audio.h"
 
 #include "ObjGameover.h"
 //#include "SceneMain.h"
@@ -15,21 +16,27 @@ using namespace GameL;
 //イニシャライズ
 void CObjGameover::Init()
 {
+	m_time = 0;
 	choice = 0;
 	m_key_flag = true;
+	m_and = 1.0f;
+	m_andf = false;
 }
 
 //アクション
 void CObjGameover::Action()
 {
-
-	if (Input::GetVKey(VK_UP) == true)
+	if (choice == 1 && m_time <= 0 && Input::GetVKey(VK_UP) == true)
 	{
+		m_time = 5;
 		choice = 0;
+		Audio::Start(0);
 	}
-	if (Input::GetVKey(VK_DOWN) == true)
+	if (choice == 0 && m_time <= 0 && Input::GetVKey(VK_DOWN) == true)
 	{
+		m_time = 5;
 		choice = 1;
+		Audio::Start(0);
 	}
 
 	if (choice == 0)
@@ -38,7 +45,8 @@ void CObjGameover::Action()
 		{
 			if (m_key_flag == true)
 			{
-				Scene::SetScene(new CSceneMain());
+				m_andf = true;
+				Audio::Start(1);
 				m_key_flag = false;
 			}
 		}
@@ -52,10 +60,24 @@ void CObjGameover::Action()
 	{
 		if (Input::GetVKey(VK_RETURN) == true)
 		{
+			Audio::Start(2);
 			exit(1);
 		}
 
 	}
+	if (m_andf == true)
+	{
+		m_and -= 0.03f;
+		if (m_and <= 0.0f)
+		{
+			m_and = 0.0f;
+			m_andf = false;
+			Scene::SetScene(new CSceneMain());
+		}
+	}
+
+	if (m_time >= 0)
+		m_time--;
 }
 
 //ドロー
@@ -65,7 +87,7 @@ void CObjGameover::Draw()
 
 	RECT_F src;		//描画元切り取り位置
 	RECT_F dst;		//描画先表示位置
-					//背景切り取り
+	//背景切り取り
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 800.0f;

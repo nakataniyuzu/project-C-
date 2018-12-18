@@ -3,6 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjBoss3Battle.h"
@@ -97,6 +98,7 @@ void CObjBoss3Battle::Action()
 			CObjEnemyMagicBattle* objemb = new CObjEnemyMagicBattle(m_px - m_directionx, m_py + m_directiony);
 			Objs::InsertObj(objemb, OBJ_ENEMY_MAGIC_BATTLE, 100);
 			m_delay = 2;
+			Audio::Start(5);
 		}
 		else if (m_px <= 0)
 		{
@@ -104,6 +106,7 @@ void CObjBoss3Battle::Action()
 			CObjEnemyMagicBattle* objemb = new CObjEnemyMagicBattle(m_px + m_directionx, m_py + m_directiony);
 			Objs::InsertObj(objemb, OBJ_ENEMY_MAGIC_BATTLE, 100);
 			m_delay = 2;
+			Audio::Start(5);
 		}
 	}
 	else

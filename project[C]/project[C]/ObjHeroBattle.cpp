@@ -200,13 +200,15 @@ void CObjHeroBattle::Action()
 
 				if (m_battle_magic == 0)	//火の魔法
 				{
-					CObjFireBattle* objfb = new CObjFireBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
+					CObjFireBattle* objfb = new CObjFireBattle(m_px + m_directionx, m_py + m_directiony);//Fireオブジェクト(戦闘)作成
 					Objs::InsertObj(objfb, OBJ_FIRE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(7);
 				}
 				if (m_battle_magic == 1)	//氷の魔法
 				{
 					CObjIceBattle* objib = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
 					Objs::InsertObj(objib, OBJ_ICE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+					Audio::Start(8);
 				}
 				else if (m_battle_magic == 3)	//雷の魔法
 				{
@@ -258,6 +260,8 @@ void CObjHeroBattle::Action()
 		}
 		m_time = 80;		//無敵時間をセット
 		hit->SetInvincibility(true);	//無敵オン
+
+		Audio::Start(3);
 
 		//敵(1層目)
 		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_FIRST) != nullptr)

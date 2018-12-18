@@ -28,7 +28,7 @@ void CObjHero::Init()
 	m_max_hp = 10;	//Å‘åHP
 	m_max_mp = 10;	//Å‘åMP
 	m_hp = 100;	//‰ŠúHP
-	m_mp = 10000;	//‰ŠúMP
+	m_mp = 10;	//‰ŠúMP
 	m_magic = 0;	//‰Šú–‚–@
 
 	m_key = 0;	//Œ®‚Ìî•ñ
