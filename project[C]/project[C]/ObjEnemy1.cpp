@@ -51,7 +51,7 @@ void CObjEnemyFirst::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 
-	if (battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;	//“®‚«‚ğ~‚ß‚é
@@ -139,7 +139,7 @@ void CObjEnemyFirst::Action()
 //ƒhƒ[
 void CObjEnemyFirst::Draw()
 {
-	if (battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}

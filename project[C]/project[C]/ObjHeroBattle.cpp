@@ -62,26 +62,31 @@ void CObjHeroBattle::Action()
 	m_thunder_flag = hero->GetTHUNDERF();
 	m_wind_flag    = hero->GetWINDF();
 
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
 
-	if (m_battle_flag == true)
+	if (g_battle_flag == false)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
-			m_px = 100.0f;
+			m_px = 0.0f;
 			m_py = 500.0f;		//位置
 			m_posture = 0.0f;
 		}
 		else if (hero_posture == 2.0f || hero_posture == 3.0f)
 		{
-			m_px = 600.0f;
+			m_px = 700.0f;
 			m_py = 500.0f;		//位置
 			m_posture = 1.0f;
 		}
-
+		hit->SetInvincibility(true);	//無敵オン
+		m_time = 50;
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 		return;
 	}
+	
+
 
 	//キーの入力方向 
 	if (Input::GetVKey(VK_RIGHT) == true)
@@ -126,8 +131,7 @@ void CObjHeroBattle::Action()
 	//Eキーでメニューを開く
 	if (Input::GetVKey('E') == true)
 	{
-		//Scene::SetScene(new CSceneMenu());
-		
+		//Scene::SetScene(new CSceneMenu());	
 	}
 
 	//Aキーで近接(剣)攻撃
@@ -164,7 +168,7 @@ void CObjHeroBattle::Action()
 	{
 		if (m_mf == true) {	//キー制御用
 			m_mf = false;
-			m_battle_magic += 2;
+			m_battle_magic += 1;
 		}
 		if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
 			m_battle_magic = 0;
@@ -230,8 +234,7 @@ void CObjHeroBattle::Action()
 	//自由落下運動
 	m_vy += 15.8 / (16.0f);
 
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
+	
 
 	//位置の更新
 	m_px += m_vx;
@@ -390,7 +393,7 @@ void CObjHeroBattle::Action()
 //ドロー
 void CObjHeroBattle::Draw()
 {
-	if (m_battle_flag == true)
+	if (g_battle_flag == false)
 	{
 		return;
 	}

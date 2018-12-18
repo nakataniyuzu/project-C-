@@ -47,7 +47,7 @@ void CObjBlockBattle::Action()
 	m_battle_flag = hero->GetBATTLE();
 	m_boss_battle_f = hero->GetBOSSBATTLE();
 
-	if (m_battle_flag == true)
+	if (g_battle_flag == false)
 	{
 		return;
 	}
@@ -59,7 +59,7 @@ void CObjBlockBattle::Action()
 //ÉhÉçÅ[
 void CObjBlockBattle::Draw()
 {
-	if (m_battle_flag == true || m_boss_battle_f == true)
+	if (g_battle_flag == false)
 	{
 		return;
 	}

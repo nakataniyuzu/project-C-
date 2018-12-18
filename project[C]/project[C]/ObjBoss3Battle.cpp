@@ -69,7 +69,7 @@ void CObjBoss3Battle::Action()
 		m_pop_flag = false;	//Œü‚«—pƒtƒ‰ƒO
 	}
 
-	if (m_boss_flag == true)
+	if (g_battle_flag == false)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;

@@ -28,7 +28,6 @@ void CObjSwitch::Init()
 	m_time = 0;
 
 	m_change = false;	//画像切り替え
-	m_key_flag = false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_SWITCH, 1);
@@ -37,9 +36,7 @@ void CObjSwitch::Init()
 //アクション
 void CObjSwitch::Action()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
@@ -51,7 +48,6 @@ void CObjSwitch::Action()
 	{
 		m_change = true;
 	}
-
 
 	//位置の更新
 	m_px += m_vx;

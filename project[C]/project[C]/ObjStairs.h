@@ -20,7 +20,5 @@ class CObjStairs : public CObj
 		float m_vx;			//ˆÚ“®ƒxƒNƒgƒ‹
 		float m_vy;
 		int m_next_floor;
-
-		bool m_battle_flag;
 };
 

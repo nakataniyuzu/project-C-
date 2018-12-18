@@ -39,9 +39,7 @@ void CObjBoss1Battle::Init()
 void CObjBoss1Battle::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_boss_flag = hero->GetBATTLE();
 	hero_posture = hero->GetPOS();
-	enemy_flag = hero->GetENEMYF();
 
 	if (boss_delete_flag == true)
 	{
@@ -67,7 +65,7 @@ void CObjBoss1Battle::Action()
 		m_pop_flag = false;	//向き用フラグ
 	}
 
-	if (m_boss_flag == true)
+	if (g_battle_flag == false)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -180,7 +178,7 @@ void CObjBoss1Battle::Action()
 //ドロー
 void CObjBoss1Battle::Draw()
 {
-	if (m_boss_flag == true)
+	if (g_battle_flag == false)
 	{
 		return;
 	}

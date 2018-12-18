@@ -27,8 +27,8 @@ void CObjHero::Init()
 	
 	m_max_hp = 10;	//最大HP
 	m_max_mp = 10;	//最大MP
-	m_hp = 100;	//初期HP
-	m_mp = 10000;	//初期MP
+	m_hp = 10;	//初期HP
+	m_mp = 10;	//初期MP
 	m_magic = 0;	//初期魔法
 
 	m_key = 0;	//鍵の情報
@@ -57,6 +57,9 @@ void CObjHero::Init()
 	m_wind_flag = false;	//風：2
 	m_thunder_flag = false;	//雷：3
 
+	if (g_map_change >= 1) {
+		m_ice_flag = true;
+	}
 	//blockとの衝突状態確認
 	m_hit_up    = false;
 	m_hit_down  = false;
@@ -76,7 +79,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_speed_power = 0.2f;		//通常速度
+	m_speed_power = 1.0f;		//通常速度
 
 	if (m_andf == true)		//フェードイン
 	{
@@ -89,7 +92,7 @@ void CObjHero::Action()
 	}
 	else {		//フェードイン中は入力を受け付けない
 
-		if (m_battle_flag == false)
+		if (g_battle_flag == true)
 		{
 			m_vx = 0.0f;
 			m_vy = 0.0f;
@@ -294,9 +297,8 @@ void CObjHero::Action()
 		}
 	}
 
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)	//敵と接触したら
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)	//敵と接触したらBATTLESCENEに移行
 	{
-
 		Audio::Start(1);
 
 		m_fade_flag = true;		//フェイドフラグをオン
@@ -309,7 +311,6 @@ void CObjHero::Action()
 	//敵を接触したらBATTLESCENEに移行(BOSS)
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
-
 		Audio::Start(1);
 
 		m_fade_flag = true;		//フェイドフラグをオン
@@ -348,7 +349,7 @@ void CObjHero::Action()
 	}
 	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr)	//主人公がゲートと当たった場合
 	{
-		mes.switchgate = true;		//フラグをオンにする
+		mes.switchgate = true;	//フラグをオンにする
 	}
 	if (hit->CheckObjNameHit(OBJ_HEAL) != nullptr)	//主人公がHEALと当たった場合
 	{
@@ -391,7 +392,7 @@ void CObjHero::Action()
 //ドロー
 void CObjHero::Draw()
 {
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}

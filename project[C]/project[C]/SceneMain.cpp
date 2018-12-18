@@ -181,13 +181,13 @@ void CSceneMain::Scene()
 		hero->SetENEMYF(m_enemy_flag);
 	}
 	//1層目ボス
-	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
 		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
 		m_boss_flag = false;
 		hero->SetBOSSF(m_boss_flag);
-	}*/
+	}
 
 	//2層目雑魚
 	/*if (m_enemy_flag == true)		//フラグがオンの時、敵出現

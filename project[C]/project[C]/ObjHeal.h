@@ -26,8 +26,6 @@ private:
 
 	int m_time;			//表示する時間
 
-	bool m_battle_flag;	//バトル用フラグ
-
 	float fire;	//火が灯っているかの判定用
 
 	float m_and;		//透明度処理用

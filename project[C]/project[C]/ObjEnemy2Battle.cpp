@@ -53,7 +53,7 @@ void CObjEnemy2Battle::Action()
 	CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 	m_hero_position = herob->GetX();
 
-	if (m_battle_flag == true)
+	if (g_battle_flag == false)
 	{
 		if (m_hero_posture == 0.0f || m_hero_posture == 1.0f)
 		{

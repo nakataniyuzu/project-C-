@@ -31,9 +31,6 @@ class CObjBlock : public CObj
 	private:
 		int m_map[38][65];	//マップ情報
 
-		bool m_battle_flag;	//バトル移行用フラグ
-		bool m_boss_flag;	//ボスバトル移行用フラグ
-
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;
 

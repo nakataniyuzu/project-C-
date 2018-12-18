@@ -58,31 +58,13 @@ void CObjSwitchGate::Action()
 //ドロー
 void CObjSwitchGate::Draw()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	
-	/*
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリー系統と当たった場合、m_timeに時間をセット
-	{
-		m_time = 100;
-	}
-	if (m_time > 0) {
-		m_time--;
-		Font::StrDraw(L"開かない...", 200, 200, 20, c);//時間が0になると表示を終了		
-		if (m_time <= 0) {
-			m_time = 0;
-		}
-	}*/
-	
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置

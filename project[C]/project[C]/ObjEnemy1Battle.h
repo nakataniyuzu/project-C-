@@ -43,9 +43,8 @@ private:
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
 
-	bool m_battle_flag;
-	bool boss_flag;
-
+	bool m_eff_flag;	//エフェクト用フラグ
+	
 	bool enemy_delete_flag;	//敵消滅用
 	//移動の向き制御用
 	bool m_move;

@@ -46,10 +46,8 @@ void CObjBlock::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
-	m_battle_flag = hero->GetBATTLE();
-	m_boss_flag = hero->GetBOSSBATTLE();
 
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
@@ -220,7 +218,7 @@ void CObjBlock::Action()
 void CObjBlock::Draw()
 {
 
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}

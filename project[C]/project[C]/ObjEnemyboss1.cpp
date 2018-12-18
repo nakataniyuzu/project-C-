@@ -33,7 +33,7 @@ void CObjEnemyboss1::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
 
-	if (battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		m_time = 100;
 //		hit->SetInvincibility(true);	//–³“GƒIƒ“
@@ -63,7 +63,7 @@ void CObjEnemyboss1::Action()
 //ƒhƒ[
 void CObjEnemyboss1::Draw()
 {
-	if (battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}

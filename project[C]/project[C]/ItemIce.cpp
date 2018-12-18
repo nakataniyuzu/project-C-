@@ -56,9 +56,7 @@ void CObjItemIce::Action()
 //ƒhƒ[
 void CObjItemIce::Draw()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}

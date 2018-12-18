@@ -24,8 +24,6 @@ void CObjFadein::Action()
 	//戦闘時の敵の情報を持ってくる
 	CObjEnemy1Battle* benemy = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
 	
-	
-
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	hero->SetSPEED(0.0f);	//スピードを０にする
@@ -54,10 +52,14 @@ void CObjFadein::Action()
 				Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 			}
 			m_flag = false;
-			if (m_fade_flag == false)
-				hero->SetBATTLE(true);		//マップ画面へ移行
-			else
-				hero->SetBATTLE(false);			//バトル画面へ移行
+			if (m_fade_flag == false) {
+				g_battle_flag = false;
+				//hero->SetBATTLE(true);		//マップ画面へ移行
+			}
+			else {
+				g_battle_flag = true;
+				//hero->SetBATTLE(false);			//バトル画面へ移行
+			}
 		}
 	}
 	else if(m_flag == false)

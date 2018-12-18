@@ -23,6 +23,5 @@ private:
 
 	int m_time;	//メッセージ時間管理
 	bool m_change;	//スイッチのオンオフ
-	bool m_battle_flag;
 };
 

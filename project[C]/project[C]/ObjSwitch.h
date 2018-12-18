@@ -27,7 +27,4 @@ class CObjSwitch : public CObj
 		bool m_change;		//‰æ‘œØ‚è‘Ö‚¦—p
 
 		int m_time;
-
-		bool m_key_flag;
-		bool m_battle_flag;
 };
