@@ -6,22 +6,19 @@
 using namespace GameL;
 
 //オブジェクト：ブロック＆背景
-class CObjGate : public CObj
+class CObjDummySwitch : public CObj
 {
 public:
-	CObjGate(float x, float y);
-	~CObjGate() {};
+	CObjDummySwitch(float x, float y);
+	~CObjDummySwitch() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
 
+	bool GetCHANGE() { return m_change; }
+
 private:
 	float m_px;			//位置
 	float m_py;
-
-	float m_f;		//鍵が開いたかの判定
-	int m_time;			//表示する時間
-	int m_draw_time;
-	int key;	//鍵
+	bool m_change;		//画像切り替え用
 };
-

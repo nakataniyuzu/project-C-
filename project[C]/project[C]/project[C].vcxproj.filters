@@ -193,6 +193,9 @@
     <ClCompile Include="CObjEnemyMagicBattle.cpp">
       <Filter>ソースファイル\Main\Magic関係</Filter>
     </ClCompile>
+    <ClCompile Include="ObjDummySwitch.cpp">
+      <Filter>ソースファイル\Main\Block関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -389,6 +392,9 @@
     </ClInclude>
     <ClInclude Include="CObjEnemyMagicBattle.h">
       <Filter>ソースファイル\Main\Magic関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjDummySwitch.h">
+      <Filter>ソースファイル\Main\Block関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

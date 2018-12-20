@@ -66,7 +66,9 @@ void CObjFireGate::Draw()
 	}
 	//描画カラー情報
 	float r[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
+	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
 	{
@@ -74,6 +76,7 @@ void CObjFireGate::Draw()
 	}
 	if (m_time > 0) {
 		m_time--;
+		pm->BackDraw(195.0f, 195.0f, 330.0f, 225.0f, a);
 		Font::StrDraw(L"火を灯せ...?", 200, 200, 20, r);//時間が0になると表示を終了
 		if (m_time <= 0) {
 			m_time = 0;
@@ -97,7 +100,7 @@ void CObjFireGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(BLOCK1, &src, &dst, r, 0.0f);
+	Draw::Draw(BLOCK, &src, &dst, r, 0.0f);
 }
 
 

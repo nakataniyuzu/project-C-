@@ -177,7 +177,7 @@ void CObjEnemy2Battle::Action()
 	{
 		hero->SetBATTLE(true);
 		hero->SetENEMYF(true);
-		main->SetENEMYKILLS(1);
+		g_enemy_kills += 1;
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}

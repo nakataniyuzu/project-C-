@@ -6,8 +6,8 @@
 using namespace GameL;
 
 //É}ÉNÉç
-#define FLOOR1 01
-#define BLOCK1 2
+#define FLOOR 01
+#define BLOCK 2
 #define HEALKEY 5
 #define ITEM 10
 

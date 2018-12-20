@@ -64,6 +64,7 @@ enum OBJ_NAME
 	OBJ_RESETBLOCK,
 	OBJ_SWITCH,
 	OBJ_SWITCHGATE,
+	OBJ_DUMMYSWITCH,
 	OBJ_STAIRS,
 
 	OBJ_FADEIN,
@@ -121,6 +122,7 @@ struct UserData
 #define ALL_SIZE 50.0f		//ブロック等のサイズ
 extern int g_map_change;	//マップ変更用変数
 extern bool g_battle_flag;	//バトル画面変更用のフラグ
+extern int g_enemy_kills;	//敵の撃破数
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -190,6 +192,7 @@ extern bool g_battle_flag;	//バトル画面変更用のフラグ
 #include "ObjSwitch.h"
 #include "ObjSwitchGate.h"
 #include "ObjStairs.h"
+#include "ObjDummySwitch.h"
 
 #include "ObjMessage.h"
 #include "ObjFadein.h"

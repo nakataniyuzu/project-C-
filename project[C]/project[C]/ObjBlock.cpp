@@ -207,7 +207,15 @@ void CObjBlock::Action()
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
-			
+			if (g_map[i][j] == 18)
+			{
+				//18があればDummySwitchを出現
+				
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+
 		}
 	}
 	
@@ -246,19 +254,19 @@ void CObjBlock::Draw()
 				{
 					src.m_top    =   0.0f;
 					src.m_left   =   0.0f;
-					src.m_right  = 800.0f;
-					src.m_bottom = 600.0f;
+					src.m_right  = 100.0f;
+					src.m_bottom = 100.0f;
 					//描画
-					Draw::Draw(FLOOR1, &src, &dst, c, 0.0f);
+					Draw::Draw(FLOOR, &src, &dst, c, 0.0f);
 				}
 				else if (g_map[i][j] == 1)
 				{
 					src.m_top    = 0.0f;
 					src.m_left   = 0.0f;
-					src.m_right  = 50.0f;
-					src.m_bottom = 50.0f;
+					src.m_right  = 100.0f;
+					src.m_bottom = 100.0f;
 					//描画
-					Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+					Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
 				}						
 				else
 				{

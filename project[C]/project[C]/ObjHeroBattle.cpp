@@ -14,6 +14,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjHeroBattle::Init()
 {
+	m_px = 100.0f;
+	m_py = 100.0f;
 	m_battle_magic = 0;
 
 	m_vx = 0.0f;		//移動ベクトル
@@ -71,7 +73,7 @@ void CObjHeroBattle::Action()
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
-			m_px = 0.0f;
+			m_px = 100.0f;
 			m_py = 500.0f;		//位置
 			m_posture = 0.0f;
 		}
@@ -270,15 +272,17 @@ void CObjHeroBattle::Action()
 				}
 			}
 			//角度で上下左右を判定
-			if ((r < 45 && r >= 0) || r > 315)
+			//if (r > 135 && r < 225 || r < 135)
+			if (r > 90 && r < 270)
 			{
-				m_vy = -10;
-				m_vx -= 25;
-			}
-			if (r > 135 && r < 225)
-			{
-				m_vy = -10;
+				m_vy = -10;		//右
 				m_vx += 25;
+			}
+			//if ((r < 45 && r >= 0) || r > 315 || (r > 45 || r < 90 ))
+			else
+			{
+				m_vy = -10;		//左
+				m_vx -= 25;
 			}
 			m_time = 80;		//無敵時間をセット
 			hit->SetInvincibility(true);	//無敵オン
@@ -360,6 +364,9 @@ void CObjHeroBattle::Action()
 	//主人公の体力が0になったらゲームオーバーシーンに移行
 	if (m_battle_hp <= 0)
 	{
+		g_battle_flag = false;
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 		Scene::SetScene(new CSceneGameover());
 	}
 

@@ -22,7 +22,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
-	m_speed_power = 0.5f;	//通常速度
+	m_speed_power = 3.0f;	//通常速度
 	m_posture = 2.0f;
 	
 	m_max_hp = 10;	//最大HP
@@ -79,7 +79,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_speed_power = 1.0f;		//通常速度
+	m_speed_power = 0.4f;		//通常速度
 
 	if (m_andf == true)		//フェードイン
 	{
@@ -273,6 +273,8 @@ void CObjHero::Action()
 		//主人公がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
 		hit_date = hit->SearchElementHit(ELEMENT_MYSTERY);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{

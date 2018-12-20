@@ -69,8 +69,15 @@ void CSceneMain::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256);
-	Draw::LoadImageW(L"floor1.png", FLOOR1, TEX_SIZE_800_600);
-	Draw::LoadImageW(L"Block.png", BLOCK1, TEX_SIZE_800_600);
+	if (g_map_change == 0) {
+		Draw::LoadImageW(L"Floor1.png", FLOOR, TEX_SIZE_800_600);	//１層目の床
+		Draw::LoadImageW(L"Floor1Block.png", BLOCK, TEX_SIZE_800_600);	//1層目のブロック
+	}
+	else if (g_map_change == 1) {
+		Draw::LoadImageW(L"Floor2.png", FLOOR, TEX_SIZE_800_600);	//２層目の床
+		Draw::LoadImageW(L"Floor2Block.png", BLOCK, TEX_SIZE_800_600);	//2層目のブロック
+	}
+
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
 	Draw::LoadImageW(L"nazotoki.png", 4, TEX_SIZE_100);
 	Draw::LoadImageW(L"healkey.png", HEALKEY, TEX_SIZE_100);

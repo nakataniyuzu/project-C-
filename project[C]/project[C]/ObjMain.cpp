@@ -107,7 +107,7 @@ void CObjMain::Draw()
 		Font::StrDraw(L"XƒL[‚ÅØ‚è‘Ö‚¦", GAME_MESSAGE2_POS_X, GAME_MESSAGE2_POS_Y, GAME_MESSAGE2_FONT_SIZE, c);
 	}
 	
-	swprintf_s(KILLS, L"“G‚ÌŒ‚”j”~%d",enemy_kills);
+	swprintf_s(KILLS, L"“G‚ÌŒ‚”j”~%d", g_enemy_kills);
 	Font::StrDraw(KILLS, GAME_ENEMY_KILLS_POS_X, GAME_ENEMY_KILLS_POS_Y, GAME_ENEMY_KILLS_FONT_SIZE, c);
 
 }

@@ -164,7 +164,7 @@ void CObjEnemy1Battle::Action()
 	{
 		hero->SetFADEF(false);	//フェイドフラグをオフ		
 		m_del = true;
-		main->SetENEMYKILLS(1);
+		g_enemy_kills += 1;
 	}
 
 	//敵が領域外に行かないようにする

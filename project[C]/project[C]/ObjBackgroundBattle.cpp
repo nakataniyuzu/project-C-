@@ -40,8 +40,8 @@ void CObjBackgroundBattle::Draw()
 
 	//îwåiêÿÇËéÊÇË
 	src.m_top    =   0.0f;
-	src.m_left   =   0.0f;
-	src.m_right  =  100.0f;
+	src.m_left   =  400.0f;
+	src.m_right  =  500.0f;
 	src.m_bottom =  100.0f;
 
 	//ï`âÊ
@@ -49,6 +49,6 @@ void CObjBackgroundBattle::Draw()
 	dst.m_left   =   0.0f;
 	dst.m_right  = 800.0f;
 	dst.m_bottom = 550.0f;
-	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+	Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
 }
 

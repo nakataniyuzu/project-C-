@@ -13,22 +13,22 @@
 using namespace GameL;
 
 
-CObjSwitch::CObjSwitch(float x, float y)
+CObjDummySwitch::CObjDummySwitch(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjSwitch::Init()
+void CObjDummySwitch::Init()
 {
 	m_change = false;	//画像切り替え
-	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_SWITCH, 1);
+						//当たり判定用のHitBoxを作成
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_DUMMYSWITCH, 1);
 }
 
 //アクション
-void CObjSwitch::Action()
+void CObjDummySwitch::Action()
 {
 	if (g_battle_flag == true)
 	{
@@ -50,7 +50,7 @@ void CObjSwitch::Action()
 }
 
 //ドロー
-void CObjSwitch::Draw()
+void CObjDummySwitch::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,2.0f,0.7f };
@@ -59,22 +59,22 @@ void CObjSwitch::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-	//切り取り位置の設定
-	src.m_top    =   0.0f;
-	src.m_left   = 100.0f;
-	src.m_right  = 200.0f;
+				//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 100.0f;
+	src.m_right = 200.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//表示位置の設定
-	dst.m_top    = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
-	dst.m_left   = 0.0f + m_px + block->GetScrollX();
-	dst.m_right  = ALL_SIZE + m_px + block->GetScrollX();
+	dst.m_top = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
+	dst.m_left = 0.0f + m_px + block->GetScrollX();
+	dst.m_right = ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	if (m_change == false){
+	if (m_change == false) {
 		Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
 	}
 	else if (m_change == true) {

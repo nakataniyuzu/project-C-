@@ -22,9 +22,6 @@ CObjGate::CObjGate(float x, float y)
 //イニシャライズ
 void CObjGate::Init()
 {
-	m_vx = 0.0f;		//移動ベクトル
-	m_vy = 0.0f;
-
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_GATE, 1);
 
@@ -47,10 +44,6 @@ void CObjGate::Action()
 			Hits::DeleteHitBox(this);
 		}
 	}
-
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -80,6 +73,7 @@ void CObjGate::Draw()
 		}
 		if (m_time > 0) {
 			m_time--;
+
 			Font::StrDraw(L"鍵が必要です", 200, 200, 20, c);//時間が0になると表示を終了		
 			if (m_time <= 0) {
 				m_time = 0;
@@ -107,7 +101,7 @@ void CObjGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+	Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
 }
 
 

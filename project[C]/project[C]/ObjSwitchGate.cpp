@@ -83,7 +83,7 @@ void CObjSwitchGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//•`‰æ
-	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+	Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
 }
 
 
