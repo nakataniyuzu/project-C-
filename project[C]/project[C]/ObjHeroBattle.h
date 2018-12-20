@@ -27,6 +27,7 @@ public:
 	int GetBATTLEMP() { return m_battle_mp; }		//ålŒö‚ÌMP‚ğæ“¾
 	int GetBATTLEMAGIC() { return m_battle_magic; }	//ålŒö‚Ìİ’è–‚–@‚ğæ“¾
 
+	void SetSPEED(float s) { m_speed_power = s; }
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }

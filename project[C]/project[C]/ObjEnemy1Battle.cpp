@@ -26,12 +26,11 @@ void CObjEnemy1Battle::Init()
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
+	m_posture = 0.0f;	//0.0f=左 1.0f=右
 	m_move = true;  //true=右 false=左
 	enemy_delete_flag = false;	//敵消滅フラグ
 	m_pop_flag = true;	//敵向き用フラグ
-
-	m_block_type = 0;		//踏んでいるblockの種類を確認用
-
+	
 	m_eff.m_top    =  0;
 	m_eff.m_left   =  0;
 	m_eff.m_right  = 50;
@@ -40,7 +39,6 @@ void CObjEnemy1Battle::Init()
 	m_ani = 0;
 	m_ani_time_d = 0;
 	m_del = false;
-	
 	m_eff_flag = false;
 
 	//当たり判定用のHitBoxを作成
@@ -55,6 +53,8 @@ void CObjEnemy1Battle::Action()
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	hero_posture = hero->GetPOS();
+	//戦闘時の主人公の情報を持ってくる
+	CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -121,71 +121,50 @@ void CObjEnemy1Battle::Action()
 	if (m_move == false)
 	{
 		m_vx += m_speed_power;
-		m_posture = 1.0f;
+		m_posture = 0.0f;
 		m_ani_time += 1;
 	}
 	else if (m_move == true)
 	{
 		m_vx -= m_speed_power;
-		m_posture = 0.0f;
+		m_posture = 1.0f;
 		m_ani_time += 1;
 	}
 	
-
-	
-
-
-	
-
 	//攻撃を受けたら体力を減らす
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
-	{/*
+	{
 		//主人公がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
 		hit_date = hit->SearchElementHit(ELEMENT_ATTACK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
-		{
-			float r = hit_date[i]->r;
-			//角度で上下左右を判定
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vy = -10;
-				m_vx -= 25;
+		
+		float r = 0;
+		for (int i = 0; i < 10; i++) {
+			if (hit_date[i] != nullptr) {
+			r = hit_date[i]->r;
 			}
-			if (r > 135 && r < 225)
-			{
-				m_vy = -10;
-				m_vx += 25;
-			}
-			
-		}*/
+		}
 		//ノックバック処理
-		if (m_posture == 1.0f)
+		if ((r < 45 && r >= 0) || r > 315)
 		{
 			m_vy = -10;
 			m_vx -= 25;
 		}
-		else if (m_posture == 0.0f)
+		if (r > 135 && r < 225)
 		{
 			m_vy = -10;
 			m_vx += 25;
 		}
-
 		m_enemy_hp -= 1;
 	}
 
-	
-	//敵の体力が0になったら破棄CObjMain
-	if (m_enemy_hp <= 0)
+	//敵の体力が0になったら消滅処理に移る
+	if (m_del == false && m_enemy_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ
-		m_eff_flag = true;
+		hero->SetFADEF(false);	//フェイドフラグをオフ		
 		m_del = true;
 		main->SetENEMYKILLS(1);
-		/*this->SetStatus(false);
-		Hits::DeleteHitBox(this);*/
 	}
 
 	//敵が領域外に行かないようにする
@@ -206,59 +185,57 @@ void CObjEnemy1Battle::Action()
 		m_py = 50.0f;
 	}
 
-	//敵消滅処理------	
-	if (m_eff_flag == true)
-	{
-		if (m_del == true)
-		{
-			//死亡アニメーションRECT情報
-			RECT_F ani_src[3] =
-			{
-				{ 0,  0, 50, 50 },
-				{ 0, 50,100, 50 },
-				{ 0,100,150, 50 },
-			};
 
-			//アニメーションのコマ間隔制御
-			if (m_ani_time_d > 5)
-			{
-				m_ani++;	//アニメーションのコマを1つ進める
-				m_ani_time_d = 0;
-
-				m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-			}
-			else
-			{
-				m_ani_time_d++;
-			}
-
-			//死亡アニメーション終了で本当にオブジェクトの破棄
-			if (m_ani == 3)
-			{
-				hit->SetInvincibility(true);	//無敵にする
-				m_speed_power = 0.0f;			//動きを止める
-				m_eff_flag = false;
-			}
-			return;
+	if (m_time > 0) {
+		m_time--;
+		if (m_time <= 0) {
+			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+			Objs::InsertObj(fade, OBJ_FADEIN, 200);
+			this->SetStatus(false);		//画像の削除
+			Hits::DeleteHitBox(this);	//ヒットボックスの削除
+			m_time = 0;
 		}
 	}
-	
 
-	//当たり判定を行うオブジェクト情報部
-	/*int data_base[1] =
+	//敵消滅処理------		
+	if (m_del == true)
 	{
-		OBJ_SWORD_BATTLE,
-	};
-
-	//オブジェクト情報群と当たり判定行い。当たっていれば削除
-	for (int i = 0; i < 1; i++)
-	{
-		if (hit->CheckObjNameHit(data_base[i]) != nullptr)
+		herob->SetSPEED(0.0f);	//主人公のスピードを０にする
+		herob->SetVX(0.0f);		//主人公のベクトルを０にする
+		herob->SetVY(0.0f);
+		//死亡アニメーションRECT情報
+		RECT_F ani_src[3] =
 		{
-			m_del = true;
-			hit->SetInvincibility(true);
+			{ 0,  0, 50, 50 },
+			{ 0, 50,100, 50 },
+			{ 0,100,150, 50 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_ani_time_d > 5)
+		{
+			m_ani++;	//アニメーションのコマを1つ進める
+			m_ani_time_d = 0;
+
+			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
 		}
-	}*/
+		else
+		{
+			m_ani_time_d++;
+		}
+
+		//死亡アニメーション終了で本当にオブジェクトの破棄
+		if (m_ani == 3)
+		{
+			hit->SetInvincibility(true);	//無敵にする
+			m_speed_power = 0.0f;			//動きを止める
+			m_eff_flag = true;			//画像切り替え用フラグ
+			m_time = 20;		//フェイドイン移行用の間隔設定
+		}
+		return;
+	}
+	
+	
 }
 
 //ドロー
@@ -281,17 +258,24 @@ void CObjEnemy1Battle::Draw()
 	//敵の状態で描画を変更
 	if (m_del == true)
 	{
-		//死亡アニメーション描画
-		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
+		//切り取り位置の設定
+		src.m_top    =  0.0f;
+		src.m_left   =100.0f;
+		src.m_right  =150.0f;
+		src.m_bottom = 50.0f;
+		if (m_eff_flag == true)
+			Draw::Draw(23, &src, &dst, c, 0.0f);
+		else 
+			Draw::Draw(23, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
 	}
 	else
 	{
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 50.0f;
-		src.m_right = 0.0f;
-		src.m_bottom = 50.0f;
+		src.m_top    =100.0f;
+		src.m_left   =  0.0f;
+		src.m_right  = 50.0f;
+		src.m_bottom =150.0f;
 		//描画
-		Draw::Draw(12, &src, &dst, c, 0.0f);
+		Draw::Draw(7, &src, &dst, c, 0.0f);
 	}
 }

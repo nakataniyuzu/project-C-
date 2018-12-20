@@ -79,7 +79,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_speed_power = 1.2f;		//通常速度
+	m_speed_power = 1.0f;		//通常速度
 
 	if (m_andf == true)		//フェードイン
 	{

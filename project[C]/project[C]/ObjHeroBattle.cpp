@@ -36,6 +36,8 @@ void CObjHeroBattle::Init()
 //アクション
 void CObjHeroBattle::Action()
 {
+	m_speed_power = 0.7f;	//通常速度
+
 	//敵の情報を持ってくる
 	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
 	CObjEnemy2Battle* benemy2 = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
@@ -246,84 +248,105 @@ void CObjHeroBattle::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + 13, m_py);
 
-	//攻撃を受けたら体力を減らす
-	if (hit->CheckElementHit(ELEMENT_ENEMY_BATTLE) == true
-		|| hit->CheckElementHit(ELEMENT_BOSS_BATTLE) == true
-		|| hit->CheckElementHit(ELEMENT_MAGIC_BATTLE) == true)
+	//当たり判定を行うオブジェクト情報群
+	int data_base[3] =
 	{
-		//ノックバック処理
-		if (m_posture == 0.0f)
+		ELEMENT_ENEMY_BATTLE,
+		ELEMENT_BOSS_BATTLE,
+		ELEMENT_MAGIC_BATTLE,
+	};
+	//オブジェクト情報群と当たり判定行い。当たっていればノックバック
+	for (int i = 0; i < 6; i++)
+	{
+		if (hit->CheckElementHit(data_base[i]) == true)
 		{
-			m_vy = -15;
-			m_vx -= 20;
-		}
-		else if (m_posture == 1.0f)
-		{
-			m_vy = -15;
-			m_vx += 20;
-		}
-		m_time = 80;		//無敵時間をセット
-		hit->SetInvincibility(true);	//無敵オン
+			HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+			hit_date = hit->SearchElementHit(data_base[i]);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-		Audio::Start(3);
+			float r = 0;
+			for (int i = 0; i < 10; i++) {
+				if (hit_date[i] != nullptr) {
+					r = hit_date[i]->r;
+				}
+			}
+			//角度で上下左右を判定
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vy = -10;
+				m_vx -= 25;
+			}
+			if (r > 135 && r < 225)
+			{
+				m_vy = -10;
+				m_vx += 25;
+			}
+			m_time = 80;		//無敵時間をセット
+			hit->SetInvincibility(true);	//無敵オン
 
-		//敵(1層目)
-		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_FIRST) != nullptr)
-		{
-			CObjEnemy1Battle* e1b = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
-			m_damage = e1b ->GetDMG();
-			m_battle_hp -= m_damage;
 			Audio::Start(3);
-		}
-		//敵(2層目)
-		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_SECOND) != nullptr)
-		{
-			CObjEnemy2Battle* e2b = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
-			m_damage = e2b ->GetDMG();
-			m_battle_hp -= m_damage;
-			Audio::Start(3);
-		}
-		//敵(3層目)
-		if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_THIRD) != nullptr)
-		{
-			CObjEnemy3Battle* e3b = (CObjEnemy3Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_THIRD);
-			m_damage = e3b->GetDMG();
-			m_battle_hp -= m_damage;
-			Audio::Start(3);
-		}
-		//ボス(1層目)
-		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_FIRST) != nullptr)
-		{
-			CObjBoss1Battle* bs1b = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
-			m_damage = bs1b ->GetDMG();
-			m_battle_hp -= m_damage;
-			Audio::Start(3);
-		}
-		//ボス(2層目)
-		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_SECOND) != nullptr)
-		{
-			CObjBoss2Battle* bs2b = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
-			m_damage = bs2b->GetDMG();
-			m_battle_hp -= m_damage;
-			Audio::Start(3);
-		}
-		//ボス(3層目)
-		if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_THIRD) != nullptr)
-		{
-			CObjBoss3Battle* bs3b = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
-			m_damage = bs3b->GetDMG();
-			m_battle_hp -= m_damage;
-			Audio::Start(3);
-		}
-		//ボス魔法(3層目)
-		if (hit->CheckObjNameHit(OBJ_ENEMY_MAGIC_BATTLE) != nullptr)
-		{
-			CObjEnemyMagicBattle* emb = (CObjEnemyMagicBattle*)Objs::GetObj(OBJ_ENEMY_MAGIC_BATTLE);
-			m_damage = emb-> GetDMG();
-			m_battle_hp -= m_damage;
-			Audio::Start(3);
+
+			//敵(1層目)
+			if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_FIRST) != nullptr)
+			{
+				CObjEnemy1Battle* e1b = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
+				m_damage = e1b->GetDMG();
+				m_battle_hp -= m_damage;
+				Audio::Start(3);
+			}
+			//敵(2層目)
+			if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_SECOND) != nullptr)
+			{
+				CObjEnemy2Battle* e2b = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
+				m_damage = e2b->GetDMG();
+				m_battle_hp -= m_damage;
+				Audio::Start(3);
+			}
+			//敵(3層目)
+			if (hit->CheckObjNameHit(OBJ_ENEMY_BATTLE_THIRD) != nullptr)
+			{
+				CObjEnemy3Battle* e3b = (CObjEnemy3Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_THIRD);
+				m_damage = e3b->GetDMG();
+				m_battle_hp -= m_damage;
+				Audio::Start(3);
+			}
+			//ボス(1層目)
+			if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_FIRST) != nullptr)
+			{
+				CObjBoss1Battle* bs1b = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
+				m_damage = bs1b->GetDMG();
+				m_battle_hp -= m_damage;
+				Audio::Start(3);
+			}
+			//ボス(2層目)
+			if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_SECOND) != nullptr)
+			{
+				CObjBoss2Battle* bs2b = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
+				m_damage = bs2b->GetDMG();
+				m_battle_hp -= m_damage;
+				Audio::Start(3);
+			}
+			//ボス(3層目)
+			if (hit->CheckObjNameHit(OBJ_BOSS_BATTLE_THIRD) != nullptr)
+			{
+				CObjBoss3Battle* bs3b = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
+				m_damage = bs3b->GetDMG();
+				m_battle_hp -= m_damage;
+				Audio::Start(3);
+			}
+			//ボス魔法(3層目)
+			if (hit->CheckObjNameHit(OBJ_ENEMY_MAGIC_BATTLE) != nullptr)
+			{
+				CObjEnemyMagicBattle* emb = (CObjEnemyMagicBattle*)Objs::GetObj(OBJ_ENEMY_MAGIC_BATTLE);
+				m_damage = emb->GetDMG();
+				m_battle_hp -= m_damage;
+				Audio::Start(3);
+			}
+
 		}
 	}
+
+	
+	
 	if (m_time > 0)
 	{
 		m_time--;

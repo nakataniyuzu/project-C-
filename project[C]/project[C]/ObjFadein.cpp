@@ -32,6 +32,8 @@ void CObjFadein::Action()
 	m_next_flag = hero->GetNEXTF();	//ネクストフラグを取得
 	m_fade_flag = hero->GetFADEF();	//フェイドインかアウトを設定するためのフラグ
 
+
+
 	if (m_flag == true)
 	{
 		m_ani_time += 1;
