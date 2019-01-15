@@ -101,6 +101,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS3_MAGIC.png", 24, TEX_SIZE_100);
+	Draw::LoadImageW(L"ENEMYBOSS1_DEATH.png", 25, TEX_SIZE_100);
 
 	Draw::LoadImageW(L"AllFloorBlock.png", 4, TEX_SIZE_200_100);
 
