@@ -31,6 +31,8 @@ void CObjHeroBattle::Init()
 	m_sword_delay = 0;
 	m_swordwidth = 0.0f; //ソード幅
 
+	m_inputf = true;	// true = 入力可	false = 入力不可
+
 	//当たり判定用のHitBoxを作成
  	Hits::SetHitBox(this, m_px + 13 , m_py , 50, 90, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
 }
@@ -84,31 +86,34 @@ void CObjHeroBattle::Action()
 			m_posture = 1.0f;
 		}
 		hit->SetInvincibility(true);	//無敵オン
-		m_time = 50;
-		m_vx = 0.0f;
+		m_time = 50;		//バトルに入った際の無敵時間設定
+		m_inputf = true;	//入力可能に戻す
+		m_vx = 0.0f;	
 		m_vy = 0.0f;
 		return;
 	}
 	
-
-
-	//キーの入力方向 
-	if (Input::GetVKey(VK_RIGHT) == true)
+	//inputフラグがオンの場合入力を可能にする
+	if (m_inputf == true)
 	{
-		m_vx += m_speed_power;
-		m_posture = 0.0f;
-		m_ani_time += 1;
-	}
-	else if (Input::GetVKey(VK_LEFT) == true)
-	{
-		m_vx -= m_speed_power;
-		m_posture = 1.0f;
-		m_ani_time += 1;
-	}
-	else
-	{
-		m_ani_frame = 0; //キー入力が無い場合は静止フレームにする
-		m_ani_time = 0;
+		//キーの入力方向 
+		if (Input::GetVKey(VK_RIGHT) == true)
+		{
+			m_vx += m_speed_power;
+			m_posture = 0.0f;
+			m_ani_time += 1;
+		}
+		else if (Input::GetVKey(VK_LEFT) == true)
+		{
+			m_vx -= m_speed_power;
+			m_posture = 1.0f;
+			m_ani_time += 1;
+		}
+		else
+		{
+			m_ani_frame = 0; //キー入力が無い場合は静止フレームにする
+			m_ani_time = 0;
+		}
 	}
 	if (m_ani_time > 8)
 	{
@@ -240,8 +245,6 @@ void CObjHeroBattle::Action()
 
 	//自由落下運動
 	m_vy += 15.8 / (16.0f);
-
-	
 
 	//位置の更新
 	m_px += m_vx;
@@ -375,12 +378,11 @@ void CObjHeroBattle::Action()
 	{
 		m_px = 800.0 - 75.0f;
 		if (hero_posture == 0.0f || hero_posture == 1.0f) {
-
+			m_inputf = false;		//キー入力を不可にする
 			hero->SetFADEF(false);	//フェイドフラグをオフ
 			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-			Audio::Stop(13);
-			Audio::Start(12);
+			Audio::Stop(13);		//バトル用BGMを止める
 			if (m_delete == true){
 				if (benemy1 != nullptr) {
 					benemy1->SetENEMYDELETE(true);
@@ -399,12 +401,11 @@ void CObjHeroBattle::Action()
 	{
 		m_px = 0.0f;
 		if (hero_posture == 2.0f || hero_posture == 3.0f) {
-
+			m_inputf = false;		//キー入力を不可にする
 			hero->SetFADEF(false);	//フェイドフラグをオフ
 			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-			Audio::Stop(13);
-			Audio::Start(12);
+			Audio::Stop(13);		//バトル用BGMを止める
 			if (m_delete == true) {
 				if (benemy1 != nullptr) {
 					benemy1->SetENEMYDELETE(true);

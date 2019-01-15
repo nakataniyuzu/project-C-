@@ -36,16 +36,9 @@ class CObjEnemy2Battle : public CObj
 		int m_subtract;			//おテスト
 		int m_hero_position;	//おテスト2
 
-		int m_time_f;		//敵死亡時のフェイドイン移行用間隔幅
-		int m_ani;			//死亡アニメーション用
-		int m_ani_time_d;	//死亡アニメーション間隔タイム
-		bool m_del;			//削除チェック
-		RECT_F m_eff;		//死亡エフェクト描画用
-
 		//踏んでいるblockの種類を確認用
 		int m_block_type;
 
-		bool m_eff_flag;	//エフェクト用フラグ
 		bool m_battle_flag;
 		bool m_boss_flag;
 

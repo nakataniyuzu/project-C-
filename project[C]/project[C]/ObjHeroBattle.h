@@ -59,9 +59,10 @@ private:
 	float m_speed_power;	//スピードパワー
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
+	bool  m_inputf;	//キー入力制御用
 	bool  m_f;		//キー（長押し）制御用
 	bool  m_mf;		//キー（長押し）制御用
-	bool m_delete;	//敵消滅用フラグ
+	bool  m_delete;	//敵消滅用フラグ
 
 	bool m_pos_flag;	//主人公向き用のフラグ
 	bool m_battle_flag;	//マップに戻るフラグ

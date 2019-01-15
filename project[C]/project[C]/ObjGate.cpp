@@ -89,8 +89,8 @@ void CObjGate::Draw()
 
 	//Ø‚èŽæ‚èˆÊ’u‚ÌÝ’è
 	src.m_top    =   0.0f;
-	src.m_left   = 200.0f;
-	src.m_right  = 300.0f;
+	src.m_left   = 100.0f;
+	src.m_right  = 200.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -101,7 +101,7 @@ void CObjGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//•`‰æ
-	Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
+	Draw::Draw(4, &src, &dst, c, 0.0f);
 }
 
 

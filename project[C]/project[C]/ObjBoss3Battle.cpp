@@ -46,7 +46,12 @@ void CObjBoss3Battle::Action()
 	hero_posture = hero->GetPOS();
 	enemy_flag = hero->GetENEMYF();
 
-	
+	if (boss_delete_flag == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+		return;
+	}
 	//マップ上の主人公の向きによってリス位置、向きを設定
 	if (m_pop_flag == true)
 	{
@@ -72,6 +77,7 @@ void CObjBoss3Battle::Action()
 		m_pop_flag = true;
 		return;
 	}
+
 	
 	//ボスの向きによって発射する向きを設定
 	if (m_posture == 0.0f) {
@@ -151,12 +157,6 @@ void CObjBoss3Battle::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
 
-	if (boss_delete_flag == true)
-		{
-			this->SetStatus(false);
-			Hits::DeleteHitBox(this);
-			return;
-		}
 
 	//攻撃を受けたら体力を減らす
 	//主人公とATTACK系統との当たり判定
@@ -234,7 +234,7 @@ void CObjBoss3Battle::Action()
 //ドロー
 void CObjBoss3Battle::Draw()
 {
-	if (g_battle_flag == false)
+	if (m_boss_flag == true)
 	{
 		return;
 	}
@@ -245,12 +245,6 @@ void CObjBoss3Battle::Draw()
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
-
-	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (75.0f * m_posture) + m_px;
-	dst.m_right = (75 - 75.0f * m_posture) + m_px;
-	dst.m_bottom = 100.0f + m_py;
 
 	//切り取り位置の設定
 	if (m_move == true)//左向き
@@ -268,6 +262,12 @@ void CObjBoss3Battle::Draw()
 		src.m_right = 1000.0f;
 		src.m_bottom = 250.0f;
 	}
+
+	//表示位置の設定
+	dst.m_top = 0.0f + m_py;
+	dst.m_left = (75.0f * m_posture) + m_px;
+	dst.m_right = (75 - 75.0f * m_posture) + m_px;
+	dst.m_bottom = 100.0f + m_py;
 
 	//描画
 	if (m_time > 0) {

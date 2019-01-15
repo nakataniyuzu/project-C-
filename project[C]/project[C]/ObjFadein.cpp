@@ -2,7 +2,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameHead.h"
 #include "GameL\WinInputs.h"
-
+#include "GameL\Audio.h"
 #include "ObjFadein.h"
 
 //使用するネームスペース
@@ -32,6 +32,10 @@ void CObjFadein::Action()
 	m_next_flag = hero->GetNEXTF();	//ネクストフラグを取得
 	m_fade_flag = hero->GetFADEF();	//フェイドインかアウトを設定するためのフラグ
 
+	//CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
+	//herob->SetSPEED(0.0f);	//主人公のスピードを０にする
+	//herob->SetVX(0.0f);		//主人公のベクトルを０にする
+	//herob->SetVY(0.0f);
 
 
 	if (m_flag == true)
@@ -55,12 +59,11 @@ void CObjFadein::Action()
 			}
 			m_flag = false;
 			if (m_fade_flag == false) {
-				g_battle_flag = false;
-				//hero->SetBATTLE(true);		//マップ画面へ移行
+				g_battle_flag = false;//マップ画面へ移行
+				Audio::Start(12);	//マップ用BGMを鳴らす
 			}
 			else {
-				g_battle_flag = true;
-				//hero->SetBATTLE(false);			//バトル画面へ移行
+				g_battle_flag = true;//バトル画面へ移行
 			}
 		}
 	}

@@ -273,9 +273,6 @@ void CObjHero::Action()
 		//主人公がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
 		hit_date = hit->SearchElementHit(ELEMENT_MYSTERY);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-
-
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			float r = hit_date[i]->r;

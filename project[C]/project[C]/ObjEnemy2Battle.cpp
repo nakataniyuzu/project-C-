@@ -36,11 +36,6 @@ void CObjEnemy2Battle::Init()
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
-	m_time_f = 0;
-	m_ani = 0;
-	m_ani_time_d = 0;
-	m_del = false;
-	m_eff_flag = false;
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_SECOND, 1);
 }
@@ -55,7 +50,6 @@ void CObjEnemy2Battle::Action()
 	m_battle_flag = hero->GetBATTLE();
 	m_hero_posture = hero->GetPOS();
 	m_boss_flag = hero->GetBOSSF();
-	//戦闘時の主人公の情報を持ってくる
 	CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 	m_hero_position = herob->GetX();
 
@@ -178,8 +172,8 @@ void CObjEnemy2Battle::Action()
 	}
 
 
-	//敵の体力が0になったら消滅処理に移る
-	if (m_del == false && m_enemy_hp <= 0)
+	//敵の体力が0になったら破棄CObjMain
+	if (m_enemy_hp <= 0)
 	{
 		hero->SetBATTLE(true);
 		hero->SetENEMYF(true);
@@ -206,54 +200,7 @@ void CObjEnemy2Battle::Action()
 		m_py = 50.0f;
 	}
 
-	if (m_time_f > 0) {
-		m_time_f--;
-		if (m_time_f <= 0) {
-			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
-			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-			this->SetStatus(false);		//画像の削除
-			Hits::DeleteHitBox(this);	//ヒットボックスの削除
-			m_time_f = 0;
-		}
-	}
-
-	//敵消滅処理------		
-	if (m_del == true)
-	{
-		herob->SetSPEED(0.0f);	//主人公のスピードを０にする
-		herob->SetVX(0.0f);		//主人公のベクトルを０にする
-		herob->SetVY(0.0f);
-		//死亡アニメーションRECT情報
-		RECT_F ani_src[3] =
-		{
-			{ 0,  0, 90,100 },
-			{ 0,105,200,100 },
-			{ 0,210,318,100 },
-		};
-
-		//アニメーションのコマ間隔制御
-		if (m_ani_time_d > 5)
-		{
-			m_ani++;	//アニメーションのコマを1つ進める
-			m_ani_time_d = 0;
-
-			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-		}
-		else
-		{
-			m_ani_time_d++;
-		}
-
-		//死亡アニメーション終了で本当にオブジェクトの破棄
-		if (m_ani == 3)
-		{
-			hit->SetInvincibility(true);	//無敵にする
-			m_speed_power = 0.0f;			//動きを止める
-			m_eff_flag = true;			//画像切り替え用フラグ
-			m_time_f = 20;		//フェイドイン移行用の間隔設定
-		}
-		return;
-	}
+	//
 }
 
 //ドロー
@@ -265,34 +212,18 @@ void CObjEnemy2Battle::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
+	//切り取り位置の設定
+	src.m_top    = 0.0f;
+	src.m_left   = 400.0f;
+	src.m_right  = 300.0f;
+	src.m_bottom = 100.0f;
+
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (75.0f * m_posture) + m_px;
-	dst.m_right = (75 - 75.0f * m_posture) + m_px;
+	dst.m_top    = 0.0f + m_py;
+	dst.m_left   = (75.0f * m_posture) + m_px;
+	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
-	//敵の状態で描画を変更
-	if (m_del == true)
-	{
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 210.0f;
-		src.m_right = 318.0f;
-		src.m_bottom = 100.0f;
-		if (m_eff_flag == true)
-			Draw::Draw(26, &src, &dst, c, 0.0f);
-		else
-			Draw::Draw(26, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
-	}
-	else
-	{
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 400.0f;
-		src.m_right = 300.0f;
-		src.m_bottom = 100.0f;
-
-		//描画
-		Draw::Draw(19, &src, &dst, c, 0.0f);
-	}
+	//描画
+	Draw::Draw(19, &src, &dst, c, 0.0f);
 }

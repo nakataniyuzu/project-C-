@@ -210,22 +210,18 @@ void CObjBlock::Action()
 			if (g_map[i][j] == 18)
 			{
 				//18があればDummySwitchを出現
-				
-
+				CObjDummySwitch* objds = new CObjDummySwitch(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objds, OBJ_DUMMYSWITCH, 111);
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
-
 		}
 	}
-	
-	
 }
 
 //ドロー
 void CObjBlock::Draw()
 {
-
 	if (g_battle_flag == true)
 	{
 		return;
@@ -277,8 +273,6 @@ void CObjBlock::Draw()
 	}
 }
 
-
-
 //BlockHit関数
 //引数1		float*	x			:判定を行うobjectのX位置
 //引数2		float*	y			:判定を行うobjectのY位置
@@ -298,7 +292,6 @@ void CObjBlock::BlockHit(
 	float *vx, float *vy, int *bt
 )
 {
-
 	//主人公の衝突状態確認用のフラグの初期化
 	*up    = false;
 	*down  = false;

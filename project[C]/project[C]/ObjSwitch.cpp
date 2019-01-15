@@ -38,7 +38,7 @@ void CObjSwitch::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公と当たっているか確認
-	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		m_change = true;
 	}
@@ -52,6 +52,10 @@ void CObjSwitch::Action()
 //ドロー
 void CObjSwitch::Draw()
 {
+	if (g_battle_flag == true)
+	{
+		return;
+	}
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,2.0f,0.7f };
 	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
@@ -61,8 +65,8 @@ void CObjSwitch::Draw()
 
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
-	src.m_left   = 100.0f;
-	src.m_right  = 200.0f;
+	src.m_left   =   0.0f;
+	src.m_right  = 100.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -75,10 +79,10 @@ void CObjSwitch::Draw()
 
 	//描画
 	if (m_change == false){
-		Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
+		Draw::Draw(4, &src, &dst, c, 0.0f);
 	}
 	else if (m_change == true) {
-		Draw::Draw(BLOCK, &src, &dst, r, 0.0f);
+		Draw::Draw(4, &src, &dst, r, 0.0f);
 	}
 }
 

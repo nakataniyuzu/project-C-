@@ -68,8 +68,10 @@ void CObjSwordBattle::Action()
 	if (hit->CheckElementHit(ELEMENT_ENEMY_BATTLE) == true 
 	 || hit->CheckElementHit(ELEMENT_BOSS_BATTLE) == true)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		//this->SetStatus(false);
+		//Hits::DeleteHitBox(this);
+		hit->SetInvincibility(true);
+
 	}
 
 	//•Ç‚É“–‚½‚Á‚½‚çÁ‚¦‚éˆ—

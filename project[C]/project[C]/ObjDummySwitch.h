@@ -21,4 +21,5 @@ private:
 	float m_px;			//位置
 	float m_py;
 	bool m_change;		//画像切り替え用
+	int m_time;		//メッセージ表示用
 };

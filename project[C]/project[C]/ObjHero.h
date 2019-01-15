@@ -120,6 +120,7 @@ class CObjHero : public CObj
 			bool switchblock;	//スイッチブロック用
 			bool switchgate;	//スイッチゲート用
 			bool heal;		//ヒールブロック用
+			bool dswitch;	//ダミースイッチ用
 		};
 		Message mes;
 
