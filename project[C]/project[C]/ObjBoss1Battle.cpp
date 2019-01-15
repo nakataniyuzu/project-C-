@@ -136,6 +136,7 @@ void CObjBoss1Battle::Action()
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
+		g_enemy_kills += 1;
 	}
 
 	//“G‚ª—ÌˆæŠO‚És‚©‚È‚¢‚æ‚¤‚É‚·‚é

@@ -330,7 +330,7 @@ void CObjHero::Action()
 		{
 			m_key = 0;		//鍵を消費する
 			mes.gate = true;//鍵のフラグをオンにする
-			Audio::Start(11);
+			Audio::Start(11);     //音楽スタート
 		}
 	}
 	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)	//主人公が氷の結晶と当たった場合
