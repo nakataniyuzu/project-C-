@@ -15,11 +15,10 @@ using namespace GameL;
 //イニシャライズ
 void CObjEnemyBattle::Init()
 {
-	m_px = 600.0f;//位置
-	m_py = 450.0f;
+	m_px = 300.0f;
+	m_py = 500.0f;		//出現位置
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 	m_enemy_hp = 3;     //敵のヒットポイント(最大3)
 
 	m_ani_time = 0;
@@ -29,9 +28,11 @@ void CObjEnemyBattle::Init()
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
 	m_move = true;  //true=右 false=左
+	enemy_delete_flag = false;	//敵消滅フラグ
+	m_pop_flag = true;	//敵向き用フラグ
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
-
+	
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY, OBJ_ENEMY_BATTLE, 1);
 }
@@ -39,24 +40,45 @@ void CObjEnemyBattle::Init()
 //アクション
 void CObjEnemyBattle::Action()
 {
+	//OBJ_MAINの情報を持ってくる
+	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_flag = hero->GetBATTLE();
 	hero_posture = hero->GetPOS();
+	boss_flag = hero->GetBOSSF();
 
-	if (m_battle_flag == true)
+	if (enemy_delete_flag == true)
+	{
+		enemy_delete_flag = false;
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	//マップ上の主人公の向きによってリス位置、向きを設定
+	if (m_pop_flag == true)
 	{
 		if (hero_posture == 0.0f || hero_posture == 1.0f)
 		{
 			m_px = 600.0f;
-			m_py = 500.0f;		//位置
+			m_py = 500.0f;		//出現位置
+			m_move = true;	//向き
 		}
-		else if (hero_posture == 2.0f || hero_posture == 3.0f)
+		if (hero_posture == 2.0f || hero_posture == 3.0f)
 		{
 			m_px = 100.0f;
-			m_py = 500.0f;		//位置
+			m_py = 500.0f;		//出現位置
+			m_move = false;	//向き
 		}
+		m_pop_flag = false;	//向き用フラグ
+	}
+	
+	//マップへの移行
+	if (m_battle_flag == true)
+	{	
 		m_vx = 0.0f;
 		m_vy = 0.0f;
+		m_pop_flag = true;
 		return;
 	}
 
@@ -113,12 +135,49 @@ void CObjEnemyBattle::Action()
 	//攻撃を受けたら体力を減らす
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
-	{
+	{/*
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_ATTACK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			float r = hit_date[i]->r;
+			//角度で上下左右を判定
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vy = -10;
+				m_vx -= 25;
+			}
+			if (r > 135 && r < 225)
+			{
+				m_vy = -10;
+				m_vx += 25;
+			}
+			
+		}*/
+		//ノックバック処理
+		if (m_posture == 1.0f)
+		{
+			m_vy = -10;
+			m_vx -= 25;
+		}
+		else if (m_posture == 0.0f)
+		{
+			m_vy = -10;
+			m_vx += 25;
+		}
+
 		m_enemy_hp -= 1;
 	}
-	//敵の体力が0になったら破棄
+
+	
+	//敵の体力が0になったら破棄CObjMain
 	if (m_enemy_hp <= 0)
 	{
+		hero->SetBATTLE(true);
+		hero->SetENEMYF(true);
+		main->SetENEMYKILLS(1);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
@@ -140,6 +199,7 @@ void CObjEnemyBattle::Action()
 	{
 		m_py = 50.0f;
 	}
+
 }
 
 //ドロー
@@ -170,5 +230,4 @@ void CObjEnemyBattle::Draw()
 
 	//描画
 	Draw::Draw(12, &src, &dst, c, 0.0f);
-
 }

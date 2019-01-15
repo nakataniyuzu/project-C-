@@ -1,6 +1,7 @@
 #pragma once
 //使用するヘッダーファイル
 #include "GameL\SceneObjManager.h"
+#include "ObjMessage.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -30,8 +31,6 @@ private:
 	int m_draw_time;
 	//描画切り替え用
 	int m_switch;
-
-	bool m_battle_flag;
 };
 
 

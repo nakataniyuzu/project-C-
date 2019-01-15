@@ -22,9 +22,6 @@ CObjGate::CObjGate(float x, float y)
 //イニシャライズ
 void CObjGate::Init()
 {
-	m_vx = 0.0f;		//移動ベクトル
-	m_vy = 0.0f;
-
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_GATE, 1);
 
@@ -48,10 +45,6 @@ void CObjGate::Action()
 		}
 	}
 
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
-
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -62,9 +55,7 @@ void CObjGate::Action()
 //ドロー
 void CObjGate::Draw()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
@@ -82,6 +73,7 @@ void CObjGate::Draw()
 		}
 		if (m_time > 0) {
 			m_time--;
+
 			Font::StrDraw(L"鍵が必要です", 200, 200, 20, c);//時間が0になると表示を終了		
 			if (m_time <= 0) {
 				m_time = 0;
@@ -97,8 +89,8 @@ void CObjGate::Draw()
 
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
-	src.m_left   = 200.0f;
-	src.m_right  = 300.0f;
+	src.m_left   = 100.0f;
+	src.m_right  = 200.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -109,7 +101,7 @@ void CObjGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+	Draw::Draw(4, &src, &dst, c, 0.0f);
 }
 
 

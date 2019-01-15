@@ -5,13 +5,12 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define ALL_SIZE 50.0f
 
 //オブジェクト：ブロック＆背景
 class CObjBlock : public CObj
 {
 	public:
-		CObjBlock(int map[27][55]);
+		CObjBlock(int map[38][65]);
 		~CObjBlock() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
@@ -30,10 +29,12 @@ class CObjBlock : public CObj
 		);
 
 	private:
-		int m_map[27][55];	//マップ情報
+		int m_map[38][65];	//マップ情報
 
-		bool m_battle_flag;
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;
+
+		float m_and;		//透明度処理用
+		bool m_andf;		//透明度処理用フラグ
 
 };

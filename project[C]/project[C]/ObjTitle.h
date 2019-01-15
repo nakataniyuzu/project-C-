@@ -36,5 +36,7 @@ class CObjTitle :public CObj
 		int choice;
 		int m_time;		//キーの入力時間間隔
 		bool m_key_flag;
+		float m_and;		//透明度処理用
+		bool m_andf;		//透明度処理用フラグ
 };
 

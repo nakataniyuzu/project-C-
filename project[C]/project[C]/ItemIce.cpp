@@ -4,6 +4,7 @@
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ItemIce.h"
@@ -38,6 +39,7 @@ void CObjItemIce::Action()
 	//ŽålŒö‚ÆÕ“Ë‚µ‚½‚çÁ–Å
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
+		Audio::Start(14);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
@@ -56,9 +58,7 @@ void CObjItemIce::Action()
 //ƒhƒ[
 void CObjItemIce::Draw()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}

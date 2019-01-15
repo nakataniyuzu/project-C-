@@ -39,7 +39,7 @@ void CObjFire::Init()
 	m_time = 50;	//魔法が消える時間
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, ALL_SIZE, ALL_SIZE, ELEMENT_MAGIC, OBJ_FIRE, 1);
+	Hits::SetHitBox(this, m_x + 15, m_y + 10, 25.0f, 30.0f, ELEMENT_MAGIC, OBJ_FIRE, 1);
 }
 
 //アクション
@@ -73,7 +73,7 @@ void CObjFire::Action()
 	
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_x, m_y);
+	hit->SetPos(m_x + 15, m_y+ 10);
 
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d;
@@ -86,16 +86,14 @@ void CObjFire::Action()
 	);
 
 	//FIREBLOCKと衝突したら消滅させる
-	if (hit->CheckObjNameHit(OBJ_FIREBLOCK) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_FIREBLOCK) != nullptr || 
+		hit->CheckObjNameHit(OBJ_GATE) != nullptr || 
+		hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+	
 	//壁に当たったら消える処理
 	if (m_hit == true) {		
 		this->SetStatus(false);

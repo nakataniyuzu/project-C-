@@ -27,6 +27,7 @@ public:
 	int GetBATTLEMP() { return m_battle_mp; }		//主人公のMPを取得
 	int GetBATTLEMAGIC() { return m_battle_magic; }	//主人公の設定魔法を取得
 
+	void SetSPEED(float s) { m_speed_power = s; }
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }
@@ -42,9 +43,12 @@ private:
 	float hero_posture;	//マップ上のヒーローの向き
 	float m_swordwidth; //ソード幅
 
+
 	int m_battle_hp;	//体力(戦闘)
 	int m_battle_mp;	//魔法使用回数(戦闘)
 	int m_battle_magic;	//魔法切り替え(戦闘)
+
+	int m_damage;
 
 	int m_time;		//無敵時間用
 	int m_sword_delay;
@@ -55,11 +59,14 @@ private:
 	float m_speed_power;	//スピードパワー
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
+	bool  m_inputf;	//キー入力制御用
 	bool  m_f;		//キー（長押し）制御用
 	bool  m_mf;		//キー（長押し）制御用
+	bool  m_delete;	//敵消滅用フラグ
 
 	bool m_pos_flag;	//主人公向き用のフラグ
 	bool m_battle_flag;	//マップに戻るフラグ
+	bool m_boss_battle_f;	//ボス戦用フラグ
 	bool m_hit_down; //敵の頭の判定用
 
 	//魔法使用可能フラグ

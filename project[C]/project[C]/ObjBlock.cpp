@@ -9,15 +9,15 @@
 #include "ObjBlock.h"
 
 
-int g_map[27][55];
+int g_map[38][65];
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjBlock::CObjBlock(int map[27][55])
+CObjBlock::CObjBlock(int map[38][65])
 {
 	//マップデータをコピー
-	memcpy(g_map, map, sizeof(int)*(27 * 55));
+	memcpy(g_map, map, sizeof(int)*(38 * 65));
 }
 
 //イニシャライズ
@@ -25,18 +25,29 @@ void CObjBlock::Init()
 {
 	m_scrollx = 0.0f;
 	m_scrolly = 0.0f;
+	m_and = 0.0f;
+	m_andf = true;
 }
 
 //アクション
 void CObjBlock::Action()
 {
+	if (m_andf == true)
+	{
+		m_and += 0.01f;
+		if (m_and >= 1.0f)
+		{
+			m_and = 1.0f;
+			m_andf = false;
+		}
+	}
+
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
-	m_battle_flag = hero->GetBATTLE();
 
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
@@ -63,10 +74,20 @@ void CObjBlock::Action()
 	}
 
 	//出現
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 38; i++)
 	{
-		for (int j = 0; j < 55; j++)
+		for (int j = 0; j < 65; j++)
 		{
+			if (g_map[i][j] == 20)
+			{
+				//20があれば主人公を出現
+				/*CObjHero* objhero = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objhero, OBJ_HERO, 115);*/
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+
 			//列の中からを探す
 			if (g_map[i][j] == 2)
 			{
@@ -95,11 +116,21 @@ void CObjBlock::Action()
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
+			if (g_map[i][j] == 5)
+			{
+				//5があればStairsを出現
+				CObjStairs* objsta = new CObjStairs(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objsta, OBJ_STAIRS, 111);
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+
 			if (g_map[i][j] == 6)
 			{
 				//6があれば敵を出現
-				CObjEnemy1* obje1 = new CObjEnemy1(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obje1, OBJ_ENEMY, 110);
+				CObjEnemyFirst* obje1 = new CObjEnemyFirst(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(obje1, OBJ_ENEMY_FIRST, 110);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -126,7 +157,7 @@ void CObjBlock::Action()
 			{
 				//10があればBOSS出現
 				CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objb1, OBJ_ENEMY, 110);
+				Objs::InsertObj(objb1, OBJ_BOSS, 110);
 
 				//出現場所を0にする
 				g_map[i][j] = 0;
@@ -169,38 +200,43 @@ void CObjBlock::Action()
 			}
 			if (g_map[i][j] == 17)
 			{
-				//16があればSwitchGateを出現
+				//17があればSwitchGateを出現
 				CObjSwitchGate* objswg = new CObjSwitchGate(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objswg, OBJ_SWITCHGATE, 111);
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
+			if (g_map[i][j] == 18)
+			{
+				//18があればDummySwitchを出現
+				CObjDummySwitch* objds = new CObjDummySwitch(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objds, OBJ_DUMMYSWITCH, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
 		}
 	}
-	
-	
 }
 
 //ドロー
 void CObjBlock::Draw()
 {
-
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_and };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
 
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 38; i++)
 	{
-		for (int j = 0; j < 55; j++)
+		for (int j = 0; j < 65; j++)
 		{
 			if (g_map[i][j] >= 0)
 			{
@@ -214,19 +250,19 @@ void CObjBlock::Draw()
 				{
 					src.m_top    =   0.0f;
 					src.m_left   =   0.0f;
-					src.m_right  = 800.0f;
-					src.m_bottom = 600.0f;
+					src.m_right  = 100.0f;
+					src.m_bottom = 100.0f;
 					//描画
-					Draw::Draw(FLOOR1, &src, &dst, c, 0.0f);
+					Draw::Draw(FLOOR, &src, &dst, c, 0.0f);
 				}
 				else if (g_map[i][j] == 1)
 				{
 					src.m_top    = 0.0f;
 					src.m_left   = 0.0f;
-					src.m_right  = 50.0f;
-					src.m_bottom = 50.0f;
+					src.m_right  = 100.0f;
+					src.m_bottom = 100.0f;
 					//描画
-					Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+					Draw::Draw(BLOCK, &src, &dst, c, 0.0f);
 				}						
 				else
 				{
@@ -236,8 +272,6 @@ void CObjBlock::Draw()
 		}
 	}
 }
-
-
 
 //BlockHit関数
 //引数1		float*	x			:判定を行うobjectのX位置
@@ -258,7 +292,6 @@ void CObjBlock::BlockHit(
 	float *vx, float *vy, int *bt
 )
 {
-
 	//主人公の衝突状態確認用のフラグの初期化
 	*up    = false;
 	*down  = false;
@@ -266,9 +299,9 @@ void CObjBlock::BlockHit(
 	*right = false;
 
 	//m_mapの全要素にアクセス
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 38; i++)
 	{
-		for (int j = 0; j < 55; j++)
+		for (int j = 0; j < 65; j++)
 		{
 			if (g_map[i][j] > 0 && g_map[i][j] != 6 && g_map[i][j] != 10)
 			{
@@ -281,7 +314,8 @@ void CObjBlock::BlockHit(
 				float scrolly = scroll_on ? m_scrolly : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x +(-scrollx) + ALL_SIZE > bx) && (*x + (-scrollx) < bx + ALL_SIZE) && (*y + (-scrolly) + ALL_SIZE > by) && (*y + (-scrolly) < by + ALL_SIZE))
+				if ((*x +(-scrollx) + 42.0f > bx) && (*x + (-scrollx) < bx + 42.0f) 
+				 && (*y + (-scrolly) + 48.0f > by) && (*y + (-scrolly) < by + 48.0f))
 				{
 					//上下左右判定
 
@@ -309,29 +343,29 @@ void CObjBlock::BlockHit(
 						{
 							//右
 							*right = true;	//主人公の左の部分が衝突している
-							*x = bx + ALL_SIZE + (scrollx);	//ブロックの位置+主人公の幅
-							*vx = 0.3f;//-VX*反発係数
+							*x = bx + 42.0f + (scrollx);	//ブロックの位置+主人公の幅
+							*vx = 0.2f;//-VX*反発係数
 						}
 						if (r > 45 && r < 135)
 						{
 							//上
 							*down = true;	//主人公から見て、下の部分が衝突している
-							*y = by - ALL_SIZE + (scrolly);	//ブロックの位置-主人公の幅
-							*vy = -0.3f;//-VX*反発係数
+							*y = by - 48.0f + (scrolly);	//ブロックの位置-主人公の幅
+							*vy = -0.2f;//-VX*反発係数
 						}
 						if (r > 135 && r < 225)
 						{
 							//左
 							*left = true;	//主人公の右の部分が衝突している
-							*x = bx - ALL_SIZE + (scrollx);	//ブロックの位置-主人公の幅
-							*vx = -0.3f;//-VX*反発係数
+							*x = bx - 42.0f + (scrollx);	//ブロックの位置-主人公の幅
+							*vx = -0.2f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							//下
 							*up = true;		//主人公から見て、上の部分が衝突している
-							*y = by + ALL_SIZE + (scrolly);	//ブロック位置+主人公の幅
-							*vy = 0.3f;//-VX*反発係数
+							*y = by + 48.0f + (scrolly);	//ブロック位置+主人公の幅
+							*vy = 0.2f;//-VX*反発係数
 						}
 					}
 				}

@@ -22,14 +22,7 @@ CObjSwitch::CObjSwitch(float x, float y)
 //イニシャライズ
 void CObjSwitch::Init()
 {
-	m_vx = 0.0f;		//移動ベクトル
-	m_vy = 0.0f;
-
-	m_time = 0;
-
 	m_change = false;	//画像切り替え
-	m_key_flag = false;
-
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_SWITCH, 1);
 }
@@ -37,9 +30,7 @@ void CObjSwitch::Init()
 //アクション
 void CObjSwitch::Action()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
@@ -47,19 +38,12 @@ void CObjSwitch::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公と当たっているか確認
-	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		m_change = true;
 	}
-
-
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
-
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
 
@@ -68,34 +52,21 @@ void CObjSwitch::Action()
 //ドロー
 void CObjSwitch::Draw()
 {
+	if (g_battle_flag == true)
+	{
+		return;
+	}
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,2.0f,0.7f };
 	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	if (m_key_flag == false)
-	{
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
-		{
-			m_time = 100;
-		}
-		if (m_time > 0) {
-			m_time--;
-			Font::StrDraw(L"どこかで扉が開く音がした。", 200, 200, 20, r);//時間が0になると表示を終了
-			if (m_time <= 0) {
-				m_time = 0;
-				m_key_flag = true;
-			}
-		}
-	}
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
-	src.m_left   = 100.0f;
-	src.m_right  = 200.0f;
+	src.m_left   =   0.0f;
+	src.m_right  = 100.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -108,10 +79,10 @@ void CObjSwitch::Draw()
 
 	//描画
 	if (m_change == false){
-		Draw::Draw(BLOCK1, &src, &dst, c, 0.0f);
+		Draw::Draw(4, &src, &dst, c, 0.0f);
 	}
 	else if (m_change == true) {
-		Draw::Draw(BLOCK1, &src, &dst, r, 0.0f);
+		Draw::Draw(4, &src, &dst, r, 0.0f);
 	}
 }
 

@@ -60,15 +60,15 @@ void CObjFireGate::Action()
 //ドロー
 void CObjFireGate::Draw()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
 	//描画カラー情報
 	float r[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
+	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公がミステリーブロックと当たった場合、m_timeに時間をセット
 	{
@@ -76,6 +76,7 @@ void CObjFireGate::Draw()
 	}
 	if (m_time > 0) {
 		m_time--;
+		pm->BackDraw(195.0f, 195.0f, 330.0f, 225.0f, a);
 		Font::StrDraw(L"火を灯せ...?", 200, 200, 20, r);//時間が0になると表示を終了
 		if (m_time <= 0) {
 			m_time = 0;
@@ -87,8 +88,8 @@ void CObjFireGate::Draw()
 
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
-	src.m_left   = 200.0f;
-	src.m_right  = 300.0f;
+	src.m_left   = 100.0f;
+	src.m_right  = 200.0f;
 	src.m_bottom = 100.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -99,7 +100,7 @@ void CObjFireGate::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画
-	Draw::Draw(BLOCK1, &src, &dst, r, 0.0f);
+	Draw::Draw(4, &src, &dst, r, 0.0f);
 }
 
 

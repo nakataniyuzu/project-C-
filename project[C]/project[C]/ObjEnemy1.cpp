@@ -5,19 +5,19 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy1.h"
+#include "ObjEnemyFirst.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy1::CObjEnemy1(float x, float y)
+CObjEnemyFirst::CObjEnemyFirst(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjEnemy1::Init()
+void CObjEnemyFirst::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -38,11 +38,11 @@ void CObjEnemy1::Init()
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_FIRST, 1);
 }
 
 //アクション
-void CObjEnemy1::Action()
+void CObjEnemyFirst::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
@@ -51,27 +51,39 @@ void CObjEnemy1::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 
-	if (battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		m_vx = 0.0f;
-		m_vy = 0.0f;
-		m_time = 100;
-		hit->SetInvincibility(true);	//無敵オン
+		m_vy = 0.0f;	//動きを止める
+		m_time = 100;	//m_timeに時間をセット
 		return;
 	}
 	
 	if (m_time > 0)
 	{
-		m_speed_power = 0.0f;
+		m_speed_power = 0.0f;	//スピードを0にする
 		m_time--;
 		if (m_time <= 0)
 		{
-			m_speed_power = 0.5f;
-			m_time = 0;
+			m_speed_power = 0.5f;	//スピードを元に戻す
+			m_time = 0;				//m_timeを0に戻す
 			hit->SetInvincibility(false);	//無敵オフ
 		}
 	}
 
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公を触れたら
+	{
+		m_speed_power = 0.0f;		//スピードを０にする
+		hit->SetInvincibility(true);	//当たり判定を消す
+	}
+	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)	//魔法攻撃(Fire)に触れたら
+	{
+		m_speed_power = 2.0f;	//スピードを上げる
+	}
+	if (hit->CheckObjNameHit(OBJ_ICE) != nullptr)	//魔法攻撃(Ice)に触れたら
+	{
+		m_speed_power = 0.0f;	//スピードを止める
+	}
 	if (m_hit_up == true)	//上
 		m_move = false;
 	if (m_hit_down == true)	//下
@@ -125,9 +137,9 @@ void CObjEnemy1::Action()
 }
 
 //ドロー
-void CObjEnemy1::Draw()
+void CObjEnemyFirst::Draw()
 {
-	if (battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}
@@ -139,6 +151,7 @@ void CObjEnemy1::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float r[4] = { 0.6f,0.0f,0.0f,0.8f };
+	float b[4] = { 0.0f,0.0f,0.6f,0.8f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -156,8 +169,11 @@ void CObjEnemy1::Draw()
 	dst.m_right =  ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 	
-	if (m_speed_power == 0.0f){
+	if (m_speed_power >= 2.0f){
 		Draw::Draw(7, &src, &dst, r, 0.0f);
+	}
+	else if (m_speed_power == 0.0f) {
+		Draw::Draw(7, &src, &dst, b, 0.0f);
 	}
 	else {
 		Draw::Draw(7, &src, &dst, c, 0.0f);

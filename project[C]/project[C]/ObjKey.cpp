@@ -3,6 +3,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjKey.h"
@@ -25,8 +26,7 @@ void CObjKey::Init()
 	m_vy = 0.0f;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_KEY, 1);
-
+	Hits::SetHitBox(this, m_px + 10, m_py, 30, ALL_SIZE, ELEMENT_FIELD, OBJ_KEY, 1);
 }
 
 //アクション
@@ -44,13 +44,13 @@ void CObjKey::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//キーを取得
 	{
+		Audio::Start(14);
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
-
 
 	//位置の更新
 	m_px += m_vx;
@@ -60,16 +60,14 @@ void CObjKey::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//HitBoxの位置の変更
-	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
+	hit->SetPos(m_px + block->GetScrollX() + 10, m_py + block->GetScrollY());
 
 }
 
 //ドロー
 void CObjKey::Draw()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	if (m_battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		return;
 	}

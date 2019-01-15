@@ -16,6 +16,8 @@ public:
 	void Draw();		//ドロー
 
 private:
-	bool m_battle_flag;
+	bool m_battle_flag;		//バトル用フラグ
+	bool m_boss_battle_f;	//ボス戦用フラグ
+
 	int m_map[12][16]; //ブロック情報
 };

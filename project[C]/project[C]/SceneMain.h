@@ -6,8 +6,8 @@
 using namespace GameL;
 
 //マクロ
-#define FLOOR1 01
-#define BLOCK1 2
+#define FLOOR 01
+#define BLOCK 2
 #define HEALKEY 5
 #define ITEM 10
 
@@ -21,6 +21,11 @@ class CSceneMain :public CScene
 		void Scene();    //ゲームメインの実行中メソッド
 	private:
 		/*int m_map[10][10];	//マップ情報*/
-		bool battle_flag;
+		int i, j;
+		bool m_battle_flag;
+		bool m_enemy_flag;
+		bool m_boss_flag;
 		bool m_f;
+
+		int m_time;
 };
