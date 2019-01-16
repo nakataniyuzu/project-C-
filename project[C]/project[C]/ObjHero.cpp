@@ -348,11 +348,13 @@ void CObjHero::Action()
 	{
 		mes.water = true;		//フラグをオンにする
 	}
-	if (hit->CheckObjNameHit(OBJ_SWITCH) != nullptr)	//主人公がスイッチに触れた場合
+	if (hit->CheckObjNameHit(OBJ_SWITCH) != nullptr || 
+		hit->CheckObjNameHit(OBJ_BOSSSWITCH) != nullptr)	//主人公がスイッチに触れた場合
 	{
 		mes.switchblock = true;	//フラグをオンにする
 	}
-	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr)	//主人公がゲートと当たった場合
+	if (hit->CheckObjNameHit(OBJ_SWITCHGATE) != nullptr || 
+		hit->CheckObjNameHit(OBJ_BOSSGATE) != nullptr)	//主人公がゲートと当たった場合
 	{
 		mes.switchgate = true;	//フラグをオンにする
 	}

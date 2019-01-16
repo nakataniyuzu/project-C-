@@ -5,19 +5,19 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy1.h"
+#include "ObjEnemy2.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy1::CObjEnemy1(float x, float y)
+CObjEnemy2::CObjEnemy2(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjEnemy1::Init()
+void CObjEnemy2::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -29,24 +29,24 @@ void CObjEnemy1::Init()
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
-	m_move = false;			
+	m_move = false;
 
 	//blockとの衝突状態確認
-	m_hit_up    = false;
-	m_hit_down  = false;
-	m_hit_left  = false;
+	m_hit_up = false;
+	m_hit_down = false;
+	m_hit_left = false;
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_FIRST, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_SECOND, 1);
 }
 
 //アクション
-void CObjEnemy1::Action()
+void CObjEnemy2::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
-	
+
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -58,7 +58,7 @@ void CObjEnemy1::Action()
 		m_time = 100;	//m_timeに時間をセット
 		return;
 	}
-	
+
 	if (m_time > 0)
 	{
 		m_speed_power = 0.0f;	//スピードを0にする
@@ -137,7 +137,7 @@ void CObjEnemy1::Action()
 }
 
 //ドロー
-void CObjEnemy1::Draw()
+void CObjEnemy2::Draw()
 {
 	if (g_battle_flag == true)
 	{
@@ -157,19 +157,19 @@ void CObjEnemy1::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    = ALL_SIZE * m_posture;
-	src.m_left   =     0.0f + AniDate[m_ani_frame] * ALL_SIZE;
-	src.m_right  = ALL_SIZE + AniDate[m_ani_frame] * ALL_SIZE;
+	src.m_top = ALL_SIZE * m_posture;
+	src.m_left = 0.0f + AniDate[m_ani_frame] * ALL_SIZE;
+	src.m_right = ALL_SIZE + AniDate[m_ani_frame] * ALL_SIZE;
 	src.m_bottom = ALL_SIZE + (ALL_SIZE * m_posture);
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//表示位置の設定
-	dst.m_top    = 0.0f + m_py + block->GetScrollY();
-	dst.m_left   = 0.0f + m_px + block->GetScrollX();
-	dst.m_right =  ALL_SIZE + m_px + block->GetScrollX();
+	dst.m_top = 0.0f + m_py + block->GetScrollY();
+	dst.m_left = 0.0f + m_px + block->GetScrollX();
+	dst.m_right = ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
-	
-	if (m_speed_power >= 2.0f){
+
+	if (m_speed_power >= 2.0f) {
 		Draw::Draw(7, &src, &dst, r, 0.0f);
 	}
 	else if (m_speed_power == 0.0f) {

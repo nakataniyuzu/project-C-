@@ -129,9 +129,14 @@ void CObjBlock::Action()
 			if (g_map[i][j] == 6)
 			{
 				//6Ç™Ç†ÇÍÇŒìGÇèoåª
-				CObjEnemyFirst* obje1 = new CObjEnemyFirst(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(obje1, OBJ_ENEMY_FIRST, 110);
-
+				if (g_map_change == 0) {
+					CObjEnemy1* obje1 = new CObjEnemy1(j*ALL_SIZE, i*ALL_SIZE);
+					Objs::InsertObj(obje1, OBJ_ENEMY_FIRST, 110);
+				}
+				else if (g_map_change == 1) {
+					CObjEnemy2* obje2 = new CObjEnemy2(j*ALL_SIZE, i*ALL_SIZE);
+					Objs::InsertObj(obje2, OBJ_ENEMY_SECOND, 110);
+				}
 				//èoåªèÍèäÇÃílÇ0Ç…Ç∑ÇÈ
 				g_map[i][j] = 0;
 			}
