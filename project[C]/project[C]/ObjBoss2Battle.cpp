@@ -194,10 +194,11 @@ void CObjBoss2Battle::Action()
 //ドロー
 void CObjBoss2Battle::Draw()
 {
-	if (m_boss_flag == true)
+	//↓が原因でBOSSが表示されなくなる(後に解決)
+	/*if (g_battle_flag == true)
 	{
 		return;
-	}
+	}*/
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -209,23 +210,23 @@ void CObjBoss2Battle::Draw()
 	if (m_move == true)//左向き
 	{
 		src.m_top = 0.0f;
-		src.m_left = 105.0f;
-		src.m_right = 198.0f;
+		src.m_left = 193.0f;
+		src.m_right = 283.0f;
 		src.m_bottom = 102.0f;
 	}
 	else if (m_move == false)//右向き
 	{
 		m_posture = 0.0f;
 		src.m_top = 0.0f;
-		src.m_left = 305.0f;
-		src.m_right = 398.0f;
+		src.m_left = 100.0f;
+		src.m_right = 190.0f;
 		src.m_bottom = 102.0f;
 	}
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (75.0f * m_posture) + m_px;
-	dst.m_right = (75 - 75.0f * m_posture) + m_px;
+	dst.m_top    = 0.0f + m_py;
+	dst.m_left   = (     75.0f * m_posture) + m_px;
+	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画

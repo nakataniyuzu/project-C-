@@ -24,6 +24,7 @@ private:
 	float m_vx;			//移動ベクトル
 	float m_vy;
 	float m_posture;	//姿勢
+	bool m_pop_flag;	//ボスの出現位置用
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;	//描画フレーム
@@ -35,13 +36,22 @@ private:
 	float hero_posture;
 
 	int m_time;	//突進時間
+	
+	bool m_boss_flag;	//ボス戦闘用フラグ
+	bool enemy_flag;	//敵削除用
+	
+	int m_time_f;		//敵死亡時のフェイドイン移行用間隔幅
+	int m_ani;			//死亡アニメーション用
+	int m_ani_time_d;	//死亡アニメーション間隔タイム
+	bool m_del;			//削除チェック
+	RECT_F m_eff;		//死亡エフェクト描画用
+
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
 
-	bool m_boss_flag;	//ボス戦闘用フラグ
-	bool enemy_flag;	//敵削除用
+	bool m_eff_flag;	//エフェクト用フラグ
+
 	bool boss_delete_flag;	//ボス削除用
-	bool m_pop_flag;	//ボスの出現位置用
 	//移動の向き制御用
 	bool m_move;
 };

@@ -27,8 +27,8 @@ void CObjHero::Init()
 	
 	m_max_hp = 10;	//最大HP
 	m_max_mp = 10;	//最大MP
-	m_hp = 10;	//初期HP
-	m_mp = 10;	//初期MP
+	m_hp = 1073741823;	//初期HP
+	m_mp = 1073741823;	//初期MP
 	m_magic = 0;	//初期魔法
 
 	m_key = 0;	//鍵の情報
@@ -331,7 +331,7 @@ void CObjHero::Action()
 		{
 			m_key = 0;		//鍵を消費する
 			mes.gate = true;//鍵のフラグをオンにする
-			Audio::Start(11);
+			Audio::Start(11);     //音楽スタート
 		}
 	}
 	if (hit->CheckObjNameHit(ITEM_ICE) != nullptr)	//主人公が氷の結晶と当たった場合

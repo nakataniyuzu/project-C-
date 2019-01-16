@@ -78,6 +78,16 @@ void CObjBlock::Action()
 	{
 		for (int j = 0; j < 65; j++)
 		{
+			if (g_map[i][j] == 20)
+			{
+				//20があれば主人公を出現
+				/*CObjHero* objhero = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objhero, OBJ_HERO, 115);*/
+
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+
 			//列の中からを探す
 			if (g_map[i][j] == 2)
 			{
