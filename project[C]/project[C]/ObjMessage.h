@@ -24,6 +24,7 @@ class CObjMessage :public CObj
 			bool key;		//KEYのメッセージフラグ
 			bool water;		//WATERBLOCKのメッセージフラグ
 			bool ice;		//ICEMAGICのメッセージフラグ
+			bool wind;		//WINDMAGICのメッセージフラグ
 			bool sblock;	//SWITCHBLOCKのメッセージフラグ
 			bool sgate;		//SWITCHGATEのメッセージフラグ
 			bool heal;		//HEALのメッセージフラグ
@@ -36,6 +37,7 @@ class CObjMessage :public CObj
 			int water;		//WATER用の時間
 			int key;		//KEY用の時間
 			int ice;		//ICE用の時間
+			int wind;		//wind用の時間
 			int sblock;		//SWITCHBLOCK用の時間
 			int sgate;		//SWITCHGATE用の時間
 			int heal;		//HEALの時間

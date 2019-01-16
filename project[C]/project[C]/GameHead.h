@@ -17,6 +17,7 @@ enum OBJ_NAME
 	OBJ_SWORD_BATTLE,
 
 	ITEM_ICE,
+	ITEM_WIND,
 
 	OBJ_FIRE,
 	OBJ_ICE,
@@ -65,6 +66,10 @@ enum OBJ_NAME
 	OBJ_SWITCH,
 	OBJ_SWITCHGATE,
 	OBJ_DUMMYSWITCH,
+	OBJ_CHANGESWITCH,
+	OBJ_CHANGEGATE,
+	OBJ_BOSSSWITCH,
+	OBJ_BOSSGATE,
 	OBJ_STAIRS,
 
 	OBJ_FADEIN,
@@ -122,6 +127,7 @@ struct UserData
 #define ALL_SIZE 50.0f		//ブロック等のサイズ
 extern int g_map_change;	//マップ変更用変数
 extern bool g_battle_flag;	//バトル画面変更用のフラグ
+extern bool g_key_flag;		//キー入力制御用フラグ
 extern int g_enemy_kills;	//敵の撃破数
 
 //------------------------------------------------
@@ -142,6 +148,7 @@ extern int g_enemy_kills;	//敵の撃破数
 
 //Item関係
 #include "ItemIce.h"
+#include "ItemWind.h"
 
 #include "ObjHeal.h"
 
@@ -193,6 +200,11 @@ extern int g_enemy_kills;	//敵の撃破数
 #include "ObjSwitchGate.h"
 #include "ObjStairs.h"
 #include "ObjDummySwitch.h"
+#include "ObjChangeSwitch.h"
+#include "ObjChangeGate1.h"
+#include "ObjChangeGate2.h"
+#include "ObjBossSwitch.h"
+#include "ObjBossGate.h"
 
 #include "ObjMessage.h"
 #include "ObjFadein.h"

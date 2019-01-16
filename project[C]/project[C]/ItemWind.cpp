@@ -4,34 +4,33 @@
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
-#include "GameL\Audio.h"
 
 #include "GameHead.h"
-#include "ItemIce.h"
+#include "ItemWind.h"
 
 
 //使用するネームスペース
 using namespace GameL;
 
 
-CObjItemIce::CObjItemIce(float x, float y)
+CObjItemWind::CObjItemWind(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjItemIce::Init()
+void CObjItemWind::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ITEM, ITEM_ICE, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ITEM, ITEM_WIND, 1);
 }
 
 //アクション
-void CObjItemIce::Action()
+void CObjItemWind::Action()
 {
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -39,7 +38,6 @@ void CObjItemIce::Action()
 	//主人公と衝突したら消滅
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		Audio::Start(14);
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
@@ -56,7 +54,7 @@ void CObjItemIce::Action()
 }
 
 //ドロー
-void CObjItemIce::Draw()
+void CObjItemWind::Draw()
 {
 	if (g_battle_flag == true)
 	{
@@ -70,16 +68,16 @@ void CObjItemIce::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top    =   0.0f;
-	src.m_left   =  50.0f;
-	src.m_right  = 100.0f;
+	src.m_top    =  0.0f;
+	src.m_left   = 100.0f;
+	src.m_right  = 150.0f;
 	src.m_bottom =  50.0f;
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//表示位置の設定
-	dst.m_top    = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
-	dst.m_left   = 0.0f + m_px + block->GetScrollX();
-	dst.m_right  = ALL_SIZE + m_px + block->GetScrollX();
+	dst.m_top = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
+	dst.m_left = 0.0f + m_px + block->GetScrollX();
+	dst.m_right = ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//描画

@@ -124,6 +124,8 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(10, L"HEAL.WAV", EFFECT);
 	Audio::LoadAudio(11, L"ZELDA.WAV", EFFECT);
 
+	Audio::LoadAudio(14, L"ENTER.wav", EFFECT);
+
 	Audio::LoadAudio(12, L"STAGEBGMŒó•â1.wav", SOUND_TYPE::BACK_MUSIC);
 	Audio::LoadAudio(13, L"BATTLE-BGM.wav", SOUND_TYPE::BACK_MUSIC);
 

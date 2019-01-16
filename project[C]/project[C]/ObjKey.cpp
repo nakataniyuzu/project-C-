@@ -3,6 +3,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjKey.h"
@@ -43,6 +44,7 @@ void CObjKey::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//キーを取得
 	{
+		Audio::Start(14);
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}

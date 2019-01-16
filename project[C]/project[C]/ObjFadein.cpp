@@ -60,10 +60,13 @@ void CObjFadein::Action()
 			m_flag = false;
 			if (m_fade_flag == false) {
 				g_battle_flag = false;//マップ画面へ移行
+				Audio::Stop(13);
 				Audio::Start(12);	//マップ用BGMを鳴らす
 			}
 			else {
 				g_battle_flag = true;//バトル画面へ移行
+				Audio::Stop(12);
+				Audio::Start(13);	//マップ用BGMを鳴らす
 			}
 		}
 	}
