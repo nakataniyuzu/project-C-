@@ -22,8 +22,14 @@ void CObjFadein::Init()
 void CObjFadein::Action()
 {
 	//戦闘時の敵の情報を持ってくる
-	CObjEnemy1Battle* benemy = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE);
-	
+	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
+	CObjEnemy2Battle* benemy2 = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
+	CObjEnemy3Battle* benemy3 = (CObjEnemy3Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_THIRD);
+	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
+	CObjBoss2Battle* bboss2 = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
+	CObjBoss3Battle* bboss3 = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
+
+
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	hero->SetSPEED(0.0f);	//スピードを０にする
