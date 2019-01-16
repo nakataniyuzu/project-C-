@@ -15,6 +15,7 @@ class CObjEnemy2Battle : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
+		void SetENEMYDELETE(bool x) { enemy_delete_flag = x; }	//敵消滅用
 		int GetDMG() {  return m_damage; }//攻撃力を取得
 
 	private:
@@ -23,6 +24,7 @@ class CObjEnemy2Battle : public CObj
 		float m_vx;			//移動ベクトル
 		float m_vy;
 		float m_posture;	//姿勢
+		bool m_pop_flag;	//リス位置の初期化用
 
 		int m_ani_time;	//アニメーションフレーム動作間隔
 		int m_ani_frame;	//描画フレーム
@@ -33,6 +35,12 @@ class CObjEnemy2Battle : public CObj
 		float m_ani_max_time;	//アニメーション動作間隔最大値
 		float m_hero_posture;
 		
+		int m_time;		//敵死亡時のフェイドイン移行用間隔幅
+		int m_ani;			//死亡アニメーション用
+		int m_ani_time_d;	//死亡アニメーション間隔タイム
+		bool m_del;			//削除チェック
+		RECT_F m_eff;		//死亡エフェクト描画用
+
 		int m_subtract;			//おテスト
 		int m_hero_position;	//おテスト2
 
@@ -41,6 +49,10 @@ class CObjEnemy2Battle : public CObj
 
 		bool m_battle_flag;
 		bool m_boss_flag;
+
+		bool m_eff_flag;	//エフェクト用フラグ
+
+		bool enemy_delete_flag;	//敵消滅用
 
 		//移動の向き制御用
 		bool m_move;

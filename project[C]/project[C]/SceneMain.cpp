@@ -102,6 +102,10 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS3_MAGIC.png", 24, TEX_SIZE_100);
 	Draw::LoadImageW(L"ENEMYBOSS1_DEATH.png", 25, TEX_SIZE_100);
+	Draw::LoadImageW(L"Floor2_Enemy_Death.png", 26, TEX_SIZE_100);
+	Draw::LoadImageW(L"ENEMYBOSS2_DEATH.png", 27, TEX_SIZE_100);
+	Draw::LoadImageW(L"Floor3_Enemy_Death.png", 28, TEX_SIZE_100);
+	Draw::LoadImageW(L"ENEMYBOSS3_DEATH.png", 29, TEX_SIZE_100);
 
 	Draw::LoadImageW(L"AllFloorBlock.png", 4, TEX_SIZE_200_100);
 
@@ -182,7 +186,7 @@ void CSceneMain::Scene()
 	m_boss_flag = hero->GetBOSSF();
 
 	//1層目雑魚
-	if (m_enemy_flag == true)		//フラグがオンの時、敵出現
+	/*if (m_enemy_flag == true)		//フラグがオンの時、敵出現
 	{
 		Audio::Stop(12);
 		Audio::Start(13);
@@ -190,24 +194,24 @@ void CSceneMain::Scene()
 		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_FIRST, 10);
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
-	}
+	}*/
 	//1層目ボス
-	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
+	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
 		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
 		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
 		m_boss_flag = false;
 		hero->SetBOSSF(m_boss_flag);
-	}
+	}*/
 
 	//2層目雑魚
-	/*if (m_enemy_flag == true)		//フラグがオンの時、敵出現
+	if (m_enemy_flag == true)		//フラグがオンの時、敵出現
 	{
 	CObjEnemy2Battle* bobje = new CObjEnemy2Battle();
 	Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_SECOND, 10);
 	m_enemy_flag = false;
 	hero->SetENEMYF(m_enemy_flag);
-	}*/
+	}
 	//2層目ボス
 	/*if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
