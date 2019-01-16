@@ -57,6 +57,8 @@ class CObjHero : public CObj
 		bool GetGATEF() { return mes.gate; }	//GATEの情報を取得
 		bool GetWATERF() { return mes.water; }	//WATERの情報を取得
 		bool GetMICE() { return mes.ice; }		//ICEの情報を取得
+		bool GetMWIND() { return mes.wind; }	//WINDの情報を取得
+
 		bool GetSGATE() { return mes.switchgate; }	//SWITCHGATEの情報を取得
 		bool GetSBLOCK() { return mes.switchblock; }//SWITCHBLOCKの情報を取得
 		bool GetHEAL() { return mes.heal; }		//HEALの情報を取得
@@ -70,6 +72,7 @@ class CObjHero : public CObj
 		void SetGATEF(bool x) { mes.gate = x; }		//GATEに情報をセット
 		void SetWATERF(bool x) { mes.water = x; }	//WATERに情報をセット
 		void SetMICE(bool x) { mes.ice = x; }		//ICEに情報をセット
+		void SetMWIND(bool x) { mes.wind = x; }		//WINDに情報をセット
 		void SetSGATE(bool x) { mes.switchgate = x; }	//SWITCHGATEに情報をセット
 		void SetSBLOCK(bool x) { mes.switchblock = x; }	//SWITCHBLOCKに情報をセット
 		void SetHEAL(bool x) { mes.heal = x; }		//HEALに情報をセット
@@ -117,6 +120,7 @@ class CObjHero : public CObj
 			bool water;		//水用
 			bool key;		//鍵用
 			bool ice;		//氷魔法用
+			bool wind;		//風魔法用
 			bool switchblock;	//スイッチブロック用
 			bool switchgate;	//スイッチゲート用
 			bool heal;		//ヒールブロック用

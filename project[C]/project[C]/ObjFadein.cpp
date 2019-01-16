@@ -58,9 +58,10 @@ void CObjFadein::Action()
 				Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 			}
 			m_flag = false;
-			if (m_fade_flag == false) {
-				g_battle_flag = false;//マップ画面へ移行
-				Audio::Start(12);	//マップ用BGMを鳴らす
+			if (m_fade_flag == false) {		//フェイドフラグがオフの場合マップ画面へ戻す
+				g_battle_flag = false;	//マップ画面へ移行
+				g_key_flag = false;		//キー入力制御用フラグがオンの場合元に戻す
+				Audio::Start(12);		//マップ用BGMを鳴らす
 			}
 			else {
 				g_battle_flag = true;//バトル画面へ移行

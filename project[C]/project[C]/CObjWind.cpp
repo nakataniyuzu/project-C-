@@ -103,11 +103,6 @@ void CObjWind::Action()
 			Hits::DeleteHitBox(this);
 		}
 	}
-
-
-
-
-
 }
 
 
@@ -119,11 +114,11 @@ void CObjWind::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-				//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 50.0f;
-	src.m_bottom = 50.0f;
+	//切り取り位置の設定
+	src.m_top    =   0.0f;
+	src.m_left   = 150.0f;
+	src.m_right  = 200.0f;
+	src.m_bottom =  52.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_y;
@@ -131,5 +126,5 @@ void CObjWind::Draw()
 	dst.m_right = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(8, &src, &dst, c, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
 }

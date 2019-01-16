@@ -78,16 +78,6 @@ void CObjBlock::Action()
 	{
 		for (int j = 0; j < 65; j++)
 		{
-			if (g_map[i][j] == 20)
-			{
-				//20があれば主人公を出現
-				/*CObjHero* objhero = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objhero, OBJ_HERO, 115);*/
-
-				//出現場所の値を0にする
-				g_map[i][j] = 0;
-			}
-
 			//列の中からを探す
 			if (g_map[i][j] == 2)
 			{
@@ -146,9 +136,15 @@ void CObjBlock::Action()
 			}
 			if (g_map[i][j] == 9)
 			{
-				//9があればItemIceを出現
-				CObjItemIce* objice = new CObjItemIce(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objice, ITEM_ICE, 110);
+				//9があればItemを出現
+				if (g_map_change == 0) {	//1層目は氷アイテムを出現
+					CObjItemIce* objice = new CObjItemIce(j*ALL_SIZE, i*ALL_SIZE);
+					Objs::InsertObj(objice, ITEM_ICE, 110);
+				}
+				else if (g_map_change == 1) {//2層目は風アイテムを出現
+					CObjItemWind* objwind = new CObjItemWind(j*ALL_SIZE, i*ALL_SIZE);
+					Objs::InsertObj(objwind, ITEM_ICE, 110);
+				}
 
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
@@ -212,6 +208,46 @@ void CObjBlock::Action()
 				//18があればDummySwitchを出現
 				CObjDummySwitch* objds = new CObjDummySwitch(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objds, OBJ_DUMMYSWITCH, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 19)
+			{
+				//19があればBossSwitchを出現
+				CObjBossSwitch* objbs = new CObjBossSwitch(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objbs, OBJ_BOSSSWITCH, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 20)
+			{
+				//20があればBossGateを出現
+				CObjBossGate* objbg = new CObjBossGate(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objbg, OBJ_BOSSGATE, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 21)
+			{
+				//21があればChangeSwitchを出現
+				CObjChangeSwitch* objds = new CObjChangeSwitch(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objds, OBJ_CHANGESWITCH, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 22)
+			{
+				//22があればChangeGate1を出現
+				CObjChangeGate1* objds = new CObjChangeGate1(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objds, OBJ_CHANGEGATE, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 23)
+			{
+				//23があればChangeGate2を出現
+				CObjChangeGate2* objds = new CObjChangeGate2(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objds, OBJ_CHANGEGATE, 111);
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}

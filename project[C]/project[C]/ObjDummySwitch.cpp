@@ -23,6 +23,7 @@ CObjDummySwitch::CObjDummySwitch(float x, float y)
 void CObjDummySwitch::Init()
 {
 	m_change = false;	//画像切り替え
+	m_time = 0;
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_DUMMYSWITCH, 1);
 }
@@ -45,17 +46,23 @@ void CObjDummySwitch::Action()
 		//主人公と当たっているか確認
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
+			m_time = 50;
+			g_key_flag = true;
 			m_change = true;	//当たっていたら表示カラーを変える
-			hero->SetENEMYF(true);
-			hero->SetFADEF(true);
-			hero->SetDELETE(true);
-
-			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
-			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-			hit->SetInvincibility(true);
+			
+			hit->SetInvincibility(true);	//当たり判定を消す
 		}
 	}
 	
+	if (m_time == 1) {
+		hero->SetENEMYF(true);	//敵出現フラグをオン
+		hero->SetFADEF(true);	//フェイドフラグをオン
+		hero->SetDELETE(true);	//前敵削除フラグをオン
+
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
+	}
+
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//HitBoxの位置の変更
@@ -89,8 +96,8 @@ void CObjDummySwitch::Draw()
 	}
 	if (m_time > 0) {
 		m_time--;
-		pm->BackDraw(195.0f, 195.0f, 420.0f, 225.0f, a);
-		Font::StrDraw(L"敵だったようだ...", 200, 200, 20, c);//時間が0になると表示を終了	
+		pm->BackDraw(195.0f, 195.0f, 265.0f, 225.0f, a);
+		Font::StrDraw(L"敵だ!!", 200, 200, 20, c);//時間が0になると表示を終了
 		if (m_time <= 0) {
 			m_time = 0;
 		}

@@ -42,6 +42,7 @@ void CObjMessage::Draw()
 	f.key = hero->GetKEYF();
 	f.gate = hero->GetGATEF();
 	f.ice = hero->GetMICE();
+	f.wind = hero->GetMWIND();
 	f.sgate = hero->GetSGATE();
 	f.sblock = hero->GetSBLOCK();
 	f.heal = hero->GetHEAL();
@@ -98,11 +99,26 @@ void CObjMessage::Draw()
 		t.ice--;
 		f.ice = false;		//フラグをオフ
 		hero->SetMICE(f.ice);
-		BackDraw(195.0f, 195.0f, 540.0f, 225.0f, a);
+		BackDraw(195.0f, 195.0f, 540.0f, 225.0f, b);
 		Font::StrDraw(L"氷魔法を覚えた！（Xキーで切り替え", 200, 200, 20, c);//時間が0になると表示を終了
 
 		if (t.ice <= 0) {
 			t.ice = 0;
+		}
+	}
+	if (f.wind == true)		//鍵のフラグがオンになったら時間をセット
+	{
+		t.wind = 100;
+	}
+	if (t.wind > 0) {
+		t.wind--;
+		f.wind = false;		//フラグをオフ
+		hero->SetMICE(f.wind);
+		BackDraw(195.0f, 195.0f, 540.0f, 225.0f, g);
+		Font::StrDraw(L"風魔法を覚えた！（Xキーで切り替え", 200, 200, 20, c);//時間が0になると表示を終了
+
+		if (t.wind <= 0) {
+			t.wind = 0;
 		}
 	}
 	if (f.sgate == true)	//フラグがオンの時タイムをセット

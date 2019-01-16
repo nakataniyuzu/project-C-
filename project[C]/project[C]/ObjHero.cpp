@@ -38,6 +38,7 @@ void CObjHero::Init()
 	mes.water = false;
 	mes.key = false;
 	mes.ice = false;
+	mes.wind = false;
 	mes.switchblock = false;
 	mes.switchgate = false;
 	mes.heal = false;
@@ -91,8 +92,8 @@ void CObjHero::Action()
 		}
 	}
 	else {		//フェードイン中は入力を受け付けない
-
-		if (g_battle_flag == true)
+		//バトルフラグ、または入力制御フラグがオンの場合アクションを制御する
+		if (g_battle_flag == true || g_key_flag == true)
 		{
 			m_vx = 0.0f;
 			m_vy = 0.0f;
@@ -338,6 +339,11 @@ void CObjHero::Action()
 		mes.ice = true;			//フラグをオンにする
 		m_ice_flag = true;
 	}
+	if (hit->CheckObjNameHit(ITEM_WIND) != nullptr)	//主人公が風の結晶と当たった場合
+	{
+		mes.wind = true;			//フラグをオンにする
+		m_wind_flag = true;
+	}
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)			//主人公が水と当たった場合
 	{
 		mes.water = true;		//フラグをオンにする
@@ -371,12 +377,12 @@ void CObjHero::Action()
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&g_px, &g_py, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
-	);
+	////ブロックとの当たり判定実行
+	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//pb->BlockHit(&g_px, &g_py, true,
+	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+	//	&m_block_type
+	//);
 
 	//位置の更新
 	g_px += m_vx;
