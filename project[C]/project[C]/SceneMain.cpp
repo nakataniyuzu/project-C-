@@ -72,22 +72,24 @@ void CSceneMain::InitScene()
 	if (g_map_change == 0) {
 		Draw::LoadImageW(L"Floor1.png", FLOOR, TEX_SIZE_800_600);	//‚P‘w–Ú‚Ì°
 		Draw::LoadImageW(L"Floor1Block.png", BLOCK, TEX_SIZE_800_600);	//1‘w–Ú‚ÌƒuƒƒbƒN
+		Draw::LoadImageW(L"Floor1_Enemy.png", 7, TEX_SIZE_200_100);	//1‘w–Ú‚Ì“G
 	}
 	else if (g_map_change == 1) {
 		Draw::LoadImageW(L"Floor2.png", FLOOR, TEX_SIZE_800_600);	//‚Q‘w–Ú‚Ì°
 		Draw::LoadImageW(L"Floor2Block.png", BLOCK, TEX_SIZE_800_600);	//2‘w–Ú‚ÌƒuƒƒbƒN
+		Draw::LoadImageW(L"Floor2_Enemy.png", 7, TEX_SIZE_200_100);	//1‘w–Ú‚Ì“G
 	}
 
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
-	//Draw::LoadImageW(L"nazotoki.png", 4, TEX_SIZE_100);
 	Draw::LoadImageW(L"healkey.png", HEALKEY, TEX_SIZE_100);
 	Draw::LoadImageW(L"Water.png", 6, TEX_SIZE_200);
-	Draw::LoadImageW(L"Enemy1.png", 7, TEX_SIZE_200_100);
 	Draw::LoadImageW(L"Magic.png", 8, TEX_SIZE_100);
 	Draw::LoadImageW(L"Candle.png", 9, TEX_SIZE_200_100);
 	Draw::LoadImageW(L"magicitem.png", ITEM, TEX_SIZE_256);
 	Draw::LoadImageW(L"Hero2.png", 11, TEX_SIZE_100);
-	Draw::LoadImageW(L"Floor1_Enemy.png", 12, TEX_SIZE_100);
+
+	
+
 	Draw::LoadImageW(L"MagicBattle.png", 13, TEX_SIZE_256);
 	Draw::LoadImageW(L"ENEMYBOSS1.png", 14, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"sister.png", 15, TEX_SIZE_800_600);
@@ -185,8 +187,14 @@ void CSceneMain::Scene()
 	{
 		Audio::Stop(12);
 		Audio::Start(13);
-		CObjEnemy1Battle* bobje = new CObjEnemy1Battle();
-		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_FIRST, 10);
+		if (g_map_change == 0) {
+			CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
+			Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
+		}
+		else if (g_map_change == 1) {
+			CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
+			Objs::InsertObj(bobje2, OBJ_ENEMY_BATTLE_SECOND, 10);
+		}
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
 	}

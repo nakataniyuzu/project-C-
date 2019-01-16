@@ -177,7 +177,7 @@ extern int g_enemy_kills;	//“G‚ÌŒ‚”j”
 #include "ObjBoss3Battle.h"
 #include "ObjEnemyboss1.h"
 #include "ObjEnemy1.h"
-#include "ObjEnemyFirst.h"
+#include "ObjEnemy2.h"
 
 
 #include "ObjBlock.h"
