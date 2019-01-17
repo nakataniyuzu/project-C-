@@ -217,6 +217,9 @@
     <ClCompile Include="ObjEnemy2.cpp">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClCompile>
+    <ClCompile Include="ObjEnemyboss2.cpp">
+      <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -436,6 +439,9 @@
       <Filter>ソースファイル\Main\Block関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjEnemy2.h">
+      <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemyboss2.h">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClInclude>
   </ItemGroup>

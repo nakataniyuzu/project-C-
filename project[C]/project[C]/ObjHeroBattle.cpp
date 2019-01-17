@@ -384,18 +384,30 @@ void CObjHeroBattle::Action()
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
 			Audio::Stop(13);		//バトル用BGMを止める
 			if (m_delete == true){
-				if (benemy1 != nullptr) {
-					benemy1->SetENEMYDELETE(true);
+				if (g_map_change == 0) {
+					if (benemy1 != nullptr) {
+						benemy1->SetENEMYDELETE(true);
+					}
+				}
+				else if (g_map_change == 1) {
+					if (benemy2 != nullptr) {
+						benemy2->SetENEMYDELETE(true);
+					}
 				}
 			}
 			else {
-				if (bboss1 != nullptr) {
-					bboss1->SetBOSSDELETE(true);
+				if (g_map_change == 0) {
+					if (bboss1 != nullptr) {
+						bboss1->SetBOSSDELETE(true);
+					}
+				}
+				else if (g_map_change == 1) {
+					if (bboss2 != nullptr) {
+						bboss2->SetBOSSDELETE(true);
+					}
 				}
 			}
-
 		}
-	
 	}
 	if (m_px < 0)
 	{
@@ -407,13 +419,27 @@ void CObjHeroBattle::Action()
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
 			Audio::Stop(13);		//バトル用BGMを止める
 			if (m_delete == true) {
-				if (benemy1 != nullptr) {
-					benemy1->SetENEMYDELETE(true);
+				if (g_map_change == 0) {
+					if (benemy1 != nullptr) {
+						benemy1->SetENEMYDELETE(true);
+					}
+				}
+				else if (g_map_change == 1) {
+					if (benemy2 != nullptr) {
+						benemy2->SetENEMYDELETE(true);
+					}
 				}
 			}
 			else {
-				if (bboss1 != nullptr) {
-					bboss1->SetBOSSDELETE(true);
+				if (g_map_change == 0) {
+					if (bboss1 != nullptr) {
+						bboss1->SetBOSSDELETE(true);
+					}
+				}
+				else if (g_map_change == 1) {
+					if (bboss2 != nullptr) {
+						bboss2->SetBOSSDELETE(true);
+					}
 				}
 			}
 		}

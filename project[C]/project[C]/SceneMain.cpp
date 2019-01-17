@@ -73,11 +73,13 @@ void CSceneMain::InitScene()
 		Draw::LoadImageW(L"Floor1.png", FLOOR, TEX_SIZE_800_600);	//‚P‘w–Ú‚Ì°
 		Draw::LoadImageW(L"Floor1Block.png", BLOCK, TEX_SIZE_800_600);	//1‘w–Ú‚ÌƒuƒƒbƒN
 		Draw::LoadImageW(L"Floor1_Enemy.png", 7, TEX_SIZE_200_100);	//1‘w–Ú‚Ì“G
+		Draw::LoadImageW(L"ENEMYBOSS1.png", 14, TEX_SIZE_800_600);	//1‘w–Ú‚Ì“G
 	}
 	else if (g_map_change == 1) {
 		Draw::LoadImageW(L"Floor2.png", FLOOR, TEX_SIZE_800_600);	//‚Q‘w–Ú‚Ì°
 		Draw::LoadImageW(L"Floor2Block.png", BLOCK, TEX_SIZE_800_600);	//2‘w–Ú‚ÌƒuƒƒbƒN
-		Draw::LoadImageW(L"Floor2_Enemy.png", 7, TEX_SIZE_200_100);	//1‘w–Ú‚Ì“G
+		Draw::LoadImageW(L"Floor2_Enemy.png", 7, TEX_SIZE_200_100);	//2‘w–Ú‚Ì“G
+		Draw::LoadImageW(L"ENEMYBOSS2.png", 14, TEX_SIZE_800_600);	//2‘w–Ú‚Ì“G
 	}
 
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
@@ -88,17 +90,14 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"magicitem.png", ITEM, TEX_SIZE_256);
 	Draw::LoadImageW(L"Hero2.png", 11, TEX_SIZE_100);
 
-	
 
 	Draw::LoadImageW(L"MagicBattle.png", 13, TEX_SIZE_256);
-	Draw::LoadImageW(L"ENEMYBOSS1.png", 14, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"sister.png", 15, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_16000_600);
 	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
-	Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
+	//Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
 	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
-	Draw::LoadImageW(L"ENEMYBOSS2.png", 21, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);
@@ -181,16 +180,12 @@ void CSceneMain::InitScene()
 //ƒQ[ƒ€ƒ^ƒCƒgƒ‹‚ÌŽÀs’†ƒƒ\ƒbƒh
 void CSceneMain::Scene()
 {
-	
-
-	m_time++;
-
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_enemy_flag = hero->GetENEMYF();
 	m_boss_flag = hero->GetBOSSF();
 
-	//1‘w–ÚŽG‹›
-	/*if (m_enemy_flag == true)		//ƒtƒ‰ƒO‚ªƒIƒ“‚ÌŽžA“GoŒ»
+	//ŽG‹›
+	if (m_enemy_flag == true)		//ƒtƒ‰ƒO‚ªƒIƒ“‚ÌŽžA“GoŒ»
 	{
 		Audio::Stop(12);
 		Audio::Start(13);
@@ -204,47 +199,19 @@ void CSceneMain::Scene()
 		}
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
-	}*/
-	//1‘w–Úƒ{ƒX
-	/*if (m_boss_flag == true)		//ƒtƒ‰ƒO‚ªƒIƒ“‚ÌŽžAƒ{ƒXoŒ»
-	{
-		CObjBoss1Battle* bobjb = new CObjBoss1Battle();
-		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_FIRST, 10);
-		m_boss_flag = false;
-		hero->SetBOSSF(m_boss_flag);
-	}*/
-
-	//2‘w–ÚŽG‹›
-	/*if (m_enemy_flag == true)		//ƒtƒ‰ƒO‚ªƒIƒ“‚ÌŽžA“GoŒ»
-	{
-	CObjEnemy2Battle* bobje = new CObjEnemy2Battle();
-	Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_SECOND, 10);
-	m_enemy_flag = false;
-	hero->SetENEMYF(m_enemy_flag);
-	}*/
-	//2‘w–Úƒ{ƒX
-	/*if (m_boss_flag == true)		//ƒtƒ‰ƒO‚ªƒIƒ“‚ÌŽžAƒ{ƒXoŒ»
-	{
-		CObjBoss2Battle* bobjb = new CObjBoss2Battle();
-		Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_SECOND, 10);
-		m_boss_flag = false;
-		hero->SetBOSSF(m_boss_flag);
-	}*/
-
-	//3‘w–ÚŽG‹›
-	/*if (m_enemy_flag == true || m_time == 400)		//ƒtƒ‰ƒO‚ªƒIƒ“‚ÌŽžA“GoŒ»
-	{
-		CObjEnemy3Battle* bobje = new CObjEnemy3Battle();
-		Objs::InsertObj(bobje, OBJ_ENEMY_BATTLE_THIRD, 10);
-		m_enemy_flag = false;
-		hero->SetENEMYF(m_enemy_flag);
-	}*/
-	//3‘w–Úƒ{ƒX
+	}
+	//ƒ{ƒX
 	if (m_boss_flag == true)		//ƒtƒ‰ƒO‚ªƒIƒ“‚ÌŽžAƒ{ƒXoŒ»
 	{
-	CObjBoss3Battle* bobjb = new CObjBoss3Battle();
-	Objs::InsertObj(bobjb, OBJ_BOSS_BATTLE_THIRD, 10);
-	m_boss_flag = false;
-	hero->SetBOSSF(m_boss_flag);
+		if (g_map_change == 0) {
+			CObjBoss1Battle* bobjb1 = new CObjBoss1Battle();
+			Objs::InsertObj(bobjb1, OBJ_BOSS_BATTLE_FIRST, 10);
+		}
+		else if (g_map_change == 1) {
+			CObjBoss2Battle* bobjb2 = new CObjBoss2Battle();
+			Objs::InsertObj(bobjb2, OBJ_BOSS_BATTLE_SECOND, 10);
+		}
+		m_boss_flag = false;
+		hero->SetBOSSF(m_boss_flag);
 	}
 }

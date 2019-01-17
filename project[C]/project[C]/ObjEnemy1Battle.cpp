@@ -162,7 +162,9 @@ void CObjEnemy1Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_enemy_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ		
+		hero->SetFADEF(false);	//フェイドフラグをオフ	
+		hero->SetMAXHP(1);		//HP/MPを増やす
+		hero->SetMAXMP(1);
 		m_del = true;
 		g_enemy_kills += 1;
 	}

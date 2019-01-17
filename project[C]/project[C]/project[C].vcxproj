@@ -72,6 +72,7 @@
     <ClCompile Include="ObjEnemy1Battle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjEnemyboss2.cpp" />
     <ClCompile Include="ObjFadein.cpp" />
     <ClCompile Include="ObjFireblock.cpp" />
     <ClCompile Include="ObjFireGate.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="ObjEnemy1Battle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="ObjEnemyboss2.h" />
     <ClInclude Include="ObjFadein.h" />
     <ClInclude Include="ObjFireblock.h" />
     <ClInclude Include="ObjFireGate.h" />
