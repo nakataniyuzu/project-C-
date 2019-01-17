@@ -151,8 +151,10 @@ void CObjBoss1Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		hero->SetFADEF(true);
+		hero->SetMAXHP(1);		//HP/MPを増やす
+		hero->SetMAXMP(1);
+		m_del = true;
 		g_enemy_kills += 1;
 	}
 
@@ -247,11 +249,6 @@ void CObjBoss1Battle::Action()
 //ドロー
 void CObjBoss1Battle::Draw()
 {
-	/*if (g_battle_flag == false)
-	{
-		return;
-	}*/
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 

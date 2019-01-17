@@ -78,15 +78,6 @@ void CObjBlock::Action()
 	{
 		for (int j = 0; j < 65; j++)
 		{
-			if (g_map[i][j] == 20)
-			{
-				//20があれば主人公を出現
-				/*CObjHero* objhero = new CObjHero(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objhero, OBJ_HERO, 115);*/
-
-				//出現場所の値を0にする
-				g_map[i][j] = 0;
-			}
 
 			//列の中からを探す
 			if (g_map[i][j] == 2)
@@ -167,9 +158,14 @@ void CObjBlock::Action()
 			if (g_map[i][j] == 10)
 			{
 				//10があればBOSS出現
-				CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
-				Objs::InsertObj(objb1, OBJ_BOSS, 110);
-
+				if (g_map_change == 0) {
+					CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
+					Objs::InsertObj(objb1, OBJ_BOSS, 110);
+				}
+				else if (g_map_change == 1) {
+					CObjEnemyboss2* objb2 = new CObjEnemyboss2(j*ALL_SIZE, i*ALL_SIZE);
+					Objs::InsertObj(objb2, OBJ_BOSS, 110);
+				}
 				//出現場所を0にする
 				g_map[i][j] = 0;
 			}

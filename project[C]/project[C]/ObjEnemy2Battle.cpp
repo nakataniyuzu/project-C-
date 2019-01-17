@@ -122,7 +122,6 @@ void CObjEnemy2Battle::Action()
 	m_subtract = m_hero_position - m_px;
 	if (m_subtract < 0)
 	{
-
 		m_move = true;
 	}
 	else 
@@ -176,9 +175,11 @@ void CObjEnemy2Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_enemy_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ		
+		hero->SetFADEF(false);	//フェイドフラグをオフ
+		hero->SetMAXHP(1);		//HP/MPを増やす
+		hero->SetMAXMP(1);
 		m_del = true;
-		g_enemy_kills += 1;
+		g_enemy_kills += 1;		//撃破数を増やす		
 	}
 
 	//敵が領域外に行かないようにする
@@ -259,17 +260,17 @@ void CObjEnemy2Battle::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (75.0f * m_posture) + m_px;
-	dst.m_right = (75 - 75.0f * m_posture) + m_px;
+	dst.m_top    =   0.0f + m_py;
+	dst.m_left   = (        75.0f * m_posture) + m_px;
+	dst.m_right  = (75.0f - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
 	if (m_del == true)
 	{
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 210.0f;
-		src.m_right = 312.0f;
+		src.m_top    = 0.0f;
+		src.m_left   = 210.0f;
+		src.m_right  = 312.0f;
 		src.m_bottom = 100.0f;
 		if (m_eff_flag == true)
 			Draw::Draw(26, &src, &dst, c, 0.0f);
@@ -278,30 +279,13 @@ void CObjEnemy2Battle::Draw()
 	}
 	else
 	{
-		if (m_move == true)//左向き
-		{
-			src.m_top = 0.0f;
-			src.m_left = 108.0f;
-			src.m_right = 192.0f;
-			src.m_bottom = 100.0f;
-		}
-		else if (m_move == false)//右向き
-		{
-			src.m_top = 0.0f;
-			src.m_left = 392.0f;
-			src.m_right = 306.0f;
-			src.m_bottom = 100.0f;
-		} 
+		//切り取り位置の設定
+		src.m_top    = 150.0f;
+		src.m_left   =   0.0f;
+		src.m_right  =  50.0f;
+		src.m_bottom = 200.0f;
 		//描画
-		Draw::Draw(19, &src, &dst, c, 0.0f);
+		Draw::Draw(7, &src, &dst, c, 0.0f);
 	}
 
-	
-
-
-
-
-
-
-	
 }

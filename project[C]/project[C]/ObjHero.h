@@ -36,8 +36,9 @@ class CObjHero : public CObj
 		void SetBOSSBATTLE(bool x) { m_boss_battle_flag = x; }
 		void SetBATTLE(bool x) { m_battle_flag = x; }
 
-		void SetMAXHP(float x) { m_max_hp = x; }	//主人公のMAXHPに値をセット
-		void SetMAXMP(float x) { m_max_mp = x; }	//主人公のMAXMPに値をセット
+		void SetMAXHP(float x) { m_max_hp += x; }	//主人公のMAXHPに値を加算
+		void SetMAXMP(float x) { m_max_mp += x; }	//主人公のMAXMPに値を加算
+
 		void SetHP(float x) { m_hp = x; }	//主人公のHPに値をセット
 		void SetMP(float x) { m_mp = x; }	//主人公のMPに値をセット
 		void SetMAGIC(float x) { m_magic = x; }	//主人公の魔法の種類をセット
