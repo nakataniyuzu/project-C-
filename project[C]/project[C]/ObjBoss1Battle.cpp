@@ -19,7 +19,7 @@ void CObjBoss1Battle::Init()
 
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_boss_hp = 15;     //敵のヒットポイント(最大15)
+	m_boss_hp = 1;     //敵のヒットポイント(最大15)
 	m_damage = 2;
 
 	m_ani_time = 0;
@@ -144,12 +144,11 @@ void CObjBoss1Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		hero->SetFADEF(true);
+		hero->SetFADEF(false);	//フェイドフラグをオフ
 		hero->SetMAXHP(1);		//HP/MPを増やす
 		hero->SetMAXMP(1);
-		m_del = true;
 		g_enemy_kills += 1;
-		m_del = true;	
+		m_del = true;
 	}
 
 	//敵が領域外に行かないようにする
@@ -197,6 +196,7 @@ void CObjBoss1Battle::Action()
 			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
 			m_time_f = 0;
+			m_time = 0;
 			this->SetStatus(false);		//画像の削除
 			Hits::DeleteHitBox(this);	//ヒットボックスの削除
 		}
@@ -239,7 +239,6 @@ void CObjBoss1Battle::Action()
 		}
 		return;
 	}
-	
 }
 
 //ドロー
