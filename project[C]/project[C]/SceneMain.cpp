@@ -163,19 +163,6 @@ void CSceneMain::InitScene()
 	CObjBlockBattle* bobjb = new CObjBlockBattle();
 	Objs::InsertObj(bobjb, OBJ_BLOCK_BATTLE, 9);
 	
-	
-	//敵(1層目)オブジェクト作成
-	//CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
-	//Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
-
-	//敵(2層目)オブジェクト作成
-	/*CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
-	Objs::InsertObj(bobje2, OBJ_ENEMY_BATTLE_SECOND, 10);*/
-
-	//敵(3層目)オブジェクト作成
-	/*CObjEnemy3Battle* bobje3 = new CObjEnemy3Battle();
-	Objs::InsertObj(bobje3, OBJ_ENEMY_BATTLE_THIRD, 10);*/
-	
 	//背景(戦闘)オブジェクト作成
 	CObjBackgroundBattle* bobjbackb = new CObjBackgroundBattle();
 	Objs::InsertObj(bobjbackb, OBJ_BACKGROUND_BATTLE,8);
