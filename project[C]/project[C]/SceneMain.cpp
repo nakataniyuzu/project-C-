@@ -113,7 +113,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_16000_600);
 	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
-	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Floor1up2.png", 50, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"ENEMYBOSS3_MAGIC.png", 24, TEX_SIZE_100);
 
 	Draw::LoadImageW(L"AllFloorBlock.png", 4, TEX_SIZE_200_100);
