@@ -34,6 +34,10 @@ void CObjEnemyMagicBattle::Init()
 	m_hit_right = false;
 	m_hit = false;
 
+	//ボスのHP情報を持ってくる
+	CObjBoss3Battle* boss3h = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
+	m_boss_hp = boss3h->GetHP();
+
 	//ボスの位向きを取得
 	CObjBoss3Battle* boss3 = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
 	m_posture = boss3->GetPOS();
@@ -87,6 +91,13 @@ void CObjEnemyMagicBattle::Action()
 			this->SetStatus(false);
 			Hits::DeleteHitBox(this);
 		}
+	}
+
+	//HP0で魔法削除
+	if (m_boss_hp == 0)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
 	}
 }
 
