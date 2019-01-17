@@ -103,6 +103,7 @@
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTopback.cpp" />
     <ClCompile Include="ObjWater.cpp" />
+    <ClCompile Include="ObjWindBlock.cpp" />
     <ClCompile Include="SceneBattle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -203,6 +204,7 @@
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTopback.h" />
     <ClInclude Include="ObjWater.h" />
+    <ClInclude Include="ObjWindBlock.h" />
     <ClInclude Include="SceneBattle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>

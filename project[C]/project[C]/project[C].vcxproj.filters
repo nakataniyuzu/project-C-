@@ -220,6 +220,9 @@
     <ClCompile Include="ObjEnemy3.cpp">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClCompile>
+    <ClCompile Include="ObjWindBlock.cpp">
+      <Filter>ソースファイル\Main\Block関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -443,6 +446,9 @@
     </ClInclude>
     <ClInclude Include="ObjEnemy3.h">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWindBlock.h">
+      <Filter>ソースファイル\Main\Block関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

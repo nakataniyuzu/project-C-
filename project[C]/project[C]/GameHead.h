@@ -70,6 +70,7 @@ enum OBJ_NAME
 	OBJ_CHANGEGATE,
 	OBJ_BOSSSWITCH,
 	OBJ_BOSSGATE,
+	OBJ_WINDBLOCK,
 	OBJ_STAIRS,
 
 	OBJ_FADEIN,
@@ -176,7 +177,6 @@ extern int g_enemy_kills;	//ìGÇÃåÇîjêî
 #include "ObjBoss2Battle.h"
 #include "ObjBoss3Battle.h"
 #include "ObjEnemyboss1.h"
-//#include "ObjEnemyboss3.h"
 #include "ObjEnemy1.h"
 #include "ObjEnemy2.h"
 #include "ObjEnemy3.h"
@@ -207,6 +207,7 @@ extern int g_enemy_kills;	//ìGÇÃåÇîjêî
 #include "ObjChangeGate2.h"
 #include "ObjBossSwitch.h"
 #include "ObjBossGate.h"
+#include "ObjWindBlock.h"
 
 #include "ObjMessage.h"
 #include "ObjFadein.h"

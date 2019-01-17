@@ -128,7 +128,7 @@ void CObjBlock::Action()
 					CObjEnemy2* obje2 = new CObjEnemy2(j*ALL_SIZE, i*ALL_SIZE);
 					Objs::InsertObj(obje2, OBJ_ENEMY_SECOND, 110);
 				}
-				else if (g_map_change == 3) {
+				else if (g_map_change == 2) {
 					CObjEnemy3* obje3 = new CObjEnemy3(j*ALL_SIZE, i*ALL_SIZE);
 					Objs::InsertObj(obje3, OBJ_ENEMY_THIRD, 110);
 				}
@@ -259,6 +259,14 @@ void CObjBlock::Action()
 				//23があればChangeGate2を出現
 				CObjChangeGate2* objds = new CObjChangeGate2(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objds, OBJ_CHANGEGATE, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 24)
+			{
+				//24があればWindBlockを出現
+				CObjWindBlock* objwb = new CObjWindBlock(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objwb, OBJ_WINDBLOCK, 111);
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}

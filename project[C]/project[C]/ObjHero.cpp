@@ -61,6 +61,9 @@ void CObjHero::Init()
 	if (g_map_change >= 1) {
 		m_ice_flag = true;
 	}
+	if (g_map_change >= 2) {
+		m_wind_flag = true;
+	}
 	//blockとの衝突状態確認
 	m_hit_up    = false;
 	m_hit_down  = false;
@@ -99,12 +102,6 @@ void CObjHero::Action()
 			m_vx = 0.0f;
 			m_vy = 0.0f;
 			return;
-		}
-
-		if (g_battle_flag == false)
-		{
-			
-			
 		}
 
 		//Eキーでメニューを開く

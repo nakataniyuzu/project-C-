@@ -44,13 +44,8 @@ void CObjEnemy3::Init()
 //アクション
 void CObjEnemy3::Action()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	battle_flag = hero->GetBATTLE();
-
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
-
-
 	if (g_battle_flag == true)
 	{
 		m_vx = 0.0f;
@@ -115,6 +110,35 @@ void CObjEnemy3::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
+
+	//敵とMYSTTERY系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
+	{
+		//敵がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_MYSTERY);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			float r = hit_date[i]->r;
+			//角度で上下左右を判定
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -0.15f; //右
+			}
+			if (r > 45 && r < 135)
+			{
+				m_vy = 0.15f;//上
+			}
+			if (r > 135 && r < 225)
+			{
+				m_vx = 0.15f;//左
+			}
+			if (r > 225 && r < 315)
+			{
+				m_vy = -0.15f; //下
+			}
+		}
+	}
 
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d;
