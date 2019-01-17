@@ -178,9 +178,10 @@ extern bool g_battle_key;	//戦闘中のキー入力制御用フラグ
 #include "ObjBoss2Battle.h"
 #include "ObjBoss3Battle.h"
 #include "ObjEnemyboss1.h"
-#include "ObjEnemyboss2.h"
+//#include "ObjEnemyboss3.h"
 #include "ObjEnemy1.h"
 #include "ObjEnemy2.h"
+#include "ObjEnemy3.h"
 
 
 #include "ObjBlock.h"
