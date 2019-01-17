@@ -19,7 +19,7 @@ void CObjBoss3Battle::Init()
 
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_boss_hp = 1;     //敵のヒットポイント(最大50)
+	m_boss_hp = 50;     //敵のヒットポイント(最大50)
 	m_damage = 5;
 	m_delay = 5;
 

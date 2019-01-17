@@ -4,6 +4,7 @@
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjSwitch.h"
@@ -61,6 +62,7 @@ void CObjDummySwitch::Action()
 
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
+		Audio::Start(1);
 	}
 
 	//ブロック情報を持ってくる
