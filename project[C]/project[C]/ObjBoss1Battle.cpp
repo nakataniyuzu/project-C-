@@ -28,6 +28,7 @@ void CObjBoss1Battle::Init()
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 	
+	m_posture = 0.0f;	//0.0f=左 1.0f=右
 	m_move = true;  //true=右 false=左
 	boss_delete_flag = false;	//ボス消滅フラグ
 	m_pop_flag = true;	//ボス向き用フラグ
@@ -43,6 +44,7 @@ void CObjBoss1Battle::Init()
 	m_eff_flag = false;
 
 	m_time = 0;
+	m_time_f = 0;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS_BATTLE, OBJ_BOSS_BATTLE_FIRST, 1);
@@ -132,15 +134,6 @@ void CObjBoss1Battle::Action()
 		m_posture = 0.0f;
 		m_ani_time += 1;
 	}
-	/*if (m_ani_time > m_ani_max_time)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
-	if (m_ani_frame == 4)
-	{
-		m_ani_frame = 0;
-	}*/
 
 	//攻撃を受けたら体力を減らす
 	//主人公とATTACK系統との当たり判定
@@ -151,9 +144,9 @@ void CObjBoss1Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		hero->SetFADEF(false);	//フェイドフラグをオフ		
 		g_enemy_kills += 1;
+		m_del = true;	
 	}
 
 	//敵が領域外に行かないようにする
@@ -197,51 +190,53 @@ void CObjBoss1Battle::Action()
 	if (m_time_f > 0) {
 		m_time_f--;
 		if (m_time_f <= 0) {
+
 			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 			Objs::InsertObj(fade, OBJ_FADEIN, 200);
+			m_time_f = 0;
 			this->SetStatus(false);		//画像の削除
 			Hits::DeleteHitBox(this);	//ヒットボックスの削除
-			m_time_f = 0;
-		}
-
-		//敵消滅処理------		
-		if (m_del == true)
-		{
-			herob->SetSPEED(0.0f);	//主人公のスピードを０にする
-			herob->SetVX(0.0f);		//主人公のベクトルを０にする
-			herob->SetVY(0.0f);
-			//死亡アニメーションRECT情報
-			RECT_F ani_src[3] =
-			{
-				{ 0,  0, 82, 100 },
-				{ 0, 96,195, 100 },
-				{ 0,210,318, 100 },
-			};
-
-			//アニメーションのコマ間隔制御
-			if (m_ani_time_d > 5)
-			{
-				m_ani++;	//アニメーションのコマを1つ進める
-				m_ani_time_d = 0;
-
-				m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-			}
-			else
-			{
-				m_ani_time_d++;
-			}
-
-			//死亡アニメーション終了で本当にオブジェクトの破棄
-			if (m_ani == 3)
-			{
-				hit->SetInvincibility(true);	//無敵にする
-				m_speed_power = 0.0f;			//動きを止める
-				m_eff_flag = true;			//画像切り替え用フラグ
-				m_time_f = 20;		//フェイドイン移行用の間隔設定
-			}
-			return;
 		}
 	}
+	//敵消滅処理------		
+	if (m_del == true)
+	{
+		herob->SetSPEED(0.0f);	//主人公のスピードを０にする
+		herob->SetVX(0.0f);		//主人公のベクトルを０にする
+		herob->SetVY(0.0f);
+		//死亡アニメーションRECT情報
+		RECT_F ani_src[3] =
+		{
+			{ 0,  0, 82, 100 },
+			{ 0, 96,195, 100 },
+			{ 0,210,318,  79 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_ani_time_d > 5)
+		{
+			m_ani++;	//アニメーションのコマを1つ進める
+			m_ani_time_d = 0;
+
+			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else
+		{
+			m_ani_time_d++;
+		}
+
+		//死亡アニメーション終了で本当にオブジェクトの破棄
+		if (m_ani == 3)
+		{
+			hit->SetInvincibility(true);	//無敵にする
+			m_speed_power = 0.0f;			//動きを止める
+			m_eff_flag = true;			//画像切り替え用フラグ
+			m_time_f = 20;		//フェイドイン移行用の間隔設定
+			m_time = 0;
+		}
+		return;
+	}
+	
 }
 
 //ドロー
@@ -270,9 +265,9 @@ void CObjBoss1Battle::Draw()
 	{
 		//切り取り位置の設定
 		src.m_top    =   0.0f;
-		src.m_left   =   0.0f;
-		src.m_right  =  82.0f;
-		src.m_bottom = 100.0f;
+		src.m_left   = 210.0f;
+		src.m_right  = 318.0f;
+		src.m_bottom = 79.0f;
 		if (m_eff_flag == true)
 			Draw::Draw(25, &src, &dst, c, 0.0f);
 		else
@@ -281,7 +276,7 @@ void CObjBoss1Battle::Draw()
 	else
 	{
 		//切り取り位置の設定
-		src.m_top    = 0.0f;
+		src.m_top    =   0.0f;
 		src.m_left   = 200.0f;
 		src.m_right  = 100.0f;
 		src.m_bottom = 100.0f;

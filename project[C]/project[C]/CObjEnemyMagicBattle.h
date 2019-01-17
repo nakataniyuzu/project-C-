@@ -15,6 +15,7 @@ class CObjEnemyMagicBattle : public CObj
 		void Action();	//アクション
 		void Draw();	//ドロー
 		int GetDMG() { return m_damage; }//攻撃力を取得
+		int GetHP() { return m_boss_hp; }//体力を取得
 		float GetPOS() { return m_posture; }//ボスの向きを取得
 	private:
 		float m_x;		//X方向の位置用変数
@@ -26,6 +27,7 @@ class CObjEnemyMagicBattle : public CObj
 		float m_posture;	//向き
 		int m_time;		//魔法が消える時間
 		int m_damage;
+		int m_boss_hp;
 
 		float m_bboss3_pos; //ボス向く向き
 
