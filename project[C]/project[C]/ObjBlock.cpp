@@ -128,6 +128,11 @@ void CObjBlock::Action()
 					CObjEnemy2* obje2 = new CObjEnemy2(j*ALL_SIZE, i*ALL_SIZE);
 					Objs::InsertObj(obje2, OBJ_ENEMY_SECOND, 110);
 				}
+				else if (g_map_change == 3) {
+					CObjEnemy3* obje3 = new CObjEnemy3(j*ALL_SIZE, i*ALL_SIZE);
+					Objs::InsertObj(obje3, OBJ_ENEMY_THIRD, 110);
+				}
+
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}
@@ -158,14 +163,9 @@ void CObjBlock::Action()
 			if (g_map[i][j] == 10)
 			{
 				//10があればBOSS出現
-				if (g_map_change == 0) {
-					CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
-					Objs::InsertObj(objb1, OBJ_BOSS, 110);
-				}
-				else if (g_map_change == 1) {
-					CObjEnemyboss2* objb2 = new CObjEnemyboss2(j*ALL_SIZE, i*ALL_SIZE);
-					Objs::InsertObj(objb2, OBJ_BOSS, 110);
-				}
+				CObjEnemyboss1* objb1 = new CObjEnemyboss1(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objb1, OBJ_BOSS, 110);
+				
 				//出現場所を0にする
 				g_map[i][j] = 0;
 			}

@@ -91,5 +91,11 @@ void CObjEnemyboss1::Draw()
 	dst.m_right  = 100.0f + m_px + block->GetScrollX();
 	dst.m_bottom = 100.0f + m_py + block->GetScrollY();
 
-	Draw::Draw(14, &src, &dst, c, 0.0f);
+	if (g_map_change == 0) {
+		Draw::Draw(14, &src, &dst, c, 0.0f);
+	}
+	else if(g_map_change == 1){
+		Draw::Draw(14, &src, &dst, c, 0.0f);
+
+	}
 }

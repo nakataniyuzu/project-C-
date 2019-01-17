@@ -43,6 +43,10 @@ void CSceneMain::InitScene()
 	else if (g_map_change == 1) {
 		p = Save::ExternalDataOpen(L"map2.csv", &size);//外部データ読み込み
 	}
+	else if (g_map_change == 2) {
+		p = Save::ExternalDataOpen(L"map3.csv", &size);//外部データ読み込み
+	}
+		
 
 	int map[38][65];
 	int count = 1;

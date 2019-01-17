@@ -217,7 +217,7 @@
     <ClCompile Include="ObjEnemy2.cpp">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemyboss2.cpp">
+    <ClCompile Include="ObjEnemy3.cpp">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClCompile>
   </ItemGroup>
@@ -441,7 +441,7 @@
     <ClInclude Include="ObjEnemy2.h">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemyboss2.h">
+    <ClInclude Include="ObjEnemy3.h">
       <Filter>ソースファイル\Main\Enemy関係\Map上</Filter>
     </ClInclude>
   </ItemGroup>
