@@ -61,6 +61,9 @@ void CObjHero::Init()
 	if (g_map_change >= 1) {
 		m_ice_flag = true;
 	}
+	if (g_map_change >= 2) {
+		m_wind_flag = true;
+	}
 	//blockとの衝突状態確認
 	m_hit_up    = false;
 	m_hit_down  = false;
@@ -80,7 +83,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_speed_power = 0.4f;		//通常速度
+	m_speed_power = 0.3f;		//通常速度
 
 
 	if (m_andf == true)		//フェードイン
@@ -99,12 +102,6 @@ void CObjHero::Action()
 			m_vx = 0.0f;
 			m_vy = 0.0f;
 			return;
-		}
-
-		if (g_battle_flag == false)
-		{
-			
-			
 		}
 
 		//Eキーでメニューを開く
@@ -202,13 +199,12 @@ void CObjHero::Action()
 	}
 
 		//キーの入力方向
-		if (Input::GetVKey(VK_UP) == true)
+		if (Input::GetVKey(VK_LEFT) == true)
 		{
-			m_py -= m_speed_power;
-			m_vy -= m_speed_power;
-			m_posture = 0.0f;	//上
+			m_px -= m_speed_power;
+			m_vx -= m_speed_power;
+			m_posture = 3.0f;	//左
 			m_ani_time += 1;
-
 		}
 		else if (Input::GetVKey(VK_RIGHT) == true)
 		{
@@ -217,6 +213,14 @@ void CObjHero::Action()
 			m_posture = 1.0f;	//右
 			m_ani_time += 1;
 		}
+		else if (Input::GetVKey(VK_UP) == true)
+		{
+			m_py -= m_speed_power;
+			m_vy -= m_speed_power;
+			m_posture = 0.0f;	//上
+			m_ani_time += 1;
+
+		}
 		else if (Input::GetVKey(VK_DOWN) == true)
 		{
 			m_py += m_speed_power;
@@ -224,14 +228,6 @@ void CObjHero::Action()
 			m_posture = 2.0f;	//下
 			m_ani_time += 1;
 		}
-		else if (Input::GetVKey(VK_LEFT) == true)
-		{
-			m_px -= m_speed_power;
-			m_vx -= m_speed_power;
-			m_posture = 3.0f;	//左
-			m_ani_time += 1;
-		}
-
 		else   //アニメーション処理
 		{
 			m_ani_frame = 0;	//キー入力がない場合は静止フレームにする

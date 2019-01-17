@@ -5,19 +5,19 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy2.h"
+#include "ObjEnemy3.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy2::CObjEnemy2(float x, float y)
+CObjEnemy3::CObjEnemy3(float x, float y)
 {
 	m_px = x;		//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjEnemy2::Init()
+void CObjEnemy3::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
@@ -38,25 +38,14 @@ void CObjEnemy2::Init()
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_SECOND, 1);
+	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_THIRD, 1);
 }
 
 //アクション
-void CObjEnemy2::Action()
+void CObjEnemy3::Action()
 {
-	if (g_enemy_kills >= 10)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	battle_flag = hero->GetBATTLE();
-
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
-
-
 	if (g_battle_flag == true)
 	{
 		m_vx = 0.0f;
@@ -80,8 +69,6 @@ void CObjEnemy2::Action()
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公を触れたら
 	{
 		m_speed_power = 0.0f;		//スピードを０にする
-		m_vx = 0.0f;
-		m_vy = 0.0f;
 		hit->SetInvincibility(true);	//当たり判定を消す
 	}
 	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)	//魔法攻撃(Fire)に触れたら
@@ -124,6 +111,35 @@ void CObjEnemy2::Action()
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
+	//敵とMYSTTERY系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
+	{
+		//敵がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_MYSTERY);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			float r = hit_date[i]->r;
+			//角度で上下左右を判定
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -0.15f; //右
+			}
+			if (r > 45 && r < 135)
+			{
+				m_vy = 0.15f;//上
+			}
+			if (r > 135 && r < 225)
+			{
+				m_vx = 0.15f;//左
+			}
+			if (r > 225 && r < 315)
+			{
+				m_vy = -0.15f; //下
+			}
+		}
+	}
+
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d;
 
@@ -145,11 +161,8 @@ void CObjEnemy2::Action()
 }
 
 //ドロー
-void CObjEnemy2::Draw()
+void CObjEnemy3::Draw()
 {
-	if (g_enemy_kills >= 10)
-		return;
-
 	if (g_battle_flag == true)
 	{
 		return;

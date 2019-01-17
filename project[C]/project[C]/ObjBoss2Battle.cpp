@@ -157,7 +157,10 @@ void CObjBoss2Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ		
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+		g_battle_key = false;
+		g_boss_kills += 1;
 		g_enemy_kills += 1;
 		m_del = true;
 	}

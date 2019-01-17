@@ -70,6 +70,7 @@ enum OBJ_NAME
 	OBJ_CHANGEGATE,
 	OBJ_BOSSSWITCH,
 	OBJ_BOSSGATE,
+	OBJ_WINDBLOCK,
 	OBJ_STAIRS,
 
 	OBJ_FADEIN,
@@ -129,6 +130,8 @@ extern int g_map_change;	//マップ変更用変数
 extern bool g_battle_flag;	//バトル画面変更用のフラグ
 extern bool g_key_flag;		//キー入力制御用フラグ
 extern int g_enemy_kills;	//敵の撃破数
+extern int g_boss_kills;	//ボスの撃破数
+extern bool g_battle_key;	//戦闘中のキー入力制御用フラグ
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -176,9 +179,9 @@ extern int g_enemy_kills;	//敵の撃破数
 #include "ObjBoss2Battle.h"
 #include "ObjBoss3Battle.h"
 #include "ObjEnemyboss1.h"
-#include "ObjEnemyboss2.h"
 #include "ObjEnemy1.h"
 #include "ObjEnemy2.h"
+#include "ObjEnemy3.h"
 
 
 #include "ObjBlock.h"
@@ -206,6 +209,7 @@ extern int g_enemy_kills;	//敵の撃破数
 #include "ObjChangeGate2.h"
 #include "ObjBossSwitch.h"
 #include "ObjBossGate.h"
+#include "ObjWindBlock.h"
 
 #include "ObjMessage.h"
 #include "ObjFadein.h"

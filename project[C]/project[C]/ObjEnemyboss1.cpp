@@ -27,6 +27,12 @@ void CObjEnemyboss1::Init()
 //アクション
 void CObjEnemyboss1::Action()
 {
+	if (g_boss_kills >= 1)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -63,6 +69,8 @@ void CObjEnemyboss1::Action()
 //ドロー
 void CObjEnemyboss1::Draw()
 {
+	if (g_boss_kills >= 1)
+		return;
 	if (g_battle_flag == true)
 	{
 		return;
@@ -91,5 +99,11 @@ void CObjEnemyboss1::Draw()
 	dst.m_right  = 100.0f + m_px + block->GetScrollX();
 	dst.m_bottom = 100.0f + m_py + block->GetScrollY();
 
-	Draw::Draw(14, &src, &dst, c, 0.0f);
+	if (g_map_change == 0) {
+		Draw::Draw(14, &src, &dst, c, 0.0f);
+	}
+	else if(g_map_change == 1){
+		Draw::Draw(14, &src, &dst, c, 0.0f);
+
+	}
 }
