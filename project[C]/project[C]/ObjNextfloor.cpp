@@ -34,12 +34,9 @@ void CObjNextfloor::Action()
 	}
 	else 
 	{
-
-
 		if (m_time > 40) {
 			m_time -= 15;
 		}
-
 		if (m_time <= 40 && Input::GetVKey(VK_RETURN) == true)
 		{
 			Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
@@ -68,8 +65,12 @@ void CObjNextfloor::Draw()
 	dst.m_left   = 0.0f;
 	dst.m_right  = 800.0f;
 	dst.m_bottom = 600.0f;
-	Draw::Draw(0, &src, &dst, c, 0.0f);
-
+	if (g_map_change == 1) {
+		Draw::Draw(0, &src, &dst, c, 0.0f);
+	}
+	else if (g_map_change == 2) {
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+	}
 	//n層目への移行用タイトル
 	swprintf_s(NEXT, L"%d層目",g_map_change + 1);		
 	Font::StrDraw(NEXT, m_time, 500, 60, c);

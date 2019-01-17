@@ -70,16 +70,29 @@ void CSceneMain::InitScene()
 	//グラフィック読み込み
 	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256);
 	if (g_map_change == 0) {
-		Draw::LoadImageW(L"Floor1.png", FLOOR, TEX_SIZE_800_600);	//１層目の床
+		Draw::LoadImageW(L"Floor1.png", FLOOR, TEX_SIZE_800_600);		//1層目の床
 		Draw::LoadImageW(L"Floor1Block.png", BLOCK, TEX_SIZE_800_600);	//1層目のブロック
-		Draw::LoadImageW(L"Floor1_Enemy.png", 7, TEX_SIZE_200_100);	//1層目の敵
-		Draw::LoadImageW(L"ENEMYBOSS1.png", 14, TEX_SIZE_800_600);	//1層目の敵
+		Draw::LoadImageW(L"Floor1_Enemy.png", 7, TEX_SIZE_200_100);		//1層目の敵
+		Draw::LoadImageW(L"ENEMYBOSS1.png", 14, TEX_SIZE_800_600);		//1層目の敵
+		Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);	//1層目の敵の死亡アニメーション
+		Draw::LoadImageW(L"ENEMYBOSS1_DEATH.png", 25, TEX_SIZE_100);	//1層目のボスの死亡アニメーション
 	}
 	else if (g_map_change == 1) {
-		Draw::LoadImageW(L"Floor2.png", FLOOR, TEX_SIZE_800_600);	//２層目の床
+		Draw::LoadImageW(L"Floor2.png", FLOOR, TEX_SIZE_800_600);		//2層目の床
 		Draw::LoadImageW(L"Floor2Block.png", BLOCK, TEX_SIZE_800_600);	//2層目のブロック
-		Draw::LoadImageW(L"Floor2_Enemy.png", 7, TEX_SIZE_200_100);	//2層目の敵
-		Draw::LoadImageW(L"ENEMYBOSS2.png", 14, TEX_SIZE_800_600);	//2層目の敵
+		Draw::LoadImageW(L"Floor2_Enemy.png", 7, TEX_SIZE_200_100);		//2層目の敵
+		Draw::LoadImageW(L"ENEMYBOSS2.png", 14, TEX_SIZE_800_600);		//2層目の敵
+		Draw::LoadImageW(L"Floor2_Enemy_Death.png", 23, TEX_SIZE_100);	//2層目の敵の死亡アニメーション
+		Draw::LoadImageW(L"ENEMYBOSS2_DEATH.png", 25, TEX_SIZE_100);	//2層目のボスの死亡アニメーション
+
+	}
+	else if (g_map_change == 2) {
+		Draw::LoadImageW(L"Floor3.png", FLOOR, TEX_SIZE_800_600);		//3層目の床
+		Draw::LoadImageW(L"Floor3Block.png", BLOCK, TEX_SIZE_800_600);	//3層目のブロック
+		Draw::LoadImageW(L"Floor3_Enemy.png", 7, TEX_SIZE_200_100);		//3層目の敵
+		Draw::LoadImageW(L"ENEMYBOSS3.png", 14, TEX_SIZE_800_600);		//3層目の敵
+		Draw::LoadImageW(L"Floor3_Enemy_Death.png", 23, TEX_SIZE_100);	//3層目の敵の死亡アニメーション
+		Draw::LoadImageW(L"ENEMYBOSS3_DEATH.png", 25, TEX_SIZE_100);	//3層目のボスの死亡アニメーション
 	}
 
 	Draw::LoadImageW(L"image.png", 3, TEX_SIZE_100);
@@ -96,17 +109,8 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"Sword.png", 16, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"Fadein.png", 17, TEX_SIZE_16000_600);
 	Draw::LoadImageW(L"Stairs.png", 18, TEX_SIZE_100);
-	//Draw::LoadImageW(L"Floor2_Enemy.png", 19, TEX_SIZE_100);
-	Draw::LoadImageW(L"Floor3_Enemy.png", 20, TEX_SIZE_100);
-	Draw::LoadImageW(L"Floor1~2.png", 50, TEX_SIZE_800_600);
-	Draw::LoadImageW(L"ENEMYBOSS3.png", 22, TEX_SIZE_800_600);
-	Draw::LoadImageW(L"Floor1_Enemy_Death.png", 23, TEX_SIZE_100);
+	Draw::LoadImageW(L"Floor1up2.png", 50, TEX_SIZE_800_600);
 	Draw::LoadImageW(L"ENEMYBOSS3_MAGIC.png", 24, TEX_SIZE_100);
-	Draw::LoadImageW(L"ENEMYBOSS1_DEATH.png", 25, TEX_SIZE_100);
-	Draw::LoadImageW(L"Floor2_Enemy_Death.png", 26, TEX_SIZE_100);
-	Draw::LoadImageW(L"ENEMYBOSS2_DEATH.png", 27, TEX_SIZE_100);
-	Draw::LoadImageW(L"Floor3_Enemy_Death.png", 28, TEX_SIZE_100);
-	Draw::LoadImageW(L"ENEMYBOSS3_DEATH.png", 29, TEX_SIZE_100);
 
 	Draw::LoadImageW(L"AllFloorBlock.png", 4, TEX_SIZE_200_100);
 
@@ -158,19 +162,6 @@ void CSceneMain::InitScene()
 	//blockオブジェクト作成
 	CObjBlockBattle* bobjb = new CObjBlockBattle();
 	Objs::InsertObj(bobjb, OBJ_BLOCK_BATTLE, 9);
-	
-	
-	//敵(1層目)オブジェクト作成
-	//CObjEnemy1Battle* bobje1 = new CObjEnemy1Battle();
-	//Objs::InsertObj(bobje1, OBJ_ENEMY_BATTLE_FIRST, 10);
-
-	//敵(2層目)オブジェクト作成
-	/*CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
-	Objs::InsertObj(bobje2, OBJ_ENEMY_BATTLE_SECOND, 10);*/
-
-	//敵(3層目)オブジェクト作成
-	/*CObjEnemy3Battle* bobje3 = new CObjEnemy3Battle();
-	Objs::InsertObj(bobje3, OBJ_ENEMY_BATTLE_THIRD, 10);*/
 	
 	//背景(戦闘)オブジェクト作成
 	CObjBackgroundBattle* bobjbackb = new CObjBackgroundBattle();

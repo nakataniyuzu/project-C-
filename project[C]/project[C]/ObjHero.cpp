@@ -96,8 +96,6 @@ void CObjHero::Action()
 		//バトルフラグ、または入力制御フラグがオンの場合アクションを制御する
 		if (g_battle_flag == true || g_key_flag == true)
 		{
-			//m_max_hp += g_enemy_kills;		//敵を倒すとHP/MPが上がる
-			//m_max_mp += g_enemy_kills;
 			m_vx = 0.0f;
 			m_vy = 0.0f;
 			return;

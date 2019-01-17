@@ -176,11 +176,11 @@ void CObjEnemy2Battle::Action()
 	if (m_del == false && m_enemy_hp <= 0)
 	{
 		hero->SetFADEF(false);	//フェイドフラグをオフ
-		hero->SetMAXHP(1);
+		hero->SetMAXHP(1);		//HP/MPを増やす
+		hero->SetMAXMP(1);
 		g_battle_key = false;
 		m_del = true;
-		g_enemy_kills += 1;
-
+		g_enemy_kills += 1;		//撃破数を増やす		
 	}
 
 	//敵が領域外に行かないようにする
@@ -271,9 +271,9 @@ void CObjEnemy2Battle::Draw()
 		src.m_right  = 312.0f;
 		src.m_bottom = 100.0f;
 		if (m_eff_flag == true)
-			Draw::Draw(26, &src, &dst, c, 0.0f);
+			Draw::Draw(23, &src, &dst, c, 0.0f);
 		else
-			Draw::Draw(26, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
+			Draw::Draw(23, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
 	}
 	else
 	{

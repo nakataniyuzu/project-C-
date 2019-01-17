@@ -271,9 +271,9 @@ void CObjEnemy3Battle::Draw()
 		src.m_right = 160.0f;
 		src.m_bottom = 50.0f;
 		if (m_eff_flag == true)
-			Draw::Draw(28, &src, &dst, c, 0.0f);
+			Draw::Draw(23, &src, &dst, c, 0.0f);
 		else
-			Draw::Draw(28, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
+			Draw::Draw(23, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
 	}
 	else
 	{
@@ -283,6 +283,6 @@ void CObjEnemy3Battle::Draw()
 		src.m_right = 100.0f;
 		src.m_bottom = 50.0f;
 		//描画
-		Draw::Draw(20, &src, &dst, c, 0.0f);
+		Draw::Draw(7, &src, &dst, c, 0.0f);
 	}
 }
