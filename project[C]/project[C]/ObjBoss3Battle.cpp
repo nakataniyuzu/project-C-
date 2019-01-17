@@ -197,6 +197,7 @@ void CObjBoss3Battle::Action()
 		hero->SetFADEF(false);	//フェイドフラグをオフ			
 		g_battle_key = false;
 		g_enemy_kills += 1;
+		g_boss_kills += 1;
 		m_del = true;
 	}
 

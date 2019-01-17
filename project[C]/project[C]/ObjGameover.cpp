@@ -16,6 +16,12 @@ using namespace GameL;
 //イニシャライズ
 void CObjGameover::Init()
 {
+	g_battle_flag = false;	//バトル画面用の変数の初期化
+	g_key_flag = false;	//キー入力制御用の変数の初期化
+	g_battle_key = true;
+	g_enemy_kills = 0;		//敵撃破数の変数の初期化
+	g_boss_kills = 0;
+
 	m_time = 0;
 	choice = 0;
 	m_key_flag = true;

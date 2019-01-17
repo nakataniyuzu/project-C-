@@ -44,6 +44,12 @@ void CObjEnemy2::Init()
 //アクション
 void CObjEnemy2::Action()
 {
+	if (g_enemy_kills >= 10)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
 
@@ -141,6 +147,9 @@ void CObjEnemy2::Action()
 //ドロー
 void CObjEnemy2::Draw()
 {
+	if (g_enemy_kills >= 10)
+		return;
+
 	if (g_battle_flag == true)
 	{
 		return;

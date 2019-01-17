@@ -149,6 +149,7 @@ void CObjBoss1Battle::Action()
 		hero->SetMAXMP(1);
 		m_del = true;
 		g_enemy_kills += 1;
+		g_boss_kills += 1;
 		g_battle_key = false;
 	}
 
