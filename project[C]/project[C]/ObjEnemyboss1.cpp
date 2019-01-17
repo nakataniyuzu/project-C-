@@ -27,6 +27,12 @@ void CObjEnemyboss1::Init()
 //アクション
 void CObjEnemyboss1::Action()
 {
+	if (g_boss_kills >= 1)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -63,6 +69,8 @@ void CObjEnemyboss1::Action()
 //ドロー
 void CObjEnemyboss1::Draw()
 {
+	if (g_boss_kills >= 1)
+		return;
 	if (g_battle_flag == true)
 	{
 		return;

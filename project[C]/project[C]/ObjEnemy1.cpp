@@ -44,6 +44,12 @@ void CObjEnemy1::Init()
 //アクション
 void CObjEnemy1::Action()
 {
+	if (g_enemy_kills >= 5)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	battle_flag = hero->GetBATTLE();
 	
@@ -74,6 +80,8 @@ void CObjEnemy1::Action()
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公を触れたら
 	{
 		m_speed_power = 0.0f;		//スピードを０にする
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 		hit->SetInvincibility(true);	//当たり判定を消す
 	}
 	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)	//魔法攻撃(Fire)に触れたら
@@ -139,6 +147,9 @@ void CObjEnemy1::Action()
 //ドロー
 void CObjEnemy1::Draw()
 {
+	if (g_enemy_kills >= 5)
+		return;
+
 	if (g_battle_flag == true)
 	{
 		return;

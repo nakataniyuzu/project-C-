@@ -165,6 +165,7 @@ void CObjEnemy1Battle::Action()
 		hero->SetFADEF(false);	//フェイドフラグをオフ	
 		hero->SetMAXHP(1);		//HP/MPを増やす
 		hero->SetMAXMP(1);
+		g_battle_key = false;
 		m_del = true;
 		g_enemy_kills += 1;
 	}
@@ -202,9 +203,6 @@ void CObjEnemy1Battle::Action()
 	//敵消滅処理------		
 	if (m_del == true)
 	{
-		herob->SetSPEED(0.0f);	//主人公のスピードを０にする
-		herob->SetVX(0.0f);		//主人公のベクトルを０にする
-		herob->SetVY(0.0f);
 		//死亡アニメーションRECT情報
 		RECT_F ani_src[3] =
 		{

@@ -6,19 +6,11 @@ using namespace GameL;
 
 //íËêî
 //ï`âÊä÷åWÇÃíËêî
-#define GAME_LEVEL_POS_X     (0)
-#define GAME_LEVEL_POS_Y     (0)
-#define GAME_LEVEL_FONT_SIZE (25)
-
-#define GAME_NAME_POS_X     (100)
-#define GAME_NAME_POS_Y     (0)
-#define GAME_NAME_FONT_SIZE (25)
-
 #define GAME_HP_POS_X     (0)
-#define GAME_HP_POS_Y     (25)
+#define GAME_HP_POS_Y     (0)
 #define GAME_HP_FONT_SIZE (25)
 
-#define GAME_MP_POS_X     (170)
+#define GAME_MP_POS_X     (0)
 #define GAME_MP_POS_Y     (25)
 #define GAME_MP_FONT_SIZE (25)
 
