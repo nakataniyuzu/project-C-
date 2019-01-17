@@ -150,6 +150,7 @@ void CObjBoss2Battle::Action()
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
+		g_battle_key = false;
 	}
 
 	//“G‚ª—ÌˆæŠO‚És‚©‚È‚¢‚æ‚¤‚É‚·‚é

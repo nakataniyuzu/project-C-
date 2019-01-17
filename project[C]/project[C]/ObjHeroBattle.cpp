@@ -33,6 +33,8 @@ void CObjHeroBattle::Init()
 
 	m_inputf = true;	// true = 入力可	false = 入力不可
 
+	g_battle_key = true;	//true = 入力可
+
 	//当たり判定用のHitBoxを作成
  	Hits::SetHitBox(this, m_px + 13 , m_py , 50, 90, ELEMENT_PLAYER, OBJ_HERO_BATTLE, 1);
 }
@@ -93,149 +95,152 @@ void CObjHeroBattle::Action()
 		return;
 	}
 	
-	//inputフラグがオンの場合入力を可能にする
-	if (m_inputf == true)
+	if (g_battle_key == true)
 	{
-		//キーの入力方向 
-		if (Input::GetVKey(VK_RIGHT) == true)
+		//inputフラグがオンの場合入力を可能にする
+		if (m_inputf == true)
 		{
-			m_vx += m_speed_power;
-			m_posture = 0.0f;
-			m_ani_time += 1;
+			//キーの入力方向 
+			if (Input::GetVKey(VK_RIGHT) == true)
+			{
+				m_vx += m_speed_power;
+				m_posture = 0.0f;
+				m_ani_time += 1;
+			}
+			else if (Input::GetVKey(VK_LEFT) == true)
+			{
+				m_vx -= m_speed_power;
+				m_posture = 1.0f;
+				m_ani_time += 1;
+			}
+			else
+			{
+				m_ani_frame = 0; //キー入力が無い場合は静止フレームにする
+				m_ani_time = 0;
+			}
 		}
-		else if (Input::GetVKey(VK_LEFT) == true)
+		if (m_ani_time > 8)
 		{
-			m_vx -= m_speed_power;
-			m_posture = 1.0f;
-			m_ani_time += 1;
-		}
-		else
-		{
-			m_ani_frame = 0; //キー入力が無い場合は静止フレームにする
+			m_ani_frame += 1;
 			m_ani_time = 0;
 		}
-	}
-	if (m_ani_time > 8)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
-	if (m_ani_frame == 4)
-	{
-		m_ani_frame = 0;
-	}
-
-	//Spaceキーでジャンプ
-	if (m_py + 100 >= 549)
-	{
-		if (Input::GetVKey(VK_SPACE) == true)
+		if (m_ani_frame == 4)
 		{
-			if (1)
+			m_ani_frame = 0;
+		}
+
+		//Spaceキーでジャンプ
+		if (m_py + 100 >= 549)
+		{
+			if (Input::GetVKey(VK_SPACE) == true)
 			{
-				m_vy = -40;
+				if (1)
+				{
+					m_vy = -40;
+				}
 			}
 		}
-	}
 
-	//Eキーでメニューを開く
-	if (Input::GetVKey('E') == true)
-	{
-		//Scene::SetScene(new CSceneMenu());	
-	}
-
-	//Aキーで近接(剣)攻撃
-	if (Input::GetVKey('A') == true)
-	{
-		if (m_sword_delay == 0)
+		//Eキーでメニューを開く
+		if (Input::GetVKey('E') == true)
 		{
-			//主人公の向きによって攻撃する向きを設定
-			if (m_posture == 0.0f) {
-				m_swordwidth = 70.0f;
-			}
-			else if (m_posture == 1.0f) {
-				m_swordwidth = -30.0f;
-			}
+			//Scene::SetScene(new CSceneMenu());	
+		}
 
-			//剣で攻撃
-			CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_swordwidth, m_py + 32.0f);//剣オブジェクト(戦闘)作成
-			Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
-			
-			//斬撃音
-			Audio::Start(0);
-
-			m_sword_delay = 10;
-		}	
-	}
-	if (m_sword_delay > 0)
-	{
-		m_sword_delay--;
-		if (m_sword_delay <= 0)
-			m_sword_delay = 0;
-	}
-	//Xキーで魔法を切り替える
-	if (Input::GetVKey('X') == true)
-	{
-		if (m_mf == true) {	//キー制御用
-			m_mf = false;
-			m_battle_magic += 1;
-		}
-		if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
-			m_battle_magic = 0;
-		}
-		if (m_battle_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
-			m_battle_magic = 0;
-		}
-		if (m_battle_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
-			m_battle_magic = 0;
-		}
-		if (m_battle_magic >= 4) {
-			m_battle_magic = 0;
-		}
-	}
-	else
-	{
-		m_mf = true;
-	}
-	if (m_battle_mp > 0) {
-		if (Input::GetVKey('Z') == true)	//魔法発射
+		//Aキーで近接(剣)攻撃
+		if (Input::GetVKey('A') == true)
 		{
-			if (m_f == true) {	//魔法制御用
-
-				//主人公の向きによって発射する向きを設定
+			if (m_sword_delay == 0)
+			{
+				//主人公の向きによって攻撃する向きを設定
 				if (m_posture == 0.0f) {
-					m_directionx = 50.0f;
-					m_directiony = 0.0f;
+					m_swordwidth = 70.0f;
 				}
 				else if (m_posture == 1.0f) {
-					m_directionx = -50.0f;
-					m_directiony = 0.0f;
+					m_swordwidth = -30.0f;
 				}
 
-				if (m_battle_magic == 0)	//火の魔法
-				{
-					CObjFireBattle* objfb = new CObjFireBattle(m_px + m_directionx, m_py + m_directiony);//Fireオブジェクト(戦闘)作成
-					Objs::InsertObj(objfb, OBJ_FIRE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
-					Audio::Start(7);
-				}
-				if (m_battle_magic == 1)	//氷の魔法
-				{
-					CObjIceBattle* objib = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
-					Objs::InsertObj(objib, OBJ_ICE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
-					Audio::Start(8);
-				}
-				else if (m_battle_magic == 3)	//雷の魔法
-				{
-					CObjThunderBattle* objtb = new CObjThunderBattle(m_px + m_directionx, m_py + m_directiony);//Thunderオブジェクト(戦闘)作成
-					Objs::InsertObj(objtb, OBJ_THUNDER_BATTLE, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
-					Audio::Start(9);
-				}
-				m_f = false;
-				m_battle_mp -= 1;		//MPを減らす
+				//剣で攻撃
+				CObjSwordBattle* objsb = new CObjSwordBattle(m_px + m_swordwidth, m_py + 32.0f);//剣オブジェクト(戦闘)作成
+				Objs::InsertObj(objsb, OBJ_SWORD_BATTLE, 100);		//作った剣オブジェクトをオブジェクトマネージャーに登録
+
+				//斬撃音
+				Audio::Start(0);
+
+				m_sword_delay = 10;
+			}
+		}
+		if (m_sword_delay > 0)
+		{
+			m_sword_delay--;
+			if (m_sword_delay <= 0)
+				m_sword_delay = 0;
+		}
+		//Xキーで魔法を切り替える
+		if (Input::GetVKey('X') == true)
+		{
+			if (m_mf == true) {	//キー制御用
+				m_mf = false;
+				m_battle_magic += 1;
+			}
+			if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
+				m_battle_magic = 0;
+			}
+			if (m_battle_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
+				m_battle_magic = 0;
+			}
+			if (m_battle_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
+				m_battle_magic = 0;
+			}
+			if (m_battle_magic >= 4) {
+				m_battle_magic = 0;
 			}
 		}
 		else
 		{
-			m_f = true;
+			m_mf = true;
+		}
+		if (m_battle_mp > 0) {
+			if (Input::GetVKey('Z') == true)	//魔法発射
+			{
+				if (m_f == true) {	//魔法制御用
+
+					//主人公の向きによって発射する向きを設定
+					if (m_posture == 0.0f) {
+						m_directionx = 50.0f;
+						m_directiony = 0.0f;
+					}
+					else if (m_posture == 1.0f) {
+						m_directionx = -50.0f;
+						m_directiony = 0.0f;
+					}
+
+					if (m_battle_magic == 0)	//火の魔法
+					{
+						CObjFireBattle* objfb = new CObjFireBattle(m_px + m_directionx, m_py + m_directiony);//Fireオブジェクト(戦闘)作成
+						Objs::InsertObj(objfb, OBJ_FIRE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+						Audio::Start(7);
+					}
+					if (m_battle_magic == 1)	//氷の魔法
+					{
+						CObjIceBattle* objib = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
+						Objs::InsertObj(objib, OBJ_ICE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
+						Audio::Start(8);
+					}
+					else if (m_battle_magic == 3)	//雷の魔法
+					{
+						CObjThunderBattle* objtb = new CObjThunderBattle(m_px + m_directionx, m_py + m_directiony);//Thunderオブジェクト(戦闘)作成
+						Objs::InsertObj(objtb, OBJ_THUNDER_BATTLE, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
+						Audio::Start(9);
+					}
+					m_f = false;
+					m_battle_mp -= 1;		//MPを減らす
+				}
+			}
+			else
+			{
+				m_f = true;
+			}
 		}
 	}
 

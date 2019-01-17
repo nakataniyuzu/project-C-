@@ -67,6 +67,7 @@ void CObjFadein::Action()
 			if (m_fade_flag == false) {
 				g_battle_flag = false;//マップ画面へ移行
 				g_key_flag = false;		//キー入力制御フラグをオフにする
+				g_battle_key = true;//マップ画面へ移行
 				//hero->SetDELETE(true);	//DELETEフラグをオンにする
 				Audio::Stop(13);
 				Audio::Start(12);	//マップ用BGMを鳴らす

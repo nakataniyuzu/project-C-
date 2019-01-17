@@ -144,9 +144,10 @@ void CObjBoss1Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ		
+		hero->SetFADEF(false);	//フェイドフラグをオフ	
 		g_enemy_kills += 1;
-		m_del = true;	
+		m_del = true;		
+		g_battle_key = false;
 	}
 
 	//敵が領域外に行かないようにする
@@ -201,9 +202,6 @@ void CObjBoss1Battle::Action()
 	//敵消滅処理------		
 	if (m_del == true)
 	{
-		herob->SetSPEED(0.0f);	//主人公のスピードを０にする
-		herob->SetVX(0.0f);		//主人公のベクトルを０にする
-		herob->SetVY(0.0f);
 		//死亡アニメーションRECT情報
 		RECT_F ani_src[3] =
 		{

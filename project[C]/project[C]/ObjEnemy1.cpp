@@ -74,6 +74,8 @@ void CObjEnemy1::Action()
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公を触れたら
 	{
 		m_speed_power = 0.0f;		//スピードを０にする
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 		hit->SetInvincibility(true);	//当たり判定を消す
 	}
 	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)	//魔法攻撃(Fire)に触れたら
