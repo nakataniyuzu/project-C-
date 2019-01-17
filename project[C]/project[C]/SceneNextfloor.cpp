@@ -32,8 +32,9 @@ CSceneNextfloor::~CSceneNextfloor()
 void CSceneNextfloor::InitScene()
 {
 	Draw::LoadImageW(L"Floor1~2.png", 0, TEX_SIZE_800_600);
+	Draw::LoadImageW(L"Floor2up3.png", 1, TEX_SIZE_800_600);
 
-
+	
 	CObjNextfloor* p = new CObjNextfloor();
 	Objs::InsertObj(p, OBJ_CLEAR, 1);
 }

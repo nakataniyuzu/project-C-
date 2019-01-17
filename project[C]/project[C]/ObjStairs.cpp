@@ -46,8 +46,6 @@ void CObjStairs::Action()
 
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
-
-		//Scene::SetScene(new CSceneNextfloor());	//ゲームネクストシーンに移行
 	}
 
 	//位置の更新

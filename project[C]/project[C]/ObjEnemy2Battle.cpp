@@ -273,9 +273,9 @@ void CObjEnemy2Battle::Draw()
 		src.m_right  = 312.0f;
 		src.m_bottom = 100.0f;
 		if (m_eff_flag == true)
-			Draw::Draw(26, &src, &dst, c, 0.0f);
+			Draw::Draw(23, &src, &dst, c, 0.0f);
 		else
-			Draw::Draw(26, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
+			Draw::Draw(23, &m_eff, &dst, c, 0.0f);//死亡アニメーション描画
 	}
 	else
 	{

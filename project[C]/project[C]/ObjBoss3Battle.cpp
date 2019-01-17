@@ -300,9 +300,9 @@ void CObjBoss3Battle::Draw()
 		src.m_right = 700.0f;
 		src.m_bottom = 250.0f;
 		if (m_eff_flag == true)
-			Draw::Draw(29, &src, &dst, c, 0.0f);
+			Draw::Draw(25, &src, &dst, c, 0.0f);
 		else
-			Draw::Draw(29, &m_eff, &dst, c, 0.0f);//Ž€–SƒAƒjƒ[ƒVƒ‡ƒ“•`‰æ
+			Draw::Draw(25, &m_eff, &dst, c, 0.0f);//Ž€–SƒAƒjƒ[ƒVƒ‡ƒ“•`‰æ
 	}
 	else
 	{
@@ -323,10 +323,10 @@ void CObjBoss3Battle::Draw()
 		}
 		//•`‰æ
 		if (m_time > 0) {
-			Draw::Draw(22, &src, &dst, a, 0.0f);
+			Draw::Draw(14, &src, &dst, a, 0.0f);
 		}
 		else {
-			Draw::Draw(22, &src, &dst, c, 0.0f);
+			Draw::Draw(14, &src, &dst, c, 0.0f);
 		}
 	}
 }
