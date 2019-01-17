@@ -230,6 +230,5 @@ void CObjBoss2Battle::Draw()
 	dst.m_bottom = 100.0f + m_py;
 
 	//•`‰æ
-	Draw::Draw(21, &src, &dst, c, 0.0f);
-
+	Draw::Draw(14, &src, &dst, c, 0.0f);
 }

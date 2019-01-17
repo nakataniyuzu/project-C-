@@ -27,8 +27,8 @@ void CObjHero::Init()
 	
 	m_max_hp = 10;	//最大HP
 	m_max_mp = 10;	//最大MP
-	m_hp = 1073741823;	//初期HP
-	m_mp = 1073741823;	//初期MP
+	m_hp = 10;	//初期HP
+	m_mp = 10;	//初期MP
 	m_magic = 0;	//初期魔法
 
 	m_key = 0;	//鍵の情報
@@ -82,6 +82,7 @@ void CObjHero::Action()
 {
 	m_speed_power = 0.4f;		//通常速度
 
+
 	if (m_andf == true)		//フェードイン
 	{
 		m_and += 0.01f;
@@ -95,16 +96,23 @@ void CObjHero::Action()
 		//バトルフラグ、または入力制御フラグがオンの場合アクションを制御する
 		if (g_battle_flag == true || g_key_flag == true)
 		{
+			//m_max_hp += g_enemy_kills;		//敵を倒すとHP/MPが上がる
+			//m_max_mp += g_enemy_kills;
 			m_vx = 0.0f;
 			m_vy = 0.0f;
 			return;
+		}
+
+		if (g_battle_flag == false)
+		{
+			
+			
 		}
 
 		//Eキーでメニューを開く
 		if (Input::GetVKey('E') == true)
 		{
 			//Scene::SetScene(new CSceneMenu());
-
 		}
 
 		//Xキーで魔法を切り替える
@@ -315,7 +323,7 @@ void CObjHero::Action()
 
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_boss_battle_flag = true;	//敵出現フラグをオンにする
-		m_delete = false;			//敵削除フラグをオンにする
+		m_delete = true;			//敵削除フラグをオンにする
 
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);

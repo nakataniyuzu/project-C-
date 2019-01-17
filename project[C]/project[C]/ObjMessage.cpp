@@ -99,8 +99,8 @@ void CObjMessage::Draw()
 		t.ice--;
 		f.ice = false;		//フラグをオフ
 		hero->SetMICE(f.ice);
-		BackDraw(195.0f, 195.0f, 540.0f, 225.0f, b);
-		Font::StrDraw(L"氷魔法を覚えた！（Xキーで切り替え", 200, 200, 20, c);//時間が0になると表示を終了
+		BackDraw(195.0f, 195.0f, 540.0f, 225.0f, a);
+		Font::StrDraw(L"氷魔法を覚えた！（Xキーで切り替え", 200, 170, 20, b);//時間が0になると表示を終了
 
 		if (t.ice <= 0) {
 			t.ice = 0;
@@ -113,9 +113,9 @@ void CObjMessage::Draw()
 	if (t.wind > 0) {
 		t.wind--;
 		f.wind = false;		//フラグをオフ
-		hero->SetMICE(f.wind);
-		BackDraw(195.0f, 195.0f, 540.0f, 225.0f, g);
-		Font::StrDraw(L"風魔法を覚えた！（Xキーで切り替え", 200, 200, 20, c);//時間が0になると表示を終了
+		hero->SetMWIND(f.wind);
+		BackDraw(165.0f, 195.0f, 540.0f, 195.0f, a);
+		Font::StrDraw(L"風魔法を覚えた！（Xキーで切り替え", 210, 170, 20, g);//時間が0になると表示を終了
 
 		if (t.wind <= 0) {
 			t.wind = 0;

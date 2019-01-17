@@ -55,9 +55,9 @@ void CObjDummySwitch::Action()
 	}
 	
 	if (m_time == 1) {
+		hero->SetDELETE(true);	//前敵削除フラグをオン
 		hero->SetENEMYF(true);	//敵出現フラグをオン
 		hero->SetFADEF(true);	//フェイドフラグをオン
-		hero->SetDELETE(true);	//前敵削除フラグをオン
 
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
