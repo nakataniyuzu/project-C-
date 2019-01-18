@@ -62,6 +62,7 @@ void CObjFadein::Action()
 				g_battle_flag = false;//マップ画面へ移行
 				g_key_flag = false;		//キー入力制御フラグをオフにする
 				g_battle_key = true;//マップ画面へ移行
+				g_mhit_enemy_flag = false;//敵をうごかす
 				Audio::Stop(13);
 				Audio::Start(12);	//マップ用BGMを鳴らす
 			}
