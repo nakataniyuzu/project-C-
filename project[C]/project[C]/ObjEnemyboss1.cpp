@@ -57,6 +57,7 @@ void CObjEnemyboss1::Action()
 	}
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公が触れたら
 	{
+		g_mhit_enemy_flag = true;
 		hit->SetInvincibility(true);	//当たり判定を消す
 	}
 	//ブロック情報を持ってくる
