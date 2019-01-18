@@ -156,18 +156,27 @@ void CObjEnemy2Battle::Action()
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
-		//ノックバック処理
-		if (m_posture == 1.0f)
-		{
-			m_vy = -3;
-			m_vx -= 10;
-		}
-		else if (m_posture == 0.0f)
-		{
-			m_vy = -3;
-			m_vx += 10;
-		}
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_ATTACK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 
+		float r = 0;
+		for (int i = 0; i < 10; i++) {
+			if (hit_date[i] != nullptr) {
+				r = hit_date[i]->r;
+			}
+		}
+		//ノックバック処理
+		if ((r < 45 && r >= 0) || r > 315)
+		{
+			m_vy = -10;
+			m_vx -= 25;
+		}
+		if (r > 135 && r < 225)
+		{
+			m_vy = -10;
+			m_vx += 25;
+		}
 		m_enemy_hp -= 1;
 	}
 

@@ -144,7 +144,7 @@ void CObjBoss1Battle::Action()
 	//“G‚Ì‘Ì—Í‚ª0‚É‚È‚Á‚½‚çÁ–Åˆ—‚ÉˆÚ‚é
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		hero->SetFADEF(true);
+		hero->SetFADEF(false);
 		hero->SetMAXHP(1);		//HP/MP‚ğ‘‚â‚·
 		hero->SetMAXMP(1);
 		m_del = true;

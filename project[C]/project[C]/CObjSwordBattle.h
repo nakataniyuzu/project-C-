@@ -21,6 +21,9 @@ private:
 	float m_vx;		//X方向の速度用変数
 	float m_vy;		//Y方向の速度用変数
 
+	float m_hero_x;	
+	float m_hero_y;
+
 	float m_hit;	//衝突判定
 	float m_posture;	//向き
 
