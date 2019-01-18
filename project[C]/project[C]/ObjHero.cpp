@@ -321,7 +321,7 @@ void CObjHero::Action()
 
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_boss_battle_flag = true;	//敵出現フラグをオンにする
-		m_delete = true;			//敵削除フラグをオンにする
+		m_delete = false;			//敵削除フラグをオンにする
 
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
