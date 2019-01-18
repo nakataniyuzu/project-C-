@@ -99,7 +99,7 @@ void CObjMessage::Draw()
 		t.ice--;
 		f.ice = false;		//フラグをオフ
 		hero->SetMICE(f.ice);
-		BackDraw(195.0f, 195.0f, 540.0f, 225.0f, a);
+		BackDraw(165.0f, 195.0f, 540.0f, 195.0f, a);
 		Font::StrDraw(L"氷魔法を覚えた！（Xキーで切り替え", 200, 170, 20, b);//時間が0になると表示を終了
 
 		if (t.ice <= 0) {

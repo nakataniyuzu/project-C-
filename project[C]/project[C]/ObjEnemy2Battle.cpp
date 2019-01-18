@@ -49,6 +49,8 @@ void CObjEnemy2Battle::Init()
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
+	m_time_d = 0;
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_SECOND, 1);
 }
@@ -142,16 +144,7 @@ void CObjEnemy2Battle::Action()
 		m_posture = 0.0f;
 		m_ani_time += 1;
 	}
-	if (m_ani_time > m_ani_max_time)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
-	if (m_ani_frame == 4)
-	{
-		m_ani_frame = 0;
-	}
-
+	
 	//攻撃を受けたら体力を減らす
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
@@ -178,15 +171,23 @@ void CObjEnemy2Battle::Action()
 			m_vx += 25;
 		}
 		m_enemy_hp -= 1;
+		m_time_d = 30;
 	}
-
+	if (m_time_d > 0)
+	{
+		m_time_d--;
+		if (m_time_d <= 0)
+		{
+			m_time_d = 0;
+		}
+	}
 
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_enemy_hp <= 0)
 	{
 		hero->SetFADEF(false);	//フェイドフラグをオフ
-		hero->SetMAXHP(1);		//HP/MPを増やす
-		hero->SetMAXMP(1);
+		hero->SetMAXHP(2);		//HP/MPを増やす
+		hero->SetMAXMP(2);
 		g_battle_key = false;
 		m_del = true;
 		g_enemy_kills += 1;		//撃破数を増やす		
@@ -262,6 +263,7 @@ void CObjEnemy2Battle::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 1.0f,0.5f,1.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -292,7 +294,12 @@ void CObjEnemy2Battle::Draw()
 		src.m_right  =  50.0f;
 		src.m_bottom = 200.0f;
 		//描画
-		Draw::Draw(7, &src, &dst, c, 0.0f);
+		if (m_time_d > 0) {
+			Draw::Draw(7, &src, &dst, a, 0.0f);
+		}
+		else {
+			Draw::Draw(7, &src, &dst, c, 0.0f);
+		}
 	}
 
 }

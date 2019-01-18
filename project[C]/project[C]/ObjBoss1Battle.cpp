@@ -45,6 +45,7 @@ void CObjBoss1Battle::Init()
 
 	m_time = 0;
 	m_time_f = 0;
+	m_time_d = 0;
 
 	//“–‚½‚è”»’è—p‚ÌHitBox‚ðì¬
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS_BATTLE, OBJ_BOSS_BATTLE_FIRST, 1);
@@ -84,6 +85,7 @@ void CObjBoss1Battle::Action()
 		Hits::DeleteHitBox(this);
 		return;
 	}
+
 	//ƒ}ƒbƒvã‚ÌŽålŒö‚ÌŒü‚«‚É‚æ‚Á‚ÄƒŠƒXˆÊ’uAŒü‚«‚ðÝ’è
 	if (m_pop_flag == true)
 	{
@@ -140,13 +142,23 @@ void CObjBoss1Battle::Action()
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
 		m_boss_hp -= 1;
+		m_time_d = 30;
 	}
+	if (m_time_d > 0)
+	{
+		m_time_d--;
+		if (m_time_d <= 0)
+		{
+			m_time_d = 0;
+		}
+	}
+
 	//“G‚Ì‘Ì—Í‚ª0‚É‚È‚Á‚½‚çÁ–Åˆ—‚ÉˆÚ‚é
 	if (m_del == false && m_boss_hp <= 0)
 	{
 		hero->SetFADEF(false);
-		hero->SetMAXHP(1);		//HP/MP‚ð‘‚â‚·
-		hero->SetMAXMP(1);
+		hero->SetMAXHP(2);		//HP/MP‚ð‘‚â‚·
+		hero->SetMAXMP(2);
 		m_del = true;
 		g_enemy_kills += 1;
 		g_boss_kills += 1;
@@ -245,6 +257,7 @@ void CObjBoss1Battle::Draw()
 {
 	//•`‰æƒJƒ‰[î•ñ
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 1.0f,0.5f,1.0f,1.0f };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
 	RECT_F dst;	//•`‰ææ•\Ž¦ˆÊ’u
@@ -254,7 +267,6 @@ void CObjBoss1Battle::Draw()
 	dst.m_left   = (     75.0f * m_posture) + m_px;
 	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
-
 
 	//“G‚Ìó‘Ô‚Å•`‰æ‚ð•ÏX
 	if (m_del == true)
@@ -277,6 +289,11 @@ void CObjBoss1Battle::Draw()
 		src.m_right  = 100.0f;
 		src.m_bottom = 100.0f;
 		//•`‰æ
-		Draw::Draw(14, &src, &dst, c, 0.0f);
+		if (m_time_d > 0) {
+			Draw::Draw(14, &src, &dst, a, 0.0f);
+		}
+		else {
+			Draw::Draw(14, &src, &dst, c, 0.0f);
+		}
 	}
 }

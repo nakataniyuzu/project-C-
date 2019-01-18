@@ -50,6 +50,7 @@ void CObjEnemy1::Action()
 		Hits::DeleteHitBox(this);
 	}
 
+
 	//©g‚ÌHitBox‚ğ‚Á‚Ä‚­‚é
 	CHitBox* hit = Hits::GetHitBox(this);
 

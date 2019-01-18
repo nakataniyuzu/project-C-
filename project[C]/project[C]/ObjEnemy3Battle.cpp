@@ -48,6 +48,8 @@ void CObjEnemy3Battle::Init()
 	m_del = false;
 	m_eff_flag = false;
 
+	m_time_d = 0;
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_THIRD, 1);
 }
@@ -129,7 +131,7 @@ void CObjEnemy3Battle::Action()
 		m_move = false;
 	}
 
-	//定期的にジャンプ(仮)
+	//定期的にジャンプ
 	
 	if (m_py + 100 >= 549)
 	{
@@ -179,16 +181,26 @@ void CObjEnemy3Battle::Action()
 			m_vx += 25;
 		}
 		m_enemy_hp -= 1;
+		m_time_d = 30;
 	}
-
+	if (m_time_d > 0)
+	{
+		m_time_d--;
+		if (m_time_d <= 0)
+		{
+			m_time_d = 0;
+		}
+	}
 
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_enemy_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ			
-		g_battle_key = false;
+		hero->SetFADEF(false);	//フェイドフラグをオフ		
+		hero->SetMAXHP(5);		//HP/MPを増やす
+		hero->SetMAXMP(5);
 		m_del = true;
 		g_enemy_kills += 1;
+		g_battle_key = false;
 	}
 
 	//敵が領域外に行かないようにする
@@ -261,6 +273,7 @@ void CObjEnemy3Battle::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 1.0f,0.5f,1.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -292,6 +305,11 @@ void CObjEnemy3Battle::Draw()
 		src.m_right  = 50.0f;
 		src.m_bottom = 200.0f;
 		//描画
-		Draw::Draw(7, &src, &dst, c, 0.0f);
+		if (m_time_d > 0) {
+			Draw::Draw(7, &src, &dst, a, 0.0f);
+		}
+		else {
+			Draw::Draw(7, &src, &dst, c, 0.0f);
+		}
 	}
 }
