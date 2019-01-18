@@ -74,14 +74,18 @@ void CObjEnemy1Battle::Action()
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
-
+	//主人公がマップ画面に移行した場合、元居る敵を削除
 	if (enemy_delete_flag == true)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 		return;
 	}
-
+	//バトル時の主人公が死亡した場合、動きを止める
+	if (herob->GetINPUTF() == false)
+	{
+		return;
+	}
 	//マップ上の主人公の向きによってリス位置、向きを設定
 	if (m_pop_flag == true)
 	{

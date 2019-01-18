@@ -22,7 +22,7 @@ public:
 	float GetVX() { return m_vx; }		
 	bool GetBATTLER() { return m_battle_flag; }
 
-
+	bool GetINPUTF() { return m_inputf; }			//inputfの情報を取得
 	int GetBATTLEHP() { return m_battle_hp; }		//主人公のHPを取得
 	int GetBATTLEMP() { return m_battle_mp; }		//主人公のMPを取得
 	int GetBATTLEMAGIC() { return m_battle_magic; }	//主人公の設定魔法を取得

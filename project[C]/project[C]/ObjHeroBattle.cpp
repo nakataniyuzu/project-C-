@@ -370,7 +370,7 @@ void CObjHeroBattle::Action()
 	}
 
 	//主人公の体力が0になったらゲームオーバーシーンに移行
-	if (m_battle_hp <= 0)
+	if (m_battle_hp <= 0 && m_inputf == true)
 	{
 		m_dtime = 70;		//タイムをセット
 		m_inputf = false;	//キー入力を制御
@@ -513,7 +513,7 @@ void CObjHeroBattle::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
-	float r[4] = { 1.0f,0.5f,0.5f,1.0f };
+	float r[4] = { 1.0f,0.5f,0.5f,0.5f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -531,12 +531,12 @@ void CObjHeroBattle::Draw()
 	dst.m_bottom = 100.0f + m_py;
 
 	//描画カラーの設定
-	if (m_time > 0){		//無敵時間の場合
+	if (m_dtime > 0) {	//死亡時間の場合
+		Draw::Draw(0, &src, &dst, r, 0.0f);
+	}
+	else if (m_time > 0){		//無敵時間の場合
 		Draw::Draw(0, &src, &dst, a, 0.0f);
 	}
-	else if(m_dtime_f==true) {	//死亡時間の場合
-		Draw::Draw(0, &src, &dst, r, 0.0f);
-	}	
 	else {	//通常時
 		Draw::Draw(0, &src, &dst, c, 0.0f);
 	}
