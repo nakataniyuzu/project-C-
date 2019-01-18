@@ -48,10 +48,11 @@ private:
 	int m_battle_mp;	//魔法使用回数(戦闘)
 	int m_battle_magic;	//魔法切り替え(戦闘)
 
-	int m_damage;
+	int m_damage;		//主人公が受けるダメージ用
 
 	int m_time;		//無敵時間用
-	int m_sword_delay;
+	int m_dtime;	//死亡時間
+	int m_sword_delay;	//剣攻撃間隔用
 
 	int	  m_ani_time;	//アニメーションフレーム動作間隔
 	int   m_ani_frame;	//描画フレーム

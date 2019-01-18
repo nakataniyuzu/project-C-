@@ -300,10 +300,10 @@ void CObjEnemy3Battle::Draw()
 	else
 	{
 		//Ø‚èŽæ‚èˆÊ’u‚ÌÝ’è
-		src.m_top = 0.0f;
-		src.m_left = 50.0f;
-		src.m_right = 100.0f;
-		src.m_bottom = 50.0f;
+		src.m_top    = 150.0f;
+		src.m_left   = 0.0f;
+		src.m_right  = 50.0f;
+		src.m_bottom = 200.0f;
 		//•`‰æ
 		if (m_time_d > 0) {
 			Draw::Draw(7, &src, &dst, a, 0.0f);

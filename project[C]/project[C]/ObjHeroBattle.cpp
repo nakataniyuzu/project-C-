@@ -54,6 +54,8 @@ void CObjHeroBattle::Action()
 
 	CObjEnemyMagicBattle* emb = (CObjEnemyMagicBattle*)Objs::GetObj(OBJ_ENEMY_MAGIC_BATTLE);
 
+	CObjFadein* fade = (CObjFadein*)Objs::GetObj(OBJ_FADEIN);
+
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_battle_hp = hero->GetHP();	//主人公からHPの情報を取得
@@ -357,8 +359,6 @@ void CObjHeroBattle::Action()
 		}
 	}
 
-	
-	
 	if (m_time > 0)
 	{
 		m_time--;
@@ -372,10 +372,24 @@ void CObjHeroBattle::Action()
 	//主人公の体力が0になったらゲームオーバーシーンに移行
 	if (m_battle_hp <= 0)
 	{
-		g_battle_flag = false;
+		m_inputf = false;	//キー入力を制御
+		m_dtime = 70;		//タイムをセット
+		hit->SetInvincibility(true);	//無敵オン
+	}
+	if (m_dtime == 1)
+	{
+		fade->SetDEATHF(true);	//フェイドのデスフラグをオンにして、ゲームオーバーへ移行するようにする
+		hero->SetFADEF(false);
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
-		Scene::SetScene(new CSceneGameover());
+	}
+	if (m_dtime > 0)	//m_dtimeに数値が入った場合
+	{
+		m_dtime--;	//数値を減らす
+		if (m_dtime <= 0)
+		{
+			m_dtime = 0;
+		}
 	}
 
 	//主人公が領域外に行かないようにする
@@ -399,6 +413,11 @@ void CObjHeroBattle::Action()
 						benemy2->SetENEMYDELETE(true);
 					}
 				}
+				else if (g_map_change == 2) {
+					if (benemy3 != nullptr) {
+						benemy3->SetENEMYDELETE(true);
+					}
+				}
 			}
 			else {
 				if (g_map_change == 0) {
@@ -409,6 +428,11 @@ void CObjHeroBattle::Action()
 				else if (g_map_change == 1) {
 					if (bboss2 != nullptr) {
 						bboss2->SetBOSSDELETE(true);
+					}
+				}
+				else if (g_map_change == 2) {
+					if (benemy3 != nullptr) {
+						benemy3->SetENEMYDELETE(true);
 					}
 				}
 			}
@@ -434,6 +458,11 @@ void CObjHeroBattle::Action()
 						benemy2->SetENEMYDELETE(true);
 					}
 				}
+				else if (g_map_change == 2) {
+					if (benemy3 != nullptr) {
+						benemy3->SetENEMYDELETE(true);
+					}
+				}
 			}
 			else {
 				if (g_map_change == 0) {
@@ -444,6 +473,11 @@ void CObjHeroBattle::Action()
 				else if (g_map_change == 1) {
 					if (bboss2 != nullptr) {
 						bboss2->SetBOSSDELETE(true);
+					}
+				}
+				else if (g_map_change == 2) {
+					if (benemy3 != nullptr) {
+						benemy3->SetENEMYDELETE(true);
 					}
 				}
 			}
@@ -480,6 +514,7 @@ void CObjHeroBattle::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
+	float r[4] = { 1.0f,0.5f,0.5f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -496,11 +531,14 @@ void CObjHeroBattle::Draw()
 	dst.m_right  = (75 - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
-	//描画
-	if (m_time > 0){
+	//描画カラーの設定
+	if (m_time > 0){		//無敵時間の場合
 		Draw::Draw(0, &src, &dst, a, 0.0f);
 	}
-	else {
+	else if(m_dtime > 0) {	//死亡時間の場合
+		Draw::Draw(0, &src, &dst, r, 0.0f);
+	}	
+	else {	//通常時
 		Draw::Draw(0, &src, &dst, c, 0.0f);
 	}
 

@@ -192,6 +192,10 @@ void CSceneMain::Scene()
 			CObjEnemy2Battle* bobje2 = new CObjEnemy2Battle();
 			Objs::InsertObj(bobje2, OBJ_ENEMY_BATTLE_SECOND, 10);
 		}
+		else if (g_map_change == 2) {
+			CObjEnemy3Battle* bobje3 = new CObjEnemy3Battle();
+			Objs::InsertObj(bobje3, OBJ_ENEMY_BATTLE_THIRD, 10);
+		}
 		m_enemy_flag = false;
 		hero->SetENEMYF(m_enemy_flag);
 	}
@@ -205,6 +209,10 @@ void CSceneMain::Scene()
 		else if (g_map_change == 1) {
 			CObjBoss2Battle* bobjb2 = new CObjBoss2Battle();
 			Objs::InsertObj(bobjb2, OBJ_BOSS_BATTLE_SECOND, 10);
+		}
+		else if (g_map_change == 2) {
+			CObjBoss3Battle* bobjb3 = new CObjBoss3Battle();
+			Objs::InsertObj(bobjb3, OBJ_BOSS_BATTLE_THIRD, 10);
 		}
 		m_boss_flag = false;
 		hero->SetBOSSF(m_boss_flag);
