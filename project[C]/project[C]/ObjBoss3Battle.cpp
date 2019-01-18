@@ -19,7 +19,7 @@ void CObjBoss3Battle::Init()
 
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_boss_hp = 50;     //敵のヒットポイント(最大50)
+	m_boss_hp = 70;     //敵のヒットポイント(最大70)
 	m_damage = 5;
 	m_delay = 5;
 
@@ -167,21 +167,30 @@ void CObjBoss3Battle::Action()
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_ATTACK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		float r = 0;
+		for (int i = 0; i < 10; i++) {
+			if (hit_date[i] != nullptr) {
+				r = hit_date[i]->r;
+			}
+		}
 		//ノックバック処理
-		if (m_posture == 1.0f)
+		if ((r < 45 && r >= 0) || r > 315)
 		{
 			m_vy = -10;
-			m_vx -= 5;
+			m_vx -= 25;
 		}
-		else if (m_posture == 0.0f)
+		if (r > 135 && r < 225)
 		{
 			m_vy = -10;
-			m_vx += 5;
+			m_vx += 25;
 		}
-		m_time = 80;		//無敵時間をセット
-		hit->SetInvincibility(true);	//無敵オン
 		m_boss_hp -= 1;
 	}
+
 	if (m_time > 0)
 	{
 		m_time--;

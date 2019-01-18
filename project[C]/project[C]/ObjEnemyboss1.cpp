@@ -27,11 +27,23 @@ void CObjEnemyboss1::Init()
 //アクション
 void CObjEnemyboss1::Action()
 {
-	if (g_boss_kills >= 1)
+	
+	if (g_map_change == 0 && g_boss_kills == 1)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
+	else if (g_map_change == 1 && g_boss_kills == 2)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+	else if (g_map_change == 2 && g_boss_kills == 3)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+	
 
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
