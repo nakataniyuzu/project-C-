@@ -23,6 +23,9 @@ void CObjSwordBattle::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
+	m_hero_x = 0.0f;
+	m_hero_y = 0.0f;
+
 	m_posture = 0.0f;	//右向き0.0f 左向き1.0f
 
 	//blockとの衝突状態確認
@@ -48,6 +51,10 @@ void CObjSwordBattle::Init()
 //アクション
 void CObjSwordBattle::Action()
 {
+	CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
+	m_hero_x = herob->GetX();
+	m_hero_y = herob->GetY();
+
 	if (m_hit_left == true)	//左
 		m_hit = true;
 	if (m_hit_right == true)//右
@@ -59,6 +66,14 @@ void CObjSwordBattle::Action()
 	if (m_posture == 1.0f) {
 		m_ani_frame_y = 1;
 	}
+
+
+	if (m_posture == 0.0f)
+		m_x = m_hero_x + 65;
+	else
+		m_x = m_hero_x - 30;
+
+	m_y = m_hero_y + 20;
 
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
