@@ -278,10 +278,10 @@ void CObjEnemy3Battle::Draw()
 	else
 	{
 		//Ø‚èæ‚èˆÊ’u‚Ìİ’è
-		src.m_top = 0.0f;
-		src.m_left = 50.0f;
-		src.m_right = 100.0f;
-		src.m_bottom = 50.0f;
+		src.m_top    = 150.0f;
+		src.m_left   = 0.0f;
+		src.m_right  = 50.0f;
+		src.m_bottom = 200.0f;
 		//•`‰æ
 		Draw::Draw(7, &src, &dst, c, 0.0f);
 	}

@@ -16,20 +16,16 @@ void CObjFadein::Init()
 
 	m_ani_max_time = 2;		//アニメーション間隔幅
 	m_flag = true;		//切り替え用フラグ
+
+	//フラグの初期化
+	m_next_flag = false;
+	m_main_flag = false;
+	m_death_flag = false;
 }
 
 //アクション
 void CObjFadein::Action()
 {
-	//戦闘時の敵の情報を持ってくる
-	CObjEnemy1Battle* benemy1 = (CObjEnemy1Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_FIRST);
-	CObjEnemy2Battle* benemy2 = (CObjEnemy2Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_SECOND);
-	CObjEnemy3Battle* benemy3 = (CObjEnemy3Battle*)Objs::GetObj(OBJ_ENEMY_BATTLE_THIRD);
-	CObjBoss1Battle* bboss1 = (CObjBoss1Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_FIRST);
-	CObjBoss2Battle* bboss2 = (CObjBoss2Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_SECOND);
-	CObjBoss3Battle* bboss3 = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
-
-
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	hero->SetSPEED(0.0f);	//スピードを０にする
@@ -37,12 +33,6 @@ void CObjFadein::Action()
 	hero->SetVY(0.0f);
 	m_next_flag = hero->GetNEXTF();	//ネクストフラグを取得
 	m_fade_flag = hero->GetFADEF();	//フェイドインかアウトを設定するためのフラグ
-
-	//CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
-	//herob->SetSPEED(0.0f);	//主人公のスピードを０にする
-	//herob->SetVX(0.0f);		//主人公のベクトルを０にする
-	//herob->SetVY(0.0f);
-
 
 	if (m_flag == true)
 	{
@@ -55,27 +45,29 @@ void CObjFadein::Action()
 		}
 		if (m_ani_frame == 9)
 		{
-			if (m_next_flag == true)
+			if (m_next_flag == true)	//フラグがオンの場合
 			{
 				Scene::SetScene(new CSceneNextfloor());	//ゲームネクストシーンに移行
 			}
-			if (m_main_flag == true)
+			if (m_main_flag == true)	//フラグがオンの場合
 			{
 				Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
+			}
+			if (m_death_flag == true)	//フラグがオンの場合
+			{
+				Scene::SetScene(new CSceneGameover());	//ゲームオーバーシーンに移行
 			}
 			m_flag = false;
 			if (m_fade_flag == false) {
 				g_battle_flag = false;//マップ画面へ移行
 				g_key_flag = false;		//キー入力制御フラグをオフにする
 				g_battle_key = true;//マップ画面へ移行
-				g_mhit_enemy_flag = false;	//マップ上の敵を動かす
-				//hero->SetDELETE(true);	//DELETEフラグをオンにする
 				Audio::Stop(13);
 				Audio::Start(12);	//マップ用BGMを鳴らす
 			}
 			else {
 				g_battle_flag = true;//バトル画面へ移行
-				Audio::Stop(12);
+				//Audio::Stop(12);
 				Audio::Start(13);	//マップ用BGMを鳴らす
 			}
 		}
