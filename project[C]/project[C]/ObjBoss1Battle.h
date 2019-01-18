@@ -36,6 +36,7 @@ private:
 	float hero_posture;
 
 	int m_time;	//突進時間
+	int m_time_d;	//ダメージ時のカラー変更用タイム
 	
 	bool m_boss_flag;	//ボス戦闘用フラグ
 	bool enemy_flag;	//敵削除用

@@ -430,8 +430,8 @@ void CObjHeroBattle::Action()
 					}
 				}
 				else if (g_map_change == 2) {
-					if (benemy3 != nullptr) {
-						benemy3->SetENEMYDELETE(true);
+					if (bboss3 != nullptr) {
+						bboss3->SetBOSSDELETE(true);
 					}
 				}
 			}
@@ -475,8 +475,8 @@ void CObjHeroBattle::Action()
 					}
 				}
 				else if (g_map_change == 2) {
-					if (benemy3 != nullptr) {
-						benemy3->SetENEMYDELETE(true);
+					if (bboss3 != nullptr) {
+						bboss3->SetBOSSDELETE(true);
 					}
 				}
 			}

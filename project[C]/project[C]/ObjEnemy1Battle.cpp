@@ -41,6 +41,8 @@ void CObjEnemy1Battle::Init()
 	m_del = false;
 	m_eff_flag = false;
 
+	m_time_d = 0;
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_FIRST, 1);
 }
@@ -135,28 +137,27 @@ void CObjEnemy1Battle::Action()
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
-		//主人公がブロックとどの角度で当たっているのかを確認
-		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
-		hit_date = hit->SearchElementHit(ELEMENT_ATTACK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-		
-		float r = 0;
-		for (int i = 0; i < 10; i++) {
-			if (hit_date[i] != nullptr) {
-			r = hit_date[i]->r;
-			}
-		}
 		//ノックバック処理
-		if ((r < 45 && r >= 0) || r > 315)
+		if (m_posture == 0.0f)
 		{
 			m_vy = -10;
 			m_vx -= 25;
 		}
-		if (r > 135 && r < 225)
+		if (m_posture == 1.0f)
 		{
 			m_vy = -10;
 			m_vx += 25;
 		}
+		m_time_d = 30;
 		m_enemy_hp -= 1;
+	}
+	if (m_time_d > 0)
+	{
+		m_time_d--;
+		if (m_time_d <= 0)
+		{
+			m_time_d = 0;
+		}
 	}
 
 	//敵の体力が0になったら消滅処理に移る
@@ -187,7 +188,6 @@ void CObjEnemy1Battle::Action()
 	{
 		m_py = 50.0f;
 	}
-
 
 	if (m_time > 0) {
 		m_time--;
@@ -234,8 +234,6 @@ void CObjEnemy1Battle::Action()
 		}
 		return;
 	}
-	
-	
 }
 
 //ドロー
@@ -243,6 +241,7 @@ void CObjEnemy1Battle::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 10.0f,0.6f,0.6f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -274,6 +273,11 @@ void CObjEnemy1Battle::Draw()
 		src.m_right  = 50.0f;
 		src.m_bottom =150.0f;
 		//描画
-		Draw::Draw(7, &src, &dst, c, 0.0f);
+		if (m_time_d > 0) {
+			Draw::Draw(7, &src, &dst, a, 0.0f);
+		}
+		else {
+			Draw::Draw(7, &src, &dst, c, 0.0f);
+		}
 	}
 }
