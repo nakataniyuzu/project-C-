@@ -14,7 +14,6 @@ class CObjFadein : public CObj
 		void Action();	//アクション
 		void Draw();	//ドロー
 
-		void SetDEATHF(bool x) { m_death_flag = x; }//ゲームオーバーシーンへの移行用フラグのセット
 	private:
 		int	m_ani_time;
 		int m_ani_frame;

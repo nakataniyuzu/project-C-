@@ -372,24 +372,23 @@ void CObjHeroBattle::Action()
 	//主人公の体力が0になったらゲームオーバーシーンに移行
 	if (m_battle_hp <= 0)
 	{
-		m_inputf = false;	//キー入力を制御
 		m_dtime = 70;		//タイムをセット
+		m_inputf = false;	//キー入力を制御
 		hit->SetInvincibility(true);	//無敵オン
-	}
-	if (m_dtime == 1)
-	{
-		fade->SetDEATHF(true);	//フェイドのデスフラグをオンにして、ゲームオーバーへ移行するようにする
-		hero->SetFADEF(false);
-		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
-		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
 	if (m_dtime > 0)	//m_dtimeに数値が入った場合
 	{
 		m_dtime--;	//数値を減らす
 		if (m_dtime <= 0)
 		{
+			m_dtime_f = true;	//死亡用フラグをオン
 			m_dtime = 0;
 		}
+	}
+	if (m_dtime_f == true) {
+		hero->SetDEATHF(true);	//フェイドのデスフラグをオンにして、ゲームオーバーへ移行するようにする
+		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
 
 	//主人公が領域外に行かないようにする
@@ -535,7 +534,7 @@ void CObjHeroBattle::Draw()
 	if (m_time > 0){		//無敵時間の場合
 		Draw::Draw(0, &src, &dst, a, 0.0f);
 	}
-	else if(m_dtime > 0) {	//死亡時間の場合
+	else if(m_dtime_f==true) {	//死亡時間の場合
 		Draw::Draw(0, &src, &dst, r, 0.0f);
 	}	
 	else {	//通常時

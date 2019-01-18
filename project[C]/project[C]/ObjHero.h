@@ -47,6 +47,9 @@ class CObjHero : public CObj
 		bool GetBOSSF() { return m_boss_battle_flag; }		//ボス出現用フラグを取得
 		bool GetFADEF() { return m_fade_flag; }			//フェイドフラグを取得	
 		bool GetNEXTF() { return m_next_flag; }			//ネクストフラグを取得
+		bool GetDEATHF() { return m_death_flag; }	//死亡用フラグを取得
+		
+		void SetDEATHF(bool x) { m_death_flag = x; }	//ゲームオーバーシーンへの移行用フラグを取得
 
 
 		void SetENEMYF(bool x) { m_ene_battle_flag = x; }	//敵出現用フラグをセット
@@ -108,6 +111,7 @@ class CObjHero : public CObj
 		bool  m_f;		//キー（長押し）制御用
 		bool  m_mf;		//キー（長押し）制御用
 
+		bool m_death_flag;		//主人公死亡用フラグ
 		bool m_next_flag;		//次の階層への移行用
 		bool m_fade_flag;		//フェイドイン,アウト用
 		bool m_battle_flag;		//バトル移行用
