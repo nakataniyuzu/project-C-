@@ -169,7 +169,7 @@ void CObjHeroBattle::Action()
 				//ŽaŒ‚‰¹
 				Audio::Start(0);
 
-				m_sword_delay = 10;
+				m_sword_delay = 20;
 			}
 		}
 		if (m_sword_delay > 0)

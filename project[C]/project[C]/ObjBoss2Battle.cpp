@@ -19,7 +19,7 @@ void CObjBoss2Battle::Init()
 
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_boss_hp = 1;     //敵のヒットポイント(最大25)
+	m_boss_hp = 35;     //敵のヒットポイント(最大35)
 	m_damage = 3;
 
 	m_ani_time = 0;
@@ -140,29 +140,40 @@ void CObjBoss2Battle::Action()
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
 	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_date;							//当たった時の細かな情報を入れるための構造体
+		hit_date = hit->SearchElementHit(ELEMENT_ATTACK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		float r = 0;
+		for (int i = 0; i < 10; i++) {
+			if (hit_date[i] != nullptr) {
+				r = hit_date[i]->r;
+			}
+		}
 		//ノックバック処理
-		if (m_posture == 1.0f)
+		if ((r < 45 && r >= 0) || r > 315)
 		{
 			m_vy = -10;
 			m_vx -= 25;
 		}
-		else if (m_posture == 0.0f)
+		if (r > 135 && r < 225)
 		{
 			m_vy = -10;
 			m_vx += 25;
 		}
-
 		m_boss_hp -= 1;
 	}
+
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-		g_battle_key = false;
-		g_boss_kills += 1;
-		g_enemy_kills += 1;
+		hero->SetFADEF(false);
+		hero->SetMAXHP(1);		//HP/MPを増やす
+		hero->SetMAXMP(1);
 		m_del = true;
+		g_enemy_kills += 1;
+		g_boss_kills += 1;
+		g_battle_key = false;
 	}
 
 	//敵が領域外に行かないようにする
