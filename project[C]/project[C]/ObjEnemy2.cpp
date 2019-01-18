@@ -79,6 +79,7 @@ void CObjEnemy2::Action()
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公を触れたら
 	{
+		g_mhit_enemy_flag = true;
 		m_speed_power = 0.0f;		//スピードを０にする
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -96,6 +97,13 @@ void CObjEnemy2::Action()
 		m_move = false;
 	if (m_hit_down == true)	//下
 		m_move = true;
+
+	if (g_mhit_enemy_flag == true)
+	{
+		m_speed_power = 0.0f;		//スピードを０にする
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+	}
 
 	//方向
 	if (m_move == false)

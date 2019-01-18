@@ -13,12 +13,14 @@
 //使用するネームスペース
 using namespace GameL;
 
-int g_map_change = 0;		//マップが何層目かの変数の初期化
-bool g_battle_flag = false;	//バトル画面用の変数の初期化
-bool g_key_flag = false;	//キー入力制御用の変数の初期化
-bool g_battle_key = true;
+int g_map_change = 2;		//マップが何層目かの変数の初期化
 int g_enemy_kills = 0;		//敵撃破数の変数の初期化
 int g_boss_kills = 0;		//ボス撃破数変数の初期化
+bool g_battle_flag = false;	//バトル画面用の変数の初期化
+bool g_key_flag = false;	//キー入力制御用の変数の初期化
+bool g_battle_key = true;	//戦闘中のキー入力制御用フラグの初期化
+bool g_mhit_enemy_flag = false;	//マップの敵制御用フラグの初期化
+
 
 //イニシャライズ
 void CObjTitle::Init()
