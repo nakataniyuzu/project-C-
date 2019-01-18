@@ -194,11 +194,13 @@ void CObjBoss3Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ			
-		g_battle_key = false;
+		hero->SetFADEF(false);	//フェイドフラグをオフ	
+		hero->SetMAXHP(1);		//HP/MPを増やす
+		hero->SetMAXMP(1);
+		m_del = true;
 		g_enemy_kills += 1;
 		g_boss_kills += 1;
-		m_del = true;
+		g_battle_key = false;
 	}
 
 	//敵が領域外に行かないようにする
@@ -279,7 +281,7 @@ void CObjBoss3Battle::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
+	float a[4] = { 1.0f,0.5f,1.0f,0.5f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置

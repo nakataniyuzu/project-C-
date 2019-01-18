@@ -50,9 +50,7 @@ void CObjEnemy1::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	battle_flag = hero->GetBATTLE();
-	
+
 	//©g‚ÌHitBox‚ğ‚Á‚Ä‚­‚é
 	CHitBox* hit = Hits::GetHitBox(this);
 

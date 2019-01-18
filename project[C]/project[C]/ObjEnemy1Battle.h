@@ -36,6 +36,7 @@ private:
 	float hero_posture;
 
 	int m_time;		//敵死亡時のフェイドイン移行用間隔幅
+	int m_time_d;	//ダメージ時のカラー変更用タイム
 	int m_ani;			//死亡アニメーション用
 	int m_ani_time_d;	//死亡アニメーション間隔タイム
 	bool m_del;			//削除チェック
@@ -47,6 +48,7 @@ private:
 	bool m_eff_flag;	//エフェクト用フラグ
 	
 	bool enemy_delete_flag;	//敵消滅用
+
 	//移動の向き制御用
 	bool m_move;
 };

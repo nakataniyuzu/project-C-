@@ -19,7 +19,7 @@ void CObjBoss2Battle::Init()
 
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_boss_hp = 1;     //敵のヒットポイント(最大25)
+	m_boss_hp = 25;     //敵のヒットポイント(最大25)
 	m_damage = 3;
 
 	m_ani_time = 0;
@@ -44,6 +44,7 @@ void CObjBoss2Battle::Init()
 
 	m_time = 0;
 	m_time_f = 0;
+	m_time_d = 0;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_BOSS_BATTLE, OBJ_BOSS_BATTLE_SECOND, 1);
@@ -151,18 +152,28 @@ void CObjBoss2Battle::Action()
 			m_vy = -10;
 			m_vx += 25;
 		}
-
 		m_boss_hp -= 1;
+		m_time_d = 30;
 	}
+	if (m_time_d > 0)
+	{
+		m_time_d--;
+		if (m_time_d <= 0)
+		{
+			m_time_d = 0;
+		}
+	}
+
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-		g_battle_key = false;
+		hero->SetFADEF(false);	//フェイドフラグをオフ
+		hero->SetMAXHP(5);		//HP/MPを増やす
+		hero->SetMAXMP(5);
+		m_del = true;
 		g_boss_kills += 1;
 		g_enemy_kills += 1;
-		m_del = true;
+		g_battle_key = false;
 	}
 
 	//敵が領域外に行かないようにする
@@ -266,6 +277,7 @@ void CObjBoss2Battle::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 1.0f,0.5f,1.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -308,6 +320,11 @@ void CObjBoss2Battle::Draw()
 			src.m_bottom = 102.0f;
 		}
 		//描画
-		Draw::Draw(14, &src, &dst, c, 0.0f);
+		if (m_time_d > 0) {
+			Draw::Draw(14, &src, &dst, a, 0.0f);
+		}
+		else {
+			Draw::Draw(14, &src, &dst, c, 0.0f);
+		}
 	}
 }
