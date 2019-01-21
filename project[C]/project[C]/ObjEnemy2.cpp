@@ -66,7 +66,7 @@ void CObjEnemy2::Action()
 
 	if (m_time > 0)
 	{
-		m_speed_power = 0.0f;	//スピードを0にする
+			m_speed_power = 0.0f;	//スピードを0にする
 		m_time--;
 		if (m_time <= 0)
 		{
