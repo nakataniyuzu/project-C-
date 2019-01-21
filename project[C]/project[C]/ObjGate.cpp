@@ -21,6 +21,7 @@ CObjGate::CObjGate(float x, float y)
 //イニシャライズ
 void CObjGate::Init()
 {
+	m_time = 0;
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_MYSTERY, OBJ_GATE, 1);
 
@@ -43,7 +44,6 @@ void CObjGate::Action()
 			Hits::DeleteHitBox(this);
 		}
 	}
-
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 

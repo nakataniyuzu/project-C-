@@ -46,7 +46,6 @@ void CObjEnemy1::Action()
 {
 	if (g_enemy_kills >= 5)
 	{
-		m_allkill = true;
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}

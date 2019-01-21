@@ -93,12 +93,7 @@ void CObjFire::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-	//MYSTERY‘®«AENEMY‘®«‚ÆÕ“Ë‚µ‚½‚çÁ–Å‚³‚¹‚é
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+	
 	//•Ç‚É“–‚½‚Á‚½‚çÁ‚¦‚éˆ—
 	if (m_hit == true) {		
 		this->SetStatus(false);

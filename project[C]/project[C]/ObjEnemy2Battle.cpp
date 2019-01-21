@@ -20,7 +20,7 @@ void CObjEnemy2Battle::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	
-	m_enemy_hp = 10;     //敵のヒットポイント(最大10)
+	m_enemy_hp = 5;     //敵のヒットポイント(最大10)
 	m_damage = 2;
 
 	m_ani_time = 0;

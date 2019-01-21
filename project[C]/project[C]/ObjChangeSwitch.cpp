@@ -24,7 +24,8 @@ CObjChangeSwitch::CObjChangeSwitch(float x, float y)
 void CObjChangeSwitch::Init()
 {
 	m_change = false;	//‰æ‘œØ‚è‘Ö‚¦
-						//“–‚½‚è”»’è—p‚ÌHitBox‚ğì¬
+	m_time = 0;
+	//“–‚½‚è”»’è—p‚ÌHitBox‚ğì¬
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_CHANGESWITCH, 1);
 }
 

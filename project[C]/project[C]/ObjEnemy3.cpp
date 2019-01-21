@@ -45,9 +45,8 @@ void CObjEnemy3::Init()
 void CObjEnemy3::Action()
 {
 	
-	if (g_enemy_kills >= 20)
+	if (g_enemy_kills >= 17)
 	{
-		m_allkill = true;
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}

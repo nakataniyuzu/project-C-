@@ -14,6 +14,28 @@ using namespace GameL;
 //イニシャライズ
 void CObjMessage::Init()
 {
+	//フラグの初期化
+	f.gate = false;		//GATEのメッセージフラグ
+	f.key = false;		//KEYのメッセージフラグ
+	f.water = false;		//WATERBLOCKのメッセージフラグ
+	f.ice = false;		//ICEMAGICのメッセージフラグ
+	f.wind = false;		//WINDMAGICのメッセージフラグ
+	f.sblock = false;	//SWITCHBLOCKのメッセージフラグ
+	f.sgate = false;		//SWITCHGATEのメッセージフラグ
+	f.heal = false;		//HEALのメッセージフラグ
+	f.allkill = false;	//ALLKILLのメッセージフラグ
+
+	//タイムの初期化
+	t.gate = 0;		//GATE用の時間
+	t.water = 0;		//WATER用の時間
+	t.key = 0;		//KEY用の時間
+	t.ice = 0;		//ICE用の時間
+	t.wind = 0;		//wind用の時間
+	t.sblock = 0;		//SWITCHBLOCK用の時間
+	t.sgate = 0;		//SWITCHGATE用の時間
+	t.heal = 0;		//HEALの時間
+	t.allkill = 0;	//ALLKILLの時間
+
 
 }
 
@@ -46,34 +68,18 @@ void CObjMessage::Draw()
 	f.sgate = hero->GetSGATE();
 	f.sblock = hero->GetSBLOCK();
 	f.heal = hero->GetHEAL();
+	f.allkill = hero->GetALLKILL();
 
-	CObjEnemy1* enemy1 = (CObjEnemy1*)Objs::GetObj(OBJ_ENEMY_FIRST);
-	CObjEnemy2* enemy2 = (CObjEnemy2*)Objs::GetObj(OBJ_ENEMY_SECOND);
-	CObjEnemy3* enemy3 = (CObjEnemy3*)Objs::GetObj(OBJ_ENEMY_THIRD);
-
-	if (g_map_change == 0)
-		f.allkill = enemy1->GetALLKILL();
-	else if(g_map_change == 1)
-		f.allkill = enemy2->GetALLKILL();
-	else if (g_map_change == 2)
-		f.allkill = enemy3->GetALLKILL();
 	if (f.allkill == true)	//敵が全滅したときにフラグをセット
 	{
-		t.allkill = 100;
+		t.allkill = 130;
 	}
 	if (t.allkill > 0) {
 		t.allkill--;
 		f.allkill = false;		//フラグをオフ
-		if (g_map_change == 0)
-			enemy1->SetALLKILL(f.allkill);
-		else if (g_map_change == 1)
-			enemy2->SetALLKILL(f.allkill);
-		else if (g_map_change == 2)
-			enemy3->SetALLKILL(f.allkill);
-
+		hero->SetALLKILL(f.allkill);
 		BackDraw(225.0f, 175.0f, 370.0f, 255.0f, a);
-		Font::StrDraw(L"敵が全滅したようだ", 180, 230, 20, c);//時間が0になると表示を終了
-
+		Font::StrDraw(L"敵の気配が消えた...", 180, 230, 20, c);//時間が0になると表示を終了
 		if (t.allkill <= 0) {
 			t.allkill = 0;
 		}

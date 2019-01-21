@@ -25,8 +25,8 @@ void CObjHero::Init()
 	m_speed_power = 3.0f;	//’Êí‘¬“x
 	m_posture = 2.0f;	// 0.0f = ã	1.0f = ‰E	2.0f = ‰º	3.0f = ¶
 	
-	m_max_hp = 10 + g_enemy_kills + g_boss_kills;	//Å‘åHP
-	m_max_mp = 10 + g_enemy_kills + g_boss_kills;	//Å‘åMP
+	m_max_hp = 30 + g_enemy_kills + g_boss_kills;	//Å‘åHP
+	m_max_mp = 30 + g_enemy_kills + g_boss_kills;	//Å‘åMP
 	m_hp = m_max_hp;	//‰ŠúHP
 	m_mp = m_max_mp;	//‰ŠúMP
 	m_magic = 0;	//‰Šú–‚–@
