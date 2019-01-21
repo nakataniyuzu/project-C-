@@ -4,6 +4,7 @@
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjChangeSwitch.h"
@@ -49,6 +50,7 @@ void CObjChangeSwitch::Action()
 		else {
 			m_change = true;
 		}
+		Audio::Start(15);
 		hit->SetInvincibility(true);	//–³“GƒIƒ“
 		m_time = 100;
 	}

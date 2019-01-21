@@ -44,14 +44,12 @@ void CObjEnemy2::Init()
 //アクション
 void CObjEnemy2::Action()
 {
-	if (g_enemy_kills >= 10)
+	if (g_enemy_kills >= 11)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
 
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	battle_flag = hero->GetBATTLE();
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);

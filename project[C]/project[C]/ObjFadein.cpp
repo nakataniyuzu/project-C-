@@ -33,7 +33,8 @@ void CObjFadein::Action()
 	hero->SetVY(0.0f);
 	m_next_flag = hero->GetNEXTF();	//ネクストフラグを取得
 	m_fade_flag = hero->GetFADEF();	//フェイドインかアウトを設定するためのフラグ
-	m_death_flag = hero->GetDEATHF();
+	m_death_flag = hero->GetDEATHF();//死亡したか判断するためのフラグを取得
+	m_clear_flag = hero->GetCLEAR();//クリアシーンへ移行するためのフラグを取得
 
 	if (m_flag == true)
 	{
@@ -58,6 +59,10 @@ void CObjFadein::Action()
 			{
 				Scene::SetScene(new CSceneGameover());	//ゲームオーバーシーンに移行
 			}
+			if (m_clear_flag == true)
+			{
+				Scene::SetScene(new CSceneClear());	//ゲームクリアシーンに移行
+			}
 			m_flag = false;
 			if (m_fade_flag == false) {
 				g_battle_flag = false;//マップ画面へ移行
@@ -69,7 +74,7 @@ void CObjFadein::Action()
 			}
 			else {
 				g_battle_flag = true;//バトル画面へ移行
-				//Audio::Stop(12);
+				Audio::Stop(12);
 				Audio::Start(13);	//マップ用BGMを鳴らす
 			}
 		}

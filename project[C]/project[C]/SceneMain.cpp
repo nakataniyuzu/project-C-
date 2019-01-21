@@ -46,6 +46,9 @@ void CSceneMain::InitScene()
 	else if (g_map_change == 2) {
 		p = Save::ExternalDataOpen(L"map3.csv", &size);//外部データ読み込み
 	}
+	else if (g_map_change == 3) {
+		p = Save::ExternalDataOpen(L"map4.csv", &size);//外部データ読み込み
+	}
 		
 
 	int map[38][65];
@@ -73,7 +76,7 @@ void CSceneMain::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"Hero.png", 0, TEX_SIZE_256);
-	if (g_map_change == 0) {
+	if (g_map_change == 0 || g_map_change == 3) {
 		Draw::LoadImageW(L"Floor1.png", FLOOR, TEX_SIZE_800_600);		//1層目の床
 		Draw::LoadImageW(L"Floor1Block.png", BLOCK, TEX_SIZE_800_600);	//1層目のブロック
 		Draw::LoadImageW(L"Floor1_Enemy.png", 7, TEX_SIZE_200_100);		//1層目の敵
@@ -132,6 +135,7 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(9, L"THUNDER.WAV", EFFECT);
 	Audio::LoadAudio(10, L"HEAL.WAV", EFFECT);
 	Audio::LoadAudio(11, L"ZELDA.WAV", EFFECT);
+	Audio::LoadAudio(15, L"SERECT.wav", EFFECT);
 
 	Audio::LoadAudio(14, L"ENTER.wav", EFFECT);
 

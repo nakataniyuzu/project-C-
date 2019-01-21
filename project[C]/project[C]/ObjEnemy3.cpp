@@ -27,7 +27,7 @@ void CObjEnemy3::Init()
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 0.5f;	//通常速度
-	m_ani_max_time = 4;		//アニメーション間隔幅
+	m_ani_max_time = 8;		//アニメーション間隔幅
 
 	m_move = false;
 
@@ -44,6 +44,13 @@ void CObjEnemy3::Init()
 //アクション
 void CObjEnemy3::Action()
 {
+	
+	if (g_enemy_kills >= 17)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (g_battle_flag == true)
@@ -74,6 +81,10 @@ void CObjEnemy3::Action()
 		m_vy = 0.0f;
 		hit->SetInvincibility(true);	//当たり判定を消す
 	}
+
+	//Windの情報を持ってくる
+	CObjWind* wind = (CObjWind*)Objs::GetObj(OBJ_WIND);
+
 	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)	//魔法攻撃(Fire)に触れたら
 	{
 		m_speed_power = 2.0f;	//スピードを上げる
@@ -82,6 +93,18 @@ void CObjEnemy3::Action()
 	{
 		m_speed_power = 0.0f;	//スピードを止める
 	}
+	if (hit->CheckObjNameHit(OBJ_WIND) != nullptr)	//魔法攻撃(Wind)に触れたら
+	{
+		if (wind->GetWINDPOS() == 0.0f)
+			m_vy = -5.0f;
+		else if (wind->GetWINDPOS() == 1.0f)
+			m_vx = 5.0f;
+		else if (wind->GetWINDPOS() == 2.0f)
+			m_vy = 5.0f;
+		else 
+			m_vx = -5.0f;
+	}
+
 	if (m_hit_up == true)	//上
 		m_move = false;
 	if (m_hit_down == true)	//下
@@ -129,7 +152,12 @@ void CObjEnemy3::Action()
 		hit_date = hit->SearchElementHit(ELEMENT_MYSTERY);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
-			float r = hit_date[i]->r;
+			float r = 0;
+			for (int i = 0; i < 10; i++) {
+				if (hit_date[i] != nullptr) {
+					r = hit_date[i]->r;
+				}
+			}
 			//角度で上下左右を判定
 			if ((r < 45 && r >= 0) || r > 315)
 			{

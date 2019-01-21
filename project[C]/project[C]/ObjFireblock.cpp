@@ -4,6 +4,7 @@
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjFireblock.h"
@@ -41,6 +42,7 @@ void CObjFireblock::Action()
 	//Fire（魔法）と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_FIRE) != nullptr)
 	{
+		Audio::Start(11);
 		m_switch = 1.0f;
 	}
 

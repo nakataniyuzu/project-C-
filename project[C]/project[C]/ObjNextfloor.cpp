@@ -37,7 +37,8 @@ void CObjNextfloor::Action()
 		if (m_time > 40) {
 			m_time -= 15;
 		}
-		if (m_time <= 40 && Input::GetVKey(VK_RETURN) == true)
+		if (m_time <= 40 && Input::GetVKey(VK_RETURN) == true 
+		 || m_time <= 40 && Input::GetVKey('Z') == true)
 		{
 			Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 		}

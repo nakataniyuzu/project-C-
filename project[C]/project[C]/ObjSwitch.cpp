@@ -4,6 +4,7 @@
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjSwitch.h"
@@ -40,7 +41,9 @@ void CObjSwitch::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		m_change = true;
+		Audio::Start(11);	//エフェクト音を鳴らす
+		m_change = true;	//描画カラーを変える
+		hit->SetInvincibility(true);	//無敵をオンにする
 	}
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
