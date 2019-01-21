@@ -58,6 +58,9 @@ class CObjHero : public CObj
 		void SetFADEF(bool x) { m_fade_flag = x; }		//フェイドフラグをセット
 		void SetNEXTF(bool x) { m_next_flag = x; }		//ネクストフラグをセット
 
+		bool GetALLKILL() { return mes.allkill; }//敵全滅用
+		void SetALLKILL(bool x) { mes.allkill = x; }	//敵全滅用セット関数
+
 		bool GetKEYF() { return mes.key; }		//KEYの情報を取得
 		bool GetGATEF() { return mes.gate; }	//GATEの情報を取得
 		bool GetWATERF() { return mes.water; }	//WATERの情報を取得
@@ -120,7 +123,7 @@ class CObjHero : public CObj
 		bool m_ene_battle_flag;	//雑魚出現用
 		bool m_boss_battle_flag;//ボス出現用
 		bool m_map_flag; //マップ移行用
-
+		bool m_allkill_flag;	//ALLKILLフラグ
 		//メッセージ用フラグ
 		struct Message {
 			bool gate;		//ゲート用
@@ -132,6 +135,8 @@ class CObjHero : public CObj
 			bool switchgate;	//スイッチゲート用
 			bool heal;		//ヒールブロック用
 			bool dswitch;	//ダミースイッチ用
+			bool allkill;	//敵全滅用
+
 		};
 		Message mes;
 

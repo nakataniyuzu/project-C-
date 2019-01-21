@@ -28,6 +28,9 @@ void CObjSister::Init()
 //アクション
 void CObjSister::Action()
 {
+	//主人公の情報を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -36,8 +39,14 @@ void CObjSister::Action()
 		hit->SetInvincibility(true);	//無敵にする(hit判定を消す)
 		m_change = true;		//画像を切り替える
 		m_drawt1 = 100;	//ドロータイムをセット
+		g_mhit_enemy_flag = true;
 	}
-
+	if (m_change == true)
+	{
+		hero->SetSPEED(0.0f);	//スピードを０にする
+		hero->SetVX(0.0f);		//ベクトルを０にする
+		hero->SetVY(0.0f);
+	}
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

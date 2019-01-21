@@ -162,8 +162,8 @@ void CObjBoss1Battle::Action()
 	if (m_del == false && m_boss_hp <= 0)
 	{
 		hero->SetFADEF(false);
-		hero->SetMAXHP(2);		//HP/MP�𑝂₷
-		hero->SetMAXMP(2);
+		hero->SetMAXHP(1);		//HP/MP�𑝂₷
+		hero->SetMAXMP(1);
 		m_del = true;
 		g_enemy_kills += 1;
 		g_boss_kills += 1;

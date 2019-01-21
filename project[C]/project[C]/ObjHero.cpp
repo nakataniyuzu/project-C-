@@ -25,8 +25,8 @@ void CObjHero::Init()
 	m_speed_power = 3.0f;	//通常速度
 	m_posture = 2.0f;	// 0.0f = 上	1.0f = 右	2.0f = 下	3.0f = 左
 	
-	m_max_hp = 10 + g_enemy_kills;	//最大HP
-	m_max_mp = 10 + g_enemy_kills;	//最大MP
+	m_max_hp = 10 + g_enemy_kills + g_boss_kills;	//最大HP
+	m_max_mp = 10 + g_enemy_kills + g_boss_kills;	//最大MP
 	m_hp = m_max_hp;	//初期HP
 	m_mp = m_max_mp;	//初期MP
 	m_magic = 0;	//初期魔法
@@ -42,6 +42,7 @@ void CObjHero::Init()
 	mes.switchblock = false;
 	mes.switchgate = false;
 	mes.heal = false;
+	mes.allkill = false;
 
 	m_death_flag = false;
 	m_next_flag = false;
@@ -49,6 +50,7 @@ void CObjHero::Init()
 	m_ene_battle_flag = false;
 	m_boss_battle_flag = false;
 	m_fade_flag = false;
+	m_allkill_flag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
@@ -58,6 +60,7 @@ void CObjHero::Init()
 	m_ice_flag = false;		//氷：1
 	m_wind_flag = false;	//風：2
 	m_thunder_flag = false;	//雷：3
+
 
 	if (g_map_change >= 1) {
 		m_ice_flag = true;
@@ -84,6 +87,9 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	m_max_hp = 10 + g_enemy_kills + g_boss_kills;	//最大HP
+	m_max_mp = 10 + g_enemy_kills + g_boss_kills;	//最大MP
+
 	if (g_mhit_enemy_flag == false)
 	{
 		m_speed_power = 0.3f;		//通常速度
@@ -107,10 +113,21 @@ void CObjHero::Action()
 				return;
 			}
 
-			//Eキーでメニューを開く
-			if (Input::GetVKey('E') == true)
+			//敵が全滅した際のメッセージ用
+			if (g_map_change == 0 && g_enemy_kills >= 5 && m_allkill_flag == false)
 			{
-				//Scene::SetScene(new CSceneMenu());
+				mes.allkill = true;
+				m_allkill_flag = true;
+			}
+			if (g_map_change == 1 && g_enemy_kills >= 11 && m_allkill_flag == false)
+			{
+				mes.allkill = true;
+				m_allkill_flag = true;
+			}
+			if (g_map_change == 2 && g_enemy_kills >= 17 && m_allkill_flag == false)
+			{
+				mes.allkill = true;
+				m_allkill_flag = true;
 			}
 
 			//Xキーで魔法を切り替える
@@ -383,11 +400,11 @@ void CObjHero::Action()
 	m_vy += -(m_vy * 0.098);
 
 	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&g_px, &g_py, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
-	);
+	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//pb->BlockHit(&g_px, &g_py, true,
+	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+	//	&m_block_type
+	//);
 
 	//位置の更新
 	g_px += m_vx;
