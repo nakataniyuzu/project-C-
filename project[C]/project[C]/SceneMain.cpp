@@ -202,6 +202,8 @@ void CSceneMain::Scene()
 	//ボス
 	if (m_boss_flag == true)		//フラグがオンの時、ボス出現
 	{
+		Audio::Stop(12);
+		//Audio::Start(13);
 		if (g_map_change == 0) {
 			CObjBoss1Battle* bobjb1 = new CObjBoss1Battle();
 			Objs::InsertObj(bobjb1, OBJ_BOSS_BATTLE_FIRST, 10);
