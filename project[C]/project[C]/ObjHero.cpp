@@ -23,12 +23,12 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 
 	m_speed_power = 3.0f;	//通常速度
-	m_posture = 2.0f;
+	m_posture = 2.0f;	// 0.0f = 上	1.0f = 右	2.0f = 下	3.0f = 左
 	
 	m_max_hp = 10 + g_enemy_kills;	//最大HP
 	m_max_mp = 10 + g_enemy_kills;	//最大MP
-	m_hp = 1;	//初期HP
-	m_mp = 1;	//初期MP
+	m_hp = m_max_hp;	//初期HP
+	m_mp = m_max_mp;	//初期MP
 	m_magic = 0;	//初期魔法
 
 	m_key = 0;	//鍵の情報
@@ -117,6 +117,7 @@ void CObjHero::Action()
 			if (Input::GetVKey('X') == true)
 			{
 				if (m_mf == true) {	//キー制御用
+					Audio::Start(15);	//エフェクト音を鳴らす
 					m_mf = false;
 					m_magic += 1;
 				}
@@ -376,22 +377,17 @@ void CObjHero::Action()
 	{
 		m_next_flag = true;		//フラグをオンにする
 	}
-	if (hit->CheckElementHit(ELEMENT_SISTER) == true)	//主人公が妹に触れた場合
-	{
-		Scene::SetScene(new CSceneClear());	//ゲームクリアシーンに移行
-	}
-
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 	m_vy += -(m_vy * 0.098);
 
-	////ブロックとの当たり判定実行
-	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	//pb->BlockHit(&g_px, &g_py, true,
-	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-	//	&m_block_type
-	//);
+	//ブロックとの当たり判定実行
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&g_px, &g_py, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+		&m_block_type
+	);
 
 	//位置の更新
 	g_px += m_vx;

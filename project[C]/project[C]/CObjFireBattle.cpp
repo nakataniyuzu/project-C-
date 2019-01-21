@@ -31,7 +31,7 @@ void CObjFireBattle::Init()
 
 	//éÂêlåˆÇÃà å¸Ç´ÇéÊìæ
 	CObjHeroBattle* hero = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
-	posture = hero->GetPOS();
+	m_posture = hero->GetPOS();
 
 	m_time = 50;	//ñÇñ@Ç™è¡Ç¶ÇÈéûä‘
 
@@ -47,11 +47,11 @@ void CObjFireBattle::Action()
 	if (m_hit_right == true)//âE
 		m_hit = true;
 
-	if (posture == 0.0f) {
+	if (m_posture == 0.0f) {
 		m_vx = 5.0f;
 		m_x += m_vx;
 	}
-	if (posture == 1.0f) {
+	if (m_posture == 1.0f) {
 		m_vx = -5.0f;
 		m_x += m_vx;
 	}
@@ -102,5 +102,9 @@ void CObjFireBattle::Draw()
 	dst.m_right   = ALL_SIZE + m_x;
 	dst.m_bottom  = ALL_SIZE + m_y;
 
-	Draw::Draw(13, &src, &dst, c, 0.0f);
+	if(m_posture == 0.0f)
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+	else
+		Draw::Draw(13, &src, &dst, c, 180.0f);
+
 }

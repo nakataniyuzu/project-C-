@@ -7,13 +7,13 @@
 #include "GameHead.h"
 #include "GameL\Audio.h"
 
-#include "ObjClear.h"
+#include "ObjClearName.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //イニシャライズ
-void CObjClear::Init()
+void CObjClearName::Init()
 {
 	m_time = 0;
 	choice = 0;
@@ -23,69 +23,36 @@ void CObjClear::Init()
 }
 
 //アクション
-void CObjClear::Action()
+void CObjClearName::Action()
 {
-	if (choice == 1 && m_time <= 0 && Input::GetVKey(VK_UP) == true)
-	{
-		m_time = 5;
-		Audio::Start(0);
-		choice = 0;
-	}
-	else if (choice == 0 && m_time <= 0 && Input::GetVKey(VK_DOWN) == true)
-	{
-		m_time = 5;
-		Audio::Start(0);
-		choice = 1;
-	}
-
-	if (choice == 0)
-	{
-		if (Input::GetVKey(VK_RETURN) == true)
-		{
-			if (m_key_flag == true)
-			{
-				Scene::SetScene(new CSceneTitle());
-				m_key_flag = false;
-			}
-		}
-		else
-		{
-			m_key_flag = true;
-		}
-	}
-
-	if (choice == 1)
-	{
-		if (Input::GetVKey(VK_RETURN) == true)
-		{
-			exit(1);
-		}
-	}
-
-	if (m_time >= 0)
-		m_time--;
+	
 }
 
 //ドロー
-void CObjClear::Draw()
+void CObjClearName::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float b[4] = { 0.0f,0.0f,0.0f,1.0f };
 
+	wchar_t NAME[128];
+
+	swprintf_s(NAME, L"%c", m_name_key[2][4]);
+	Font::StrDraw(NAME, 200, 300, 25, c);
+
 	RECT_F src;		//描画元切り取り位置
 	RECT_F dst;		//描画先表示位置
-					//背景切り取り
-	src.m_top    = 0.0f;
-	src.m_left   = 0.0f;
-	src.m_right  = 800.0f;
-	src.m_bottom = 600.0f;
+	////背景切り取り
+	//src.m_top = 0.0f;
+	//src.m_left = 0.0f;
+	//src.m_right = 800.0f;
+	//src.m_bottom = 600.0f;
 
-	//背景の描画
-	dst.m_top = 0.0f;
-	dst.m_left = 0.0f;
-	dst.m_right = 800.0f;
-	dst.m_bottom = 600.0f;
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	////背景の描画
+	//dst.m_top = 0.0f;
+	//dst.m_left = 0.0f;
+	//dst.m_right = 800.0f;
+	//dst.m_bottom = 600.0f;
+	//Draw::Draw(0, &src, &dst, c, 0.0f);
 
 	//タイトル
 	//Font::StrDraw(L"○○の冒険", CLEAR_POS_X, CLEAR_POS_Y, CLEAR_FONT_SIZE, c);

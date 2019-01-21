@@ -17,6 +17,9 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
+	bool GetALLKILL() { return m_allkill; }//敵全滅用
+	void SetALLKILL(bool x) { m_allkill = x; }	//敵全滅用セット関数
+
 	float GetVx() { return m_vx; }
 	float GetVy() { return m_vy; }
 
@@ -36,9 +39,9 @@ private:
 	float m_speed_power;	//スピードパワー
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
-	bool battle_flag;	//バトル切り替え用
+	bool m_allkill;	//敵全滅用
 
-						//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;

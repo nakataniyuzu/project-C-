@@ -27,6 +27,7 @@ enum OBJ_NAME
 	OBJ_FIRE_BATTLE,
 	OBJ_ICE_BATTLE,
 	OBJ_THUNDER_BATTLE,
+	OBJ_WIND_BATTLE,
 	OBJ_ENEMY_MAGIC_BATTLE,
 	
 	OBJ_FIREBLOCK,
@@ -168,6 +169,7 @@ extern bool g_battle_key;	//戦闘中のキー入力制御用フラグ
 #include "CObjFireBattle.h"
 #include "CObjIceBattle.h"
 #include "CObjThunderBattle.h"
+#include "CObjWindBattle.h"
 #include "CObjEnemyMagicBattle.h"
 
 //Magic関係

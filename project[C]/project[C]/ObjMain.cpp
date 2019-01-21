@@ -91,7 +91,7 @@ void CObjMain::Draw()
 		Draw::Draw(HEALKEY, &src, &dst, c, 0.0f);
 	}
 
-	if (battle_flag == false)
+	if (g_battle_flag == true)
 	{
 		Font::StrDraw(L"AÉLÅ[Ç≈í èÌçUåÇ", GAME_MESSAGE_POS_X, GAME_MESSAGE_POS_Y, GAME_MESSAGE_FONT_SIZE, c);
 

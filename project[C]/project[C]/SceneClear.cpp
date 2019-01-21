@@ -33,10 +33,16 @@ void CSceneClear::InitScene()
 {
 	Draw::LoadImageW(L"題.png", 0, TEX_SIZE_800_600);
 
+	//オーディオ読み込み
+	Audio::LoadAudio(0, L"SERECT.wav", EFFECT);
+	Audio::LoadAudio(1, L"ENTER.wav", EFFECT);
+	Audio::LoadAudio(2, L"TITLE-BGM.WAV", SOUND_TYPE::BACK_MUSIC);
+
+	//BGMスタート
+	Audio::Start(2);
 
 	CObjClear* p = new CObjClear();
 	Objs::InsertObj(p, OBJ_CLEAR, 1);
-
 }
 
 //ゲームタイトルの実行中メソッド

@@ -223,6 +223,9 @@
     <ClCompile Include="ObjWindBlock.cpp">
       <Filter>ソースファイル\Main\Block関係</Filter>
     </ClCompile>
+    <ClCompile Include="CObjWindBattle.cpp">
+      <Filter>ソースファイル\Main\Magic関係</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -449,6 +452,9 @@
     </ClInclude>
     <ClInclude Include="ObjWindBlock.h">
       <Filter>ソースファイル\Main\Block関係</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjWindBattle.h">
+      <Filter>ソースファイル\Main\Magic関係</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -34,7 +34,7 @@ void CObjFire::Init()
 
 	//主人公の位向きを取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	posture = hero->GetPOS();
+	m_posture = hero->GetPOS();
 
 	m_time = 50;	//魔法が消える時間
 
@@ -54,19 +54,19 @@ void CObjFire::Action()
 	if (m_hit_right == true)//右
 		m_hit = true;
 
-	if (posture == 0.0f) {
+	if (m_posture == 0.0f) {
 		m_vy = -5.0f;
 		m_y += m_vy;
 	}
-	if (posture == 1.0f) {
+	if (m_posture == 1.0f) {
 		m_vx = 5.0f;
 		m_x += m_vx;
 	}
-	if (posture == 2.0f) {
+	if (m_posture == 2.0f) {
 		m_vy = 5.0f;
 		m_y += m_vy;
 	}
-	if (posture == 3.0f) {
+	if (m_posture == 3.0f) {
 		m_vx = -5.0f;
 		m_x += m_vx;
 	}
@@ -93,7 +93,12 @@ void CObjFire::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-	
+	//MYSTERY属性、ENEMY属性と衝突したら消滅させる
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	//壁に当たったら消える処理
 	if (m_hit == true) {		
 		this->SetStatus(false);
@@ -132,5 +137,12 @@ void CObjFire::Draw()
 	dst.m_right  = ALL_SIZE + m_x;
 	dst.m_bottom = ALL_SIZE + m_y;
 
-	Draw::Draw(13, &src, &dst, c, 0.0f);
+	if (m_posture == 0.0f)
+		Draw::Draw(13, &src, &dst, c, 90.0f);
+	else if (m_posture == 1.0f)
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+	else if (m_posture == 2.0f)
+		Draw::Draw(13, &src, &dst, c, 270.0f);
+	else
+		Draw::Draw(13, &src, &dst, c, 180.0f);
 }

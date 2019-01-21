@@ -26,4 +26,5 @@ class CObjFadein : public CObj
 		bool m_next_flag;		//次の階層への移行用
 		bool m_main_flag;		//タイトルからの移行用
 		bool m_death_flag;		//ゲームオーバーシーンへの移行用
+		bool m_clear_flag;		//ゲームクリアへの移行用
 };

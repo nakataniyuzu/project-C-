@@ -8,7 +8,6 @@
 #include "GameL\Audio.h"
 
 #include "ObjTitle.h"
-//#include "SceneMain.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -20,7 +19,6 @@ bool g_battle_flag = false;	//バトル画面用の変数の初期化
 bool g_key_flag = false;	//キー入力制御用の変数の初期化
 bool g_battle_key = true;	//戦闘中のキー入力制御用フラグの初期化
 bool g_mhit_enemy_flag = false;	//マップの敵制御用フラグの初期化
-
 
 //イニシャライズ
 void CObjTitle::Init()

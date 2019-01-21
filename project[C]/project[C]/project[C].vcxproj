@@ -34,6 +34,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CObjWind.cpp" />
+    <ClCompile Include="CObjWindBattle.cpp" />
     <ClCompile Include="ItemWind.cpp" />
     <ClCompile Include="ObjBoss1Battle.cpp" />
     <ClCompile Include="ObjBoss2Battle.cpp" />
@@ -134,6 +135,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CObjWind.h" />
+    <ClInclude Include="CObjWindBattle.h" />
     <ClInclude Include="ItemWind.h" />
     <ClInclude Include="ObjBoss1Battle.h" />
     <ClInclude Include="ObjBoss2Battle.h" />

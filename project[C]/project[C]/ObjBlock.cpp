@@ -122,15 +122,15 @@ void CObjBlock::Action()
 				//6があれば敵を出現
 				if (g_map_change == 0) {
 					CObjEnemy1* obje1 = new CObjEnemy1(j*ALL_SIZE, i*ALL_SIZE);
-					Objs::InsertObj(obje1, OBJ_ENEMY_FIRST, 110);
+					Objs::InsertObj(obje1, OBJ_ENEMY_FIRST, 112);
 				}
 				else if (g_map_change == 1) {
 					CObjEnemy2* obje2 = new CObjEnemy2(j*ALL_SIZE, i*ALL_SIZE);
-					Objs::InsertObj(obje2, OBJ_ENEMY_SECOND, 110);
+					Objs::InsertObj(obje2, OBJ_ENEMY_SECOND, 112);
 				}
 				else if (g_map_change == 2) {
 					CObjEnemy3* obje3 = new CObjEnemy3(j*ALL_SIZE, i*ALL_SIZE);
-					Objs::InsertObj(obje3, OBJ_ENEMY_THIRD, 110);
+					Objs::InsertObj(obje3, OBJ_ENEMY_THIRD, 112);
 				}
 
 				//出現場所の値を0にする
@@ -267,6 +267,14 @@ void CObjBlock::Action()
 				//24があればWindBlockを出現
 				CObjWindBlock* objwb = new CObjWindBlock(j*ALL_SIZE, i*ALL_SIZE);
 				Objs::InsertObj(objwb, OBJ_WINDBLOCK, 111);
+				//出現場所の値を0にする
+				g_map[i][j] = 0;
+			}
+			if (g_map[i][j] == 25)
+			{
+				//25があればSisterを出現
+				CObjSister* objsis = new CObjSister(j*ALL_SIZE, i*ALL_SIZE);
+				Objs::InsertObj(objsis, OBJ_SISTER, 111);
 				//出現場所の値を0にする
 				g_map[i][j] = 0;
 			}

@@ -47,6 +47,38 @@ void CObjMessage::Draw()
 	f.sblock = hero->GetSBLOCK();
 	f.heal = hero->GetHEAL();
 
+	CObjEnemy1* enemy1 = (CObjEnemy1*)Objs::GetObj(OBJ_ENEMY_FIRST);
+	CObjEnemy2* enemy2 = (CObjEnemy2*)Objs::GetObj(OBJ_ENEMY_SECOND);
+	CObjEnemy3* enemy3 = (CObjEnemy3*)Objs::GetObj(OBJ_ENEMY_THIRD);
+
+	if (g_map_change == 0)
+		f.allkill = enemy1->GetALLKILL();
+	else if(g_map_change == 1)
+		f.allkill = enemy2->GetALLKILL();
+	else if (g_map_change == 2)
+		f.allkill = enemy3->GetALLKILL();
+	if (f.allkill == true)	//敵が全滅したときにフラグをセット
+	{
+		t.allkill = 100;
+	}
+	if (t.allkill > 0) {
+		t.allkill--;
+		f.allkill = false;		//フラグをオフ
+		if (g_map_change == 0)
+			enemy1->SetALLKILL(f.allkill);
+		else if (g_map_change == 1)
+			enemy2->SetALLKILL(f.allkill);
+		else if (g_map_change == 2)
+			enemy3->SetALLKILL(f.allkill);
+
+		BackDraw(225.0f, 175.0f, 370.0f, 255.0f, a);
+		Font::StrDraw(L"敵が全滅したようだ", 180, 230, 20, c);//時間が0になると表示を終了
+
+		if (t.allkill <= 0) {
+			t.allkill = 0;
+		}
+	}
+
 	if (f.water == true)	//主人公がWATERブロックと当たった場合、m_timeに時間をセット
 	{
 		t.water = 100;
@@ -159,8 +191,8 @@ void CObjMessage::Draw()
 		t.heal--;
 		f.heal = false;
 		hero->SetHEAL(f.heal);
-		BackDraw(195.0f, 195.0f, 375.0f, 225.0f, a);
-		Font::StrDraw(L"HP/MPが回復した！", 200, 200, 20, g);//時間が0になると表示を終了
+		BackDraw(195.0f, 300.0f, 480.0f, 225.0f, a);
+		Font::StrDraw(L"HP/MPが回復した！", 300, 200, 20, g);//時間が0になると表示を終了
 		if (t.heal <= 0) {
 			t.heal = 0;
 		}

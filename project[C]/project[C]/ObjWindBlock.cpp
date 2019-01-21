@@ -4,6 +4,7 @@
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjWindBlock.h"
@@ -38,6 +39,7 @@ void CObjWindBlock::Action()
 	//WINDと当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_WIND) != nullptr)//当たっていたら当たり判定を消し、描画を変える
 	{
+		Audio::Start(11);		//エフェクト音を鳴らす
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
@@ -74,7 +76,7 @@ void CObjWindBlock::Draw()
 	if (m_time > 0)
 	{
 		m_time--;
-		pm->BackDraw(195.0f, 195.0f, 410.0f, 225.0f, a);
+		pm->BackDraw(195.0f, 195.0f, 370.0f, 225.0f, a);
 		Font::StrDraw(L"大きな力が必要...", 200, 200, 20, g);//時間が0になると表示を終了
 		if (m_time <= 0)
 		{

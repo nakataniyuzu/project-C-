@@ -79,14 +79,13 @@ void CObjDummySwitch::Draw()
 	{
 		return;
 	}
-	//メッセージの情報を持ってくる
-	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float b[4] = { 1.0f,1.0f,2.0f,0.7f };
 	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
+	//メッセージの情報を持ってくる
+	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (m_change == true)
