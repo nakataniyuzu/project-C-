@@ -95,17 +95,17 @@ void CObjSister::Draw()
 	//切り取り位置の設定
 	if (m_change == false)	//画像を切り替える位置の調整
 	{
-		src.m_top    =  96.0f;
+		src.m_top    =  97.0f;
 		src.m_left   = 240.0f;
 		src.m_right  = 264.0f;
-		src.m_bottom = 128.0f;
+		src.m_bottom = 129.0f;
 	}
 	else
 	{
-		src.m_top    =  32.0f;
+		src.m_top    =  33.0f;
 		src.m_left   = 240.0f;
 		src.m_right  = 264.0f;
-		src.m_bottom =  64.0f;
+		src.m_bottom =  65.0f;
 	}
 	//ブロックの情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

@@ -17,7 +17,7 @@ void CObjEnemy3Battle::Init()
 	m_py = 450.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_enemy_hp = 7;     //敵のヒットポイント(最大30)
+	m_enemy_hp = 30;     //敵のヒットポイント(最大30)
 	m_damage = 3;
 
 	m_ani_time = 0;

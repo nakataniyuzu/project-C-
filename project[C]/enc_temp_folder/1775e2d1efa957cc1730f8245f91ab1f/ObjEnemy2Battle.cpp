@@ -5,33 +5,29 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy3Battle.h"
+#include "ObjEnemy2Battle.h"
 
 //使用するネームスペース
 using namespace GameL;
 
+
+
 //イニシャライズ
-void CObjEnemy3Battle::Init()
+void CObjEnemy2Battle::Init()
 {
 	m_px = 600.0f;//位置
 	m_py = 450.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
-	m_enemy_hp = 7;     //敵のヒットポイント(最大30)
-	m_damage = 3;
+	
+	m_enemy_hp = 10;     //敵のヒットポイント(最大10)
+	m_damage = 2;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
-
-	m_subtract = 0;		//HEROとの距離
-	m_hero_position = 0;//HEROの位置
-
-	m_time_j++; //ジャンプテスト用
-
-	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 	m_move = true;  //true=右 false=左
@@ -40,22 +36,27 @@ void CObjEnemy3Battle::Init()
 
 	m_eff.m_top = 0;
 	m_eff.m_left = 0;
-	m_eff.m_right = 50;
-	m_eff.m_bottom = 50;
+	m_eff.m_right = 88;
+	m_eff.m_bottom = 100;
 
 	m_ani = 0;
 	m_ani_time_d = 0;
 	m_del = false;
 	m_eff_flag = false;
 
+	m_subtract = 0;		//HEROとの距離
+	m_hero_position = 0;//HEROの位置
+
+	m_block_type = 0;		//踏んでいるblockの種類を確認用
+
 	m_time_d = 0;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_THIRD, 1);
+	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_SECOND, 1);
 }
 
 //アクション
-void CObjEnemy3Battle::Action()
+void CObjEnemy2Battle::Action()
 {
 	//OBJ_MAINの情報を持ってくる
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
@@ -84,7 +85,6 @@ void CObjEnemy3Battle::Action()
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
-
 	//主人公がマップ画面に移行した場合、元居る敵を削除
 	if (enemy_delete_flag == true)
 	{
@@ -128,22 +128,11 @@ void CObjEnemy3Battle::Action()
 	m_subtract = m_hero_position - m_px;
 	if (m_subtract < 0)
 	{
-
 		m_move = true;
 	}
-	else
+	else 
 	{
 		m_move = false;
-	}
-
-	//定期的にジャンプ
-	
-	if (m_py + 100 >= 549)
-	{
-		if (1)
-		{
-			m_vy = -20;
-		}
 	}
 
 	//方向
@@ -159,7 +148,7 @@ void CObjEnemy3Battle::Action()
 		m_posture = 0.0f;
 		m_ani_time += 1;
 	}
-
+	
 	//攻撃を受けたら体力を減らす
 	//主人公とATTACK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_ATTACK) == true)
@@ -200,12 +189,12 @@ void CObjEnemy3Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_enemy_hp <= 0)
 	{
-		hero->SetFADEF(false);	//フェイドフラグをオフ		
-		hero->SetMAXHP(5);		//HP/MPを増やす
-		hero->SetMAXMP(5);
-		m_del = true;
-		g_enemy_kills += 1;
+		hero->SetFADEF(false);	//フェイドフラグをオフ
+		hero->SetMAXHP(2);		//HP/MPを増やす
+		hero->SetMAXMP(2);
 		g_battle_key = false;
+		m_del = true;
+		g_enemy_kills += 1;		//撃破数を増やす		
 	}
 
 	//敵が領域外に行かないようにする
@@ -243,9 +232,9 @@ void CObjEnemy3Battle::Action()
 		//死亡アニメーションRECT情報
 		RECT_F ani_src[3] =
 		{
-			{ 0,  0, 50, 50 },
-			{ 0, 50,100, 50 },
-			{ 0,108,160, 50 },
+			{ 0,  0, 88, 100 },
+			{ 0,105,205, 100 },
+			{ 0,210,312, 100 },
 		};
 
 		//アニメーションのコマ間隔制御
@@ -274,7 +263,7 @@ void CObjEnemy3Battle::Action()
 }
 
 //ドロー
-void CObjEnemy3Battle::Draw()
+void CObjEnemy2Battle::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -284,19 +273,18 @@ void CObjEnemy3Battle::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (75.0f * m_posture) + m_px;
-	dst.m_right = (75 - 75.0f * m_posture) + m_px;
+	dst.m_top    =   0.0f + m_py;
+	dst.m_left   = (        75.0f * m_posture) + m_px;
+	dst.m_right  = (75.0f - 75.0f * m_posture) + m_px;
 	dst.m_bottom = 100.0f + m_py;
 
-	//敵の状態で描画を変更
 	if (m_del == true)
 	{
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 108.0f;
-		src.m_right = 160.0f;
-		src.m_bottom = 50.0f;
+		src.m_top    = 0.0f;
+		src.m_left   = 210.0f;
+		src.m_right  = 312.0f;
+		src.m_bottom = 100.0f;
 		if (m_eff_flag == true)
 			Draw::Draw(23, &src, &dst, c, 0.0f);
 		else
@@ -306,8 +294,8 @@ void CObjEnemy3Battle::Draw()
 	{
 		//切り取り位置の設定
 		src.m_top    = 150.0f;
-		src.m_left   = 0.0f;
-		src.m_right  = 50.0f;
+		src.m_left   =   0.0f;
+		src.m_right  =  50.0f;
 		src.m_bottom = 200.0f;
 		//描画
 		if (m_time_d > 0) {
@@ -317,4 +305,5 @@ void CObjEnemy3Battle::Draw()
 			Draw::Draw(7, &src, &dst, c, 0.0f);
 		}
 	}
+
 }

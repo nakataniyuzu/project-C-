@@ -14,6 +14,28 @@ using namespace GameL;
 //イニシャライズ
 void CObjMessage::Init()
 {
+	//フラグの初期化
+	f.gate = false;		//GATEのメッセージフラグ
+	f.key = false;		//KEYのメッセージフラグ
+	f.water = false;		//WATERBLOCKのメッセージフラグ
+	f.ice = false;		//ICEMAGICのメッセージフラグ
+	f.wind = false;		//WINDMAGICのメッセージフラグ
+	f.sblock = false;	//SWITCHBLOCKのメッセージフラグ
+	f.sgate = false;		//SWITCHGATEのメッセージフラグ
+	f.heal = false;		//HEALのメッセージフラグ
+	f.allkill = false;	//ALLKILLのメッセージフラグ
+
+	//タイムの初期化
+	t.gate = 0;		//GATE用の時間
+	t.water = 0;		//WATER用の時間
+	t.key = 0;		//KEY用の時間
+	t.ice = 0;		//ICE用の時間
+	t.wind = 0;		//wind用の時間
+	t.sblock = 0;		//SWITCHBLOCK用の時間
+	t.sgate = 0;		//SWITCHGATE用の時間
+	t.heal = 0;		//HEALの時間
+	t.allkill = 0;	//ALLKILLの時間
+
 
 }
 
