@@ -27,7 +27,7 @@ void CObjEnemyMagicBattle::Init()
 
 	m_bboss3_pos = 0.0f;
 
-	m_damage = 10;
+	m_damage = 5;
 
 	//block‚Æ‚ÌÕ“Ëó‘ÔŠm”F
 	m_hit_left = false;
@@ -52,13 +52,10 @@ void CObjEnemyMagicBattle::Init()
 void CObjEnemyMagicBattle::Action()
 {
 	CObjBoss3Battle* bboss3 = (CObjBoss3Battle*)Objs::GetObj(OBJ_BOSS_BATTLE_THIRD);
-	m_bboss3_pos = bboss3 -> GetPOS();
-
-	if (m_hit_left == true)	//¶
-		m_hit = true;
-	if (m_hit_right == true)//‰E
-		m_hit = true;
-
+	if (bboss3 != nullptr) {
+		m_bboss3_pos = bboss3->GetPOS();
+	}
+	
 	if (m_bboss3_pos == 1.0f) {
 		m_vx = 5.0f;
 		m_x += m_vx + 10.8f;
@@ -79,11 +76,6 @@ void CObjEnemyMagicBattle::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	//•Ç‚É“–‚½‚Á‚½‚çÁ‚¦‚éˆ—
-	if (m_hit == true) {
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
 	//ˆê’è‚ÌŽžŠÔ‚ÅÁ‚¦‚éˆ—
 	if (m_time > 0) {
 		m_time--;

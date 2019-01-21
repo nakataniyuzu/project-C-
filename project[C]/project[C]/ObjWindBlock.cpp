@@ -43,10 +43,10 @@ void CObjWindBlock::Action()
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)//当たっていたら当たり判定を消し、描画を変える
-	{
-		m_time = 100;
-	}
+	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)//当たっていたら当たり判定を消し、描画を変える
+	//{
+	//	m_time = 100;
+	//}
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;

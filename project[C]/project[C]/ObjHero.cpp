@@ -50,7 +50,9 @@ void CObjHero::Init()
 	m_ene_battle_flag = false;
 	m_boss_battle_flag = false;
 	m_fade_flag = false;
-	m_allkill_flag = false;
+	m_allkill_flag1 = false;
+	m_allkill_flag2 = false;
+	m_allkill_flag3 = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
@@ -114,20 +116,20 @@ void CObjHero::Action()
 			}
 
 			//敵が全滅した際のメッセージ用
-			if (g_map_change == 0 && g_enemy_kills >= 5 && m_allkill_flag == false)
+			if (g_map_change == 0 && g_enemy_kills >= 5 && m_allkill_flag1 == false)
 			{
 				mes.allkill = true;
-				m_allkill_flag = true;
+				m_allkill_flag1 = true;
 			}
-			if (g_map_change == 1 && g_enemy_kills >= 11 && m_allkill_flag == false)
+			if (g_map_change == 1 && g_enemy_kills >= 11 && m_allkill_flag2 == false)
 			{
 				mes.allkill = true;
-				m_allkill_flag = true;
+				m_allkill_flag2 = true;
 			}
-			if (g_map_change == 2 && g_enemy_kills >= 17 && m_allkill_flag == false)
+			if (g_map_change == 2 && g_enemy_kills >= 17 && m_allkill_flag3 == false)
 			{
 				mes.allkill = true;
-				m_allkill_flag = true;
+				m_allkill_flag3 = true;
 			}
 
 			//Xキーで魔法を切り替える

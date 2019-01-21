@@ -33,6 +33,7 @@ void CObjHeroBattle::Init()
 
 	m_inputf = true;	// true = 入力可	false = 入力不可
 	m_dtime = 0;
+	m_dtime_f = false;
 	m_time = 0;
 	g_battle_key = true;	//true = 入力可
 
@@ -132,10 +133,10 @@ void CObjHeroBattle::Action()
 			m_ani_frame = 0;
 		}
 
-		//Spaceキーでジャンプ
+		//上キーでジャンプ
 		if (m_py + 100 >= 549)
 		{
-			if (Input::GetVKey(VK_SPACE) == true)
+			if (Input::GetVKey(VK_UP) == true)
 			{
 				if (1)
 				{
@@ -144,14 +145,8 @@ void CObjHeroBattle::Action()
 			}
 		}
 
-		//Eキーでメニューを開く
-		if (Input::GetVKey('E') == true)
-		{
-			//Scene::SetScene(new CSceneMenu());	
-		}
-
-		//Aキーで近接(剣)攻撃
-		if (Input::GetVKey('A') == true)
+		//Zキーで近接(剣)攻撃
+		if (Input::GetVKey('Z') == true)
 		{
 			if (m_sword_delay == 0)
 			{
@@ -179,8 +174,8 @@ void CObjHeroBattle::Action()
 			if (m_sword_delay <= 0)
 				m_sword_delay = 0;
 		}
-		//Xキーで魔法を切り替える
-		if (Input::GetVKey('X') == true)
+		//下キーで魔法を切り替える
+		if (Input::GetVKey(VK_DOWN) == true)
 		{
 			if (m_mf == true) {	//キー制御用
 				m_mf = false;
@@ -204,7 +199,7 @@ void CObjHeroBattle::Action()
 			m_mf = true;
 		}
 		if (m_battle_mp > 0) {
-			if (Input::GetVKey('Z') == true)	//魔法発射
+			if (Input::GetVKey('X') == true)	//魔法発射
 			{
 				if (m_f == true) {	//魔法制御用
 

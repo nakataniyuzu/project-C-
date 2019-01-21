@@ -14,11 +14,11 @@ using namespace GameL;
 #define GAME_MP_POS_Y     (25)
 #define GAME_MP_FONT_SIZE (25)
 
-#define GAME_MESSAGE_POS_X     (300)
+#define GAME_MESSAGE_POS_X     (200)
 #define GAME_MESSAGE_POS_Y     (0)
 #define GAME_MESSAGE_FONT_SIZE (20)
 
-#define GAME_MESSAGE2_POS_X     (300)
+#define GAME_MESSAGE2_POS_X     (200)
 #define GAME_MESSAGE2_POS_Y     (25)
 #define GAME_MESSAGE2_FONT_SIZE (20)
 

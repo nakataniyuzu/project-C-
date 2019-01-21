@@ -29,6 +29,7 @@ void CObjEnemy3::Init()
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 8;		//アニメーション間隔幅
 
+	m_time = 0;
 	m_move = false;
 
 	//blockとの衝突状態確認
@@ -57,7 +58,7 @@ void CObjEnemy3::Action()
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;	//動きを止める
-		m_time = 100;	//m_timeに時間をセット
+		m_time = 130;	//m_timeに時間をセット
 		return;
 	}
 

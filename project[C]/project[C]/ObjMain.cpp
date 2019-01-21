@@ -75,7 +75,7 @@ void CObjMain::Draw()
 	swprintf_s(MP, L"MP %d/%d",  hero_mp, hero_max_mp);
 	Font::StrDraw(MP, GAME_MP_POS_X, GAME_MP_POS_Y, GAME_MP_FONT_SIZE, c);
 
-	if (key == 1)
+	if (key == 1 && g_battle_flag == false)
 	{
 		//切り取り位置の設定
 		src.m_top    =  0.0f;
@@ -93,9 +93,14 @@ void CObjMain::Draw()
 
 	if (g_battle_flag == true)
 	{
-		Font::StrDraw(L"Aキーで通常攻撃", GAME_MESSAGE_POS_X, GAME_MESSAGE_POS_Y, GAME_MESSAGE_FONT_SIZE, c);
+		Font::StrDraw(L"Xキーで魔法攻撃", GAME_MESSAGE_POS_X, GAME_MESSAGE_POS_Y, GAME_MESSAGE_FONT_SIZE, c);
 
-		Font::StrDraw(L"Zキーで魔法攻撃", GAME_MESSAGE2_POS_X, GAME_MESSAGE2_POS_Y, GAME_MESSAGE2_FONT_SIZE, c);
+		Font::StrDraw(L"下キーで切り替え", GAME_MESSAGE2_POS_X, GAME_MESSAGE2_POS_Y, GAME_MESSAGE2_FONT_SIZE, c);
+
+		Font::StrDraw(L"Zキーで通常攻撃", 400, GAME_MESSAGE_POS_Y, GAME_MESSAGE_FONT_SIZE, c);
+
+		Font::StrDraw(L"上キーでジャンプ", 400, GAME_MESSAGE2_POS_Y, GAME_MESSAGE2_FONT_SIZE, c);
+
 	}
 	else
 	{

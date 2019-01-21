@@ -59,7 +59,7 @@ void CObjEnemy2::Action()
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;	//動きを止める
-		m_time = 100;	//m_timeに時間をセット
+		m_time = 130;	//m_timeに時間をセット
 		return;
 	}
 
@@ -153,7 +153,7 @@ void CObjEnemy2::Action()
 //ドロー
 void CObjEnemy2::Draw()
 {
-	if (g_enemy_kills >= 10)
+	if (g_enemy_kills >= 11)
 		return;
 
 	if (g_battle_flag == true)

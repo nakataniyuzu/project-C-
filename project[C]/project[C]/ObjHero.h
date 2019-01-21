@@ -123,7 +123,11 @@ class CObjHero : public CObj
 		bool m_ene_battle_flag;	//雑魚出現用
 		bool m_boss_battle_flag;//ボス出現用
 		bool m_map_flag; //マップ移行用
-		bool m_allkill_flag;	//ALLKILLフラグ
+		bool m_allkill_flag1;	//ALLKILLフラグ
+		bool m_allkill_flag2;	//ALLKILLフラグ
+		bool m_allkill_flag3;	//ALLKILLフラグ
+
+
 		//メッセージ用フラグ
 		struct Message {
 			bool gate;		//ゲート用
