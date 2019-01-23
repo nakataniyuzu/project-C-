@@ -35,13 +35,14 @@ void CObjEnemy1Battle::Init()
 	m_eff.m_left   =  0;
 	m_eff.m_right  = 50;
 	m_eff.m_bottom = 50;
-
+	m_ice_time = 0;
 	m_ani = 0;
 	m_ani_time_d = 0;
 	m_del = false;
 	m_eff_flag = false;
 
 	m_time_d = 0;
+	m_ice_time = 0;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_FIRST, 1);
@@ -50,6 +51,7 @@ void CObjEnemy1Battle::Init()
 //アクション
 void CObjEnemy1Battle::Action()
 {
+
 	//OBJ_MAINの情報を持ってくる
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	//主人公の情報を持ってくる
@@ -155,6 +157,20 @@ void CObjEnemy1Battle::Action()
 		m_time_d = 30;
 		m_enemy_hp -= 1;
 	}
+
+	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)	//魔法（アイス）を当たった場合
+	{
+		m_ice_time = 100;	//icetimeに時間をセット
+	}
+	if (m_ice_time > 0)
+	{
+		m_ice_time--;		//動きを制御
+		m_speed_power = 0.0f;
+		if (m_ice_time <= 0) {
+			m_ice_time = 0;
+			m_speed_power = 0.4f;
+		}
+	}
 	if (m_time_d > 0)
 	{
 		m_time_d--;
@@ -168,6 +184,7 @@ void CObjEnemy1Battle::Action()
 	if (m_del == false && m_enemy_hp <= 0)
 	{
 		hero->SetFADEF(false);	//フェイドフラグをオフ	
+		g_hero_max_hp_mp += 1;	//敵の撃破時のHP/MP増加
 		hero->SetMAXHP(1);		//HP/MPを増やす
 		hero->SetMAXMP(1);
 		g_battle_key = false;
@@ -245,6 +262,7 @@ void CObjEnemy1Battle::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float b[4] = { 0.0f,0.0f,1.0f,1.0f };
 	float a[4] = { 10.0f,0.6f,0.6f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
@@ -279,6 +297,9 @@ void CObjEnemy1Battle::Draw()
 		//描画
 		if (m_time_d > 0) {
 			Draw::Draw(7, &src, &dst, a, 0.0f);
+		}
+		if (m_speed_power == 0.0f) {
+			Draw::Draw(7, &src, &dst, b, 0.0f);
 		}
 		else {
 			Draw::Draw(7, &src, &dst, c, 0.0f);

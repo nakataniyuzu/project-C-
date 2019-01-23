@@ -50,6 +50,7 @@ void CObjEnemy2Battle::Init()
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	m_time_d = 0;
+	m_ice_time = 0;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 75, 100, ELEMENT_ENEMY_BATTLE, OBJ_ENEMY_BATTLE_SECOND, 1);
@@ -177,6 +178,20 @@ void CObjEnemy2Battle::Action()
 		m_enemy_hp -= 1;
 		m_time_d = 30;
 	}
+	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)	//魔法（アイス）を当たった場合
+	{
+		m_ice_time = 100;	//icetimeに時間をセット
+	}
+	if (m_ice_time > 0)
+	{
+		m_ice_time--;		//動きを制御
+		m_speed_power = 0.0f;
+		if (m_ice_time <= 0) {
+			m_ice_time = 0;
+			m_speed_power = 0.4f;
+		}
+	}
+
 	if (m_time_d > 0)
 	{
 		m_time_d--;
@@ -189,9 +204,12 @@ void CObjEnemy2Battle::Action()
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_enemy_hp <= 0)
 	{
+		if (g_xp_flag == true) {
+			g_hero_max_hp_mp += 2;	//敵の撃破時のHP/MP増加
+			hero->SetMAXHP(2);		//HP/MPを増やす
+			hero->SetMAXMP(2);
+		}
 		hero->SetFADEF(false);	//フェイドフラグをオフ
-		hero->SetMAXHP(2);		//HP/MPを増やす
-		hero->SetMAXMP(2);
 		g_battle_key = false;
 		m_del = true;
 		g_enemy_kills += 1;		//撃破数を増やす		
@@ -267,6 +285,7 @@ void CObjEnemy2Battle::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float b[4] = { 0.0f,0.0f,1.0f,1.0f };
 	float a[4] = { 10.0f,0.6f,0.6f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
@@ -300,6 +319,9 @@ void CObjEnemy2Battle::Draw()
 		//描画
 		if (m_time_d > 0) {
 			Draw::Draw(7, &src, &dst, a, 0.0f);
+		}
+		if (m_speed_power == 0.0f) {
+			Draw::Draw(7, &src, &dst, b, 0.0f);
 		}
 		else {
 			Draw::Draw(7, &src, &dst, c, 0.0f);

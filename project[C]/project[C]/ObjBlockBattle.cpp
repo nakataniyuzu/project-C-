@@ -19,41 +19,13 @@ CObjBlockBattle::CObjBlockBattle()
 //イニシャライズ
 void CObjBlockBattle::Init()
 {
-	//ブロック情報
-	int block_data[12][16]
-	{
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
 
-	};
-	//コピー
-	memcpy(m_map, block_data, sizeof(int)*(12 * 16));
 }
 
 //アクション
 void CObjBlockBattle::Action()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	m_battle_flag = hero->GetBATTLE();
-	m_boss_battle_f = hero->GetBOSSBATTLE();
 
-	if (g_battle_flag == false)
-	{
-		return;
-	}
-	//主人公の位置を取得
-	float hx = hero->GetX();
-	float hy = hero->GetY();
 }
 
 //ドロー

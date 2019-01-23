@@ -210,8 +210,9 @@ void CObjBoss3Battle::Action()
 	if (m_del == false && m_boss_hp <= 0)
 	{
 		hero->SetFADEF(false);	//フェイドフラグをオフ	
-		hero->SetMAXHP(1);		//HP/MPを増やす
-		hero->SetMAXMP(1);
+		g_hero_max_hp_mp += 5;	//敵の撃破時のHP/MP増加
+		hero->SetMAXHP(5);		//HP/MPを増やす
+		hero->SetMAXMP(5);
 		m_del = true;
 		g_enemy_kills += 1;
 		g_boss_kills += 1;
@@ -331,7 +332,7 @@ void CObjBoss3Battle::Draw()
 			src.m_bottom = 95.0f;
 			
 		}
-		if (m_move == false)//右向き
+		else if (m_move == false)//右向き
 		{
 			src.m_top = 0.0f;
 			src.m_left = 200.0f;

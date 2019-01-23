@@ -40,7 +40,8 @@ class CObjEnemy3Battle : public CObj
 		int m_hero_position;	//おテスト2
 
 		float m_time_j;		//ジャンプテスト
-
+		int m_ice_time;	//ice用time変数
+		bool m_ice_flag;//ice用stop変数
 		float hero_posture;
 
 		int m_time;		//敵死亡時のフェイドイン移行用間隔幅

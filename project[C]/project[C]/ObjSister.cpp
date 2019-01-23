@@ -20,6 +20,9 @@ CObjSister::CObjSister(float x, float y)
 //イニシャライズ
 void CObjSister::Init()
 {
+	m_drawt1 = 0;	//文字表示時間
+	m_drawt2 = 0;
+
 	m_change = false;	
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_SISTER, OBJ_SISTER, 1);

@@ -50,7 +50,7 @@ void CObjDummySwitch::Action()
 			m_time = 50;
 			g_key_flag = true;
 			m_change = true;	//当たっていたら表示カラーを変える
-			
+			g_xp_flag = false;	//経験値フラグをオフ
 			hit->SetInvincibility(true);	//当たり判定を消す
 		}
 	}
@@ -59,7 +59,7 @@ void CObjDummySwitch::Action()
 		hero->SetDELETE(true);	//前敵削除フラグをオン
 		hero->SetENEMYF(true);	//敵出現フラグをオン
 		hero->SetFADEF(true);	//フェイドフラグをオン
-
+		
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 		Audio::Start(1);

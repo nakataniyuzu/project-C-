@@ -24,7 +24,7 @@ void CObjMessage::Init()
 	f.sgate = false;		//SWITCHGATEのメッセージフラグ
 	f.heal = false;		//HEALのメッセージフラグ
 	f.allkill = false;	//ALLKILLのメッセージフラグ
-
+	f.windb = false;	//WINDブロックのメッセージフラグ
 	//タイムの初期化
 	t.gate = 0;		//GATE用の時間
 	t.water = 0;		//WATER用の時間
@@ -35,6 +35,7 @@ void CObjMessage::Init()
 	t.sgate = 0;		//SWITCHGATE用の時間
 	t.heal = 0;		//HEALの時間
 	t.allkill = 0;	//ALLKILLの時間
+	t.windb = 0;	//WINDブロックの時間
 
 
 }
@@ -69,7 +70,22 @@ void CObjMessage::Draw()
 	f.sblock = hero->GetSBLOCK();
 	f.heal = hero->GetHEAL();
 	f.allkill = hero->GetALLKILL();
+	f.windb = hero->GetWINDB();
 
+	if (f.windb == true)	//敵が全滅したときにフラグをセット
+	{
+		t.windb = 100;
+	}
+	if (t.windb > 0) {
+		t.windb--;
+		f.windb = false;		//フラグをオフ
+		hero->SetWINDB(f.windb);
+		BackDraw(195.0f, 195.0f, 370.0f, 225.0f, a);
+		Font::StrDraw(L"大きな力が必要...", 200, 200, 20, g);//時間が0になると表示を終了
+		if (t.windb <= 0) {
+			t.windb = 0;
+		}
+	}
 	if (f.allkill == true)	//敵が全滅したときにフラグをセット
 	{
 		t.allkill = 130;

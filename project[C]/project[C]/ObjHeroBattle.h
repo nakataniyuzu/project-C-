@@ -20,7 +20,6 @@ public:
 	float GetPOS() { return m_posture; }//主人公の向きを取得
 	float GetVY() { return m_vy; }		
 	float GetVX() { return m_vx; }		
-	bool GetBATTLER() { return m_battle_flag; }
 
 	bool GetINPUTF() { return m_inputf; }			//inputfの情報を取得
 	int GetBATTLEHP() { return m_battle_hp; }		//主人公のHPを取得
@@ -67,8 +66,6 @@ private:
 	bool m_dtime_f;//死亡用フラグ
 
 	bool m_pos_flag;	//主人公向き用のフラグ
-	bool m_battle_flag;	//マップに戻るフラグ
-	bool m_boss_battle_f;	//ボス戦用フラグ
 	bool m_hit_down; //敵の頭の判定用
 
 	//魔法使用可能フラグ

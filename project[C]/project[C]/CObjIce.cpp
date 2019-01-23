@@ -86,7 +86,8 @@ void CObjIce::Action()
 
 	//MYSTERY‘®«AENEMY‘®«‚ÆÕ“Ë‚µ‚½‚çÁ–Å‚³‚¹‚é
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true
-		|| hit->CheckElementHit(ELEMENT_ENEMY) == true)
+		|| hit->CheckElementHit(ELEMENT_ENEMY) == true
+		|| hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

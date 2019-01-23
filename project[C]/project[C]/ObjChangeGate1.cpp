@@ -65,7 +65,7 @@ void CObjChangeGate1::Draw()
 		return;
 	}
 	//•`‰æƒJƒ‰[î•ñ
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 0.0f,0.0f,1.0f,1.0f };
 	float a[4] = { 0.0f,0.0f,0.0f,0.0f };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èæ‚èˆÊ’u

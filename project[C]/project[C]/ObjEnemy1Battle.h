@@ -35,6 +35,7 @@ private:
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 	float hero_posture;
 
+	int m_ice_time;	//ice用time変数
 	int m_time;		//敵死亡時のフェイドイン移行用間隔幅
 	int m_time_d;	//ダメージ時のカラー変更用タイム
 	int m_ani;			//死亡アニメーション用

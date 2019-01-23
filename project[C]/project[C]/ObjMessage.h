@@ -29,6 +29,7 @@ class CObjMessage :public CObj
 			bool sgate;		//SWITCHGATEのメッセージフラグ
 			bool heal;		//HEALのメッセージフラグ
 			bool allkill;	//ALLKILLのメッセージフラグ
+			bool windb;		//WINDブロックのメッセージフラグ
 		};
 		Flag f;
 
@@ -43,6 +44,7 @@ class CObjMessage :public CObj
 			int sgate;		//SWITCHGATE用の時間
 			int heal;		//HEALの時間
 			int allkill;	//ALLKILLの時間
+			int windb;		//WINDブロックの時間
 		};
 		Time t;
 		
