@@ -17,7 +17,7 @@ void CObjClear::Init()
 {
 	m_time = 0;
 	choice = 0;
-	m_key_flag = true;
+	m_key_flag = false;
 
 	Audio::Start(100);
 }
@@ -96,10 +96,10 @@ void CObjClear::Draw()
 	Font::StrDraw(L"ÉQÅ[ÉÄèIóπ", GAME_END_POS_X, GAME_END_POS_Y, GAME_END_FONT_SIZE, b);
 
 	if (choice == 0) {
-		Font::StrDraw(L"Åü", GAME_START_POS_X - 30, GAME_START_POS_Y, GAME_START_FONT_SIZE, c);
+		Font::StrDraw(L"Åü", GAME_START_POS_X - 30, GAME_START_POS_Y, GAME_START_FONT_SIZE, b);
 	}
 	if (choice == 1) {
-		Font::StrDraw(L"Åü", GAME_END_POS_X - 30, GAME_END_POS_Y, GAME_END_FONT_SIZE, c);
+		Font::StrDraw(L"Åü", GAME_END_POS_X - 30, GAME_END_POS_Y, GAME_END_FONT_SIZE, b);
 	}
 
 }

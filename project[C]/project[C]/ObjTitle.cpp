@@ -25,7 +25,7 @@ void CObjTitle::Init()
 {
 	m_time = 0;
 	choice = 0;
-	m_key_flag = true;
+	m_key_flag = false;
 	m_and = 1.0f;
 	m_andf = false;
 	Audio::Start(100);

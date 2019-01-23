@@ -119,4 +119,9 @@ void CObjEnemyboss1::Draw()
 		Draw::Draw(14, &src, &dst, c, 0.0f);
 
 	}
+	else if (g_map_change == 2) {
+		Draw::Draw(14, &src, &dst, c, 0.0f);
+
+	}
+
 }

@@ -326,16 +326,17 @@ void CObjBoss3Battle::Draw()
 		if (m_move == true)//¶Œü‚«
 		{
 			src.m_top = 0.0f;
-			src.m_left = 520.0f;
-			src.m_right = 745.0f;
-			src.m_bottom = 240.0f;
+			src.m_left = 200.0f;
+			src.m_right = 295.0f;
+			src.m_bottom = 95.0f;
+			
 		}
 		if (m_move == false)//‰EŒü‚«
 		{
 			src.m_top = 0.0f;
-			src.m_left = 490.0f;
-			src.m_right = 260.0f;
-			src.m_bottom = 240.0f;
+			src.m_left = 200.0f;
+			src.m_right = 100.0f;
+			src.m_bottom = 95.0f;
 		}
 		//•`‰æ
 		if (m_time > 0) {
