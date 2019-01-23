@@ -21,7 +21,8 @@ void CObjGameover::Init()
 	g_battle_key = true;//戦闘中のキー入力制御用の変数の初期化
 	g_mhit_enemy_flag = false;//マップの敵制御用フラグの初期化
 	g_boss_kills = 0;
-
+	g_enemy_kills = 0;
+	g_hero_max_hp_mp = 0;
 	m_time = 0;
 	choice = 0;
 	m_key_flag = true;

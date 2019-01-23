@@ -90,7 +90,11 @@ void CObjStairs::Draw()
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
 
 	//•`‰æ
-	Draw::Draw(18, &src, &dst, c, 90.0f);
+	if(g_map_change == 1)
+		Draw::Draw(18, &src, &dst, c, 270.0f);
+	else 
+		Draw::Draw(18, &src, &dst, c, 90.0f);
+
 }
 
 

@@ -64,8 +64,6 @@ void CObjHeroBattle::Action()
 	m_battle_mp = hero->GetMP();	//主人公からMPの情報を取得
 	m_battle_magic = hero->GetMAGIC();	//主人公からMAGICの情報を取得
 
-	m_battle_flag = hero->GetBATTLE();
-	m_boss_battle_f = hero->GetBOSSBATTLE();
 	hero_posture = hero->GetPOS();	//マップ上の主人公の向きを取得
 	m_delete = hero->GetDELETE();
 
@@ -184,13 +182,7 @@ void CObjHeroBattle::Action()
 			if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
 				m_battle_magic = 0;
 			}
-			if (m_battle_magic == 2 && m_wind_flag == false) {	//風魔法を取得しないと発動させない
-				m_battle_magic = 0;
-			}
-			if (m_battle_magic == 3 && m_thunder_flag == false) {//雷魔法を取得しないと発動させない
-				m_battle_magic = 0;
-			}
-			if (m_battle_magic >= 4) {
+			if (m_battle_magic == 2) {
 				m_battle_magic = 0;
 			}
 		}
@@ -224,12 +216,6 @@ void CObjHeroBattle::Action()
 						CObjIceBattle* objib = new CObjIceBattle(m_px + m_directionx, m_py + m_directiony);//Iceオブジェクト(戦闘)作成
 						Objs::InsertObj(objib, OBJ_ICE_BATTLE, 100);		//作ったIceオブジェクトをオブジェクトマネージャーに登録
 						Audio::Start(8);
-					}
-					else if (m_battle_magic == 3)	//雷の魔法
-					{
-						CObjThunderBattle* objtb = new CObjThunderBattle(m_px + m_directionx, m_py + m_directiony);//Thunderオブジェクト(戦闘)作成
-						Objs::InsertObj(objtb, OBJ_THUNDER_BATTLE, 100);		//作ったThunderオブジェクトをオブジェクトマネージャーに登録
-						Audio::Start(9);
 					}
 					m_f = false;
 					m_battle_mp -= 1;		//MPを減らす
@@ -351,7 +337,9 @@ void CObjHeroBattle::Action()
 				m_battle_hp -= m_damage;
 				Audio::Start(3);
 			}
-
+			//敵の攻撃によってHPが0以下になった場合
+			if(m_battle_hp <= 0)
+				m_battle_hp = 0;	//HPを0にする
 		}
 	}
 

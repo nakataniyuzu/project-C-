@@ -24,9 +24,9 @@ void CObjHero::Init()
 
 	m_speed_power = 3.0f;	//通常速度
 	m_posture = 2.0f;	// 0.0f = 上	1.0f = 右	2.0f = 下	3.0f = 左
-	
-	m_max_hp = 10 + g_enemy_kills + g_boss_kills;	//最大HP
-	m_max_mp = 10 + g_enemy_kills + g_boss_kills;	//最大MP
+
+	m_max_hp = 10 + g_hero_max_hp_mp;	//最大HP
+	m_max_mp = 10 + g_hero_max_hp_mp;	//最大MP
 	m_hp = m_max_hp;	//初期HP
 	m_mp = m_max_mp;	//初期MP
 	m_magic = 0;	//初期魔法
@@ -89,12 +89,12 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_max_hp = 10 + g_enemy_kills + g_boss_kills;	//最大HP
-	m_max_mp = 10 + g_enemy_kills + g_boss_kills;	//最大MP
+	m_max_hp = 10 + g_hero_max_hp_mp;	//最大HP
+	m_max_mp = 10 + g_hero_max_hp_mp;	//最大MP
 
 	if (g_mhit_enemy_flag == false)
 	{
-		m_speed_power = 0.3f;		//通常速度
+		m_speed_power = 1.0f;		//通常速度
 
 
 		if (m_andf == true)		//フェードイン
@@ -391,6 +391,10 @@ void CObjHero::Action()
 		m_mp = m_max_mp;		//MPを最大まで回復
 		mes.heal = true;		//フラグをオンにする
 		Audio::Start(10);
+	}
+	if (hit->CheckObjNameHit(OBJ_WINDBLOCK) != nullptr)			//主人公がWINDブロックと当たった場合
+	{
+		mes.windb = true;		//フラグをオンにする
 	}
 	if (hit->CheckObjNameHit(OBJ_STAIRS) != nullptr)	//主人公がSTAIRSと当たった場合
 	{

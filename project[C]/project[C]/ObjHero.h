@@ -60,6 +60,8 @@ class CObjHero : public CObj
 
 		bool GetALLKILL() { return mes.allkill; }//敵全滅用
 		void SetALLKILL(bool x) { mes.allkill = x; }	//敵全滅用セット関数
+		bool GetWINDB() { return mes.windb; }//WINDブロック用
+		void SetWINDB(bool x) { mes.windb = x; }	//WINDブロックセット関数
 
 		bool GetKEYF() { return mes.key; }		//KEYの情報を取得
 		bool GetGATEF() { return mes.gate; }	//GATEの情報を取得
@@ -140,7 +142,7 @@ class CObjHero : public CObj
 			bool heal;		//ヒールブロック用
 			bool dswitch;	//ダミースイッチ用
 			bool allkill;	//敵全滅用
-
+			bool windb;		//WINDブロック用
 		};
 		Message mes;
 

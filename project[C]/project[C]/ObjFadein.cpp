@@ -15,12 +15,14 @@ void CObjFadein::Init()
 	m_ani_frame = 0;	//静止フレームを初期にする
 
 	m_ani_max_time = 2;		//アニメーション間隔幅
-	m_flag = true;		//切り替え用フラグ
 
+	m_flag = true;			//切り替え用フラグ
+	m_fade_flag = true;		//フェイドインの切り替え用フラグ
 	//フラグの初期化
 	m_next_flag = false;
 	m_main_flag = false;
 	m_death_flag = false;
+	m_clear_flag = false;
 }
 
 //アクション
@@ -65,6 +67,7 @@ void CObjFadein::Action()
 			}
 			m_flag = false;
 			if (m_fade_flag == false) {
+				g_xp_flag = true;		//経験値フラグをオンに戻す
 				g_battle_flag = false;//マップ画面へ移行
 				g_key_flag = false;		//キー入力制御フラグをオフにする
 				g_battle_key = true;//マップ画面へ移行

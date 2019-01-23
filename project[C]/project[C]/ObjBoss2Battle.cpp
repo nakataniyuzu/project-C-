@@ -183,6 +183,7 @@ void CObjBoss2Battle::Action()
 	if (m_del == false && m_boss_hp <= 0)
 	{
 		hero->SetFADEF(false);	//フェイドフラグをオフ
+		g_hero_max_hp_mp += 5;	//敵の撃破時のHP/MP増加
 		hero->SetMAXHP(5);		//HP/MPを増やす
 		hero->SetMAXMP(5);
 		m_del = true;

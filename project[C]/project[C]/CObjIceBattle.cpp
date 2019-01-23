@@ -36,7 +36,7 @@ void CObjIceBattle::Init()
 	m_time = 50;	//魔法が消える時間
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, ALL_SIZE, ALL_SIZE, ELEMENT_ATTACK, OBJ_ICE_BATTLE, 1);
+	Hits::SetHitBox(this, m_x, m_y, ALL_SIZE, ALL_SIZE, ELEMENT_MAGIC_ATTACK, OBJ_ICE_BATTLE, 1);
 }
 
 //アクション

@@ -92,6 +92,7 @@ enum HIT_ELEMENTS
 	ELEMENT_FIELD,
 	ELEMENT_SWORD,
 	ELEMENT_ATTACK,
+	ELEMENT_MAGIC_ATTACK,
 
 	ELEMENT_ENEMY_BATTLE,
 	ELEMENT_BOSS_BATTLE,
@@ -129,12 +130,14 @@ struct UserData
 #define ALL_SIZE 50.0f		//ブロック等のサイズ
 extern int g_map_change;	//マップ変更用変数
 extern int g_enemy_kills;	//敵の撃破数
+extern int g_hero_max_hp_mp;	//敵の撃破時のHP増加
+
 extern int g_boss_kills;	//ボスの撃破数(ボスをマップから消すため)
 extern bool g_battle_flag;	//バトル画面変更用のフラグ
 extern bool g_mhit_enemy_flag;	//マップの敵制御用フラグ
 extern bool g_key_flag;		//キー入力制御用フラグ
 extern bool g_battle_key;	//戦闘中のキー入力制御用フラグ
-
+extern bool g_xp_flag;	//経験値を取得するかどうかのフラグ
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
 

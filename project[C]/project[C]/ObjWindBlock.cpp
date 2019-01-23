@@ -43,10 +43,8 @@ void CObjWindBlock::Action()
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
-	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)//当たっていたら当たり判定を消し、描画を変える
-	//{
-	//	m_time = 100;
-	//}
+
+
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
@@ -67,22 +65,9 @@ void CObjWindBlock::Draw()
 	}
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	float g[4] = { 0.0f,1.0f,0.0f,1.0f };
+	float g[4] = { 0.0f,1.0f,0.0f,0.7f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
-	//メッセージの情報を持ってくる
-	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
-
-	if (m_time > 0)
-	{
-		m_time--;
-		pm->BackDraw(195.0f, 195.0f, 370.0f, 225.0f, a);
-		Font::StrDraw(L"大きな力が必要...", 200, 200, 20, g);//時間が0になると表示を終了
-		if (m_time <= 0)
-		{
-			m_time = 0;
-		}
-	}
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 

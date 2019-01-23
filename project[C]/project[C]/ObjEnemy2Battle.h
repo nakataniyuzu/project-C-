@@ -37,6 +37,7 @@ class CObjEnemy2Battle : public CObj
 		
 		int m_time;		//敵死亡時のフェイドイン移行用間隔幅
 		int m_time_d;	//ダメージ時のカラー変更用タイム
+		int m_ice_time;	//ice用time変数
 
 		int m_ani;			//死亡アニメーション用
 		int m_ani_time_d;	//死亡アニメーション間隔タイム

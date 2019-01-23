@@ -14,10 +14,12 @@ using namespace GameL;
 //イニシャライズ
 void CObjNextfloor::Init()
 {
+	m_next_time = 200;
 	m_time = 900;
 	g_map_change += 1;
 	m_and = 0.0f;
 	m_andf = true;
+	m_keyf = true;
 }
 
 //アクション
@@ -34,11 +36,18 @@ void CObjNextfloor::Action()
 	}
 	else 
 	{
-		if (m_time > 40) {
+		if (m_time > 40) {		//文字を左へスライドさせる
 			m_time -= 15;
 		}
+		else {
+			m_next_time--;	//次へ進むための時間を減らす
+			if (m_next_time >= 0) {
+				m_next_time = 0;
+			}
+		}
 		if (m_time <= 40 && Input::GetVKey(VK_RETURN) == true 
-		 || m_time <= 40 && Input::GetVKey('Z') == true)
+		 || m_time <= 40 && Input::GetVKey('Z') == true
+		 || m_next_time == 0)
 		{
 			Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 		}

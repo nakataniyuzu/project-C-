@@ -48,9 +48,6 @@ void CObjEnemyboss1::Action()
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	battle_flag = hero->GetBATTLE();
-
 	if (g_battle_flag == true)
 	{
 		m_time = 100;
@@ -75,19 +72,17 @@ void CObjEnemyboss1::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	
 	hit->SetPos(m_px + block->GetScrollX(), m_py + block->GetScrollY());
 }
 
 //ドロー
 void CObjEnemyboss1::Draw()
 {
-	if (g_boss_kills >= 1)
-		return;
 	if (g_battle_flag == true)
 	{
 		return;
 	}
+
 	int AniDate[4] =
 	{
 		0 , 1 ,
@@ -111,12 +106,5 @@ void CObjEnemyboss1::Draw()
 	dst.m_left   = 0.0f + m_px + block->GetScrollX();
 	dst.m_right  = 100.0f + m_px + block->GetScrollX();
 	dst.m_bottom = 100.0f + m_py + block->GetScrollY();
-
-	if (g_map_change == 0) {
-		Draw::Draw(14, &src, &dst, c, 0.0f);
-	}
-	else if(g_map_change == 1){
-		Draw::Draw(14, &src, &dst, c, 0.0f);
-
-	}
+	Draw::Draw(14, &src, &dst, c, 0.0f);
 }
