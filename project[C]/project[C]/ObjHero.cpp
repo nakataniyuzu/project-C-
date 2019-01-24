@@ -94,7 +94,7 @@ void CObjHero::Action()
 
 	if (g_mhit_enemy_flag == false)
 	{
-		m_speed_power = 1.0f;		//通常速度
+		m_speed_power = 0.3f;		//通常速度
 
 
 		if (m_andf == true)		//フェードイン
@@ -331,7 +331,7 @@ void CObjHero::Action()
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_ene_battle_flag = true;	//敵出現フラグをオンにする
 		m_delete = true;			//敵削除フラグをオンにする
-
+		
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}

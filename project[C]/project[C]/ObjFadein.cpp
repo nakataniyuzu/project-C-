@@ -94,6 +94,7 @@ void CObjFadein::Action()
 		if (m_ani_frame == 0)
 		{
 			this->SetStatus(false);
+			hero->SetFADEF(false);
 		}
 	}
 }
