@@ -99,7 +99,6 @@ void CObjBossSwitch::Draw()
 		m_time--;
 		pm->BackDraw(195.0f, 195.0f, 450.0f, 225.0f, a);
 		Font::StrDraw(L"ボスへ続く道が開けた", 200, 200, 20, y);//時間が0になると表示を終了
-
 	}
 }
 
