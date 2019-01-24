@@ -25,6 +25,7 @@ void CObjMessage::Init()
 	f.heal = false;		//HEALのメッセージフラグ
 	f.allkill = false;	//ALLKILLのメッセージフラグ
 	f.windb = false;	//WINDブロックのメッセージフラグ
+	f.escape = false;	//escape用のメッセージフラグ
 	//タイムの初期化
 	t.gate = 0;		//GATE用の時間
 	t.water = 0;		//WATER用の時間
@@ -36,8 +37,8 @@ void CObjMessage::Init()
 	t.heal = 0;		//HEALの時間
 	t.allkill = 0;	//ALLKILLの時間
 	t.windb = 0;	//WINDブロックの時間
-
-
+	t.xp = 0;		//HP/MP増加用の時間
+	t.escape = 0;	//escape用の時間
 }
 
 //アクション
@@ -50,6 +51,7 @@ void CObjMessage::Action()
 void CObjMessage::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float r[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float b[4] = { 0.0f,0.5f,1.0f,1.0f };
 	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
 	float g[4] = { 0.0f,1.0f,0.0f,1.0f };
@@ -71,6 +73,39 @@ void CObjMessage::Draw()
 	f.heal = hero->GetHEAL();
 	f.allkill = hero->GetALLKILL();
 	f.windb = hero->GetWINDB();
+
+	if (g_escape == true)
+		f.escape = false;
+
+	if (g_escape == false && f.escape == false)
+	{
+		t.escape = 200;
+		f.escape = true;
+	}
+	if (t.escape > 0) {
+		t.escape--;
+		BackDraw(145.0f, 195.0f, 445.0f, 175.0f, a);
+		Font::StrDraw(L"この戦闘は逃げられない！", 200, 150, 20, r);//時間が0になると表示を終了
+		if (t.escape <= 150) {
+		}
+		if (t.escape <= 0) {
+			t.escape = 0;
+		}
+	}
+
+	if (g_xpup_flag == true)
+	{
+		t.xp = 160;
+		g_xpup_flag = false;
+	}
+	if (t.xp > 0) {
+		t.xp--;
+		BackDraw(145.0f, 195.0f, 370.0f, 175.0f, a);
+		Font::StrDraw(L"HP/MPが上がった！", 200, 150, 20, y);//時間が0になると表示を終了
+		if (t.xp <= 0) {
+			t.xp = 0;
+		}
+	}
 
 	if (f.windb == true)	//敵が全滅したときにフラグをセット
 	{

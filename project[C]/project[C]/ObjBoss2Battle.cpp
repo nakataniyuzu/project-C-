@@ -38,6 +38,7 @@ void CObjBoss2Battle::Init()
 	m_ani_time_d = 0;
 	m_del = false;
 	m_eff_flag = false;
+	m_ice_time = 0;
 
 	m_pop_flag = true;
 	m_move = true;  //true=右 false=左
@@ -170,6 +171,19 @@ void CObjBoss2Battle::Action()
 		m_boss_hp -= 1;
 		m_time_d = 30;
 	}
+	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)	//魔法（アイス）を当たった場合
+	{
+		m_ice_time = 50;	//icetimeに時間をセット
+	}
+	if (m_ice_time > 0)
+	{
+		m_ice_time--;		//動きを制御
+		m_speed_power = 0.0f;
+		if (m_ice_time <= 0) {
+			m_ice_time = 0;
+			m_speed_power = 0.4f;
+		}
+	}
 	if (m_time_d > 0)
 	{
 		m_time_d--;
@@ -186,6 +200,7 @@ void CObjBoss2Battle::Action()
 		g_hero_max_hp_mp += 5;	//敵の撃破時のHP/MP増加
 		hero->SetMAXHP(5);		//HP/MPを増やす
 		hero->SetMAXMP(5);
+		g_xpup_flag = true;	//経験値増加フラグをオンにする
 		m_del = true;
 		g_boss_kills += 1;
 		g_enemy_kills += 1;
@@ -285,12 +300,6 @@ void CObjBoss2Battle::Action()
 //ドロー
 void CObjBoss2Battle::Draw()
 {
-	//↓が原因でBOSSが表示されなくなる(後に解決)
-	/*if (g_battle_flag == true)
-	{
-		return;
-	}*/
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float a[4] = { 10.0f,0.6f,0.6f,1.0f };

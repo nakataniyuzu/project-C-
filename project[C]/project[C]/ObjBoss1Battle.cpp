@@ -32,6 +32,7 @@ void CObjBoss1Battle::Init()
 	m_move = true;  //true=右 false=左
 	boss_delete_flag = false;	//ボス消滅フラグ
 	m_pop_flag = true;	//ボス向き用フラグ
+	m_ice_time = 0;
 
 	m_eff.m_top    =   0;
 	m_eff.m_left   =   0;
@@ -157,7 +158,19 @@ void CObjBoss1Battle::Action()
 			m_time_d = 0;
 		}
 	}
-
+	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)	//魔法（アイス）を当たった場合
+	{
+		m_ice_time = 100;	//icetimeに時間をセット
+	}
+	if (m_ice_time > 0)
+	{
+		m_ice_time--;		//動きを制御
+		m_speed_power = 0.0f;
+		if (m_ice_time <= 0) {
+			m_ice_time = 0;
+			m_speed_power = 0.4f;
+		}
+	}
 	//敵の体力が0になったら消滅処理に移る
 	if (m_del == false && m_boss_hp <= 0)
 	{
@@ -165,6 +178,7 @@ void CObjBoss1Battle::Action()
 		g_hero_max_hp_mp += 2;	//敵の撃破時のHP/MP増加
 		hero->SetMAXHP(2);		//HP/MPを増やす
 		hero->SetMAXMP(2);
+		g_xpup_flag = true;	//経験値増加フラグをオンにする
 		m_del = true;
 		g_enemy_kills += 1;
 		g_boss_kills += 1;

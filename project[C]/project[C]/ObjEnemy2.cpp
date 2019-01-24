@@ -45,8 +45,9 @@ void CObjEnemy2::Init()
 //アクション
 void CObjEnemy2::Action()
 {
-	if (g_enemy_kills >= 11)
+	if (g_hero_max_hp_mp >= 20)
 	{
+		g_hero_max_hp_mp = 20;
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
@@ -75,6 +76,8 @@ void CObjEnemy2::Action()
 			hit->SetInvincibility(false);	//無敵オフ
 		}
 	}
+	//Windの情報を持ってくる
+	CObjWind* wind = (CObjWind*)Objs::GetObj(OBJ_WIND);
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//主人公を触れたら
 	{
@@ -89,6 +92,18 @@ void CObjEnemy2::Action()
 	{
 		m_speed_power = 0.0f;	//スピードを止める
 	}
+	if (hit->CheckObjNameHit(OBJ_WIND) != nullptr)	//魔法攻撃(Wind)に触れたら
+	{
+		if (wind->GetWINDPOS() == 0.0f)
+			m_vy = -5.0f;
+		else if (wind->GetWINDPOS() == 1.0f)
+			m_vx = 5.0f;
+		else if (wind->GetWINDPOS() == 2.0f)
+			m_vy = 5.0f;
+		else
+			m_vx = -5.0f;
+	}
+
 	if (m_hit_up == true)	//上
 		m_move = false;
 	if (m_hit_down == true)	//下
@@ -151,9 +166,6 @@ void CObjEnemy2::Action()
 //ドロー
 void CObjEnemy2::Draw()
 {
-	if (g_enemy_kills >= 11)
-		return;
-
 	if (g_battle_flag == true)
 	{
 		return;

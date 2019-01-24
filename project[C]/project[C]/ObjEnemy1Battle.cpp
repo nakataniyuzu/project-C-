@@ -187,6 +187,7 @@ void CObjEnemy1Battle::Action()
 		g_hero_max_hp_mp += 1;	//敵の撃破時のHP/MP増加
 		hero->SetMAXHP(1);		//HP/MPを増やす
 		hero->SetMAXMP(1);
+		g_xpup_flag = true;	//経験値増加フラグをオンにする
 		g_battle_key = false;
 		m_del = true;
 		g_enemy_kills += 1;

@@ -32,6 +32,7 @@ class CObjBoss3Battle : public CObj
 		int m_ani_frame;	//描画フレーム
 		int m_boss_hp;   //敵の体力
 		int m_damage;
+		int m_ice_time;	//ice用time変数
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値

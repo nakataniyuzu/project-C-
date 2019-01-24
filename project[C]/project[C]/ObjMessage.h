@@ -30,6 +30,8 @@ class CObjMessage :public CObj
 			bool heal;		//HEALのメッセージフラグ
 			bool allkill;	//ALLKILLのメッセージフラグ
 			bool windb;		//WINDブロックのメッセージフラグ
+			bool xp;		//XP取得時のメッセージフラグ
+			bool escape;	//escape用のメッセージフラグ
 		};
 		Flag f;
 
@@ -45,6 +47,8 @@ class CObjMessage :public CObj
 			int heal;		//HEALの時間
 			int allkill;	//ALLKILLの時間
 			int windb;		//WINDブロックの時間
+			int xp;			//XP取得時の時間
+			int escape;		//escape用の時間
 		};
 		Time t;
 		

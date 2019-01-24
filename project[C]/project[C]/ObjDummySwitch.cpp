@@ -50,6 +50,9 @@ void CObjDummySwitch::Action()
 		g_key_flag = true;
 		m_change = true;	//当たっていたら表示カラーを変える
 		g_xp_flag = false;	//経験値フラグをオフ
+		g_escape = false;	//escapeフラグをオフ
+
+
 		hit->SetInvincibility(true);	//当たり判定を消す
 	}
 	

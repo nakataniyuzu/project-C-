@@ -24,6 +24,7 @@ CObjBossSwitch::CObjBossSwitch(float x, float y)
 void CObjBossSwitch::Init()
 {
 	m_change = false;	//画像切り替え
+	m_time = 0;
 						//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ALL_SIZE, ALL_SIZE, ELEMENT_FIELD, OBJ_BOSSSWITCH, 1);
 }
@@ -42,6 +43,7 @@ void CObjBossSwitch::Action()
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		Audio::Start(11);	//エフェクト音を鳴らす
+		m_time = 100;	//タイムをセット
 		hit->SetInvincibility(true);	//無敵をオンにする
 		m_change = true;
 	}
@@ -62,6 +64,8 @@ void CObjBossSwitch::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,2.0f,0.7f };
 	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
+	float a[4] = { 1.0f,1.0f,1.0f,0.7f };
+	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -79,6 +83,8 @@ void CObjBossSwitch::Draw()
 	dst.m_left = 0.0f + m_px + block->GetScrollX();
 	dst.m_right = ALL_SIZE + m_px + block->GetScrollX();
 	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
+	//メッセージの情報を持ってくる
+	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 
 	//描画
 	if (m_change == false) {
@@ -86,6 +92,14 @@ void CObjBossSwitch::Draw()
 	}
 	else if (m_change == true) {
 		Draw::Draw(4, &src, &dst, r, 0.0f);
+	}
+
+	if (m_time > 0)
+	{
+		m_time--;
+		pm->BackDraw(195.0f, 195.0f, 450.0f, 225.0f, a);
+		Font::StrDraw(L"ボスへ続く道が開けた", 200, 200, 20, y);//時間が0になると表示を終了
+
 	}
 }
 

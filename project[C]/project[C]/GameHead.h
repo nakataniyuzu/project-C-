@@ -138,6 +138,10 @@ extern bool g_mhit_enemy_flag;	//マップの敵制御用フラグ
 extern bool g_key_flag;		//キー入力制御用フラグ
 extern bool g_battle_key;	//戦闘中のキー入力制御用フラグ
 extern bool g_xp_flag;	//経験値を取得するかどうかのフラグ
+extern bool g_xpup_flag;	//HP/MP増加用メッセージフラグ
+extern bool g_escape;	//逃げれなくするフラグ
+
+
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
 

@@ -179,17 +179,19 @@ void CObjHeroBattle::Action()
 				m_mf = false;
 				m_battle_magic += 1;
 			}
-			if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
-				m_battle_magic = 0;
-			}
-			if (m_battle_magic == 2) {
-				m_battle_magic = 0;
-			}
 		}
 		else
 		{
 			m_mf = true;
 		}
+		if (m_battle_magic == 1 && m_ice_flag == false) {	//氷魔法を取得しないと発動させない
+			m_battle_magic = 0;
+		}
+		if (m_battle_magic == 2) {
+			m_battle_magic = 0;
+		}
+
+
 		if (m_battle_mp > 0) {
 			if (Input::GetVKey('X') == true)	//魔法発射
 			{
@@ -375,106 +377,87 @@ void CObjHeroBattle::Action()
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
 
-	//主人公が領域外に行かないようにする
-	if (m_px + 75 >= 800)
+	//敵から逃げれないフラグ
+	if (g_escape == true)	//オンの場合逃げられる
 	{
-		m_px = 800.0 - 75.0f;
-		if (hero_posture == 0.0f || hero_posture == 1.0f) {
-			m_inputf = false;		//キー入力を不可にする
-			hero->SetFADEF(false);	//フェイドフラグをオフ
-			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
-			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-			Audio::Stop(13);		//バトル用BGMを止める
-			if (m_delete == true){
-				if (g_map_change == 0) {
-					if (benemy1 != nullptr) {
-						benemy1->SetENEMYDELETE(true);
+		//主人公が逃げられるようにする
+		if (m_px + 75 >= 800)
+		{
+			m_px = 800.0 - 75.0f;
+			if (hero_posture == 0.0f || hero_posture == 1.0f) {
+				m_inputf = false;		//キー入力を不可にする
+				hero->SetFADEF(false);	//フェイドフラグをオフ
+				CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+				Objs::InsertObj(fade, OBJ_FADEIN, 200);
+				Audio::Stop(13);		//バトル用BGMを止める
+				if (m_delete == true) {
+					if (g_map_change == 0) {
+						if (benemy1 != nullptr) {
+							benemy1->SetENEMYDELETE(true);
+						}
 					}
-				}
-				else if (g_map_change == 1) {
-					if (benemy2 != nullptr) {
-						benemy2->SetENEMYDELETE(true);
+					else if (g_map_change == 1) {
+						if (benemy2 != nullptr) {
+							benemy2->SetENEMYDELETE(true);
+						}
 					}
-				}
-				else if (g_map_change == 2) {
-					if (benemy3 != nullptr) {
-						benemy3->SetENEMYDELETE(true);
-					}
-				}
-			}
-			else {
-				if (g_map_change == 0) {
-					if (bboss1 != nullptr) {
-						bboss1->SetBOSSDELETE(true);
-					}
-				}
-				else if (g_map_change == 1) {
-					if (bboss2 != nullptr) {
-						bboss2->SetBOSSDELETE(true);
-					}
-				}
-				else if (g_map_change == 2) {
-					if (bboss3 != nullptr) {
-						bboss3->SetBOSSDELETE(true);
+					else if (g_map_change == 2) {
+						if (benemy3 != nullptr) {
+							benemy3->SetENEMYDELETE(true);
+						}
 					}
 				}
 			}
 		}
+		if (m_px < 0)
+		{
+			m_px = 0.0f;
+			if (hero_posture == 2.0f || hero_posture == 3.0f) {
+				m_inputf = false;		//キー入力を不可にする
+				hero->SetFADEF(false);	//フェイドフラグをオフ
+				CObjFadein* fade = new CObjFadein();	//フェイドインの作成
+				Objs::InsertObj(fade, OBJ_FADEIN, 200);
+				Audio::Stop(13);		//バトル用BGMを止める
+				if (m_delete == true) {
+					if (g_map_change == 0) {
+						if (benemy1 != nullptr) {
+							benemy1->SetENEMYDELETE(true);
+						}
+					}
+					else if (g_map_change == 1) {
+						if (benemy2 != nullptr) {
+							benemy2->SetENEMYDELETE(true);
+						}
+					}
+					else if (g_map_change == 2) {
+						if (benemy3 != nullptr) {
+							benemy3->SetENEMYDELETE(true);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//領域外に行かない処理
+	if (m_px + 75 >= 800)
+	{
+		m_px = 800.0 - 75.0f;
 	}
 	if (m_px < 0)
 	{
 		m_px = 0.0f;
-		if (hero_posture == 2.0f || hero_posture == 3.0f) {
-			m_inputf = false;		//キー入力を不可にする
-			hero->SetFADEF(false);	//フェイドフラグをオフ
-			CObjFadein* fade = new CObjFadein();	//フェイドインの作成
-			Objs::InsertObj(fade, OBJ_FADEIN, 200);
-			Audio::Stop(13);		//バトル用BGMを止める
-			if (m_delete == true) {
-				if (g_map_change == 0) {
-					if (benemy1 != nullptr) {
-						benemy1->SetENEMYDELETE(true);
-					}
-				}
-				else if (g_map_change == 1) {
-					if (benemy2 != nullptr) {
-						benemy2->SetENEMYDELETE(true);
-					}
-				}
-				else if (g_map_change == 2) {
-					if (benemy3 != nullptr) {
-						benemy3->SetENEMYDELETE(true);
-					}
-				}
-			}
-			else {
-				if (g_map_change == 0) {
-					if (bboss1 != nullptr) {
-						bboss1->SetBOSSDELETE(true);
-					}
-				}
-				else if (g_map_change == 1) {
-					if (bboss2 != nullptr) {
-						bboss2->SetBOSSDELETE(true);
-					}
-				}
-				else if (g_map_change == 2) {
-					if (bboss3 != nullptr) {
-						bboss3->SetBOSSDELETE(true);
-					}
-				}
-			}
-		}
-		
 	}
+
 	if (m_py + 100 >= 580)
 	{
 		m_py = 580.0f - 100.0f;
 	}
-	if (m_py <50)
+	if (m_py < 50)
 	{
 		m_py = 50.0f;
 	}
+	
 
 	hero->SetHP(m_battle_hp);
 	hero->SetMP(m_battle_mp);

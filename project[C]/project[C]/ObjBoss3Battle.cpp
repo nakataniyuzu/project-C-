@@ -43,6 +43,7 @@ void CObjBoss3Battle::Init()
 	m_ani_time_d = 0;
 	m_del = false;
 	m_eff_flag = false;
+	m_ice_time = 0;
 
 	m_time = 0;
 	m_time_f = 0;
@@ -196,7 +197,19 @@ void CObjBoss3Battle::Action()
 		}
 		m_boss_hp -= 1;
 	}
-
+	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)	//魔法（アイス）を当たった場合
+	{
+		m_ice_time = 40;	//icetimeに時間をセット
+	}
+	if (m_ice_time > 0)
+	{
+		m_ice_time--;		//動きを制御
+		m_speed_power = 0.0f;
+		if (m_ice_time <= 0) {
+			m_ice_time = 0;
+			m_speed_power = 0.4f;
+		}
+	}
 	if (m_time > 0)
 	{
 		m_time--;
@@ -213,6 +226,7 @@ void CObjBoss3Battle::Action()
 		g_hero_max_hp_mp += 5;	//敵の撃破時のHP/MP増加
 		hero->SetMAXHP(5);		//HP/MPを増やす
 		hero->SetMAXMP(5);
+		g_xpup_flag = true;	//経験値増加フラグをオンにする
 		m_del = true;
 		g_enemy_kills += 1;
 		g_boss_kills += 1;

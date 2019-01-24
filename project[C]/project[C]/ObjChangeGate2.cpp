@@ -66,7 +66,7 @@ void CObjChangeGate2::Draw()
 	}
 
 	//•`‰æƒJƒ‰[î•ñ
-	float c[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
 	float a[4] = { 0.0f,0.0f,0.0f,0.0f };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èæ‚èˆÊ’u
@@ -90,7 +90,7 @@ void CObjChangeGate2::Draw()
 		Draw::Draw(4, &src, &dst, a, 0.0f);
 	}
 	else {
-		Draw::Draw(4, &src, &dst, c, 0.0f);
+		Draw::Draw(4, &src, &dst, y, 0.0f);
 	}
 }
 

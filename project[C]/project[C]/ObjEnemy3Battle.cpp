@@ -223,6 +223,7 @@ void CObjEnemy3Battle::Action()
 			g_hero_max_hp_mp += 5;	//敵の撃破時のHP/MP増加
 			hero->SetMAXHP(5);		//HP/MPを増やす
 			hero->SetMAXMP(5);
+			g_xpup_flag = true;	//経験値増加フラグをオンにする
 		}
 		hero->SetFADEF(false);	//フェイドフラグをオフ		
 		m_del = true;

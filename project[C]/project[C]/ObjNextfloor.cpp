@@ -14,7 +14,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjNextfloor::Init()
 {
-	m_next_time = 200;
+	m_next_time = 300;
 	m_time = 900;
 	g_map_change += 1;
 	m_and = 0.0f;

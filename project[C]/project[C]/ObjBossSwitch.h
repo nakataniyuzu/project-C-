@@ -21,4 +21,5 @@ class CObjBossSwitch : public CObj
 		float m_px;			//ˆÊ’u
 		float m_py;
 		bool m_change;		//‰æ‘œØ‚è‘Ö‚¦—p
+		int m_time;		
 };

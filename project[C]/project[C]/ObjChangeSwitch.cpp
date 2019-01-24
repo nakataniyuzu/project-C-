@@ -83,15 +83,11 @@ void CObjChangeSwitch::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	float b[4] = { 1.0f,1.0f,2.0f,0.7f };
-	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
+	float g[4] = { 0.0f,1.0f,1.0f,1.0f };
+	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
-	if (m_time > 0)
-	{
-		pm->BackDraw(195.0f, 195.0f, 410.0f, 225.0f, a);
-		Font::StrDraw(L"どこからか物音がした", 200, 200, 20, c);//時間が0になると表示を終了
-	}
+	
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -112,10 +108,16 @@ void CObjChangeSwitch::Draw()
 
 	//描画
 	if (m_change == false) {
-		Draw::Draw(4, &src, &dst, b, 0.0f);
+		Draw::Draw(4, &src, &dst, g, 0.0f);
 	}
 	else if (m_change == true) {
-		Draw::Draw(4, &src, &dst, r, 0.0f);
+		Draw::Draw(4, &src, &dst, y, 0.0f);
+	}
+
+	if (m_time > 0)
+	{
+		pm->BackDraw(195.0f, 195.0f, 425.0f, 225.0f, a);
+		Font::StrDraw(L"扉が切り替わったようだ", 200, 200, 20, c);//時間が0になると表示を終了
 	}
 }
 

@@ -44,7 +44,7 @@ void CObjEnemy1::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjEnemy1::Action()
 {
-	if (g_enemy_kills >= 5)
+	if (g_hero_max_hp_mp >= 5)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

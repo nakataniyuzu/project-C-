@@ -89,6 +89,9 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
 	m_max_hp = 10 + g_hero_max_hp_mp;	//最大HP
 	m_max_mp = 10 + g_hero_max_hp_mp;	//最大MP
 
@@ -110,23 +113,24 @@ void CObjHero::Action()
 			//バトルフラグ、または入力制御フラグがオンの場合アクションを制御する
 			if (g_battle_flag == true || g_key_flag == true)
 			{
+				hit->SetInvincibility(true);	//無敵オン
 				m_vx = 0.0f;
 				m_vy = 0.0f;
 				return;
 			}
-
+			hit->SetInvincibility(false);	//無敵オン
 			//敵が全滅した際のメッセージ用
-			if (g_map_change == 0 && g_enemy_kills >= 5 && m_allkill_flag1 == false)
+			if (g_map_change == 0 && g_hero_max_hp_mp >= 5 && m_allkill_flag1 == false)
 			{
 				mes.allkill = true;
 				m_allkill_flag1 = true;
 			}
-			if (g_map_change == 1 && g_enemy_kills >= 11 && m_allkill_flag2 == false)
+			if (g_map_change == 1 && g_hero_max_hp_mp >= 20 && m_allkill_flag2 == false)
 			{
 				mes.allkill = true;
 				m_allkill_flag2 = true;
 			}
-			if (g_map_change == 2 && g_enemy_kills >= 17 && m_allkill_flag3 == false)
+			if (g_map_change == 2 && g_hero_max_hp_mp >= 35 && m_allkill_flag3 == false)
 			{
 				mes.allkill = true;
 				m_allkill_flag3 = true;
@@ -293,8 +297,6 @@ void CObjHero::Action()
 		b->SetScrollY(b->GetScrollY());
 	}
 
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
 	//主人公とMYSTTERY系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)
 	{
@@ -331,7 +333,6 @@ void CObjHero::Action()
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_ene_battle_flag = true;	//敵出現フラグをオンにする
 		m_delete = true;			//敵削除フラグをオンにする
-		
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
@@ -339,11 +340,10 @@ void CObjHero::Action()
 	if (hit->CheckElementHit(ELEMENT_BOSS) == true)
 	{
 		Audio::Start(1);
-
+		g_escape = false;
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_boss_battle_flag = true;	//敵出現フラグをオンにする
 		m_delete = false;			//敵削除フラグをオンにする
-
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
@@ -351,6 +351,7 @@ void CObjHero::Action()
 	{
 		m_key = 1;
 		mes.key = true;
+
 	}
 	if (hit->CheckObjNameHit(OBJ_GATE) != nullptr)
 	{
@@ -406,11 +407,11 @@ void CObjHero::Action()
 	m_vy += -(m_vy * 0.098);
 
 	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&g_px, &g_py, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
-	);
+	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//pb->BlockHit(&g_px, &g_py, true,
+	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+	//	&m_block_type
+	//);
 
 	//位置の更新
 	g_px += m_vx;
