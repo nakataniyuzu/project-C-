@@ -100,6 +100,7 @@ void CObjClear::Draw()
 	}
 	if (choice == 1) {
 		Font::StrDraw(L"Åü", GAME_END_POS_X - 30, GAME_END_POS_Y, GAME_END_FONT_SIZE, b);
+
 	}
 
 }

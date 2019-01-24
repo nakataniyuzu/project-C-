@@ -406,11 +406,11 @@ void CObjHero::Action()
 	m_vy += -(m_vy * 0.098);
 
 	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	/*CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&g_px, &g_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
-	);
+	);*/
 
 	//位置の更新
 	g_px += m_vx;
