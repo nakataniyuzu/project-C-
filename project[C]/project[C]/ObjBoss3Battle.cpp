@@ -330,6 +330,7 @@ void CObjBoss3Battle::Draw()
 			src.m_left = 200.0f;
 			src.m_right = 295.0f;
 			src.m_bottom = 95.0f;
+			
 		}
 		else if (m_move == false)//‰EŒü‚«
 		{

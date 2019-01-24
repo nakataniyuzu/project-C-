@@ -37,9 +37,10 @@ void CSceneClear::InitScene()
 	Audio::LoadAudio(0, L"SERECT.wav", EFFECT);
 	Audio::LoadAudio(1, L"ENTER.wav", EFFECT);
 	Audio::LoadAudio(2, L"TITLE-BGM.WAV", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(3, L"GAME-CLEAR.wav", SOUND_TYPE::BACK_MUSIC);
 
 	//BGMスタート
-	Audio::Start(2);
+	Audio::Start(3);
 
 	CObjClear* p = new CObjClear();
 	Objs::InsertObj(p, OBJ_CLEAR, 1);
