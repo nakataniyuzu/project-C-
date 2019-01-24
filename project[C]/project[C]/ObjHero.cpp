@@ -94,7 +94,7 @@ void CObjHero::Action()
 
 	if (g_mhit_enemy_flag == false)
 	{
-		m_speed_power = 1.0f;		//通常速度
+		m_speed_power = 0.3f;		//通常速度
 
 
 		if (m_andf == true)		//フェードイン
@@ -331,7 +331,7 @@ void CObjHero::Action()
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_ene_battle_flag = true;	//敵出現フラグをオンにする
 		m_delete = true;			//敵削除フラグをオンにする
-
+		
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
@@ -406,11 +406,11 @@ void CObjHero::Action()
 	m_vy += -(m_vy * 0.098);
 
 	//ブロックとの当たり判定実行
-	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	//pb->BlockHit(&g_px, &g_py, true,
-	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-	//	&m_block_type
-	//);
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&g_px, &g_py, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+		&m_block_type
+	);
 
 	//位置の更新
 	g_px += m_vx;

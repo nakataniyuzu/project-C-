@@ -22,7 +22,6 @@ class CObjFadein : public CObj
 
 		bool m_flag;			//切り替え用フラグ
 		bool m_fade_flag;		//フェイドインの切り替え用フラグ
-		bool m_fadeout_flag;	//フェイドアウトの切り替え用フラグ
 		bool m_next_flag;		//次の階層への移行用
 		bool m_main_flag;		//タイトルからの移行用
 		bool m_death_flag;		//ゲームオーバーシーンへの移行用

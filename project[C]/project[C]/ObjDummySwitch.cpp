@@ -42,18 +42,17 @@ void CObjDummySwitch::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	if (m_change == false)
+	
+	//主人公と当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		//主人公と当たっているか確認
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-		{
-			m_time = 50;
-			g_key_flag = true;
-			m_change = true;	//当たっていたら表示カラーを変える
-			g_xp_flag = false;	//経験値フラグをオフ
-			hit->SetInvincibility(true);	//当たり判定を消す
-		}
+		m_time = 50;
+		g_key_flag = true;
+		m_change = true;	//当たっていたら表示カラーを変える
+		g_xp_flag = false;	//経験値フラグをオフ
+		hit->SetInvincibility(true);	//当たり判定を消す
 	}
+	
 	
 	if (m_time == 1) {
 		hero->SetDELETE(true);	//前敵削除フラグをオン
@@ -88,13 +87,6 @@ void CObjDummySwitch::Draw()
 	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 
 	CHitBox* hit = Hits::GetHitBox(this);
-	if (m_change == true)
-	{
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//FireがFireblockと当たった場合、m_timeに時間をセット
-		{
-			m_time = 100;
-		}
-	}
 	if (m_time > 0) {
 		m_time--;
 		pm->BackDraw(195.0f, 195.0f, 265.0f, 225.0f, a);

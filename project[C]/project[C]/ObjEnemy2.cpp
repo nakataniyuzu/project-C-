@@ -28,8 +28,9 @@ void CObjEnemy2::Init()
 
 	m_speed_power = 0.5f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
-
+	m_time = 0;
 	m_move = false;
+
 
 	//blockとの衝突状態確認
 	m_hit_up = false;
