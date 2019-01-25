@@ -12,7 +12,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-int g_map_change = 0;		//マップが何層目かの変数の初期化
+int g_map_change = 0;		//マップが何層目かの変数の初期化　1層目 = 0　2層目 = 1　3層目 = 2　4層目 = 3
 int g_enemy_kills = 0;		//敵撃破数の変数の初期化	1 = 6	2 = 11	3 = 17
 int g_boss_kills = 0;		//ボス撃破数変数の初期化
 bool g_battle_flag = false;	//バトル画面用の変数の初期化

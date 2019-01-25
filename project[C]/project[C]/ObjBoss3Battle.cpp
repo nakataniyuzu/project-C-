@@ -231,6 +231,7 @@ void CObjBoss3Battle::Action()
 		g_enemy_kills += 1;
 		g_boss_kills += 1;
 		g_battle_key = false;
+		m_time = 0;
 	}
 
 	//敵が領域外に行かないようにする
@@ -272,7 +273,7 @@ void CObjBoss3Battle::Action()
 		{
 			{ 0,  0,230,250 },
 			{ 0,240,460,250 },
-			{ 0,470,700,250 },
+			{ 0,470,635,250 },
 		};
 
 		//アニメーションのコマ間隔制御
@@ -328,7 +329,7 @@ void CObjBoss3Battle::Draw()
 		//切り取り位置の設定
 		src.m_top = 0.0f;
 		src.m_left = 470.0f;
-		src.m_right = 700.0f;
+		src.m_right = 635.0f;
 		src.m_bottom = 250.0f;
 		if (m_eff_flag == true)
 			Draw::Draw(25, &src, &dst, c, 0.0f);
