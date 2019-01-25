@@ -14,7 +14,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjNextfloor::Init()
 {
-	m_next_time = 300;
+	m_next_time = 100;
 	m_time = 900;
 	g_map_change += 1;
 	m_and = 0.0f;
@@ -41,7 +41,7 @@ void CObjNextfloor::Action()
 		}
 		else {
 			m_next_time--;	//次へ進むための時間を減らす
-			if (m_next_time >= 0) {
+			if (m_next_time <= 0) {
 				m_next_time = 0;
 			}
 		}

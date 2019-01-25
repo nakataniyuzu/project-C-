@@ -66,14 +66,14 @@ void CObjBoss3Battle::Action()
 	CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 
 	//–€ŽC
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	m_vx += -(m_vx * 0.098f);
+	m_vy += -(m_vy * 0.098f);
 
 	//Ž©g‚ÌHitBox‚ðŽ‚Á‚Ä‚­‚é
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//Ž©—R—Ž‰º‰^“®
-	m_vy += 9.8 / (16.0f);
+	m_vy += 9.8f / (16.0f);
 
 	//ˆÊ’u‚ÌXV
 	m_px += m_vx;
@@ -303,15 +303,10 @@ void CObjBoss3Battle::Action()
 //ƒhƒ[
 void CObjBoss3Battle::Draw()
 {
-	//«‚ªŒ´ˆö‚ÅBOSS‚ª•\Ž¦‚³‚ê‚È‚­‚È‚é(Œã‚É‰ðŒˆ)
-	/*if (g_battle_flag == true)
-	{
-		return;
-	}*/
-
 	//•`‰æƒJƒ‰[î•ñ
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float a[4] = { 10.0f,0.6f,0.6f,1.0f };
+	float b[4] = { 0.0f,0.0f,1.0f,1.0f };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
 	RECT_F dst;	//•`‰ææ•\Ž¦ˆÊ’u
@@ -356,6 +351,9 @@ void CObjBoss3Battle::Draw()
 		//•`‰æ
 		if (m_time > 0) {
 			Draw::Draw(14, &src, &dst, a, 0.0f);
+		}
+		else if (m_ice_time > 0) {
+			Draw::Draw(14, &src, &dst, b, 0.0f);
 		}
 		else {
 			Draw::Draw(14, &src, &dst, c, 0.0f);

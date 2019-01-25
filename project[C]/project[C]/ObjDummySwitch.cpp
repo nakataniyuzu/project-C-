@@ -85,6 +85,7 @@ void CObjDummySwitch::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float b[4] = { 1.0f,1.0f,2.0f,0.7f };
 	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
+	float red[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 	//メッセージの情報を持ってくる
 	CObjMessage* pm = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
@@ -92,8 +93,8 @@ void CObjDummySwitch::Draw()
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (m_time > 0) {
 		m_time--;
-		pm->BackDraw(195.0f, 195.0f, 265.0f, 225.0f, a);
-		Font::StrDraw(L"敵だ!!", 200, 200, 20, c);//時間が0になると表示を終了
+		pm->BackDraw(195.0f, 390.0f, 460.0f, 225.0f, a);
+		Font::StrDraw(L"敵だ!!", 400, 200, 20, red);//時間が0になると表示を終了
 		if (m_time <= 0) {
 			m_time = 0;
 		}

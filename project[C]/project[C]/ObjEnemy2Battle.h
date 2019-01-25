@@ -44,8 +44,8 @@ class CObjEnemy2Battle : public CObj
 		bool m_del;			//削除チェック
 		RECT_F m_eff;		//死亡エフェクト描画用
 
-		int m_subtract;			//おテスト
-		int m_hero_position;	//おテスト2
+		float m_subtract;			//おテスト
+		float m_hero_position;	//おテスト2
 
 		//踏んでいるblockの種類を確認用
 		int m_block_type;

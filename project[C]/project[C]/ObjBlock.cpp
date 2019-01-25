@@ -391,7 +391,7 @@ void CObjBlock::BlockHit(
 
 					//äpìxÇãÅÇﬂÇÈ
 					float r = atan2(rvy, rvx);
-					r = r * 180.0f / 3.14;
+					r = r * 180.0f / 3.14f;
 
 					if (r <= 0.0f)
 						r = abs(r);

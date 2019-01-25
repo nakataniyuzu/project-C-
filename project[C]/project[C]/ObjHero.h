@@ -25,7 +25,7 @@ class CObjHero : public CObj
 		int GetHP() { return m_hp; }	//主人公のHPを取得
 		int GetMP() { return m_mp; }	//主人公のMPを取得
 		int GetMAGIC() { return m_magic; }	//主人公の設定魔法を取得
-		bool GetKEY() { return m_key; }		//鍵の情報を取得
+		int GetKEY() { return m_key; }		//鍵の情報を取得
 
 		bool GetBATTLE() { return m_battle_flag; }	//バトル移行用のフラグを取得
 		bool GetBOSSBATTLE() { return m_boss_battle_flag; }	//ボスバトル移行用のフラグを取得
@@ -36,12 +36,12 @@ class CObjHero : public CObj
 		void SetBOSSBATTLE(bool x) { m_boss_battle_flag = x; }
 		void SetBATTLE(bool x) { m_battle_flag = x; }
 
-		void SetMAXHP(float x) { m_max_hp += x; }	//主人公のMAXHPに値を加算
-		void SetMAXMP(float x) { m_max_mp += x; }	//主人公のMAXMPに値を加算
+		void SetMAXHP(int x) { m_max_hp += x; }	//主人公のMAXHPに値を加算
+		void SetMAXMP(int x) { m_max_mp += x; }	//主人公のMAXMPに値を加算
 
-		void SetHP(float x) { m_hp = x; }	//主人公のHPに値をセット
-		void SetMP(float x) { m_mp = x; }	//主人公のMPに値をセット
-		void SetMAGIC(float x) { m_magic = x; }	//主人公の魔法の種類をセット
+		void SetHP(int x) { m_hp = x; }	//主人公のHPに値をセット
+		void SetMP(int x) { m_mp = x; }	//主人公のMPに値をセット
+		void SetMAGIC(int x) { m_magic = x; }	//主人公の魔法の種類をセット
 		
 		bool GetENEMYF() { return m_ene_battle_flag; }		//敵出現用フラグを取得
 		bool GetBOSSF() { return m_boss_battle_flag; }		//ボス出現用フラグを取得

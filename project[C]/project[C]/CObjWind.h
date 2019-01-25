@@ -22,7 +22,7 @@ class CObjWind : public CObj
 		float m_vx;		//X方向の速度用変数
 		float m_vy;		//Y方向の速度用変数
 
-		float m_hit;	//衝突判定
+		bool m_hit;	//衝突判定
 		float m_posture;	//向き
 		int m_time;		//魔法が消える時間
 

@@ -30,7 +30,7 @@ private:
 	int m_time;			//•\¦‚·‚éŠÔ
 	int m_draw_time;
 	//•`‰æØ‚è‘Ö‚¦—p
-	int m_switch;
+	float m_switch;
 };
 
 

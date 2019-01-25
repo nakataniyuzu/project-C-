@@ -26,7 +26,7 @@ class CObjFireGate : public CObj
 
 		int m_time;			//•\Ž¦‚·‚éŽžŠÔ
 
-		float fire;	//‰Î‚ª“”‚Á‚Ä‚¢‚é‚©‚Ì”»’è—p
+		float m_fire;	//‰Î‚ª“”‚Á‚Ä‚¢‚é‚©‚Ì”»’è—p
 
 };
 

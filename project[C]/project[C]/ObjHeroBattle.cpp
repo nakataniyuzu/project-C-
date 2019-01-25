@@ -231,11 +231,11 @@ void CObjHeroBattle::Action()
 	}
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	m_vx += -(m_vx * 0.098f);
+	m_vy += -(m_vy * 0.098f);
 
 	//自由落下運動
-	m_vy += 15.8 / (16.0f);
+	m_vy += 15.8f / (16.0f);
 
 	//位置の更新
 	m_px += m_vx;

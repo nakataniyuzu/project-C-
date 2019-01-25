@@ -140,8 +140,8 @@ void CObjEnemy3::Action()
 	}
 
 	//–€ŽC
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	m_vx += -(m_vx * 0.098f);
+	m_vy += -(m_vy * 0.098f);
 
 	//“G‚ÆMYSTTERYŒn“‚Æ‚Ì“–‚½‚è”»’è
 	if (hit->CheckElementHit(ELEMENT_MYSTERY) == true)

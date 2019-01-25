@@ -71,14 +71,14 @@ void CObjEnemy2Battle::Action()
 	m_hero_position = herob->GetX();
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	m_vx += -(m_vx * 0.098f);
+	m_vy += -(m_vy * 0.098f);
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//自由落下運動
-	m_vy += 9.8 / (16.0f);
+	m_vy += 9.8f / (16.0f);
 
 	//位置の更新
 	m_px += m_vx;

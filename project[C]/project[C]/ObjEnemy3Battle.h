@@ -17,7 +17,7 @@ class CObjEnemy3Battle : public CObj
 
 		void SetENEMYDELETE(bool x) { enemy_delete_flag = x; }	//敵消滅用
 		int GetDMG() { return m_damage; }//攻撃力を取得
-		int GetPOS() { return m_posture; }//卍向き取得卍
+		float GetPOS() { return m_posture; }//卍向き取得卍
 
 	private:
 		float m_px;//位置
@@ -36,8 +36,8 @@ class CObjEnemy3Battle : public CObj
 		float m_ani_max_time;	//アニメーション動作間隔最大値
 		float m_hero_posture;
 
-		int m_subtract;			//おテスト
-		int m_hero_position;	//おテスト2
+		float m_subtract;			//おテスト
+		float m_hero_position;	//おテスト2
 
 		float m_time_j;		//ジャンプテスト
 		int m_ice_time;	//ice用time変数

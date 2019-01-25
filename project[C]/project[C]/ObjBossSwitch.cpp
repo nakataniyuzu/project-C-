@@ -62,8 +62,8 @@ void CObjBossSwitch::Draw()
 		return;
 	}
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,2.0f,0.7f };
-	float r[4] = { 3.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float r[4] = { 3.0f,0.5f,0.5f,1.0f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.7f };
 	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
 
@@ -97,9 +97,10 @@ void CObjBossSwitch::Draw()
 	if (m_time > 0)
 	{
 		m_time--;
-		pm->BackDraw(195.0f, 195.0f, 450.0f, 225.0f, a);
+		pm->BackDraw(195.0f, 195.0f, 410.0f, 225.0f, a);
 		Font::StrDraw(L"ボスへ続く道が開けた", 200, 200, 20, y);//時間が0になると表示を終了
 	}
+
 }
 
 

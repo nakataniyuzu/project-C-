@@ -22,7 +22,7 @@ bool g_mhit_enemy_flag = false;	//マップの敵制御用フラグの初期化
 int g_hero_max_hp_mp = 0;	//敵の撃破時のHP増加
 bool g_xp_flag = true;		//XPを取得するかどうかのフラグの初期化
 bool g_xpup_flag = false;	//HP/MP増加用メッセージフラグ
-bool g_escape = true;
+bool g_escape = true;		//escapeフラグの初期化
 
 //イニシャライズ
 void CObjTitle::Init()

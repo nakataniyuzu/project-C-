@@ -37,10 +37,10 @@ void CObjFireGate::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	CObjFireblock* f = (CObjFireblock*)Objs::GetObj(OBJ_FIREBLOCK);
-	fire = f->GetSWITCH();
+	m_fire = f->GetSWITCH();
 
 	//Fireblockに火が灯っていたら消滅
-	if (fire == 1.0f) 
+	if (m_fire == 1.0f)
 	{
 		this->SetStatus(false);		
 		Hits::DeleteHitBox(this);
@@ -74,14 +74,7 @@ void CObjFireGate::Draw()
 	{
 		m_time = 100;
 	}
-	if (m_time > 0) {
-		m_time--;
-		pm->BackDraw(195.0f, 195.0f, 330.0f, 225.0f, a);
-		Font::StrDraw(L"火を灯せ...?", 200, 200, 20, r);//時間が0になると表示を終了
-		if (m_time <= 0) {
-			m_time = 0;
-		}
-	}
+	
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -101,6 +94,15 @@ void CObjFireGate::Draw()
 
 	//描画
 	Draw::Draw(4, &src, &dst, r, 0.0f);
+
+	if (m_time > 0) {
+		m_time--;
+		pm->BackDraw(195.0f, 195.0f, 330.0f, 225.0f, a);
+		Font::StrDraw(L"火を灯せ...?", 200, 200, 20, r);//時間が0になると表示を終了
+		if (m_time <= 0) {
+			m_time = 0;
+		}
+	}
 }
 
 

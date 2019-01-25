@@ -31,7 +31,7 @@ void CObjHero::Init()
 	m_mp = m_max_mp;	//初期MP
 	m_magic = 0;	//初期魔法
 
-	m_key = 0;	//鍵の情報
+	m_key = false;	//鍵の情報
 
 	//フラグの初期化
 	mes.gate = false;
@@ -116,17 +116,17 @@ void CObjHero::Action()
 			}
 
 			//敵が全滅した際のメッセージ用
-			if (g_map_change == 0 && g_enemy_kills >= 5 && m_allkill_flag1 == false)
+			if (g_map_change == 0 && g_hero_max_hp_mp >= 5 && m_allkill_flag1 == false)
 			{
 				mes.allkill = true;
 				m_allkill_flag1 = true;
 			}
-			if (g_map_change == 1 && g_enemy_kills >= 11 && m_allkill_flag2 == false)
+			if (g_map_change == 1 && g_hero_max_hp_mp >= 20 && m_allkill_flag2 == false)
 			{
 				mes.allkill = true;
 				m_allkill_flag2 = true;
 			}
-			if (g_map_change == 2 && g_enemy_kills >= 17 && m_allkill_flag3 == false)
+			if (g_map_change == 2 && g_hero_max_hp_mp >= 35 && m_allkill_flag3 == false)
 			{
 				mes.allkill = true;
 				m_allkill_flag3 = true;
@@ -343,7 +343,7 @@ void CObjHero::Action()
 		m_fade_flag = true;		//フェイドフラグをオン
 		m_boss_battle_flag = true;	//敵出現フラグをオンにする
 		m_delete = false;			//敵削除フラグをオンにする
-
+		g_escape = false;		//escapeフラグをオフにする
 		CObjFadein* fade = new CObjFadein();	//フェイドインの作成
 		Objs::InsertObj(fade, OBJ_FADEIN, 200);
 	}
@@ -375,8 +375,7 @@ void CObjHero::Action()
 	{
 		mes.water = true;		//フラグをオンにする
 	}
-	if (hit->CheckObjNameHit(OBJ_SWITCH) != nullptr || 
-		hit->CheckObjNameHit(OBJ_BOSSSWITCH) != nullptr)	//主人公がスイッチに触れた場合
+	if (hit->CheckObjNameHit(OBJ_SWITCH) != nullptr)	//主人公がスイッチに触れた場合
 	{
 		mes.switchblock = true;	//フラグをオンにする
 	}
@@ -402,15 +401,15 @@ void CObjHero::Action()
 	}
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	m_vx += -(m_vx * 0.098f);
+	m_vy += -(m_vy * 0.098f);
 
 	//ブロックとの当たり判定実行
-	/*CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&g_px, &g_py, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
-	);*/
+	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//pb->BlockHit(&g_px, &g_py, true,
+	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+	//	&m_block_type
+	//);
 
 	//位置の更新
 	g_px += m_vx;

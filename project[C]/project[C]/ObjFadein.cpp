@@ -39,8 +39,6 @@ void CObjFadein::Action()
 
 	if (m_flag == true)
 	{
-		this->SetStatus(true);
-
 		m_ani_time += 1;
 
 		if (m_ani_time > m_ani_max_time)

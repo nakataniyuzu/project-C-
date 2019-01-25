@@ -124,8 +124,8 @@ void CObjEnemy1::Action()
 	}
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	m_vx += -(m_vx * 0.098f);
+	m_vy += -(m_vy * 0.098f);
 
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d;

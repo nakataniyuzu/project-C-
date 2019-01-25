@@ -20,6 +20,7 @@ void CObjBoss2Battle::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_boss_hp = 35;     //敵のヒットポイント(最大35)
+
 	m_damage = 3;
 
 	m_ani_time = 0;
@@ -65,14 +66,14 @@ void CObjBoss2Battle::Action()
 	CObjHeroBattle* herob = (CObjHeroBattle*)Objs::GetObj(OBJ_HERO_BATTLE);
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
+	m_vx += -(m_vx * 0.098f);
+	m_vy += -(m_vy * 0.098f);
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//自由落下運動
-	m_vy += 9.8 / (16.0f);
+	m_vy += 9.8f / (16.0f);
 
 	//位置の更新
 	m_px += m_vx;
@@ -197,9 +198,9 @@ void CObjBoss2Battle::Action()
 	if (m_del == false && m_boss_hp <= 0)
 	{
 		hero->SetFADEF(false);	//フェイドフラグをオフ
-		g_hero_max_hp_mp += 5;	//敵の撃破時のHP/MP増加
-		hero->SetMAXHP(5);		//HP/MPを増やす
-		hero->SetMAXMP(5);
+		g_hero_max_hp_mp += 3;	//敵の撃破時のHP/MP増加
+		hero->SetMAXHP(3);		//HP/MPを増やす
+		hero->SetMAXMP(3);
 		g_xpup_flag = true;	//経験値増加フラグをオンにする
 		m_del = true;
 		g_boss_kills += 1;
@@ -303,6 +304,7 @@ void CObjBoss2Battle::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float a[4] = { 10.0f,0.6f,0.6f,1.0f };
+	float b[4] = { 0.0f,0.0f,1.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -347,6 +349,9 @@ void CObjBoss2Battle::Draw()
 		//描画
 		if (m_time_d > 0) {
 			Draw::Draw(14, &src, &dst, a, 0.0f);
+		}
+		else if (m_ice_time > 0) {
+			Draw::Draw(14, &src, &dst, b, 0.0f);
 		}
 		else {
 			Draw::Draw(14, &src, &dst, c, 0.0f);

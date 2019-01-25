@@ -57,10 +57,6 @@ void CObjMessage::Draw()
 	float g[4] = { 0.0f,1.0f,0.0f,1.0f };
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
 
-	
-	RECT_F src;		//描画元切り取り位置
-	RECT_F dst;		//描画先表示位置
-
 	//主人公の情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	f.water = hero->GetWATERF();
@@ -84,9 +80,9 @@ void CObjMessage::Draw()
 	}
 	if (t.escape > 0) {
 		t.escape--;
-		BackDraw(145.0f, 195.0f, 445.0f, 175.0f, a);
-		Font::StrDraw(L"この戦闘は逃げられない！", 200, 150, 20, r);//時間が0になると表示を終了
 		if (t.escape <= 150) {
+			BackDraw(145.0f, 195.0f, 445.0f, 175.0f, a);
+			Font::StrDraw(L"この戦闘は逃げられない！", 200, 150, 20, r);//時間が0になると表示を終了
 		}
 		if (t.escape <= 0) {
 			t.escape = 0;

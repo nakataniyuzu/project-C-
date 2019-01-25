@@ -33,12 +33,12 @@ void CObjEnemyboss1::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-	else if (g_map_change == 1 && g_boss_kills == 2)
+	if (g_map_change == 1 && g_boss_kills == 2)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-	else if (g_map_change == 2 && g_boss_kills == 3)
+	if (g_map_change == 2 && g_boss_kills == 3)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);

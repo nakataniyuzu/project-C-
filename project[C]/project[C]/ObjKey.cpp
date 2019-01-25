@@ -32,12 +32,6 @@ void CObjKey::Init()
 //アクション
 void CObjKey::Action()
 {
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	key = hero->GetKEY();
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -48,9 +42,6 @@ void CObjKey::Action()
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
-	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
 
 	//位置の更新
 	m_px += m_vx;
