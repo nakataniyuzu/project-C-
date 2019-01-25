@@ -175,8 +175,8 @@ void CObjEnemy2Battle::Action()
 			m_vy = -10;
 			m_vx += 25;
 		}
-		m_enemy_hp -= 1;
 		m_time_d = 30;
+		m_enemy_hp -= 1;
 	}
 	if (hit->CheckObjNameHit(OBJ_ICE_BATTLE) != nullptr)	//魔法（アイス）を当たった場合
 	{
@@ -321,7 +321,7 @@ void CObjEnemy2Battle::Draw()
 		if (m_time_d > 0) {
 			Draw::Draw(7, &src, &dst, a, 0.0f);
 		}
-		if (m_speed_power == 0.0f) {
+		else if (m_speed_power == 0.0f) {
 			Draw::Draw(7, &src, &dst, b, 0.0f);
 		}
 		else {

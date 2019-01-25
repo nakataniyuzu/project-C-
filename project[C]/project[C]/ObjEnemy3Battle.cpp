@@ -337,7 +337,7 @@ void CObjEnemy3Battle::Draw()
 		if (m_time_d > 0) {
 			Draw::Draw(7, &src, &dst, a, 0.0f);
 		}
-		if (m_speed_power == 0.0f) {
+		else if (m_speed_power == 0.0f) {
 			Draw::Draw(7, &src, &dst, b, 0.0f);
 		}
 		else {

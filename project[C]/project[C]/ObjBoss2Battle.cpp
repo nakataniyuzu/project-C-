@@ -206,6 +206,7 @@ void CObjBoss2Battle::Action()
 		g_boss_kills += 1;
 		g_enemy_kills += 1;
 		g_battle_key = false;
+		m_time = 0;
 	}
 
 	//“G‚ª—ÌˆæŠO‚És‚©‚È‚¢‚æ‚¤‚É‚·‚é
